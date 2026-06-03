@@ -1,0 +1,32 @@
+{
+  "model": "InternVL3-8B-Instruct",
+  "prompting": "zero_shot",
+  "total_pairs": 352,
+  "genuine_count": 176,
+  "impostor_count": 176,
+  "overall_acc": 61.64772727272727,
+  "genuine_acc": 100.0,
+  "impostor_acc": 23.295454545454543,
+  "far": 76.70454545454545,
+  "frr": 0.0,
+  "collapsed": false,
+  "answer_dist": {
+    "A": 0.8835227272727273,
+    "B": 0.11647727272727272
+  },
+  "invalid_count": 0,
+  "per_frgp": {
+    "13": {
+      "acc": 56.81818181818182,
+      "far": 86.36363636363636,
+      "frr": 0.0,
+      "n": 176
+    },
+    "14": {
+      "acc": 66.47727272727273,
+      "far": 67.04545454545455,
+      "frr": 0.0,
+      "n": 176
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "model": "Qwen3-VL-8B-Instruct",
+  "prompting": "zero_shot",
+  "total_pairs": 352,
+  "genuine_count": 176,
+  "impostor_count": 176,
+  "overall_acc": 73.29545454545455,
+  "genuine_acc": 100.0,
+  "impostor_acc": 46.590909090909086,
+  "far": 53.40909090909091,
+  "frr": 0.0,
+  "collapsed": false,
+  "answer_dist": {
+    "A": 0.7670454545454546,
+    "B": 0.23295454545454544
+  },
+  "invalid_count": 0,
+  "per_frgp": {
+    "13": {
+      "acc": 79.54545454545455,
+      "far": 40.909090909090914,
+      "frr": 0.0,
+      "n": 176
+    },
+    "14": {
+      "acc": 67.04545454545455,
+      "far": 65.9090909090909,
+      "frr": 0.0,
+      "n": 176
+    }
+  }
+}
