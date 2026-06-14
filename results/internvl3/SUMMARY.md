@@ -1,10 +1,11 @@
 # InternVL3-8B-Instruct — Results Summary
 
 **Model:** InternVL3-8B-Instruct  
-**Precision:** bfloat16, `device_map="auto"` (~16 GB VRAM)  
-**Pairs:** 352 total (176 genuine × 176 impostor)  
+**Precision:** bfloat16 (~16 GB VRAM)  
+**Pairs:** 7,832 total (176 genuine + 7,656 impostor — all C(88,2) combinations)  
 **Preprocessing:** grayscale → autocontrast → square-pad (white) → 448×448 → RGB  
-**Run date:** 2026-05-24
+**Run date:** 2026-06-14  
+**transformers:** 4.57.6 | **torch:** 2.5.1+cu124
 
 ---
 
@@ -12,21 +13,21 @@
 
 | Metric | Value |
 |---|---|
-| Overall Accuracy | 61.6% |
+| Overall Accuracy | 29.3% |
 | Genuine Accuracy (TAR) | 100.0% |
-| Impostor Accuracy (TNR) | 23.3% |
-| FAR | 76.7% |
+| Impostor Accuracy (TNR) | 27.7% |
+| FAR | 72.3% |
 | FRR | 0.0% |
 | Collapsed | **No** |
-| Answer dist | A: 88.4%, B: 11.6% |
+| Answer dist | A: 72.9%, B: 27.1% |
 | Invalid | 0 |
 
 **Per-FRGP:**
 
 | FRGP | Hand | Acc | FAR | FRR | n |
 |---|---|---|---|---|---|
-| 13 | Right | 56.8% | 86.4% | 0.0% | 176 |
-| 14 | Left  | 66.5% | 67.0% | 0.0% | 176 |
+| 13 | Right | 28.8% | 72.9% | 0.0% | 3,916 |
+| 14 | Left  | 29.8% | 71.8% | 0.0% | 3,916 |
 
 ---
 
@@ -34,7 +35,7 @@
 
 | Metric | Value |
 |---|---|
-| Overall Accuracy | 50.0% |
+| Overall Accuracy | 2.2% |
 | Genuine Accuracy (TAR) | 100.0% |
 | Impostor Accuracy (TNR) | 0.0% |
 | FAR | 100.0% |
@@ -47,8 +48,8 @@
 
 | FRGP | Hand | Acc | FAR | FRR | n |
 |---|---|---|---|---|---|
-| 13 | Right | 50.0% | 100.0% | 0.0% | 176 |
-| 14 | Left  | 50.0% | 100.0% | 0.0% | 176 |
+| 13 | Right | 2.2% | 100.0% | 0.0% | 3,916 |
+| 14 | Left  | 2.2% | 100.0% | 0.0% | 3,916 |
 
 ---
 
@@ -56,37 +57,40 @@
 
 | Metric | Value |
 |---|---|
-| Genuine Mean Score | 73.0 |
-| Impostor Mean Score | 64.1 |
-| Score Separation (Δ) | 8.9 pts |
-| Best Threshold | 66 |
-| Best Accuracy | 83.0% |
-| EER | 17.05% |
-| EER Threshold | 66 |
-| AUC | 0.8228 |
+| Genuine Mean Score | 57.7 |
+| Impostor Mean Score | 79.1 |
+| Score Separation (Δ) | **-21.4 pts (INVERTED)** |
+| Best Threshold | 86 |
+| Best Accuracy | 98.4%* |
+| EER | 48.09% |
+| EER Threshold | 76 |
+| AUC | 0.5895 |
+| TAR @ FAR=0.1% | 0.0% |
 | Invalid | 0 |
+
+*Best accuracy of 98.4% is misleading — achieved by rejecting nearly all pairs at threshold 86. AUC and EER are the honest indicators.
 
 **Per-FRGP:**
 
-| FRGP | Hand | Genuine Mean | Impostor Mean | n |
-|---|---|---|---|---|
-| 13 | Right | 72.5 | 64.1 | 176 |
-| 14 | Left  | 73.5 | 64.2 | 176 |
+| FRGP | Hand | Genuine Mean | Impostor Mean | Δ | n |
+|---|---|---|---|---|---|
+| 13 | Right | 55.5 | 79.7 | -24.2 | 3,916 |
+| 14 | Left  | 60.0 | 78.5 | -18.5 | 3,916 |
 
 ---
 
 ## Summary Table
 
-| Prompt | Acc | FAR | FRR | AUC | EER | Collapsed |
-|---|---|---|---|---|---|---|
-| Zero-Shot     | 61.6% | 76.7% | 0.0% | — | — | No |
-| Task Desc.    | 50.0% | 100%  | 0.0% | — | — | Yes |
-| Similarity SS | 83.0% (best) | — | — | 0.8228 | 17.05% | No |
+| Prompt | Acc | FAR | FRR | AUC | EER | TAR@FAR=0.1% | Collapsed |
+|---|---|---|---|---|---|---|---|
+| Zero-Shot     | 29.3% | 72.3% | 0.0% | — | — | — | No |
+| Task Desc.    | 2.2%  | 100%  | 0.0% | — | — | — | Yes |
+| Similarity SS | 98.4%* | — | — | 0.5895 | 48.09% | 0.0% | No |
 
 ---
 
 ## Notes
 
-- ZS is the only binary run that does not fully collapse; FRGP 14 (left hand) shows substantially lower FAR (67.0%) than FRGP 13 (right hand, 86.4%).
-- TD collapses to 100% FAR — adding domain context worsens discrimination compared to ZS.
-- SS achieves AUC 0.8228 with 8.9-point genuine/impostor separation. Score scale shifted lower relative to pre-preprocessing runs (genuine mean 73 vs. 84.5 previously) due to autocontrast making images look more different from training data, but separation improved from 6.6 → 8.9 pts.
+- ZS: Not collapsed, but high FAR (72.3%). Genuine accuracy 100% — never rejects a genuine pair. Per-FRGP is nearly symmetric (FRGP13 72.9% FAR, FRGP14 71.8% FAR).
+- TD: Full collapse to 100% FAR — consistent with all other models under task description.
+- SS: **Inverted calibration** — assigns higher scores to impostor pairs (79.1%) than genuine pairs (57.7%). AUC=0.589 ≈ random, EER=48.09% ≈ random. This was hidden in the 352-pair run (AUC appeared as 0.823). The exhaustive 7,656-impostor run exposes that InternVL3 similarity scoring is not reliably calibrated for fingerprint verification.

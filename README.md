@@ -10,13 +10,13 @@
 
 Four-finger SLAP (Slap Livescan Acquisition Protocol) images are the standard biometric capture format at US border entry points, yet no benchmark existed to assess whether MLLMs can reason about them. SLAPBench fills this gap.
 
-**Key findings:**
-- Task-description prompting collapses all three models to 100% FAR
-- Zero-shot prompting collapses 1 of 3 models
-- Similarity-scoring prompt eliminates collapse entirely:
-  - Qwen3-VL-8B: AUC = 0.990, EER = 5.11%
-  - InternVL3-8B: AUC = 0.823, EER = 17.05%
-  - Qwen2.5-VL-7B: AUC = 0.776, EER = 22.44%
+**Key findings (7,832 exhaustive pairs — 176 genuine + 7,656 impostor):**
+- Task-description prompting collapses all three models to ≥98.9% FAR
+- Zero-shot prompting: 3 of 3 models remain functional but with high FAR (26.5%–72.3%)
+- Similarity-scoring eliminates collapse and reveals dramatically different model capabilities:
+  - Qwen3-VL-8B: **AUC = 1.0, EER = 0.0%, TAR@FAR=0.1% = 100%** — perfect discrimination
+  - InternVL3-8B: AUC = 0.589, EER = 48.09% — inverted calibration (scores impostors higher than genuine)
+  - Qwen2.5-VL-7B: AUC = 0.567, EER = 43.34% — near-random
 
 ---
 
@@ -29,16 +29,17 @@ https://www.nist.gov/srd/nist-special-database-302
 
 ### Evaluation Pairs
 
-`results/task8_pairs.csv` is the fixed pair manifest used in all experiments:
-- **352 total pairs** (176 genuine + 176 impostor)
+`results/task8_pairs_all.csv` is the exhaustive pair manifest used in all experiments:
+- **7,832 total pairs** (176 genuine + 7,656 impostor)
 - **Genuine pairs:** same subject, R-500 vs R-1000 (cross-resolution)
-- **Impostor pairs:** different subjects, same device, same hand (FRGP)
+- **Impostor pairs:** all C(88,2) = 3,828 unique pairs per FRGP × 2 FRGPs = 7,656 total
 - Covers FRGP 13 (right four-finger) and FRGP 14 (left four-finger)
-- Seed = 42 for reproducibility
 
 ---
 
 ## Models
+
+### Open-Source (Local GPU)
 
 | Model | Precision | VRAM |
 |---|---|---|
@@ -46,7 +47,16 @@ https://www.nist.gov/srd/nist-special-database-302
 | Qwen2.5-VL-7B-Instruct | 4-bit NF4 | ~6 GB |
 | Qwen3-VL-8B-Instruct | 4-bit NF4 | ~6 GB |
 
-All models are loaded via HuggingFace `transformers`. No vLLM or serving layer required.
+All local models are loaded via HuggingFace `transformers`. No vLLM or serving layer required.
+
+### API Models (Cloud)
+
+| Provider | Model Flag | Notes |
+|---|---|---|
+| OpenAI | `--model openai` | Set `OPENAI_API_KEY` in `.env`; specify model with `--openai-model gpt-4o` |
+| Anthropic | `--model anthropic` | Set `ANTHROPIC_API_KEY` in `.env`; specify model with `--anthropic-model claude-opus-4-8` |
+
+API models send images as base64-encoded PNG. Exponential backoff handles rate limits automatically.
 
 ---
 
@@ -67,6 +77,12 @@ pip install -r requirements.txt
 
 **Requirements:** Python 3.10+, CUDA-capable GPU (16 GB VRAM for InternVL3, 8 GB for Qwen models)
 
+For API models, create a `.env` file in the project root:
+```
+OPENAI_API_KEY=your_openai_key_here
+ANTHROPIC_API_KEY=your_anthropic_key_here
+```
+
 ---
 
 ## Usage
@@ -78,21 +94,25 @@ python code/run_verification.py --dry-run
 # Save pair manifest to CSV
 python code/run_verification.py --pairs-only
 
-# Run evaluation
-python code/run_verification.py --model internvl3  --prompting zero_shot        --run
-python code/run_verification.py --model internvl3  --prompting task_description --run
-python code/run_verification.py --model internvl3  --prompting similarity_score --run
+# Run evaluation (local GPU models, all 7,832 pairs)
+python code/run_verification.py --model internvl3  --prompting zero_shot        --all-impostors --run
+python code/run_verification.py --model internvl3  --prompting task_description --all-impostors --run
+python code/run_verification.py --model internvl3  --prompting similarity_score --all-impostors --run
 
-python code/run_verification.py --model qwen25vl   --prompting zero_shot        --run
-python code/run_verification.py --model qwen25vl   --prompting task_description --run
-python code/run_verification.py --model qwen25vl   --prompting similarity_score --run
+python code/run_verification.py --model qwen25vl   --prompting zero_shot        --all-impostors --run
+python code/run_verification.py --model qwen25vl   --prompting task_description --all-impostors --run
+python code/run_verification.py --model qwen25vl   --prompting similarity_score --all-impostors --run
 
-python code/run_verification.py --model qwen3vl    --prompting zero_shot        --run
-python code/run_verification.py --model qwen3vl    --prompting task_description --run
-python code/run_verification.py --model qwen3vl    --prompting similarity_score --run
+python code/run_verification.py --model qwen3vl    --prompting zero_shot        --all-impostors --run
+python code/run_verification.py --model qwen3vl    --prompting task_description --all-impostors --run
+python code/run_verification.py --model qwen3vl    --prompting similarity_score --all-impostors --run
+
+# Run evaluation (API models)
+python code/run_verification.py --model openai     --prompting zero_shot        --all-impostors --run --openai-model gpt-4o
+python code/run_verification.py --model anthropic  --prompting zero_shot        --all-impostors --run --anthropic-model claude-opus-4-8
 
 # Resume an interrupted run
-python code/run_verification.py --model internvl3 --prompting zero_shot --run \
+python code/run_verification.py --model internvl3 --prompting zero_shot --all-impostors --run \
     --resume results/internvl3/latest/task8_internvl3_zero_shot_<timestamp>.csv
 
 # Print metrics from a completed results file
@@ -103,11 +123,11 @@ python code/run_verification.py --metrics results/internvl3/latest/<file>.csv
 
 ## Results
 
-Pre-computed results for all three models and all three prompting strategies are in `results/`.
+Pre-computed results for all three local models and all three prompting strategies are in `results/`.
 
 ```
 results/
-├── task8_pairs.csv                         # Fixed pair manifest
+├── task8_pairs_all.csv                     # Exhaustive pair manifest (7,832 pairs)
 ├── internvl3/
 │   ├── SUMMARY.md                          # Full results summary
 │   ├── task8_internvl3_zero_shot_*.csv
@@ -122,19 +142,19 @@ results/
     └── ...
 ```
 
-### Summary
+### Summary (7,832 pairs — 176 genuine + 7,656 impostor)
 
-| Model | Prompt | Acc | FAR | AUC | EER | Collapsed |
-|---|---|---|---|---|---|---|
-| InternVL3-8B | Zero-Shot | 61.6% | 76.7% | — | — | No |
-| InternVL3-8B | Task Desc. | 50.0% | 100% | — | — | Yes |
-| InternVL3-8B | Sim. Score | 83.0% | — | 0.823 | 17.05% | No |
-| Qwen2.5-VL-7B | Zero-Shot | 54.5% | 90.9% | — | — | Yes |
-| Qwen2.5-VL-7B | Task Desc. | 50.0% | 100% | — | — | Yes |
-| Qwen2.5-VL-7B | Sim. Score | 77.6% | — | 0.776 | 22.44% | No |
-| Qwen3-VL-8B | Zero-Shot | 73.3% | 53.4% | — | — | No |
-| Qwen3-VL-8B | Task Desc. | 50.0% | 100% | — | — | Yes |
-| Qwen3-VL-8B | Sim. Score | 94.9% | — | 0.990 | 5.11% | No |
+| Model | Prompt | Acc | FAR | AUC | EER | TAR@FAR=0.1% | Collapsed |
+|---|---|---|---|---|---|---|---|
+| InternVL3-8B | Zero-Shot | 29.3% | 72.3% | — | — | — | No |
+| InternVL3-8B | Task Desc. | 2.2% | 100% | — | — | — | Yes |
+| InternVL3-8B | Sim. Score | — | — | 0.589 | 48.09% | 0.0% | No |
+| Qwen2.5-VL-7B | Zero-Shot | 32.0% | 69.6% | — | — | — | No |
+| Qwen2.5-VL-7B | Task Desc. | 2.2% | 100% | — | — | — | Yes |
+| Qwen2.5-VL-7B | Sim. Score | — | — | 0.567 | 43.34% | 0.0% | No |
+| Qwen3-VL-8B | Zero-Shot | 74.1% | 26.5% | — | — | — | No |
+| Qwen3-VL-8B | Task Desc. | 3.3% | 98.9% | — | — | — | Yes |
+| **Qwen3-VL-8B** | **Sim. Score** | **100%** | **—** | **1.000** | **0.0%** | **100%** | No |
 
 ---
 
