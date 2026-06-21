@@ -1,0 +1,32 @@
+{
+  "model": "claude-opus-4-8",
+  "prompting": "task_description",
+  "total_pairs": 7832,
+  "genuine_count": 176,
+  "impostor_count": 7656,
+  "overall_acc": 50.2170582226762,
+  "genuine_acc": 100.0,
+  "impostor_acc": 49.07262277951933,
+  "far": 50.92737722048067,
+  "frr": 0.0,
+  "collapsed": false,
+  "answer_dist": {
+    "A": 0.5203013278855976,
+    "B": 0.4796986721144024
+  },
+  "invalid_count": 0,
+  "per_frgp": {
+    "13": {
+      "acc": 51.96629213483146,
+      "far": 49.137931034482754,
+      "frr": 0.0,
+      "n": 3916
+    },
+    "14": {
+      "acc": 48.46782431052094,
+      "far": 52.716823406478575,
+      "frr": 0.0,
+      "n": 3916
+    }
+  }
+}
