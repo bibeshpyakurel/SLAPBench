@@ -1,0 +1,32 @@
+{
+  "model": "Gemma-3-12B-IT",
+  "prompting": "zero_shot",
+  "total_pairs": 7832,
+  "genuine_count": 176,
+  "impostor_count": 7656,
+  "overall_acc": 5.745658835546476,
+  "genuine_acc": 100.0,
+  "impostor_acc": 3.5788923719958206,
+  "far": 96.42110762800418,
+  "frr": 0.0,
+  "collapsed": true,
+  "answer_dist": {
+    "A": 0.9650153217568948,
+    "B": 0.03498467824310521
+  },
+  "invalid_count": 0,
+  "per_frgp": {
+    "13": {
+      "acc": 4.417773237997958,
+      "far": 97.77951933124346,
+      "frr": 0.0,
+      "n": 3916
+    },
+    "14": {
+      "acc": 7.073544433094995,
+      "far": 95.0626959247649,
+      "frr": 0.0,
+      "n": 3916
+    }
+  }
+}
