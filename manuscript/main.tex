@@ -117,9 +117,10 @@ disparity tracks model \emph{weakness} rather than strength, inverting the
 pattern reported for face benchmarks, though small subgroup sizes make
 this an initial probe rather than a definitive audit.
 Together these results establish the first SLAP-specific MLLM
-verification baseline and show that prompt format governs whether
-collapse occurs, while model architecture governs whether any
-discriminative capability remains to be unlocked once collapse is removed.
+verification baseline and show that prompt format governs whether collapse
+occurs, that near-perfect scores on a single-capture benchmark can be an
+artifact of pair construction, and that on genuinely independent captures no
+current MLLM verifies four-finger fingerprints.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -195,22 +196,22 @@ This paper makes the following contributions:
         property of the prompt format, but a sufficiently capable model can
         overcome it.
 
-  \item \textbf{A similarity-scoring prompt that exposes model capability.}
-        Scoring eliminates collapse in all four open-source models, yet
-        discrimination still ranges from functional (Claude Opus~4.8,
-        Gemma-3-12B) to near-random or inverted (Qwen2.5-VL-7B,
-        InternVL3-8B). Scoring is thus necessary but not sufficient, and
-        model architecture sets the ceiling
-        (Table~\ref{tab:main_results}).
+  \item \textbf{A similarity-scoring prompt that removes collapse.}
+        Continuous scoring eliminates the constant-output collapse in all four
+        open-source models, so it is necessary for any signal to appear. On
+        SD302b the resulting score separation reflects near-duplicate
+        sensitivity rather than verification (mated pairs are same-capture
+        cross-resolution), and we treat it as such
+        (Table~\ref{tab:main_results}); genuine verification is measured only on
+        RidgeBase (contribution~6).
 
-  \item \textbf{A cautionary analysis of a perfect benchmark score.}
-        Qwen3-VL-8B attains AUC~$= 1.000$ under scoring. We trace this to
-        the resolution structure that SD302b's single-capture-per-position
-        design forces on mated pairs, show that a resolution shortcut alone
-        would reproduce the observed signature, and specify the
-        matched-resolution control that separates the two explanations. We
-        offer this as evidence that near-perfect MLLM biometric results
-        warrant a protocol audit before they are read as capability.
+  \item \textbf{A resolved analysis of a perfect benchmark score.}
+        Qwen3-VL-8B attains AUC~$= 1.000$ under scoring. We show that on SD302b,
+        where every mated pair is a 500/1000~PPI rendering of one capture, this
+        is near-duplicate detection rather than verification, and we confirm it
+        empirically: on independent RidgeBase captures the same model falls to
+        chance. Near-perfect MLLM biometric results warrant a protocol audit,
+        or an independent-capture dataset, before they are read as capability.
 
   \item \textbf{An independent-capture cross-sensor evaluation on RidgeBase.}
         We extend the benchmark to RidgeBase~\cite{ridgebase2022}, whose
@@ -218,8 +219,9 @@ This paper makes the following contributions:
         of SD302b, and add (i)~a prompt-free embedding-matching evaluation of
         each open-source model's vision encoder, (ii)~a controlled
         same-device/cross-device split, and (iii)~a same-person/different-hand
-        diagnostic that isolates appearance matching from ridge matching. This
-        turns the SD302b perfect-score caveat into a testable claim
+        diagnostic that isolates appearance matching from ridge matching. Every
+        model sits at chance on genuine verification here, establishing that the
+        SD302b perfect score does not reflect fingerprint-matching ability
         (Section~\ref{sec:rb_results}).
 
   \item \textbf{Public release} of the evaluation code, the fixed pair
@@ -324,8 +326,8 @@ favor ``same'' responses, compounded by the ambiguity of biometric
 comparison when expressed in natural language~\cite{facerecbench2025,fpbench2025}.
 Our work provides the first quantitative documentation of this phenomenon
 specifically on SLAP fingerprint images and demonstrates that continuous
-scoring prompts can eliminate collapse and expose whether discriminative
-capability is present in the underlying model.
+scoring prompts can eliminate collapse and expose whatever discriminative
+signal is present in the underlying model.
 
 % ────────────────────────────────────────────────────────────────────────────
 \section{Dataset and Data Preparation}
@@ -500,11 +502,12 @@ with identity, and a model could in principle separate them by reading
 resolution or appearance statistics instead of comparing ridge structure.
 We state this plainly at the outset because it governs how the strongest
 results in Section~\ref{sec:results} may be read, and we return to it in
-Section~\ref{sec:perfect}. Rebuilding the non-mated set as
-1000~PPI vs.\ 500~PPI comparisons removes the asymmetry directly and is
-the control we identify as most necessary.
-Accordingly, we label the \emph{similarity-scoring capability ranking} of
-Section~\ref{sec:results} as \textbf{preliminary}, pending that control.
+Section~\ref{sec:perfect}.
+Accordingly, we do \emph{not} read the SD302b similarity-scoring separation as
+a verification-capability ranking; it indexes near-duplicate sensitivity, and
+genuine verification is measured instead on the independent-capture RidgeBase
+data (Section~\ref{sec:rb_results}), which removes the asymmetry at its source
+rather than controlling for it within SD302b.
 The collapse results are not affected and carry no such caveat, for the
 reason given in Section~\ref{sec:limitations}: FAR is computed on non-mated
 pairs, which are same-resolution by construction and involve no
@@ -847,16 +850,23 @@ capable models can resist.
 \subsection{Similarity Scoring: Discriminative Signal Revealed}
 
 The similarity-scoring block of Table~\ref{tab:main_results} reports the
-per-model scoring results.
+per-model scoring results. Two facts must be read together. First, scoring
+eliminates the collapse seen under binary prompting: no model produces a single
+constant output, and impostor and genuine pairs occupy distinguishable score
+ranges. Second, and decisively, on SD302b a genuine pair is the 500 and
+1000~PPI versions of one capture (Section~\ref{sec:dataset}), so the ability
+measured here is \emph{near-duplicate sensitivity}---telling an image apart from
+its own downscale---not fingerprint verification. We therefore report the
+per-model scores below as a characterization of that near-duplicate behavior and
+of which models escape collapse, and we defer all verification claims to the
+independent-capture RidgeBase results of Section~\ref{sec:rb_results}. The
+ranking that follows should be read in that light.
 
-The similarity-scoring prompt eliminates collapse across all four
-open-source models: no model produces a single constant output, and
-impostor and genuine pairs occupy distinguishable (though not always
-separable) score ranges.
 Figure~\ref{fig:score_strong} shows the score distributions for the three
-models that discriminate (Qwen3-VL-8B, Claude Opus~4.8, and Gemma-3-12B),
-while the two that fail under scoring (InternVL3-8B and Qwen2.5-VL-7B)
-appear separately in Figure~\ref{fig:score_fail}.
+models with the strongest near-duplicate separation (Qwen3-VL-8B, Claude
+Opus~4.8, and Gemma-3-12B), while the two that stay near random
+(InternVL3-8B and Qwen2.5-VL-7B) appear separately in
+Figure~\ref{fig:score_fail}.
 
 \begin{figure*}[t]
   \centering
@@ -876,8 +886,10 @@ appear separately in Figure~\ref{fig:score_fail}.
   \label{fig:score_strong}
 \end{figure*}
 
-We describe the models in descending order of discriminative strength,
-matching the ranking in Table~\ref{tab:main_results}.
+We describe the models in descending order of near-duplicate separation,
+matching the ranking in Table~\ref{tab:main_results}. Recall that this ordering
+reflects sensitivity to the 500/1000~PPI near-duplicate structure, not
+verification skill.
 
 \textbf{Qwen3-VL-8B} expresses 100.0\% mean confidence on mated pairs and
 63.8\% on non-mated pairs, a separation of $+$36.2~percentage points.
@@ -940,8 +952,9 @@ Qwen2.5-VL-7B remain effectively random through inverted or compressed
 distributions. Once collapse is removed, it is this split, and not the
 prompt, that separates success from failure.
 \textbf{The binary collapse in Table~\ref{tab:main_results} is thus a
-prompt-format artifact; whether discriminative capability can be
-unlocked by scoring depends on model architecture.}
+prompt-format artifact; whether any discriminative signal appears under
+scoring depends on model architecture---though on SD302b that signal is
+near-duplicate sensitivity, not verification (Section~\ref{sec:rb_results}).}
 Figure~\ref{fig:qualitative} grounds these aggregate numbers in two real
 pairs: on a genuine pair, every model but InternVL3-8B reports high
 confidence, while InternVL3 returns~9; on an impostor pair, Qwen3-VL-8B,
@@ -1076,7 +1089,15 @@ matching on four-finger images.
 
 FaceRecBench reports that the best-performing face-verification MLLM also
 exhibits the strongest demographic bias~\cite{facerecbench2025}.
-We test whether the same pattern holds on SLAP fingerprints.
+We test whether the same pattern holds on SLAP fingerprints. Two scope notes
+apply. This analysis uses SD302b, the only one of our two datasets with
+demographic labels (RidgeBase provides none), so it necessarily characterizes
+the same-capture similarity-scoring behavior of Section~\ref{sec:results}---which
+Section~\ref{sec:perfect} shows is near-duplicate sensitivity rather than
+verification---broken down by subgroup, not verification fairness per se. It is
+best read as whether that behavior is uniform across groups; a verification
+fairness audit would require an independent-capture dataset with demographics,
+which we do not have.
 Using the demographic metadata in our pair manifest, we recompute
 similarity-scoring performance within demographic subgroups: a genuine
 pair is assigned to a subgroup by its subject's attribute, and an impostor
@@ -1174,9 +1195,10 @@ collapse or near-collapse in open-source models regardless of image
 type, and the failure mode is consistent across both individual-finger
 and SLAP formats.
 SLAPBench does not set out to surpass FPBench's numbers. Its contribution
-is to establish the first SLAP-specific baseline and to show that
-continuous scoring prompts expose discriminative capability that binary
-prompting suppresses.
+is to establish the first SLAP-specific baseline and to show that continuous
+scoring prompts expose whatever discriminative signal a model has, which binary
+prompting suppresses---a signal that, on genuinely independent captures, turns
+out to be at chance (Section~\ref{sec:rb_results}).
 These two benchmarks address different problems and should be read
 as complementary, not competing.
 
@@ -1255,10 +1277,11 @@ gives to mated pairs.
 
 The scoring prompt eliminates collapse in all four open-source models, but
 the resulting distributions show that scoring is necessary without being
-sufficient. It reveals whether discriminative capability exists; it does
-not confer it.
-Figure~\ref{fig:score_fail} shows the two models that lack it, InternVL3-8B
-and Qwen2.5-VL-7B.
+sufficient. It surfaces whatever discriminative signal a model has; it does
+not confer any (and on SD302b that signal is near-duplicate sensitivity, not
+verification).
+Figure~\ref{fig:score_fail} shows the two models with the weakest signal even
+under scoring, InternVL3-8B and Qwen2.5-VL-7B.
 
 \begin{figure}[t]
   \centering
@@ -1381,32 +1404,38 @@ at 100. That a frontier model stops short of perfect separation makes
 Qwen3's exact-100 behavior look less like superior recall and more like a
 different mechanism operating altogether.
 
-The one reading we cannot yet exclude is \textbf{genuine cross-resolution
-discrimination}, under which Qwen3 recognizes shared ridge structure across
-the two renderings and reports maximal confidence for sound reasons. We
-regard it as the least likely of the four, since it must explain why a
-capability strong enough to be flawless here leaves the same model
-collapsing to 98.9\% FAR under a binary prompt on the same images.
+The remaining reading, \textbf{genuine cross-resolution discrimination}---under
+which Qwen3 recognizes shared ridge structure across the two renderings and
+reports maximal confidence for sound reasons---is the one a capability claim
+would require. We regarded it as the least likely of the four even before
+testing, since it must explain why a capability strong enough to be flawless
+here leaves the same model collapsing to 98.9\% FAR under a binary prompt on
+the same images.
 
-These readings are separable by experiment, and we specify the tests rather
-than leaving the matter open. A matched-resolution protocol, in which
-non-mated pairs are also formed as 1000~PPI vs.\ 500~PPI comparisons, gives
-both classes the same resolution structure and removes the shortcut
-directly; it is the decisive test and the single control we most recommend.
-A same-resolution mated set built from a database that provides repeat SLAP
-impressions would remove the near-duplicate cue, and evaluation on a
-non-public SLAP dataset would close off contamination.
+\textbf{The RidgeBase evaluation settles it.} Rather than only specifying the
+control, we ran it: RidgeBase supplies genuinely independent captures of each
+hand (Section~\ref{sec:rb_results}), which removes the resolution and
+near-duplicate cues at their source. On those pairs Qwen3-VL-8B falls to
+AUC~$= 0.469$ (embedding) and $0.558$ (scoring)---chance---and every other
+model does the same. A model with genuine cross-resolution verification
+ability would have carried at least part of that skill to independent
+captures; none did. This excludes the genuine-discrimination reading and
+confirms that the perfect SD302b score was driven by the mated-pair
+construction, not by identity comparison. (A matched-resolution SD302b control,
+in which non-mated pairs are also formed 1000~PPI vs.\ 500~PPI, remains a
+valid within-dataset check and is consistent with this conclusion.)
 
-The honest summary is therefore narrow and, we think, more interesting than
-a capability claim would have been. Qwen3-VL-8B separates SLAPBench's mated
-and non-mated pairs perfectly under scoring; the separation is most
-plausibly driven by resolution structure rather than identity; and no
+The honest summary is therefore firm rather than tentative. Qwen3-VL-8B
+separates SD302b's mated and non-mated pairs perfectly under scoring; that
+separation is near-duplicate detection, not identity comparison, as the
+collapse to chance on independent RidgeBase captures demonstrates; and no
 operational verification capability should be inferred from it. The broader
-lesson generalizes past this benchmark: when a dataset offers only one
-capture per subject, the mated class must be constructed by some
-transformation of that capture, and any such transformation risks becoming
-the very cue the model learns to read. Near-perfect results on MLLM
-biometric benchmarks warrant a protocol audit before they warrant belief.
+lesson generalizes past this benchmark: when a dataset offers only one capture
+per subject, the mated class must be constructed by some transformation of that
+capture, and any such transformation risks becoming the very cue the model
+learns to read. Near-perfect results on MLLM biometric benchmarks warrant a
+protocol audit---or, better, an independent-capture dataset---before they
+warrant belief.
 
 \subsection{The Left-Hand / Right-Hand Asymmetry}
 
@@ -1530,31 +1559,33 @@ These tasks are deferred to subsequent work.
 \label{sec:conclusion}
 
 We introduced SLAPBench, the first benchmark for evaluating multimodal
-large language models on four-finger SLAP fingerprint verification, built
-on NIST SD302b with 7,832 pairs (176 mated, 7,656 non-mated).
+large language models on four-finger SLAP fingerprint verification, and
+evaluated it across two datasets: NIST SD302b (contact livescan) and
+RidgeBase (independent-capture contactless).
 Task-description prompting collapses all four open-source models to
-near-100\% FAR and Gemma-3-12B collapses under zero-shot as well, while the
-proprietary Claude Opus~4.8 resists collapse under both prompts and records
-the strongest binary result (FAR~$= 20.2\%$).
-Similarity-scoring prompting eliminates collapse across the open-source
-models and shows that model architecture sets the ceiling: discrimination
-ranges from functional (Claude Opus~4.8 at AUC~$= 0.953$, Gemma-3-12B at
-AUC~$= 0.837$) to near-random or inverted (Qwen2.5-VL-7B and InternVL3-8B),
-with full metrics in Table~\ref{tab:main_results}.
-Collapse is therefore an artifact of the prompt format, whereas unlocking
-discriminative capability through scoring requires a model with sufficient
-underlying visual reasoning.
-Qwen3-VL-8B's perfect separation (AUC~$= 1.000$) we deliberately do not
-claim as capability. We trace it instead to the cross-resolution structure
-that SD302b's single-capture-per-position design imposes on mated pairs,
-and we specify the matched-resolution control that would settle the
-question. This may be the most transferable lesson of the study. Whenever a
-biometric dataset offers only one capture per subject, the mated class has
-to be synthesized from that capture, and the synthesis itself can become
-the cue a model learns to read. Near-perfect MLLM results in such a setting
-call for a protocol audit before they call for belief.
-With the first SLAP-specific baseline now established, domain-adaptive
-fine-tuning is the natural next step, consistent with the gains FPBench
+near-100\% FAR on \emph{both} datasets, and Gemma-3-12B collapses under
+zero-shot as well, while on SD302b the proprietary Claude Opus~4.8 resists
+collapse under both prompts. Collapse is thus an artifact of the prompt
+format that recurs regardless of dataset.
+Similarity scoring removes the collapse, but the score separation it reveals
+must be read carefully. On SD302b every mated pair is the 500 and 1000~PPI
+versions of one capture, so the separation---and Qwen3-VL-8B's perfect
+AUC~$= 1.000$---reflects near-duplicate sensitivity, not verification. The
+RidgeBase evaluation confirms this directly: given genuinely independent
+captures, every model falls to chance (embedding AUC~$0.40$--$0.51$,
+similarity-scoring AUC~$0.50$--$0.56$), none can separate a subject's own two
+hands, and the little residual signal that exists is sensor consistency rather
+than identity. No current MLLM we tested performs four-finger fingerprint
+verification; they match global appearance.
+The most transferable lesson concerns benchmark construction. Whenever a
+biometric dataset offers only one capture per subject, the mated class must be
+synthesized from that capture, and the synthesis itself can become the cue a
+model learns to read; near-perfect MLLM results in such a setting call for a
+protocol audit, or an independent-capture dataset, before they call for belief.
+Immediate next steps are to complete the two proprietary systems (Claude
+Opus~4.8 and a current GPT model) on RidgeBase, to anchor the scores against a
+traditional matcher such as VeriFinger~\cite{verifinger}, and to test whether
+domain-adaptive fine-tuning closes the gap, consistent with the gains FPBench
 reports on single-finger tasks~\cite{fpbench2025}.
 
 % ────────────────────────────────────────────────────────────────────────────
