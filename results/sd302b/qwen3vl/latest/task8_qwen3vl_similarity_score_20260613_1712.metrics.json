@@ -1,0 +1,27 @@
+{
+  "model": "Qwen3-VL-8B-Instruct",
+  "prompting": "similarity_score",
+  "total_pairs": 7832,
+  "genuine_count": 176,
+  "impostor_count": 7656,
+  "invalid_count": 0,
+  "genuine_mean_score": 100.0,
+  "impostor_mean_score": 63.8,
+  "best_threshold": 96,
+  "best_acc": 100.0,
+  "eer": 0.0,
+  "eer_threshold": 96,
+  "auc": 1.0,
+  "per_frgp": {
+    "13": {
+      "genuine_mean": 100.0,
+      "impostor_mean": 65.6,
+      "n": 3916
+    },
+    "14": {
+      "genuine_mean": 100.0,
+      "impostor_mean": 61.9,
+      "n": 3916
+    }
+  }
+}

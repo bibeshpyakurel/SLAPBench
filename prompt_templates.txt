@@ -1,0 +1,42 @@
+SLAPBench — Verbatim prompt templates (Task 8: verification)
+Source: code/run_verification.py  (SYSTEM_PROMPT, PROMPTS)
+The two SLAP images are attached to the user message; the text below is the
+exact user prompt per strategy. "%" is a literal percent sign in the model input.
+
+================================================================================
+SYSTEM PROMPT (all three strategies)
+================================================================================
+You are an expert fingerprint examiner.
+
+================================================================================
+ZERO-SHOT (ZS)
+================================================================================
+Below are two SLAP fingerprint images. A SLAP image captures four fingers from one hand pressed simultaneously on a scanner.
+Do these two images belong to the same person?
+(A) Yes, same person
+(B) No, different people
+Reply with only the letter A or B.
+
+================================================================================
+TASK DESCRIPTION (TD)
+================================================================================
+A SLAP fingerprint image captures four fingers from one hand simultaneously. The same person's fingers produce slightly different images each time they press the scanner (different pressure, slight movement), but the ridge patterns remain the same.
+
+Below are two SLAP fingerprint images. Do these two images belong to the same person?
+(A) Yes, same person
+(B) No, different people
+Reply with only the letter A or B.
+
+================================================================================
+SIMILARITY SCORING (SS)
+================================================================================
+You are a forensic fingerprint examiner analyzing two SLAP fingerprint images.
+A SLAP image captures four fingers (index, middle, ring, little) pressed simultaneously on a scanner.
+
+Your task: Examine the ridge flow patterns, ridge endings, bifurcations, and the relative shape and spacing of each finger across both images. Then return a single integer between 0 and 100 representing your confidence that both images belong to the same person, where:
+  0   = 0% confident (certain they are different people)
+  50  = 50% confident (completely uncertain)
+  100 = 100% confident (certain they are the same person)
+
+A score of 65 means you are 65% confident the images are from the same person.
+Reply with the number only. Do not include any text, explanation, or label.

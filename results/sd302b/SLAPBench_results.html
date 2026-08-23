@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>SLAPBench — Results</title>
+<style>
+  :root {
+    --bg:#0f1220; --panel:#171a2b; --ink:#e8eaf2; --muted:#9aa0b4;
+    --line:#2a2f45; --accent:#6ea8fe; --ok:#3ddc84; --bad:#ff6b6b;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:linear-gradient(160deg,#0c0f1c,#141831); color:var(--ink);
+          font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif; padding:32px; }
+  .wrap { max-width:1180px; margin:0 auto; }
+  h1 { font-size:26px; margin:0 0 4px; letter-spacing:.3px; }
+  h1 span { color:var(--accent); }
+  .sub { color:var(--muted); margin:0 0 22px; font-size:14px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:14px;
+           padding:6px; box-shadow:0 10px 30px rgba(0,0,0,.35); overflow:hidden; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  thead .grp th { background:#1d2238; color:#cfd6f5; font-weight:700; text-transform:uppercase;
+                   font-size:11px; letter-spacing:.6px; padding:10px 8px; border-bottom:1px solid var(--line); }
+  thead .sub th { background:#191d30; color:var(--muted); font-weight:600; font-size:11px;
+                   padding:8px; border-bottom:1px solid var(--line); position:sticky; top:0; }
+  tbody td { padding:12px 8px; text-align:center; border-bottom:1px solid var(--line); }
+  tbody tr:hover { background:#1b2138; }
+  td.model { text-align:left; min-width:200px; }
+  .mname { display:block; font-weight:700; }
+  .morg { display:block; color:var(--muted); font-size:11px; margin-top:2px; }
+  td.rank { font-weight:800; color:var(--accent); }
+  td.delta { font-variant-numeric:tabular-nums; }
+  .grp-binary { border-left:3px solid #f0a23b33; }
+  .grp-score  { border-left:3px solid #6ea8fe33; }
+  .badge { padding:3px 9px; border-radius:999px; font-size:11px; font-weight:700; }
+  .badge.ok { background:rgba(61,220,132,.15); color:var(--ok); border:1px solid rgba(61,220,132,.4); }
+  .badge.bad { background:rgba(255,107,107,.15); color:var(--bad); border:1px solid rgba(255,107,107,.4); }
+  .api-row { background:#141a2e; }
+  .api-pending td { color:var(--muted); font-style:italic; background:repeating-linear-gradient(
+      45deg,#141a2e,#141a2e 10px,#181f36 10px,#181f36 20px); }
+  .pending { color:var(--muted); }
+  .muted { color:var(--muted); }
+  .legend { display:flex; gap:18px; flex-wrap:wrap; color:var(--muted); font-size:12px; margin:16px 2px 0; }
+  .legend b { color:var(--ink); }
+  .foot { color:var(--muted); font-size:12px; margin-top:18px; line-height:1.6; }
+  .pill { display:inline-block; background:#1d2238; border:1px solid var(--line);
+           border-radius:8px; padding:2px 8px; margin-right:6px; color:#cfd6f5; }
+</style></head>
+<body><div class="wrap">
+  <h1>SLAP<span>Bench</span> — Multimodal LLM Verification Results</h1>
+  <p class="sub">NIST SD302b · 7,832 exhaustive pairs (176 genuine + 7,656 impostor) · FRGP 13 &amp; 14 ·
+     metrics generated directly from evaluation outputs</p>
+
+  <div class="card">
+  <table>
+    <thead>
+      <tr class="grp">
+        <th rowspan="2">Rank</th>
+        <th rowspan="2" style="text-align:left">Model</th>
+        <th colspan="6" class="grp-binary">Binary Prompting</th>
+        <th colspan="6" class="grp-score">Similarity Scoring (continuous 0–100)</th>
+      </tr>
+      <tr class="sub">
+        <th class="grp-binary">ZS Acc</th><th>ZS FAR</th><th>ZS Status</th>
+        <th>TD Acc</th><th>TD FAR</th><th>TD Status</th>
+        <th class="grp-score">Gen</th><th>Imp</th><th>&Delta;</th><th>EER</th><th>AUC</th><th>TAR@FAR=0.1%</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="">
+        <td class="rank">#1</td>
+        <td class="model"><span class="mname">Qwen3-VL-8B-Instruct</span><span class="morg">Alibaba · 8B</span></td>
+        <td>74.1%</td>
+        <td>26.5%</td>
+        <td><span class="badge ok">Functional</span></td>
+        <td>3.3%</td>
+        <td>98.9%</td>
+        <td><span class="badge bad">Collapsed</span></td>
+        <td>100.0</td>
+        <td>63.8</td>
+        <td class="delta">+36.2</td>
+        <td>0.00%</td>
+        <td style="background:rgb(40,167,69);color:#111;font-weight:700">1.000</td>
+        <td>100.0%</td>
+      </tr>
+      <tr class="">
+        <td class="rank">#3</td>
+        <td class="model"><span class="mname">Gemma-3-12B-IT</span><span class="morg">Google DeepMind · 12B</span></td>
+        <td>5.7%</td>
+        <td>96.4%</td>
+        <td><span class="badge bad">Collapsed</span></td>
+        <td>2.3%</td>
+        <td>100.0%</td>
+        <td><span class="badge bad">Collapsed</span></td>
+        <td>75.8</td>
+        <td>63.3</td>
+        <td class="delta">+12.5</td>
+        <td>15.10%</td>
+        <td style="background:rgb(180,183,28);color:#111;font-weight:700">0.837</td>
+        <td>23.3%</td>
+      </tr>
+      <tr class="">
+        <td class="rank">#4</td>
+        <td class="model"><span class="mname">InternVL3-8B-Instruct</span><span class="morg">OpenGVLab · 8B</span></td>
+        <td>29.3%</td>
+        <td>72.3%</td>
+        <td><span class="badge ok">Functional</span></td>
+        <td>2.2%</td>
+        <td>100.0%</td>
+        <td><span class="badge bad">Collapsed</span></td>
+        <td>57.7</td>
+        <td>79.1</td>
+        <td class="delta">-21.4</td>
+        <td>48.09%</td>
+        <td style="background:rgb(232,103,46);color:#111;font-weight:700">0.590</td>
+        <td>0.0%</td>
+      </tr>
+      <tr class="">
+        <td class="rank">#5</td>
+        <td class="model"><span class="mname">Qwen2.5-VL-7B-Instruct</span><span class="morg">Alibaba · 7B</span></td>
+        <td>32.0%</td>
+        <td>69.6%</td>
+        <td><span class="badge ok">Functional</span></td>
+        <td>2.2%</td>
+        <td>100.0%</td>
+        <td><span class="badge bad">Collapsed</span></td>
+        <td>95.0</td>
+        <td>90.1</td>
+        <td class="delta">+4.9</td>
+        <td>43.34%</td>
+        <td style="background:rgb(229,90,52);color:#111;font-weight:700">0.567</td>
+        <td>0.0%</td>
+      </tr>
+      <tr class="api-row">
+        <td class="rank">#2</td>
+        <td class="model"><span class="mname">Claude Opus 4.8</span><span class="morg">Anthropic · —</span></td>
+        <td>80.3%</td>
+        <td>20.2%</td>
+        <td><span class="badge ok">Functional</span></td>
+        <td>50.2%</td>
+        <td>50.9%</td>
+        <td><span class="badge ok">Functional</span></td>
+        <td>91.3</td>
+        <td>48.4</td>
+        <td class="delta">+42.9</td>
+        <td>11.75%</td>
+        <td style="background:rgb(80,171,57);color:#111;font-weight:700">0.953</td>
+        <td>56.8%</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="legend">
+    <span><b>ZS</b> Zero-Shot</span>
+    <span><b>TD</b> Task-Description</span>
+    <span><b>Gen/Imp</b> mean confidence on genuine / impostor pairs</span>
+    <span><b>&Delta;</b> separation (Gen − Imp)</span>
+    <span><b>AUC</b> color = green (strong) → red (random)</span>
+  </div>
+
+  <p class="foot">
+    <span class="pill">Headline</span> Binary prompting collapses in <b>5 of 8</b> configurations;
+    similarity scoring eliminates collapse and exposes the true capability gap.
+    <b>Qwen3-VL-8B</b> reaches perfect discrimination (AUC 1.000), <b>Gemma-3-12B</b> is a
+    functional second (AUC 0.837), while <b>InternVL3-8B</b> (inverted) and <b>Qwen2.5-VL-7B</b>
+    (near-random) fail to discriminate. <b>Claude Opus 4.8</b> is currently running and will
+    populate automatically once its similarity-score pass completes.<br>
+    Accuracy in collapsed runs is low (≈2–6%) because accepting every pair correctly labels
+    only the 176 genuine pairs (2.25% of 7,832); FAR, AUC and EER are the meaningful measures.
+  </p>
+</div></body></html>

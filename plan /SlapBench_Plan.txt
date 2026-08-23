@@ -1,0 +1,736 @@
+================================================================================
+SLAPBench: Benchmarking Multimodal LLMs for SLAP Four-Finger Fingerprint Analysis
+================================================================================
+Authors: Bibesh Pyakurel, M. G. Sarwar Murshed
+Affiliation: Computer Science Department, University of Wisconsin - Green Bay
+Target Venue: arXiv first → IEEE T-BIOM / CVPR / ECCV
+================================================================================
+
+================================================================================
+CURRENT FOCUS  (all other tasks remain in plan — not removed, not active yet)
+================================================================================
+
+  Active task:    Task 8 — Fingerprint Verification (Genuine vs. Impostor)
+                  Genuine:  same person, R_500 vs R_1000 (different impressions)
+                  Impostor: different people, same device and FRGP
+
+  Active models:  InternVL3-8B-Instruct      (bfloat16, ~16 GB VRAM)
+                  Qwen2.5-VL-7B-Instruct    (4-bit NF4 bitsandbytes, ~6 GB VRAM)
+                  NOTE: Qwen3-VL-8B dropped — CUDA driver/PyTorch incompatibility.
+                        Qwen2.5-VL-7B used by FPBench and FaceRecBench, strong baseline.
+
+  Deferred:       Tasks 1–7 (return after Task 8 baseline is established)
+                  Smaller/proprietary models (return after open-source results)
+
+================================================================================
+
+
+================================================================================
+1. WHAT THE EXISTING PAPERS DID (AND DID NOT DO)
+================================================================================
+
+Before building our own experiment, we studied five related papers. Here is
+what each one did, explained clearly, along with what each paper did NOT do.
+
+--------------------------------------------------------------------------------
+1.1 FaceXBench (Johns Hopkins University)
+--------------------------------------------------------------------------------
+What they built:
+  The first comprehensive benchmark for testing multimodal LLMs on face
+  understanding. They created 5,000 multiple-choice questions covering 14
+  face-related tasks: age estimation, gender prediction, race estimation,
+  high- and low-resolution face recognition, celebrity identification,
+  anti-spoofing, deepfake detection, attribute prediction, expression
+  recognition, head pose estimation, face parsing, crowd counting, and
+  tool retrieval.
+
+How many models tested: 28 (including GPT-4o, GeminiPro 1.5, and many
+  open-source models of different sizes).
+
+Best result: Qwen2-VL-72b at 57.86%. Humans scored 70.28%. Specialized
+  vision models scored 84.50%. Even the best LLM is far behind humans.
+
+Key finding for us:
+  Chain-of-thought (CoT) prompting made performance WORSE, not better.
+  This means we should not assume CoT will automatically help with
+  fingerprint tasks either. We test it anyway to confirm.
+
+What they did NOT do: Anything with fingerprints.
+
+--------------------------------------------------------------------------------
+1.2 FaceRecBench (Idiap Research Institute, Switzerland)
+--------------------------------------------------------------------------------
+What they built:
+  A benchmark specifically for face verification (same person or not?) using
+  the exact same evaluation protocol as the traditional face recognition
+  community — making scores directly comparable to classical FR numbers, unlike
+  FaceXBench's MCQ format.
+
+Best result: Qwen2-VL-7B at 81.10% across 27 models on 6 datasets. The
+  specialized IResNet-50 scored 97.31% — a 16-point gap remains.
+
+Key findings for us:
+  - Many LLMs collapsed to 50% accuracy (always saying yes or always no).
+    We must check for the same collapse in our SLAP tasks.
+  - The best-performing LLM showed the worst racial bias. We need to watch
+    for demographic bias across skin types and participant backgrounds.
+
+What they did NOT do: No fingerprint analysis. No fine-tuning. Zero-shot only.
+
+--------------------------------------------------------------------------------
+1.3 FPBench (New York University) — Most Relevant Prior Work
+--------------------------------------------------------------------------------
+What they built:
+  The first-ever benchmark for testing multimodal LLMs on single-finger
+  fingerprint analysis. Eight tasks: pattern classification, minutiae
+  analysis, orientation flow analysis, fingerprint verification, sensor
+  classification, real vs. synthetic detection, ACE-V forensic analysis,
+  and tools retrieval. Approximately 5,000 questions across 7 real and
+  synthetic datasets.
+
+Best result: Gemini 2.5 Pro at 57.01%. After fine-tuning Qwen3-VL-32b
+  with LoRA (10-18 minutes on one GPU), accuracy jumped by up to 39%
+  on some tasks.
+
+Key findings for us:
+  - Fine-tuning works incredibly well for fingerprint tasks with very
+    little data and very short training time.
+  - CoT prompting hurt most models on fingerprint tasks — consistent with
+    FaceXBench.
+  - Tools retrieval (text-only reasoning) scored 70-97%, showing LLMs
+    understand fingerprint workflows even when they struggle visually.
+
+THIS IS OUR MAIN GAP:
+  FPBench only uses single isolated finger images. It does NOT include:
+  - SLAP four-finger images
+  - Finger segmentation within a multi-finger image
+  - Finger position identification (index vs. middle vs. ring vs. little)
+  - Rotation angle estimation
+  - Hand laterality (left vs. right)
+  These are the exact tasks unique to SLAP analysis. This is what we fill.
+
+--------------------------------------------------------------------------------
+1.4 A Fingerprint for Large Language Models (Shanghai University)
+--------------------------------------------------------------------------------
+What this paper is actually about:
+  Despite the title, this paper has nothing to do with biometric fingerprints.
+  It uses "fingerprint" as a metaphor for a unique digital signature of an LLM
+  model — an IP protection paper, not a biometrics paper.
+
+Relevance to our research: Almost none. Included in literature review only
+  because of keyword overlap. Does not affect our methodology.
+
+--------------------------------------------------------------------------------
+1.5 Multimodal LLM-Enhanced Biometric Authentication Framework (Pace University)
+--------------------------------------------------------------------------------
+What this paper proposes:
+  A conceptual framework for combining LLMs with multiple biometric modalities
+  plus differential privacy and federated learning. Reports impressive numbers
+  but does not present original experiments. Published in a low-tier journal.
+
+Relevance to our research: Limited. Useful background on privacy considerations,
+  but provides no methodology we can build on directly.
+
+
+================================================================================
+2. THE RESEARCH GAP: WHAT NOBODY HAS DONE YET
+================================================================================
+
+--------------------------------------------------------------------------------
+2.1 What HAS been done
+--------------------------------------------------------------------------------
+  - Face understanding with LLMs benchmarked across 14 tasks (FaceXBench).
+  - Face verification with LLMs benchmarked using standard FR protocols
+    (FaceRecBench).
+  - Single-finger fingerprint analysis with LLMs benchmarked across 8 tasks
+    (FPBench).
+  - Fine-tuning open-source LLMs on fingerprint data shown to work well
+    (FPBench).
+  - Conceptual frameworks for LLM + biometric authentication proposed.
+
+--------------------------------------------------------------------------------
+2.2 What has NOT been done — our opportunity
+--------------------------------------------------------------------------------
+  - Nobody has tested LLMs on SLAP (four-finger) fingerprint images.
+  - Nobody has asked an LLM to segment individual fingers from a four-finger
+    slap image.
+  - Nobody has asked an LLM to identify which finger is which
+    (index, middle, ring, little).
+  - Nobody has asked an LLM to determine left hand vs. right hand from a
+    slap image.
+  - Nobody has tested LLM performance on fingerprint rotation angle estimation.
+  - Nobody has compared LLM slap segmentation against NIST SlapSeg baselines.
+  - Nobody has fine-tuned LLMs specifically on SLAP segmentation and
+    identification tasks.
+  - Nobody has evaluated SLAP quality assessment by LLMs across NFIQ levels.
+
+--------------------------------------------------------------------------------
+2.3 Benchmark Comparison Table
+--------------------------------------------------------------------------------
+
+  Capability                          FaceXBench  FaceRecBench  FPBench  SLAPBench
+  --------------------------------------------- ------------ -------- ---------
+  SLAP four-finger images                  No          No         No       YES
+  Finger segmentation (multi-finger)       No          No         No       YES
+  Finger position ID (index/middle/…)      No          No         No       YES
+  Hand laterality (left vs. right)         No          No         No       YES
+  Rotation and alignment estimation        No          No         No       YES
+  NIST SlapSeg protocol alignment          No          No         No       YES
+  Quality-stratified analysis (NFIQ)       No          No         No       YES
+  Segmentation challenge identification    No          No         No       YES
+  Single-finger fingerprint analysis       No          No        Yes    Optional
+  Fingerprint verification (genuine/imp.)  No          No         No       YES
+  Face understanding tasks                Yes         Yes         No        No
+  Fine-tuning evaluation               Limited        No        Yes       YES
+
+In summary: every existing paper benchmarks LLMs on either faces or isolated
+single-finger prints. The four-finger SLAP format — the most operationally
+significant fingerprint capture mode in border security — has never been
+evaluated with any multimodal LLM. That is the gap we fill.
+
+
+================================================================================
+3. RESEARCH QUESTIONS
+================================================================================
+
+  RQ1: Can multimodal LLMs correctly identify and localize individual fingers
+       within a SLAP four-finger image?
+
+  RQ2: Can multimodal LLMs correctly label each finger (index, middle, ring,
+       little) and determine whether the image is from a left or right hand?
+
+  RQ3: How do different multimodal LLMs compare in assessing the quality of
+       SLAP fingerprint images?
+
+  RQ4: Can multimodal LLMs estimate rotation angles and alignment quality of
+       individual fingers within a SLAP capture?
+
+  RQ5: Does domain-specific fine-tuning improve LLM performance on SLAP tasks,
+       and by how much?
+
+  RQ6: How do LLM-based SLAP analysis results compare against traditional
+       algorithmic baselines (NIST SlapSeg participants)?
+
+  RQ7: Can multimodal LLMs perform fingerprint verification on SLAP images —
+       correctly distinguishing genuine pairs (same person, multiple impressions)
+       from impostor pairs (different people)?
+
+
+================================================================================
+4. DATASET
+================================================================================
+
+  Primary source:   NIST Special Database 302b (SD302b)
+                    876 SLAP four-finger images with ground-truth bounding boxes
+                    per finger. Already downloaded and organized in dataset/.
+
+  Fallback:         Synthetic SLAP composites from FVC single-finger datasets
+                    (only if more images are needed beyond what SD302b provides).
+
+  Target size:      4,000 to 5,400 MCQ questions from the 876 SLAP images
+                    (~5-6 questions per image on average across 7 tasks).
+
+  Ground truth      Hand label (left/right) — from FRGP code in filename
+  already in        Per-finger bounding boxes — from segmentation CSVs
+  dataset/:         Rotation angles (theta) — from segmentation CSVs
+                    Finger position (FRGP 2/3/4/5) — from segmentation CSVs
+
+  Ground truth      NFIQ 2 quality scores — must run NFIQ 2 on all images
+  to be             Segmentation challenge flags — heuristic from bounding box
+  generated:          geometry + manual inspection + errata cross-reference
+
+  Balance:          Equal left/right hands, balanced quality levels,
+                    balanced A/B/C/D answer option distribution.
+
+  Data split:       70% test | 20% fine-tuning train | 10% fine-tuning validation
+
+  Known issues:     Cross-reference all images against dataset/ERRATA_SD302.txt
+                    before generating questions. Exclude or flag participants
+                    with known mislabeled fingers (e.g., 00002534 device S has
+                    swapped thumbs; 00002420 device R has swapped slap segments).
+
+  FRGP codes used in SLAP images:
+    13 = Plain right four fingers (index, middle, ring, little) — PRIMARY
+    14 = Plain left four fingers (index, middle, ring, little) — PRIMARY
+    15 = Plain two thumbs — SECONDARY
+
+  Segmentation CSV columns (ground truth per finger per image):
+    filename, frgp, tlx, tly, trx, try, blx, bly, brx, bry, theta
+    where tl/tr/bl/br = top-left/top-right/bottom-left/bottom-right corners,
+    theta = rotation angle in degrees.
+
+
+================================================================================
+5. EVALUATION TASKS
+================================================================================
+
+All tasks use multiple-choice format (MCQ), following FaceXBench and FPBench,
+for standardized and reproducible evaluation.
+
+STATUS KEY:
+  [ACTIVE]   — current priority, being worked on now
+  [PLANNED]  — fully designed, will be implemented after active tasks complete
+  [NEEDS REDESIGN] — task design issue identified, requires adjustment before use
+
+--------------------------------------------------------------------------------
+Task 1: Finger Count Detection  (target: 400-600 questions)  [NEEDS REDESIGN]
+--------------------------------------------------------------------------------
+What we test:
+  Can the model correctly count how many fingers are visible in a SLAP image?
+
+Why it matters:
+  In real captures, a finger can be lifted off the scanner, or a thumb can
+  accidentally appear. The model must recognize these deviations.
+
+Ground truth source: FRGP code (13 or 14 → 4 fingers; 15 → 2 thumbs).
+
+Example question:
+  "How many fingers are visible in this SLAP fingerprint image?"
+  (A) 2   (B) 3   (C) 4   (D) 5
+
+--------------------------------------------------------------------------------
+Task 2: Hand Laterality Classification  (target: 400-600 questions)  [PLANNED]
+--------------------------------------------------------------------------------
+What we test:
+  Can the model determine whether the SLAP image is from a left or right hand?
+
+Why it matters:
+  In border processing, knowing which hand was scanned is essential for
+  correctly matching fingers to their database position
+  (left index vs. right index are different enrolled identities).
+
+Ground truth source: FRGP code (13 → right hand; 14 → left hand).
+
+Example question:
+  "This SLAP fingerprint image shows fingers from which hand?"
+  (A) Left hand   (B) Right hand
+
+--------------------------------------------------------------------------------
+Task 3: Finger Position Identification  (target: 800-1,000 questions)  [PLANNED]
+--------------------------------------------------------------------------------
+What we test:
+  Given a SLAP image where one finger is highlighted, can the model correctly
+  identify which finger it is?
+
+Why it matters:
+  This is the core of slap segmentation. After locating each finger, the
+  system must know which is index, middle, ring, and little.
+
+Ground truth source: frgp column in segmentation CSV
+  (2 = right index, 3 = right middle, 4 = right ring, 5 = right little;
+   7 = left index, 8 = left middle, 9 = left ring, 10 = left little).
+
+Example question:
+  "The highlighted finger in this SLAP image is:"
+  (A) Index finger   (B) Middle finger   (C) Ring finger   (D) Little finger
+
+--------------------------------------------------------------------------------
+Task 4: Finger Segmentation Localization  (target: 600-800 questions)  [PLANNED]
+--------------------------------------------------------------------------------
+What we test:
+  Can the model identify the approximate spatial region of a specific finger
+  in the SLAP image?
+
+Why it matters:
+  Tests spatial awareness. Can the model understand the left-to-right
+  arrangement of fingers? (In a right-hand slap: little, ring, middle, index
+  from left to right.)
+
+Ground truth source: Bounding box coordinates in segmentation CSV.
+  Relative x-position of the bounding box determines spatial order.
+
+Example question:
+  "In this right-hand SLAP image, where is the index finger located?"
+  (A) Leftmost position   (B) Second from left
+  (C) Third from left     (D) Rightmost position
+
+--------------------------------------------------------------------------------
+Task 5: Image Quality Assessment  (target: 600-800 questions)  [PLANNED]
+--------------------------------------------------------------------------------
+What we test:
+  Can the model assess overall quality of a SLAP capture and identify
+  specific quality problems?
+
+Why it matters:
+  Quality assessment determines whether a capture needs to be redone. In
+  border settings, operators need quick, interpretable feedback.
+
+Ground truth source: Must generate NFIQ 2 quality scores by running the
+  NFIQ 2 tool on all slap-segmented images. Quality bands: good / medium / poor.
+  Visual quality issues (blur, smudging, faint ridges) require labeling.
+
+Example question:
+  "What is the primary quality issue in this SLAP image?"
+  (A) Motion blur   (B) Excessive pressure / smudging
+  (C) Dry / faint ridges   (D) No quality issue
+
+--------------------------------------------------------------------------------
+Task 6: Rotation and Alignment Assessment  (target: 400-600 questions)  [NEEDS REDESIGN]
+--------------------------------------------------------------------------------
+What we test:
+  Can the model estimate whether and how much fingers are rotated relative
+  to the vertical axis?
+
+Why it matters:
+  Rotated fingers degrade segmentation accuracy and matching performance.
+  Operators need to detect and report misaligned captures.
+
+Ground truth source: theta column in segmentation CSV (rotation in degrees).
+  Binned into ranges: 0-10°, 10-25°, 25-45°, >45°.
+
+Example question:
+  "What is the approximate rotation of the fingers in this SLAP image?"
+  (A) 0-10 degrees   (B) 10-25 degrees
+  (C) 25-45 degrees   (D) More than 45 degrees
+
+--------------------------------------------------------------------------------
+Task 7: Segmentation Challenge Identification  (target: 400-600 questions)  [PLANNED]
+--------------------------------------------------------------------------------
+What we test:
+  Given a SLAP image with challenges (overlapping fingers, missing finger,
+  thumb included, partial capture), can the model identify what makes
+  segmentation difficult?
+
+Why it matters:
+  Real-world SLAP captures are messy. Operators need to know why segmentation
+  failed so they can recapture correctly.
+
+Ground truth source: Heuristic from bounding box geometry (overlapping
+  bounding boxes → overlapping fingers) + errata cross-reference + manual
+  inspection for edge cases.
+
+Example question:
+  "What segmentation challenge is present in this SLAP image?"
+  (A) Two fingers are overlapping   (B) One finger is missing
+  (C) A thumb is accidentally included   (D) No challenge detected
+
+--------------------------------------------------------------------------------
+Task 8: Fingerprint Verification — Genuine vs. Impostor  (target: 600-1,000 pairs)  [ACTIVE]
+--------------------------------------------------------------------------------
+What we test:
+  Given two SLAP images, can the model determine whether they are from the
+  same person (genuine pair) or two different people (impostor pair)?
+
+Why it matters:
+  This is the most operationally important task in biometrics. It directly
+  answers: "Is this the same person?" SD302b is uniquely suited because:
+    - Multiple impressions of the same finger exist (Device R vs. Device S,
+      500 PPI vs. 1000 PPI, and potentially multiple collection days).
+    - 201 participants provide a large impostor pool.
+
+Background — Impression and Pair Types:
+  An "impression" is a single captured SLAP image. The same person's hand
+  will produce slightly different images each time it is pressed.
+
+  Genuine pair:   Two impressions from the SAME person.
+                  Example: Subject 00002406 Device R vs. Subject 00002406 Device S.
+                  Expected: model says "same person." VeriFinger score > 48.
+
+  Impostor pair:  Impressions from TWO DIFFERENT people.
+                  Example: Subject 00002406 Device R vs. Subject 00002430 Device R.
+                  Expected: model says "different people." VeriFinger score < 48.
+
+  VeriFinger threshold: Score > 48 = match (same person); < 48 = not a match.
+  This threshold is used as the algorithmic ground truth baseline to compare
+  against LLM responses.
+
+Ground truth source:
+  Primary: Same subject_id = genuine pair; different subject_ids = impostor pair.
+  Algorithmic baseline: VeriFinger SDK match scores (threshold = 48).
+
+Pair construction from SD302b:
+  Genuine pairs: Same participant, Device R (500 PPI) vs. Device S (500 PPI),
+                 or R_500 vs. R_1000 (same device, different resolution),
+                 or Day 1 vs. Day 2 impression (if multi-day captures available).
+  Impostor pairs: Random sample of different-participant pairs, same FRGP code.
+  Balance: Equal number of genuine and impostor pairs to avoid bias.
+
+Example question:
+  "Below are two SLAP fingerprint images. Are these from the same person?"
+  (A) Yes, same person   (B) No, different people
+
+Evaluation metrics:
+  Overall accuracy, False Accept Rate (FAR), False Reject Rate (FRR),
+  Equal Error Rate (EER) — standard biometric verification metrics.
+  Compare directly against VeriFinger algorithmic baseline.
+
+--------------------------------------------------------------------------------
+Total target: 4,600 to 6,400 questions/pairs across all eight tasks.
+--------------------------------------------------------------------------------
+
+  Task-to-Ground-Truth Summary:
+  Task 1  Finger Count         FRGP code in filename
+  Task 2  Hand Laterality      FRGP code in filename (13=right, 14=left)
+  Task 3  Finger Position      frgp column in segmentation CSV
+  Task 4  Localization         bounding box (tlx/trx) in segmentation CSV
+  Task 5  Quality              NFIQ 2 output (must generate)
+  Task 6  Rotation             theta column in segmentation CSV
+  Task 7  Challenge ID         bbox geometry + errata + manual labels
+  Task 8  Verification         subject_id match / VeriFinger score baseline
+
+
+================================================================================
+6. MODELS
+================================================================================
+
+  Strategy: Open-source 32B models first (locally hosted, no API cost,
+  fine-tunable). Smaller and proprietary models added later for comparison.
+  Publication target: arXiv preprint first, then IEEE T-BIOM or CVPR/ECCV.
+
+  --- Phase 1: Open-Source ACTIVE (currently running) ---
+
+  Model                         HuggingFace ID                       VRAM / notes
+  ----------------------------  -----------------------------------  -------------------------
+  InternVL3-8B-Instruct         OpenGVLab/InternVL3-8B-Instruct      ~16 GB, bfloat16
+  Qwen2.5-VL-7B-Instruct        Qwen/Qwen2.5-VL-7B-Instruct          ~6 GB, 4-bit NF4 (bnb)
+
+  Both loaded directly via transformers (no vLLM). inference backend in run_verification.py.
+  Both confirmed loading and running in the same venv (transformers 4.49.0).
+
+  --- Phase 1: Open-Source DEFERRED (return after active baseline established) ---
+
+  InternVL3-8B-Instruct  open-source  Larger variant for comparison if 8B results are weak.
+  Qwen3-VL-8B-Instruct   open-source  Revisit if CUDA/PyTorch compatibility resolved.
+  Qwen3-VL-32B-Instruct  open-source  Larger variant for comparison if 8B results are weak.
+  Gemma3-12B             open-source  Mid-size comparison point.
+  LLaVA-OneVision-7B     open-source  Standard baseline in prior benchmarks.
+
+  --- Phase 2: Proprietary DEFERRED (after open-source results stable) ---
+
+  GPT-5                  Proprietary API  Top commercial baseline (50.20% FPBench).
+  Gemini 2.5 Pro         Proprietary API  Best on FPBench (57.01%).
+
+  Evaluation framework: VLMEvalKit (same as FPBench and FaceXBench).
+  API call format: OpenAI-compatible (vLLM local endpoint → same code for all).
+
+
+================================================================================
+7. PROMPTING STRATEGY
+================================================================================
+
+How prompts are phrased matters enormously. Both FaceXBench and FPBench found
+that different strategies produced significantly different results. We use
+three settings to understand the full picture.
+
+--------------------------------------------------------------------------------
+Setting 1 — Zero-Shot (Primary Evaluation)
+--------------------------------------------------------------------------------
+  System prompt:  "You are an expert fingerprint examiner."
+  User prompt:    "Please answer the question and provide only the correct
+                  option letter, e.g., A, B, C, D."
+
+  This is our primary evaluation setting. No context is added beyond the
+  image and question.
+
+--------------------------------------------------------------------------------
+Setting 2 — Task Description
+--------------------------------------------------------------------------------
+  Same as zero-shot, but we prepend a brief task-specific description.
+
+  Example for Task 3 (Finger Position ID):
+    "A SLAP fingerprint image captures four fingers from one hand pressed
+    simultaneously on a scanner. In a right-hand slap, from left to right,
+    the order is: little, ring, middle, index."
+
+  Purpose: Tests whether grounding the model in domain knowledge improves
+  spatial reasoning on SLAP-specific layouts.
+
+--------------------------------------------------------------------------------
+Setting 3 — Chain-of-Thought (CoT)
+--------------------------------------------------------------------------------
+  User prompt:  "Please think step by step and provide your reasoning before
+                giving the final answer. Include the final correct answer
+                option at the end of your answer."
+
+  Based on FaceXBench and FPBench, CoT likely hurts performance on visual
+  fingerprint tasks. We test it to confirm whether this holds for SLAP tasks.
+
+--------------------------------------------------------------------------------
+Consistency Rules
+--------------------------------------------------------------------------------
+  - Every prompt documented word-for-word.
+  - Temperature = 0 for deterministic output.
+  - Each model run 3 times; mean and standard deviation reported.
+  - Response parsing uses VLMEvalKit's three-step option extraction:
+      Step 1: Match option letter at start of response.
+      Step 2: Search for option letter anywhere in response.
+      Step 3: Compare response text against option values directly.
+
+
+================================================================================
+8. EVALUATION METRICS
+================================================================================
+
+--------------------------------------------------------------------------------
+8.1 Primary Metrics
+--------------------------------------------------------------------------------
+  Overall Accuracy:   Percentage of questions answered correctly across all tasks.
+  Per-Task Accuracy:  Accuracy broken down by each of the seven tasks.
+  Per-Model Accuracy: Performance comparison across all tested LLMs.
+
+--------------------------------------------------------------------------------
+8.2 Detailed Metrics
+--------------------------------------------------------------------------------
+  Precision, Recall, F1-Score:
+    Computed per answer option, especially for Task 3 (finger position ID —
+    how often does the model confuse index for middle, etc.).
+
+  Confusion Matrix:
+    For finger identification tasks, shows which fingers get confused with
+    which. Expected confusions: middle↔ring (adjacent fingers, similar shape).
+
+  Accuracy by Quality Level:
+    Performance stratified by NFIQ 2 bands: good / medium / poor.
+    Tells us whether models degrade on low-quality captures like humans do.
+
+  Accuracy by Rotation Range:
+    Performance as finger rotation (theta) increases.
+    Tells us whether models struggle more with rotated fingers.
+
+  Model Collapse Detection:
+    Explicitly check if any model always picks the same answer option
+    (e.g., always answering "Right hand" for Task 2). Flag all collapsed models.
+
+  Answer Distribution Analysis:
+    Check whether models show bias toward specific options (A/B/C/D frequency).
+    Target distribution: ~25% each for four-option, ~50% each for binary.
+
+--------------------------------------------------------------------------------
+8.3 Comparison Baselines
+--------------------------------------------------------------------------------
+  Random chance baseline:   25% for four-option MCQs, 50% for binary questions.
+  Frequent choice baseline: Accuracy from always picking the most common answer.
+  NIST SlapSeg baselines:   Compare LLM results against published SlapSeg
+                            algorithm performance where available.
+
+
+================================================================================
+9. FINE-TUNING
+================================================================================
+
+FPBench showed that fine-tuning open-source models on fingerprint data produced
+7-39% improvements per task with only ~10-18 minutes of LoRA training on a
+single GPU. We replicate this methodology for SLAP images.
+
+  Method:           LoRA (Low-Rank Adaptation) on both vision projector and
+                    LLM backbone — same setup as FPBench.
+
+  Models:           2-3 best-performing open-source models from zero-shot
+                    evaluation results.
+
+  Training data:    ~800-1,000 MCQ examples from the 20% training split.
+
+  Training time:    Expected 10-20 minutes per model on a single H100/H200 GPU
+                    (based on FPBench with similar dataset size).
+
+  Evaluation:       Fine-tuned models evaluated on the same 70% test set,
+                    compared directly against zero-shot results.
+
+  Expected gains by task (based on FPBench patterns):
+    Task 3 (Finger Position ID):    Highest gain — spatial layout is learnable.
+    Task 2 (Hand Laterality):       High gain — left/right have opposite orderings.
+    Task 4 (Localization):          Moderate gain — spatial reasoning improves.
+    Task 5 (Quality Assessment):    Moderate gain.
+    Task 6 (Rotation Estimation):   Limited gain — needs diverse rotation examples.
+
+
+================================================================================
+10. STEP-BY-STEP TIMELINE (12-16 Weeks)
+================================================================================
+
+  Phase 1 — Dataset Acquisition and Exploration  (Weeks 1-2)
+    - SD302b is already downloaded. Inspect file structure, image resolutions,
+      naming conventions.
+    - Identify all 876 usable SLAP images (FRGP 13 and 14) from devices R and S.
+    - Cross-reference all images against ERRATA_SD302.txt. Flag and exclude
+      participants with known mislabeled or swapped fingers.
+    - Verify segmentation CSV ground truth for all SLAP images.
+
+  Phase 2 — Data Preparation and Question Generation  (Weeks 3-4)
+    - Run NFIQ 2 quality scoring on all slap-segmented images (Task 5 ground truth).
+    - Generate challenge flags from bounding box geometry (Task 7 ground truth).
+    - Design question templates for all seven tasks.
+    - Generate the full MCQ question set: target 4,000-5,400 questions.
+    - Balance A/B/C/D answer distribution across all tasks.
+    - Split data: 70% test / 20% fine-tuning train / 10% fine-tuning validation.
+    - Ensure no participant appears in both train and test splits.
+
+  Phase 3 — Evaluation Framework Setup  (Weeks 5-6)
+    - Set up VLMEvalKit on compute environment.
+    - Download and configure all open-source models (Qwen3-VL, InternVL3,
+      Gemma3, LLaVA-OneVision).
+    - Set up API access for GPT-5 and Gemini 2.5 Pro.
+    - Write and finalize all prompt templates for all tasks and settings.
+    - Run pilot test on 50-100 questions to verify parsing and outputs.
+
+  Phase 4 — Zero-Shot Evaluation (Main Experiment)  (Weeks 7-9)
+    - Run all models on all questions across all three prompting settings.
+    - Temperature = 0. Each model run 3 times. Log all raw outputs.
+    - Compute all metrics: accuracy, precision/recall/F1, confusion matrices.
+    - Check every model for collapse behavior and option bias.
+    - Document any model that refused to answer or returned invalid output.
+
+  Phase 5 — Fine-Tuning Experiments  (Weeks 10-11)
+    - Select 2-3 best-performing open-source models from zero-shot results.
+    - Fine-tune each using LoRA on the training split.
+    - Evaluate fine-tuned models on the test split.
+    - Compare fine-tuned vs. zero-shot on all 7 tasks.
+
+  Phase 6 — Analysis and Paper Writing  (Weeks 12-14)
+    - Compile all results into tables and figures (mirror FPBench style).
+    - Perform quality-stratified analysis (good vs. medium vs. poor images).
+    - Perform rotation-stratified analysis (low vs. high theta values).
+    - Analyze failure cases: which images do models get wrong, and why?
+    - Write the paper following the structure of FaceXBench and FPBench.
+
+  Phase 7 — Review and Submission  (Weeks 15-16)
+    - Internal review and revision.
+    - Prepare supplementary materials (question templates, prompts, sample images).
+    - Release code and benchmark on GitHub.
+    - Submit to target venue: IEEE T-BIOM (primary), CVPR, or ECCV.
+
+
+================================================================================
+11. WHAT MAKES THIS A NOVEL CONTRIBUTION
+================================================================================
+
+  First in the field:
+    No prior work has evaluated any multimodal LLM on SLAP four-finger
+    fingerprint images.
+
+  Entirely new task categories:
+    Finger segmentation, finger position identification, hand laterality
+    classification, and rotation estimation from multi-finger images have
+    never been benchmarked with LLMs.
+
+  Operationally relevant:
+    SLAP processing is used at every US border entry point. These are real,
+    consequential tasks used in deployed border security systems.
+
+  Methodologically grounded:
+    We use the same tools (VLMEvalKit), question format (MCQ), and prompting
+    strategies as FaceXBench and FPBench. Our results are directly comparable
+    to prior work — showing exactly where SLAP tasks are harder or easier than
+    face and single-finger tasks.
+
+  Extends FPBench into multi-finger territory:
+    FPBench showed that fine-tuning dramatically helps for single isolated
+    finger tasks. We test whether this holds for the harder, more complex
+    multi-finger SLAP domain.
+
+  Dataset already in hand:
+    Unlike many benchmarks that require new data collection, SD302b is already
+    downloaded. Ground truth for 5 of 7 tasks is directly readable from the
+    existing segmentation CSV files. This significantly de-risks the project.
+
+  First LLM fingerprint verification benchmark on SLAP images:
+    No prior work has asked any multimodal LLM to distinguish genuine SLAP pairs
+    (same person, multiple impressions) from impostor pairs (different people).
+    We provide FAR/FRR/EER analysis and compare directly against VeriFinger
+    algorithmic baseline scores, creating a concrete bridge between LLM evaluation
+    and classical biometric verification protocols.
+
+
+================================================================================
+END OF SLAPBENCH PLAN
+================================================================================

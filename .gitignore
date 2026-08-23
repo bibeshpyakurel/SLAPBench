@@ -1,0 +1,38 @@
+# Data (22 GB) — never commit; provide download instructions in README
+datasets/
+dataset/
+models
+/media/
+
+# Python env / caches
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# HF / model caches
+.cache/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+manuscript/*.pdf
+eccv2026_submission/*.pdf
+
+# Large archives
+*.zip
+
+# Secrets
+.env
+
+# OS
+.DS_Store
+
+# Copyrighted third-party PDFs — do not redistribute
+related_papers/
+# Local Claude Code config
+.claude/

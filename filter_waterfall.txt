@@ -1,0 +1,15 @@
+SLAPBench filtering waterfall (Task 4)
+============================================================
+Step                                           subj   imgs
+------------------------------------------------------------
+0. SD302b participants (participants.csv)       201      —
+1. Device R four-finger SLAP (FRGP 13,14)        92    368
+   (184 @500 + 184 @1000)                                 
+2. keep subjects with BOTH 500 & 1000            92    368
+3. remove errata/incomplete (4 dropped)          88    352
+------------------------------------------------------------
+Verification pairs use these 352 Device R images.
+Broader curated active set (slap_images.csv) = 584 images
+  = 368 Device R (500+1000) + 216 Device S (500 only), 200 subjects;
+    Device S and dropped-subject images are retained but NOT paired.
+Mated pairs: 88 subj x 2 FRGP = 176.  Non-mated: C(88,2)x2 = 7,656.
