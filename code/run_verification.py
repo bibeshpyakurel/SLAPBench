@@ -331,6 +331,9 @@ def load_model(model_key: str):
         model = AutoModel.from_pretrained(
             hf_id,
             quantization_config=bnb_cfg,
+            torch_dtype=dtype,          # force non-quantized layers (biases, norms)
+                                        # to bf16 too; without this they load as fp16
+                                        # and generate() dies on a dtype mismatch.
             device_map={"": "cpu"},
             low_cpu_mem_usage=True,
             trust_remote_code=True,
