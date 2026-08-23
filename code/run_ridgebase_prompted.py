@@ -111,16 +111,26 @@ def run_one(model, proc, backend, pairs, model_key, prompting, out_path, resume)
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", required=True, choices=list(HF_REPO))
+    ap.add_argument("--model", required=True,
+                    choices=list(HF_REPO) + ["anthropic", "openai"])
     ap.add_argument("--pairs", required=True)
     ap.add_argument("--prompting", default="all",
                     choices=["all"] + list(rv.PROMPTS.keys()))
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--resume", action="store_true")
+    ap.add_argument("--anthropic-model", default="claude-opus-4-8")
+    ap.add_argument("--openai-model", default="gpt-5.6-sol")
     a = ap.parse_args()
 
-    # models/ symlink may be unmounted -> fall back to HF repo id (uses HF cache)
-    if not os.path.isdir(rv.MODELS[a.model]["hf_id"]):
+    # Paid API backends: set the concrete model id; no local weights to load.
+    if a.model == "anthropic":
+        rv.MODELS["anthropic"]["api_model"] = a.anthropic_model
+        rv.MODELS["anthropic"]["display"] = a.anthropic_model
+    elif a.model == "openai":
+        rv.MODELS["openai"]["api_model"] = a.openai_model
+        rv.MODELS["openai"]["display"] = a.openai_model
+    # Local open-source: models/ symlink may be unmounted -> HF cache fallback.
+    elif not os.path.isdir(rv.MODELS[a.model]["hf_id"]):
         rv.MODELS[a.model]["hf_id"] = HF_REPO[a.model]
 
     pairs = pd.read_csv(a.pairs, dtype=str).to_dict("records")

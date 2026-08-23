@@ -385,6 +385,9 @@ def load_model(model_key: str):
             quantization_config=bnb_cfg,
             device_map={"": "cpu"},
             low_cpu_mem_usage=True,
+            attn_implementation="eager",  # SDPA kernel segfaults intermittently
+                                          # during generate() on this GPU; eager
+                                          # is slower but stable.
         )
         model = model.to("cuda").eval()
 
@@ -655,15 +658,23 @@ def _infer_openai(client, model_name: str, img1_path: str, img2_path: str,
             ],
         },
     ]
+    is_reasoning = model_name.startswith(("gpt-5", "o1", "o3", "o4"))
     for attempt in range(max_retries):
         try:
-            response = client.chat.completions.create(
-                model=model_name,
-                messages=messages,
-                max_tokens=50,
-                temperature=0,
-            )
-            return response.choices[0].message.content.strip()
+            if is_reasoning:
+                # Reasoning models: max_completion_tokens (covers hidden reasoning
+                # + answer), reasoning_effort minimal for a terse numeric reply,
+                # and no temperature (rejected).
+                response = client.chat.completions.create(
+                    model=model_name, messages=messages,
+                    max_completion_tokens=2000, reasoning_effort="minimal",
+                )
+            else:
+                response = client.chat.completions.create(
+                    model=model_name, messages=messages,
+                    max_tokens=50, temperature=0,
+                )
+            return (response.choices[0].message.content or "").strip()
         except Exception as e:
             if "429" in str(e) or "rate" in str(e).lower():
                 wait = 2 ** attempt

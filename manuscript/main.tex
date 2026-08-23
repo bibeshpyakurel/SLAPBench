@@ -84,23 +84,22 @@ zero-shot as well. Claude Opus~4.8 alone resists collapse under both
 prompts and attains the strongest binary result (FAR~$= 20.2\%$).
 %
 The similarity-scoring prompt eliminates collapse across the open-source
-models and separates them by underlying capability. Claude Opus~4.8
-reaches Area Under the ROC Curve (AUC)~$= 0.953$ with Equal Error
-Rate~(EER)~$= 11.8\%$ and Gemma-3-12B reaches AUC~$= 0.837$
-(EER~$= 15.1\%$), whereas InternVL3-8B produces inverted calibration
-(AUC~$= 0.590$) and Qwen2.5-VL-7B yields near-random discrimination
-(AUC~$= 0.567$).
-%
-Qwen3-VL-8B separates the two classes perfectly (AUC~$= 1.000$,
-EER~$= 0.0\%$), and we report this outcome as a diagnostic rather than as
-evidence of verification capability. Since SD302b supplies only one SLAP
-capture per finger position, mated pairs must be formed across resolutions,
-and we show that this construction alone admits a resolution shortcut
-sufficient to produce perfect separation. We therefore read the result as a
+models and separates them into a clear ranking. We verified directly, however,
+that on SD302b a mated pair is the 500 and 1000~PPI versions of a
+\emph{single} capture---the 500~PPI image is an exact 2$\times$ downscale
+(mean pixel difference $<1/255$)---so this ranking indexes
+\emph{near-duplicate sensitivity}, not verification capability, and we report
+it as such: Claude Opus~4.8 reaches Area Under the ROC Curve (AUC)~$= 0.953$
+and Gemma-3-12B~$= 0.837$, whereas InternVL3-8B and Qwen2.5-VL-7B are near
+random ($0.590$ and $0.567$), and Qwen3-VL-8B separates the classes perfectly
+(AUC~$= 1.000$)---perfect \emph{near-duplicate detection} rather than
+fingerprint matching. Because SD302b supplies only one SLAP capture per finger
+position, no genuine same-finger, independent-impression pair can be formed
+from it at all. We therefore read these SD302b genuine-pair scores as a
 cautionary finding about how MLLM biometric benchmarks are assembled, and we
-specify the matched-resolution control that would settle it.
+address it directly rather than only caveat it.
 %
-To settle it empirically, we extend the benchmark to \textbf{RidgeBase}, a
+To measure genuine verification, we extend the benchmark to \textbf{RidgeBase}, a
 cross-sensor contactless four-finger dataset that provides multiple
 \emph{independent} captures per hand, and add a prompt-free embedding-matching
 evaluation alongside prompting. On these independent-capture pairs the perfect
