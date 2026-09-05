@@ -1059,7 +1059,32 @@ similarity separations $\Delta$ range from $+2.2$ (Qwen3-VL) to $-3.7$
 AUC~$= 1.000$ on SD302b---falls to $0.469$ (embedding) and $0.558$ (prompted)
 here. This is the empirical counterpart to the resolution-shortcut argument of
 Section~\ref{sec:perfect}: once mated pairs are no longer two views of one
-image, the signal that produced a perfect SD302b score is absent.
+image, the signal that produced a perfect SD302b score is absent
+(Figure~\ref{fig:contrast}).
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{fig_sd302b_vs_ridgebase.pdf}
+  \caption{\textbf{The perfect SD302b score is an artifact of pair
+    construction.} Similarity-scoring distributions (within-class normalized)
+    for the four open-source models. \textbf{Top:} SD302b, where each mated pair
+    is the 500 and 1000~PPI rendering of one capture---genuine (blue) and
+    impostor (red) separate, and Qwen3-VL-8B reaches AUC~$= 1.000$.
+    \textbf{Bottom:} RidgeBase, where mated pairs are \emph{independent}
+    captures---the two distributions become coincident and every model falls to
+    AUC~$\approx 0.5$. The collapse from top row to bottom is the near-duplicate
+    shortcut being removed.}
+  \label{fig:contrast}
+\end{figure*}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.82\columnwidth]{fig_ridgebase_roc.pdf}
+  \caption{ROC on RidgeBase (genuine vs.\ primary impostor, independent
+    captures). All four models track the chance diagonal (AUC~$0.50$--$0.56$),
+    in contrast to their SD302b behavior.}
+  \label{fig:rb_roc}
+\end{figure}
 
 \textbf{Cross-sensor split.} Comparing the same-device and cross-device
 subsets isolates how much of any residual signal is sensor consistency rather
@@ -1082,7 +1107,20 @@ right. A model doing fingerprint matching would score these as confidently
 non-mated; instead they are scored like genuine pairs. Together with the
 embedding result and the cross-sensor collapse, this is the core mechanism
 evidence that current MLLMs perform appearance matching rather than fingerprint
-matching on four-finger images.
+matching on four-finger images (Figure~\ref{fig:rb_diag}).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{fig_ridgebase_diagnostic.pdf}
+  \caption{\textbf{Diagnostic impostors.} A real genuine pair (same hand, two
+    captures), a primary impostor (different people), and a diagnostic impostor
+    (\emph{same person, opposite hand}), each shown with the four models'
+    similarity scores. A model comparing ridge structure would score the bottom
+    row low; instead all three rows receive similar scores---e.g.\ Qwen3-VL-8B
+    returns~65 for all three---showing the models cannot distinguish a person's
+    two hands and are keyed on global appearance.}
+  \label{fig:rb_diag}
+\end{figure}
 
 \subsection{Demographic Fairness}
 \label{sec:fairness}
