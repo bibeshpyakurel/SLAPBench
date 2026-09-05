@@ -86,13 +86,13 @@ prompts and attains the strongest binary result (FAR~$= 20.2\%$).
 The similarity-scoring prompt eliminates collapse across the open-source
 models and separates them into a clear ranking. We verified directly, however,
 that on SD302b a mated pair is the 500 and 1000~PPI versions of a
-\emph{single} capture---the 500~PPI image is an exact 2$\times$ downscale
-(mean pixel difference $<1/255$)---so this ranking indexes
+\emph{single} capture: the 500~PPI image is an exact 2$\times$ downscale
+(mean pixel difference $<1/255$), so this ranking indexes
 \emph{near-duplicate sensitivity}, not verification capability, and we report
 it as such: Claude Opus~4.8 reaches Area Under the ROC Curve (AUC)~$= 0.953$
 and Gemma-3-12B~$= 0.837$, whereas InternVL3-8B and Qwen2.5-VL-7B are near
 random ($0.590$ and $0.567$), and Qwen3-VL-8B separates the classes perfectly
-(AUC~$= 1.000$)---perfect \emph{near-duplicate detection} rather than
+(AUC~$= 1.000$), which is perfect \emph{near-duplicate detection} rather than
 fingerprint matching. Because SD302b supplies only one SLAP capture per finger
 position, no genuine same-finger, independent-impression pair can be formed
 from it at all. We therefore read these SD302b genuine-pair scores as a
@@ -447,8 +447,8 @@ than a contact livescan, and we treat it as a complementary stress test: it
 holds the four-finger SLAP framing (four fingers of one hand imaged together)
 while removing the same-capture confound and adding a genuine cross-sensor gap.
 Because mated pairs are now independent captures, RidgeBase lets us separate two
-explanations of the SD302b result---appearance matching versus ridge
-matching---that SD302b alone cannot.
+explanations of the SD302b result (appearance matching versus ridge
+matching) that SD302b alone cannot.
 
 % ────────────────────────────────────────────────────────────────────────────
 \section{Evaluation Protocol and Methodology}
@@ -528,8 +528,8 @@ three comparison categories:
         not two resolutions of one image.
   \item \textbf{Primary impostor (non-mated):} different subjects, same hand.
   \item \textbf{Diagnostic impostor (non-mated):} same subject, \emph{different}
-        hand (left vs.\ right). These are the same person's two hands---identical
-        skin tone, lighting, and background but genuinely different fingers---so
+        hand (left vs.\ right). These are the same person's two hands, with identical
+        skin tone, lighting, and background but genuinely different fingers, so
         they isolate whether a model keys on identity-level appearance cues
         rather than ridge structure.
 \end{itemize}
@@ -540,7 +540,7 @@ or Google$\leftrightarrow$Google) or \textbf{cross-device}
 the impostor set's device composition to the genuine set so that any
 genuine--impostor difference cannot be attributed to device makeup. The balanced
 evaluation manifest contains \textbf{1{,}484 pairs} (592 genuine, 592 primary
-impostor---each 277 same-device and 315 cross-device---and 300 diagnostic
+impostor, each 277 same-device and 315 cross-device, and 300 diagnostic
 impostors); a larger \textbf{4{,}461-pair} manifest is released for
 higher-power analysis. As a construction check, the mean genuine similarity is
 strictly below unity, confirming that mated pairs are independent captures and
@@ -855,8 +855,8 @@ eliminates the collapse seen under binary prompting: no model produces a single
 constant output, and impostor and genuine pairs occupy distinguishable score
 ranges. Second, and decisively, on SD302b a genuine pair is the 500 and
 1000~PPI versions of one capture (Section~\ref{sec:dataset}), so the ability
-measured here is \emph{near-duplicate sensitivity}---telling an image apart from
-its own downscale---not fingerprint verification. We therefore report the
+measured here is \emph{near-duplicate sensitivity} (telling an image apart from
+its own downscale), not fingerprint verification. We therefore report the
 per-model scores below as a characterization of that near-duplicate behavior and
 of which models escape collapse, and we defer all verification claims to the
 independent-capture RidgeBase results of Section~\ref{sec:rb_results}. The
@@ -953,7 +953,7 @@ distributions. Once collapse is removed, it is this split, and not the
 prompt, that separates success from failure.
 \textbf{The binary collapse in Table~\ref{tab:main_results} is thus a
 prompt-format artifact; whether any discriminative signal appears under
-scoring depends on model architecture---though on SD302b that signal is
+scoring depends on model architecture, though on SD302b that signal is
 near-duplicate sensitivity, not verification (Section~\ref{sec:rb_results}).}
 Figure~\ref{fig:qualitative} grounds these aggregate numbers in two real
 pairs: on a genuine pair, every model but InternVL3-8B reports high
@@ -1008,8 +1008,8 @@ The SD302b results above leave one question open: does any model actually
 match ridges, or does the single-capture pair structure let appearance
 similarity stand in for identity (Section~\ref{sec:perfect})? RidgeBase answers
 it directly, because its mated pairs are independent captures
-(Section~\ref{sec:rb_pairs}). We report two evaluations---prompt-free embedding
-matching and the similarity-scoring prompt---on the same 1{,}484-pair balanced
+(Section~\ref{sec:rb_pairs}). We report two evaluations, prompt-free embedding
+matching and the similarity-scoring prompt, on the same 1{,}484-pair balanced
 manifest, with results in Table~\ref{tab:ridgebase_main}.
 
 % ── RidgeBase results table (embedding + similarity scoring) ─────────────────
@@ -1041,8 +1041,8 @@ manifest, with results in Table~\ref{tab:ridgebase_main}.
 3 & InternVL3-8B    & 0.434 & 56.2\% & 56.5 & 60.2 & $-$3.7 & 0.504 & 51.4\% \\
 4 & Gemma-3-12B     & 0.509 & 49.3\% & 62.3 & 62.4 & $-$0.1 & 0.505 & 48.7\% \\
 \midrule
-5 & Claude Opus 4.8 & ---   & ---    & \ph{Gen} & \ph{Imp} & \ph{$\Delta$} & \ph{AUC} & \ph{EER} \\
-6 & GPT-5.6-sol     & ---   & ---    & \ph{Gen} & \ph{Imp} & \ph{$\Delta$} & \ph{AUC} & \ph{EER} \\
+5 & Claude Opus 4.8 & n/a   & n/a    & \ph{Gen} & \ph{Imp} & \ph{$\Delta$} & \ph{AUC} & \ph{EER} \\
+6 & GPT-5.6-sol     & n/a   & n/a    & \ph{Gen} & \ph{Imp} & \ph{$\Delta$} & \ph{AUC} & \ph{EER} \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -1055,8 +1055,8 @@ Gemma-3-12B $0.509$), and the similarity-scoring prompt does no better,
 spanning $0.504$--$0.558$ with equal-error rates of $43.6$--$51.4\%$. The
 genuine and impostor score distributions are nearly coincident: mean
 similarity separations $\Delta$ range from $+2.2$ (Qwen3-VL) to $-3.7$
-(InternVL3, i.e.\ inverted). Most strikingly, Qwen3-VL-8B---which reached
-AUC~$= 1.000$ on SD302b---falls to $0.469$ (embedding) and $0.558$ (prompted)
+(InternVL3, i.e.\ inverted). Most strikingly, Qwen3-VL-8B, which reached
+AUC~$= 1.000$ on SD302b, falls to $0.469$ (embedding) and $0.558$ (prompted)
 here. This is the empirical counterpart to the resolution-shortcut argument of
 Section~\ref{sec:perfect}: once mated pairs are no longer two views of one
 image, the signal that produced a perfect SD302b score is absent
@@ -1068,10 +1068,10 @@ image, the signal that produced a perfect SD302b score is absent
   \caption{\textbf{The perfect SD302b score is an artifact of pair
     construction.} Similarity-scoring distributions (within-class normalized)
     for the four open-source models. \textbf{Top:} SD302b, where each mated pair
-    is the 500 and 1000~PPI rendering of one capture---genuine (blue) and
+    is the 500 and 1000~PPI rendering of one capture: genuine (blue) and
     impostor (red) separate, and Qwen3-VL-8B reaches AUC~$= 1.000$.
     \textbf{Bottom:} RidgeBase, where mated pairs are \emph{independent}
-    captures---the two distributions become coincident and every model falls to
+    captures: the two distributions become coincident and every model falls to
     AUC~$\approx 0.5$. The collapse from top row to bottom is the near-duplicate
     shortcut being removed.}
   \label{fig:contrast}
@@ -1091,7 +1091,7 @@ subsets isolates how much of any residual signal is sensor consistency rather
 than identity. What little signal exists is sensor consistency: Qwen3-VL-8B,
 the strongest case, scores $0.644$ on same-device genuine pairs
 (Apple$\leftrightarrow$Apple or Google$\leftrightarrow$Google) but collapses to
-$0.491$---exactly chance---on cross-device pairs
+$0.491$, exactly chance, on cross-device pairs
 (Apple$\leftrightarrow$Google). Every model shows the same direction, with
 same-device AUC above cross-device AUC. Because the construction holds device
 composition equal between genuine and impostor sets, this gap cannot be
@@ -1099,7 +1099,7 @@ attributed to device makeup; it shows the models are matching capture
 appearance, and lose even that when the sensor changes.
 
 \textbf{Diagnostic impostors (same person, different hand).} These pairs share
-every identity-level cue---same person, skin tone, lighting, background---but
+every identity-level cue (same person, skin tone, lighting, background) but
 differ in the actual fingers. Every model is at chance at separating a
 subject's genuine pairs from their own opposite-hand pairs (AUC $0.523$--$0.582$
 across the four models), i.e.\ it cannot tell a person's left hand from their
@@ -1116,8 +1116,8 @@ matching on four-finger images (Figure~\ref{fig:rb_diag}).
     captures), a primary impostor (different people), and a diagnostic impostor
     (\emph{same person, opposite hand}), each shown with the four models'
     similarity scores. A model comparing ridge structure would score the bottom
-    row low; instead all three rows receive similar scores---e.g.\ Qwen3-VL-8B
-    returns~65 for all three---showing the models cannot distinguish a person's
+    row low; instead all three rows receive similar scores (e.g.\ Qwen3-VL-8B
+    returns~65 for all three), showing the models cannot distinguish a person's
     two hands and are keyed on global appearance.}
   \label{fig:rb_diag}
 \end{figure}
@@ -1130,9 +1130,9 @@ exhibits the strongest demographic bias~\cite{facerecbench2025}.
 We test whether the same pattern holds on SLAP fingerprints. Two scope notes
 apply. This analysis uses SD302b, the only one of our two datasets with
 demographic labels (RidgeBase provides none), so it necessarily characterizes
-the same-capture similarity-scoring behavior of Section~\ref{sec:results}---which
+the same-capture similarity-scoring behavior of Section~\ref{sec:results} (which
 Section~\ref{sec:perfect} shows is near-duplicate sensitivity rather than
-verification---broken down by subgroup, not verification fairness per se. It is
+verification), broken down by subgroup, not verification fairness per se. It is
 best read as whether that behavior is uniform across groups; a verification
 fairness audit would require an independent-capture dataset with demographics,
 which we do not have.
@@ -1235,7 +1235,7 @@ and SLAP formats.
 SLAPBench does not set out to surpass FPBench's numbers. Its contribution
 is to establish the first SLAP-specific baseline and to show that continuous
 scoring prompts expose whatever discriminative signal a model has, which binary
-prompting suppresses---a signal that, on genuinely independent captures, turns
+prompting suppresses: a signal that, on genuinely independent captures, turns
 out to be at chance (Section~\ref{sec:rb_results}).
 These two benchmarks address different problems and should be read
 as complementary, not competing.
@@ -1442,9 +1442,9 @@ at 100. That a frontier model stops short of perfect separation makes
 Qwen3's exact-100 behavior look less like superior recall and more like a
 different mechanism operating altogether.
 
-The remaining reading, \textbf{genuine cross-resolution discrimination}---under
+The remaining reading, \textbf{genuine cross-resolution discrimination} (under
 which Qwen3 recognizes shared ridge structure across the two renderings and
-reports maximal confidence for sound reasons---is the one a capability claim
+reports maximal confidence for sound reasons), is the one a capability claim
 would require. We regarded it as the least likely of the four even before
 testing, since it must explain why a capability strong enough to be flawless
 here leaves the same model collapsing to 98.9\% FAR under a binary prompt on
@@ -1454,7 +1454,7 @@ the same images.
 control, we ran it: RidgeBase supplies genuinely independent captures of each
 hand (Section~\ref{sec:rb_results}), which removes the resolution and
 near-duplicate cues at their source. On those pairs Qwen3-VL-8B falls to
-AUC~$= 0.469$ (embedding) and $0.558$ (scoring)---chance---and every other
+AUC~$= 0.469$ (embedding) and $0.558$ (scoring), both chance, and every other
 model does the same. A model with genuine cross-resolution verification
 ability would have carried at least part of that skill to independent
 captures; none did. This excludes the genuine-discrimination reading and
@@ -1472,7 +1472,7 @@ lesson generalizes past this benchmark: when a dataset offers only one capture
 per subject, the mated class must be constructed by some transformation of that
 capture, and any such transformation risks becoming the very cue the model
 learns to read. Near-perfect results on MLLM biometric benchmarks warrant a
-protocol audit---or, better, an independent-capture dataset---before they
+protocol audit, or better an independent-capture dataset, before they
 warrant belief.
 
 \subsection{The Left-Hand / Right-Hand Asymmetry}
@@ -1607,8 +1607,8 @@ collapse under both prompts. Collapse is thus an artifact of the prompt
 format that recurs regardless of dataset.
 Similarity scoring removes the collapse, but the score separation it reveals
 must be read carefully. On SD302b every mated pair is the 500 and 1000~PPI
-versions of one capture, so the separation---and Qwen3-VL-8B's perfect
-AUC~$= 1.000$---reflects near-duplicate sensitivity, not verification. The
+versions of one capture, so the separation, and Qwen3-VL-8B's perfect
+AUC~$= 1.000$, reflects near-duplicate sensitivity, not verification. The
 RidgeBase evaluation confirms this directly: given genuinely independent
 captures, every model falls to chance (embedding AUC~$0.40$--$0.51$,
 similarity-scoring AUC~$0.50$--$0.56$), none can separate a subject's own two
