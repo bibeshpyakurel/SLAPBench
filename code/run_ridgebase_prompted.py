@@ -120,6 +120,8 @@ def main():
     ap.add_argument("--resume", action="store_true")
     ap.add_argument("--anthropic-model", default="claude-opus-4-8")
     ap.add_argument("--openai-model", default="gpt-5.6-sol")
+    ap.add_argument("--results-dir", default=str(RB_RESULTS),
+                    help="output tree (e.g. results/precise); default results/ridgebase")
     a = ap.parse_args()
 
     # Paid API backends: set the concrete model id; no local weights to load.
@@ -138,7 +140,7 @@ def main():
         pairs = pairs[:a.limit]
     strategies = list(rv.PROMPTS.keys()) if a.prompting == "all" else [a.prompting]
 
-    out_dir = RB_RESULTS / a.model / "latest"
+    out_dir = Path(a.results_dir) / a.model / "latest"
     out_dir.mkdir(parents=True, exist_ok=True)
     date = datetime.now().strftime("%Y%m%d_%H%M")
 
