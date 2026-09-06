@@ -119,11 +119,11 @@ def render_md(out):
 
 
 def main():
+    global RB
     import argparse
     ap = argparse.ArgumentParser()
     ap.add_argument("--dir", default=RB, help="results tree, e.g. results/precise")
     a = ap.parse_args()
-    global RB
     RB = a.dir
     out = analyze()
     os.makedirs(RB, exist_ok=True)

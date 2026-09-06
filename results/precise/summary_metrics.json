@@ -1,0 +1,116 @@
+{
+  "qwen25vl": {
+    "embedding": {
+      "n_genuine": 676,
+      "n_impostor": 676,
+      "n_diag": 338,
+      "genuine_mean": 0.956,
+      "impostor_mean": 0.906,
+      "standard_AUC": 0.8421,
+      "standard_EER": 25.0,
+      "same_device_AUC": null,
+      "cross_device_AUC": null,
+      "diagnostic_AUC": 0.5678
+    },
+    "similarity_scoring": {
+      "n_genuine": 676,
+      "n_impostor": 676,
+      "n_diag": 338,
+      "genuine_mean": 93.846,
+      "impostor_mean": 88.757,
+      "standard_AUC": 0.5862,
+      "standard_EER": 41.42,
+      "same_device_AUC": null,
+      "cross_device_AUC": null,
+      "diagnostic_AUC": 0.5126
+    },
+    "binary": {
+      "zero_shot": {
+        "FAR": 70.3,
+        "FRR": 8.3,
+        "n": 1689
+      },
+      "task_description": {
+        "FAR": 99.9,
+        "FRR": 0.0,
+        "n": 1690
+      }
+    }
+  },
+  "internvl3": {
+    "embedding": {
+      "n_genuine": 676,
+      "n_impostor": 676,
+      "n_diag": 338,
+      "genuine_mean": 0.979,
+      "impostor_mean": 0.961,
+      "standard_AUC": 0.8354,
+      "standard_EER": 24.48,
+      "same_device_AUC": null,
+      "cross_device_AUC": null,
+      "diagnostic_AUC": 0.6104
+    },
+    "similarity_scoring": {
+      "n_genuine": 676,
+      "n_impostor": 676,
+      "n_diag": 338,
+      "genuine_mean": 80.777,
+      "impostor_mean": 72.963,
+      "standard_AUC": 0.7087,
+      "standard_EER": 32.03,
+      "same_device_AUC": null,
+      "cross_device_AUC": null,
+      "diagnostic_AUC": 0.637
+    },
+    "binary": {
+      "zero_shot": {
+        "FAR": 47.2,
+        "FRR": 15.2,
+        "n": 1690
+      },
+      "task_description": {
+        "FAR": 96.6,
+        "FRR": 1.2,
+        "n": 1690
+      }
+    }
+  },
+  "gemma3": {
+    "embedding": {
+      "n_genuine": 676,
+      "n_impostor": 676,
+      "n_diag": 338,
+      "genuine_mean": 0.987,
+      "impostor_mean": 0.975,
+      "standard_AUC": 0.8384,
+      "standard_EER": 23.96,
+      "same_device_AUC": null,
+      "cross_device_AUC": null,
+      "diagnostic_AUC": 0.5813
+    },
+    "similarity_scoring": {
+      "n_genuine": 676,
+      "n_impostor": 676,
+      "n_diag": 338,
+      "genuine_mean": 68.957,
+      "impostor_mean": 66.154,
+      "standard_AUC": 0.6294,
+      "standard_EER": 37.65,
+      "same_device_AUC": null,
+      "cross_device_AUC": null,
+      "diagnostic_AUC": 0.5981
+    },
+    "binary": {
+      "zero_shot": {
+        "FAR": 98.1,
+        "FRR": 0.9,
+        "n": 1690
+      },
+      "task_description": {
+        "FAR": 100.0,
+        "FRR": 0.0,
+        "n": 1690
+      }
+    }
+  }
+}
