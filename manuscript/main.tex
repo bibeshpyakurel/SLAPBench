@@ -450,6 +450,26 @@ Because mated pairs are now independent captures, RidgeBase lets us separate two
 explanations of the SD302b result (appearance matching versus ridge
 matching) that SD302b alone cannot.
 
+\subsection{Precise: A Same-Session Livescan Point}
+\label{sec:precise}
+
+The two datasets above bracket the problem at its extremes: SD302b mated pairs
+share the \emph{same image}, RidgeBase mated pairs share \emph{nothing}. To
+place an intermediate point between them we add \textbf{Precise}, a four-finger
+SLAP \emph{livescan} dataset of 338 subjects with multiple impressions per
+finger position (2--16, mean 7.3). Precise is the same contact modality as
+SD302b and the operational border setting, and its impressions are genuinely
+distinct presses (different pressure and placement), not resolution copies. Its
+limitation, which we verified directly, is that 99\% of subjects were captured
+in a single session: a mated pair is two impressions taken minutes apart (median
+gap 189~s) on the same device under the same lighting, and only four subjects
+have captures on more than one day. Precise mated pairs therefore share
+\emph{session} appearance without sharing the exact image. We use positions 13
+and 14 (right and left four-finger slaps) and the same three comparison
+categories as RidgeBase. Precise thus sits between SD302b and RidgeBase on a
+single axis: how much a genuine pair's two images share their capture
+conditions.
+
 % ────────────────────────────────────────────────────────────────────────────
 \section{Evaluation Protocol and Methodology}
 \label{sec:method}
@@ -1121,6 +1141,48 @@ matching on four-finger images (Figure~\ref{fig:rb_diag}).
     two hands and are keyed on global appearance.}
   \label{fig:rb_diag}
 \end{figure}
+
+\subsection{The Capture-Divergence Gradient}
+\label{sec:gradient}
+
+Placing all three datasets on a single axis makes the mechanism unmistakable. We
+order them by how much a genuine pair's two images share their capture
+conditions: SD302b (the same image at two resolutions), Precise (two impressions
+from one session, minutes apart), and RidgeBase (independent captures on
+different devices and days). Under prompt-free embedding matching, the purest
+measure since it has no language head, AUC decays monotonically along this axis
+for every model (Figure~\ref{fig:gradient}). On SD302b all three models reach
+AUC~$= 1.000$: detecting that an image matches its own downscale is trivial for
+any vision encoder, and the prompted ``capability ranking'' of
+Section~\ref{sec:results} collapses to a tie once the language head is removed.
+On Precise the same models fall to AUC~$0.835$--$0.842$, and on RidgeBase to
+$0.400$--$0.509$, i.e.\ chance.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.94\columnwidth]{fig_capture_gradient.pdf}
+  \caption{\textbf{The capture-divergence gradient.} Embedding-matching AUC
+    (genuine vs.\ impostor) for three models across the three datasets, ordered
+    by decreasing overlap of the genuine pair's capture conditions. Performance
+    decays from perfect (SD302b, same image) through $0.84$ (Precise, same
+    session) to chance (RidgeBase, independent), identically for every model.
+    The single predictor of apparent performance is how alike the two genuine
+    images are as captures, not identity.}
+  \label{fig:gradient}
+\end{figure}
+
+That Precise sits in the middle, not at the top, is itself diagnostic. Its
+impressions are genuinely different presses, so a model comparing ridges should
+score high there and remain high on RidgeBase. Instead Precise's $0.84$ is
+carried entirely by same-session appearance: restricted to the few genuine pairs
+captured on \emph{different} days, embedding AUC falls to $0.24$--$0.36$ (below
+chance), the same-person different-hand diagnostic sits at $0.51$--$0.64$, and
+task-description prompting collapses the models to $96.6$--$100\%$ FAR just as on
+the other two datasets. The single variable that predicts a model's apparent
+performance is not the model, the modality (contact vs.\ contactless), or the
+prompt, but how much a genuine pair's two images look alike as captures. These
+MLLMs perform appearance matching; once appearance is held constant across the
+mated and non-mated classes, no verification ability remains.
 
 \subsection{Demographic Fairness}
 \label{sec:fairness}
