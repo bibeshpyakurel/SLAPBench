@@ -1151,18 +1151,19 @@ conditions: SD302b (the same image at two resolutions), Precise (two impressions
 from one session, minutes apart), and RidgeBase (independent captures on
 different devices and days). Under prompt-free embedding matching, the purest
 measure since it has no language head, AUC decays monotonically along this axis
-for every model (Figure~\ref{fig:gradient}). On SD302b all three models reach
-AUC~$= 1.000$: detecting that an image matches its own downscale is trivial for
-any vision encoder, and the prompted ``capability ranking'' of
-Section~\ref{sec:results} collapses to a tie once the language head is removed.
-On Precise the same models fall to AUC~$0.835$--$0.842$, and on RidgeBase to
-$0.400$--$0.509$, i.e.\ chance.
+for every model, including Qwen3-VL-8B, the strongest system in the study
+(Figure~\ref{fig:gradient}). On SD302b all four models reach AUC~$= 1.000$:
+detecting that an image matches its own downscale is trivial for any vision
+encoder, and the prompted ``capability ranking'' of Section~\ref{sec:results}
+collapses to a tie once the language head is removed. On Precise the same
+models fall to AUC~$0.835$--$0.844$, and on RidgeBase to $0.400$--$0.509$, i.e.\
+chance.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.94\columnwidth]{fig_capture_gradient.pdf}
   \caption{\textbf{The capture-divergence gradient.} Embedding-matching AUC
-    (genuine vs.\ impostor) for three models across the three datasets, ordered
+    (genuine vs.\ impostor) for four models across the three datasets, ordered
     by decreasing overlap of the genuine pair's capture conditions. Performance
     decays from perfect (SD302b, same image) through $0.84$ (Precise, same
     session) to chance (RidgeBase, independent), identically for every model.
@@ -1175,8 +1176,8 @@ That Precise sits in the middle, not at the top, is itself diagnostic. Its
 impressions are genuinely different presses, so a model comparing ridges should
 score high there and remain high on RidgeBase. Instead Precise's $0.84$ is
 carried entirely by same-session appearance: restricted to the few genuine pairs
-captured on \emph{different} days, embedding AUC falls to $0.24$--$0.36$ (below
-chance), the same-person different-hand diagnostic sits at $0.51$--$0.64$, and
+captured on \emph{different} days, embedding AUC falls to $0.24$--$0.37$ (below
+chance), the same-person different-hand diagnostic sits at $0.51$--$0.79$, and
 task-description prompting collapses the models to $96.6$--$100\%$ FAR just as on
 the other two datasets. The single variable that predicts a model's apparent
 performance is not the model, the modality (contact vs.\ contactless), or the

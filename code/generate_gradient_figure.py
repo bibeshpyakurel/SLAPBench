@@ -27,7 +27,8 @@ OUT = os.path.join(BASE, "manuscript", "figures")
 DATASETS = [("sd302b", "SD302b\n(same image)"),
             ("precise", "Precise\n(same session)"),
             ("ridgebase", "RidgeBase\n(independent)")]
-MODELS = [("internvl3", "InternVL3-8B", "#2E7D32", "-.", "s"),
+MODELS = [("qwen3vl", "Qwen3-VL-8B", "#1565C0", "-", "o"),
+          ("internvl3", "InternVL3-8B", "#2E7D32", "-.", "s"),
           ("qwen25vl", "Qwen2.5-VL-7B", "#6A1B9A", "--", "^"),
           ("gemma3", "Gemma-3-12B", "#EF6C00", ":", "D")]
 

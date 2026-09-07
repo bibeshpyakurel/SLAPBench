@@ -1,4 +1,42 @@
 {
+  "qwen3vl": {
+    "embedding": {
+      "n_genuine": 676,
+      "n_impostor": 676,
+      "n_diag": 338,
+      "genuine_mean": 0.98,
+      "impostor_mean": 0.962,
+      "standard_AUC": 0.8436,
+      "standard_EER": 23.22,
+      "same_device_AUC": null,
+      "cross_device_AUC": null,
+      "diagnostic_AUC": 0.6057
+    },
+    "similarity_scoring": {
+      "n_genuine": 676,
+      "n_impostor": 676,
+      "n_diag": 337,
+      "genuine_mean": 89.652,
+      "impostor_mean": 74.63,
+      "standard_AUC": 0.8268,
+      "standard_EER": 20.27,
+      "same_device_AUC": null,
+      "cross_device_AUC": null,
+      "diagnostic_AUC": 0.7885
+    },
+    "binary": {
+      "zero_shot": {
+        "FAR": 46.5,
+        "FRR": 10.9,
+        "n": 1690
+      },
+      "task_description": {
+        "FAR": 99.5,
+        "FRR": 0.4,
+        "n": 1690
+      }
+    }
+  },
   "qwen25vl": {
     "embedding": {
       "n_genuine": 676,
