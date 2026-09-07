@@ -92,6 +92,16 @@ MODELS = {
         "dtype":     "bfloat16",
         "load_4bit": True,
     },
+    "pixtral": {
+        "display":   "Pixtral-12B-2409",
+        # Pre-quantized bnb-4bit repo (official mistralai repo is 25GB bf16 and
+        # doesn't fit local disk headroom; this repo already bakes the 4-bit
+        # quantization_config into config.json, so no BitsAndBytesConfig needed).
+        "hf_id":     "unsloth/Pixtral-12B-2409-bnb-4bit",
+        "backend":   "pixtral",
+        "dtype":     "bfloat16",
+        "load_4bit": True,
+    },
     "openai": {
         "display":   "gpt-4o",          # overwritten at runtime by --openai-model
         "backend":   "openai",
@@ -420,6 +430,23 @@ def load_model(model_key: str):
         processor = AutoProcessor.from_pretrained(hf_id)
         return model, processor, backend
 
+    if backend == "pixtral":
+        import torch
+        from transformers import AutoProcessor, LlavaForConditionalGeneration
+
+        # quantization_config is already baked into this repo's config.json
+        # (bnb 4-bit), so no BitsAndBytesConfig is passed here -- transformers
+        # reads it automatically and just decompresses straight to GPU.
+        model = LlavaForConditionalGeneration.from_pretrained(
+            hf_id,
+            device_map={"": "cuda:0"},
+            torch_dtype=torch.bfloat16,
+            low_cpu_mem_usage=True,
+        ).eval()
+
+        processor = AutoProcessor.from_pretrained(hf_id)
+        return model, processor, backend
+
     if backend == "openai":
         import os
         from openai import OpenAI
@@ -646,6 +673,61 @@ def _infer_gemma3(model, processor, img1_path: str, img2_path: str,
     return processor.decode(generation, skip_special_tokens=True).strip()
 
 
+def _infer_pixtral(model, processor, img1_path: str, img2_path: str,
+                   prompt_text: str, max_new_tokens: int = 96) -> str:
+    # Pixtral is wordier than the other backends and sometimes doesn't reach
+    # its numeric answer within 48 tokens; give it more room rather than
+    # truncate mid-sentence.
+    import torch
+
+    img1 = load_pil(img1_path, size=448)
+    img2 = load_pil(img2_path, size=448)
+
+    # Pixtral's chat template folds a system turn into the leading [INST]
+    # block as plain text (list-of-dicts content on the system role errors).
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {
+            "role": "user",
+            "content": [
+                {"type": "image"},
+                {"type": "image"},
+                {"type": "text", "text": prompt_text},
+            ],
+        },
+    ]
+
+    text = processor.apply_chat_template(
+        messages,
+        tokenize=False,
+        add_generation_prompt=True,
+    )
+
+    raw_inputs = processor(text=text, images=[img1, img2], return_tensors="pt")
+    raw_inputs.pop("token_type_ids", None)  # not a generate() kwarg
+    inputs = {
+        k: v.to("cuda", dtype=torch.bfloat16) if v.dtype == torch.float32 else v.to("cuda")
+        for k, v in raw_inputs.items()
+    }
+
+    input_len = inputs["input_ids"].shape[-1]
+
+    with torch.inference_mode():
+        output_ids = model.generate(
+            **inputs,
+            max_new_tokens=max_new_tokens,
+            do_sample=False,
+            # Plain greedy decoding makes Pixtral loop, re-echoing prompt
+            # phrasing ("50% confident (completely..." repeated) instead of
+            # emitting a short answer; the other backends don't need this.
+            repetition_penalty=1.3,
+            no_repeat_ngram_size=3,
+        )
+
+    generation = output_ids[0][input_len:]
+    return processor.decode(generation, skip_special_tokens=True).strip()
+
+
 def _infer_openai(client, model_name: str, img1_path: str, img2_path: str,
                   prompt_text: str, max_retries: int = 5) -> str:
     img1_b64 = image_to_base64(img1_path)
@@ -747,6 +829,8 @@ def call_model(model, proc_or_tok, backend: str,
         raw = _infer_qwen3vl(model, proc_or_tok, img1, img2, prompt_text)
     elif backend == "gemma3":
         raw = _infer_gemma3(model, proc_or_tok, img1, img2, prompt_text)
+    elif backend == "pixtral":
+        raw = _infer_pixtral(model, proc_or_tok, img1, img2, prompt_text)
     elif backend == "openai":
         raw = _infer_openai(model, proc_or_tok, img1, img2, prompt_text)
     elif backend == "anthropic":

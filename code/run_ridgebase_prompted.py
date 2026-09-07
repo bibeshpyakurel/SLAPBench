@@ -36,6 +36,7 @@ HF_REPO = {
     "internvl3": "OpenGVLab/InternVL3-8B",
     "qwen25vl":  "Qwen/Qwen2.5-VL-7B-Instruct",
     "gemma3":    "google/gemma-3-12b-it",
+    "pixtral":   "unsloth/Pixtral-12B-2409-bnb-4bit",
 }
 
 

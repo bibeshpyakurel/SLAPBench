@@ -32,6 +32,7 @@ HF_REPO = {
     "internvl3": "OpenGVLab/InternVL3-8B",
     "qwen25vl":  "Qwen/Qwen2.5-VL-7B-Instruct",
     "gemma3":    "google/gemma-3-12b-it",
+    "pixtral":   "unsloth/Pixtral-12B-2409-bnb-4bit",
 }
 
 
@@ -74,6 +75,15 @@ def extract_embedding(model, proc, backend, image_path):
             inputs = proc(images=img, text="<start_of_image>", return_tensors="pt").to(model.device)
             feats = model.get_image_features(pixel_values=inputs["pixel_values"])
             emb = _pool(feats if not isinstance(feats, (list, tuple)) else feats[0])
+
+        elif backend == "pixtral":
+            # Pixtral vision tower (via Llava wrapper): get_image_features(pixel_values,
+            # image_sizes) -> [n_images, n_patch, hidden], post multimodal projection.
+            inputs = proc(images=img, text="", return_tensors="pt")
+            pv = inputs["pixel_values"].to(model.device, dtype=next(model.parameters()).dtype)
+            sizes = inputs["image_sizes"].to(model.device)
+            feats = model.get_image_features(pixel_values=pv, image_sizes=sizes)
+            emb = _pool(feats)
         else:
             raise ValueError(f"no embedding path for backend {backend}")
 
