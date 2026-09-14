@@ -2,7 +2,7 @@
 
 **SLAPBench** is the first benchmark for evaluating multimodal large language models (MLLMs) on four-finger SLAP fingerprint verification, built on [NIST Special Database 302b (SD302b)](https://www.nist.gov/srd/nist-special-database-302).
 
-> Pyakurel, B. and Murshed, M. G. S. "SLAPBench: Benchmarking Multimodal Large Language Models for Four-Finger SLAP Fingerprint Verification." *IEEE*, 2026.
+> Pyakurel, B. and Murshed, M. G. S. "SLAPBench: Benchmarking Multimodal Large Language Models for Four-Finger SLAP Fingerprint Verification." arXiv preprint [arXiv:2607.15517](https://arxiv.org/abs/2607.15517), 2026.
 
 ---
 
@@ -201,12 +201,16 @@ All images preprocessed identically before model inference:
 ## Citation
 
 ```bibtex
-@article{pyakurel2026slapbench,
-  title     = {SLAPBench: Benchmarking Multimodal Large Language Models
-               for Four-Finger SLAP Fingerprint Verification},
-  author    = {Pyakurel, Bibesh and Murshed, M. G. Sarwar},
-  journal   = {IEEE},
-  year      = {2026}
+@misc{pyakurel2026slapbench,
+  title         = {SLAPBench: Benchmarking Multimodal Large Language Models
+                   for Four-Finger SLAP Fingerprint Verification},
+  author        = {Pyakurel, Bibesh and Murshed, M. G. Sarwar},
+  year          = {2026},
+  eprint        = {2607.15517},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  doi           = {10.48550/arXiv.2607.15517},
+  url           = {https://arxiv.org/abs/2607.15517}
 }
 ```
 
