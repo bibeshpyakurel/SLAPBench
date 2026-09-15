@@ -14,5 +14,5 @@ qwen-vl-utils>=0.0.8
 
 # API model dependencies (only needed for --model openai / --model anthropic)
 openai>=1.0.0
-anthropic>=0.25.0
+anthropic>=1.5.0
 python-dotenv>=1.0.0
