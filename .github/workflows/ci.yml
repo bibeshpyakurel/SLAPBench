@@ -1,0 +1,75 @@
+name: CI
+
+# The model runs need GPUs and NIST SD302b, so CI cannot reproduce them.
+# What it can do — and what a reader cloning this repo actually needs — is
+# prove that every published metric still follows from the per-pair CSVs
+# committed alongside it.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify published metrics
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install verification dependencies
+        run: pip install -r requirements-verify.txt
+
+      # Recomputes AUC, EER and pair counts from every results CSV and fails if
+      # any committed .metrics.json disagrees. This is what stops a results file
+      # being replaced without the analysis being rerun.
+      - name: Recompute metrics from per-pair CSVs
+        run: python code/verify_metrics.py
+
+      # The results table is generated, never hand-edited. Regenerating it here
+      # proves the generator still finds the results it documents.
+      - name: Regenerate the results table
+        run: python code/generate_results_table.py
+
+      - name: Check every analysis script imports cleanly
+        run: |
+          for f in code/*.py; do
+            python -c "import ast,sys; ast.parse(open('$f').read())" || exit 1
+          done
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - run: pip install ruff
+
+      # Correctness rules only (pyflakes + a subset of bugbear). Style is not
+      # policed here; a research repo should not fail CI over line length.
+      - run: ruff check code/ --select F,E9,B

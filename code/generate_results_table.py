@@ -38,9 +38,13 @@ MODELS = [
 
 def find_metrics(model_key: str, prompting: str):
     """Return the parsed metrics dict for a model+prompting, or None if absent."""
+    # Results live flat in results/<model>/. The latest/ and previous/ layout is
+    # still honoured so older checkouts keep working; flat is searched last so a
+    # curated latest/ still wins when one exists.
     patterns = [
         RESULTS_DIR / model_key / "latest" / f"*{prompting}*.metrics.json",
         RESULTS_DIR / model_key / "previous" / "*" / f"*{prompting}*.metrics.json",
+        RESULTS_DIR / model_key / f"*{prompting}*.metrics.json",
     ]
     hits = []
     for pat in patterns:
@@ -57,6 +61,7 @@ def find_csv(model_key: str, prompting: str):
     patterns = [
         RESULTS_DIR / model_key / "latest" / f"*{prompting}*.csv",
         RESULTS_DIR / model_key / "previous" / "*" / f"*{prompting}*.csv",
+        RESULTS_DIR / model_key / f"*{prompting}*.csv",
     ]
     hits = []
     for pat in patterns:

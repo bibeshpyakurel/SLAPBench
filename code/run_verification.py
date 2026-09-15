@@ -38,8 +38,8 @@ import csv
 import io
 import itertools
 import json
-import os
 import random
+from typing import TYPE_CHECKING
 import re
 import time
 from datetime import datetime
@@ -151,6 +151,10 @@ def image_to_base64(path: str, size: int = 448) -> str:
     buf = io.BytesIO()
     img.save(buf, format="PNG")
     return base64.standard_b64encode(buf.getvalue()).decode("utf-8")
+
+
+if TYPE_CHECKING:  # annotation only; PIL is imported lazily inside the function
+    from PIL.Image import Image
 
 
 def load_pil(path: str, size: int = 448) -> "Image":
@@ -310,7 +314,6 @@ def load_model(model_key: str):
     if backend not in ("openai", "anthropic"):
         import torch
         hf_id     = cfg["hf_id"]
-        load_4bit = cfg["load_4bit"]
         dtype     = torch.bfloat16 if cfg["dtype"] == "bfloat16" else torch.float16
         print(f"Loading {cfg['display']} ...")
 
@@ -520,7 +523,7 @@ def _infer_qwen25vl(model, processor, img1_path: str, img2_path: str,
             use_cache=True,
         )
 
-    trimmed = [o[len(i):] for o, i in zip(output_ids, inputs["input_ids"])]
+    trimmed = [o[len(i):] for o, i in zip(output_ids, inputs["input_ids"], strict=False)]
     return processor.batch_decode(
         trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
     )[0].strip()
@@ -529,7 +532,6 @@ def _infer_qwen25vl(model, processor, img1_path: str, img2_path: str,
 def _infer_qwen3vl(model, processor, img1_path: str, img2_path: str,
                    prompt_text: str, max_new_tokens: int = 48) -> str:
     import torch
-    from qwen_vl_utils import process_vision_info
 
     img1 = load_pil(img1_path, size=448)
     img2 = load_pil(img2_path, size=448)
@@ -568,7 +570,7 @@ def _infer_qwen3vl(model, processor, img1_path: str, img2_path: str,
             use_cache=True,
         )
 
-    trimmed = [o[len(i):] for o, i in zip(output_ids, inputs["input_ids"])]
+    trimmed = [o[len(i):] for o, i in zip(output_ids, inputs["input_ids"], strict=False)]
     return processor.batch_decode(
         trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
     )[0].strip()
@@ -927,7 +929,6 @@ def compute_score_metrics(results_path: Path) -> dict:
     for t in thresholds:
         # Predict genuine if score >= threshold
         tp = sum(1 for s in genuine  if s >= t)
-        fn = sum(1 for s in genuine  if s <  t)
         fp = sum(1 for s in impostor if s >= t)
         tn = sum(1 for s in impostor if s <  t)
         n_g = len(genuine) or 1
@@ -951,7 +952,7 @@ def compute_score_metrics(results_path: Path) -> dict:
             eer_thresh = t
 
     # AUC via trapezoidal rule on the ROC curve (FAR on x, TAR on y)
-    sorted_pairs = sorted(zip(far_curve, tar_curve))
+    sorted_pairs = sorted(zip(far_curve, tar_curve, strict=False))
     auc = sum(
         (sorted_pairs[i+1][0] - sorted_pairs[i][0]) *
         (sorted_pairs[i+1][1] + sorted_pairs[i][1]) / 2
