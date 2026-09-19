@@ -22,7 +22,8 @@
 - Before edits, inspect `git status`, the active branch, and remotes. Preserve
   unrelated user changes. Fetch before synchronizing; never discard local work.
 - Do not commit or push directly to `main`. Bring work from `dev` to `main` only
-  when the user explicitly asks to publish it, after checking for conflicts.
+  when the user explicitly asks to publish it, through a pull request after
+  checking the diff, conflicts and CI results.
 - Never force-push, delete remote branches, publish tags or releases, or change
   repository visibility without explicit user instructions.
 - Remote: https://github.com/bibeshpyakurel/SLAPBench.git

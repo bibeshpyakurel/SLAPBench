@@ -5,7 +5,8 @@
 `main` is GitHub's default branch for published work. `dev` is the working
 branch for agents and routine changes, now and in future sessions. Commit and
 push completed changes to `dev`. Update `main` from `dev` only when the user
-explicitly requests publication, after reviewing the diff and conflicts.
+explicitly requests publication, through a pull request after reviewing the
+diff, conflicts and CI results.
 Do not force-push, delete remote branches, or publish tags as part of routine work.
 
 Every completed change task includes reviewing, checking, committing, and pushing
