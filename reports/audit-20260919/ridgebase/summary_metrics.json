@@ -1,0 +1,192 @@
+{
+  "qwen3vl": {
+    "embedding": {
+      "n_genuine": 592,
+      "n_impostor": 592,
+      "n_diag": 300,
+      "genuine_mean": 0.933,
+      "impostor_mean": 0.938,
+      "standard_AUC": 0.4691,
+      "standard_EER": 54.56,
+      "same_device_AUC": 0.4651,
+      "cross_device_AUC": 0.4829,
+      "diagnostic_AUC": 0.5209
+    },
+    "similarity_scoring": {
+      "n_genuine": 592,
+      "n_impostor": 592,
+      "n_diag": 300,
+      "genuine_mean": 68.285,
+      "impostor_mean": 66.081,
+      "standard_AUC": 0.5582,
+      "standard_EER": 43.58,
+      "same_device_AUC": 0.6444,
+      "cross_device_AUC": 0.4905,
+      "diagnostic_AUC": 0.5819
+    },
+    "binary": {
+      "zero_shot": {
+        "FAR": 24.9,
+        "FRR": 68.4,
+        "n": 1483
+      },
+      "task_description": {
+        "FAR": 98.4,
+        "FRR": 3.4,
+        "n": 1484
+      }
+    }
+  },
+  "qwen25vl": {
+    "embedding": {
+      "n_genuine": 592,
+      "n_impostor": 592,
+      "n_diag": 300,
+      "genuine_mean": 0.872,
+      "impostor_mean": 0.893,
+      "standard_AUC": 0.4002,
+      "standard_EER": 58.11,
+      "same_device_AUC": 0.3515,
+      "cross_device_AUC": 0.4518,
+      "diagnostic_AUC": 0.4842
+    },
+    "similarity_scoring": {
+      "n_genuine": 592,
+      "n_impostor": 592,
+      "n_diag": 300,
+      "genuine_mean": 83.285,
+      "impostor_mean": 81.301,
+      "standard_AUC": 0.5502,
+      "standard_EER": 44.93,
+      "same_device_AUC": 0.5533,
+      "cross_device_AUC": 0.5492,
+      "diagnostic_AUC": 0.5655
+    },
+    "binary": {
+      "zero_shot": {
+        "FAR": 42.4,
+        "FRR": 44.8,
+        "n": 1484
+      },
+      "task_description": {
+        "FAR": 100.0,
+        "FRR": 0.0,
+        "n": 1484
+      }
+    }
+  },
+  "internvl3": {
+    "embedding": {
+      "n_genuine": 592,
+      "n_impostor": 592,
+      "n_diag": 300,
+      "genuine_mean": 0.938,
+      "impostor_mean": 0.945,
+      "standard_AUC": 0.4337,
+      "standard_EER": 56.25,
+      "same_device_AUC": 0.3967,
+      "cross_device_AUC": 0.4779,
+      "diagnostic_AUC": 0.5108
+    },
+    "similarity_scoring": {
+      "n_genuine": 592,
+      "n_impostor": 592,
+      "n_diag": 300,
+      "genuine_mean": 56.541,
+      "impostor_mean": 60.22,
+      "standard_AUC": 0.5044,
+      "standard_EER": 51.44,
+      "same_device_AUC": 0.5749,
+      "cross_device_AUC": 0.4572,
+      "diagnostic_AUC": 0.561
+    },
+    "binary": {
+      "zero_shot": {
+        "FAR": 46.6,
+        "FRR": 48.1,
+        "n": 1484
+      },
+      "task_description": {
+        "FAR": 99.9,
+        "FRR": 0.0,
+        "n": 1484
+      }
+    }
+  },
+  "gemma3": {
+    "embedding": {
+      "n_genuine": 592,
+      "n_impostor": 592,
+      "n_diag": 300,
+      "genuine_mean": 0.968,
+      "impostor_mean": 0.968,
+      "standard_AUC": 0.5089,
+      "standard_EER": 49.32,
+      "same_device_AUC": 0.4454,
+      "cross_device_AUC": 0.5863,
+      "diagnostic_AUC": 0.498
+    },
+    "similarity_scoring": {
+      "n_genuine": 592,
+      "n_impostor": 592,
+      "n_diag": 300,
+      "genuine_mean": 62.306,
+      "impostor_mean": 62.39,
+      "standard_AUC": 0.5049,
+      "standard_EER": 48.73,
+      "same_device_AUC": 0.5287,
+      "cross_device_AUC": 0.4835,
+      "diagnostic_AUC": 0.5231
+    },
+    "binary": {
+      "zero_shot": {
+        "FAR": 99.1,
+        "FRR": 2.2,
+        "n": 1484
+      },
+      "task_description": {
+        "FAR": 100.0,
+        "FRR": 0.0,
+        "n": 1484
+      }
+    }
+  },
+  "pixtral": {
+    "embedding": {
+      "n_genuine": 592,
+      "n_impostor": 592,
+      "n_diag": 300,
+      "genuine_mean": 0.985,
+      "impostor_mean": 0.987,
+      "standard_AUC": 0.3953,
+      "standard_EER": 58.19,
+      "same_device_AUC": 0.3771,
+      "cross_device_AUC": 0.4056,
+      "diagnostic_AUC": 0.4926
+    },
+    "similarity_scoring": {
+      "n_genuine": 363,
+      "n_impostor": 339,
+      "n_diag": 178,
+      "genuine_mean": 33.419,
+      "impostor_mean": 29.029,
+      "standard_AUC": 0.5322,
+      "standard_EER": 48.46,
+      "same_device_AUC": 0.5212,
+      "cross_device_AUC": 0.5467,
+      "diagnostic_AUC": 0.5221
+    },
+    "binary": {
+      "zero_shot": {
+        "FAR": 73.7,
+        "FRR": 29.4,
+        "n": 1484
+      },
+      "task_description": {
+        "FAR": 77.0,
+        "FRR": 25.0,
+        "n": 1484
+      }
+    }
+  }
+}

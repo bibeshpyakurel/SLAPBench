@@ -169,9 +169,14 @@ Image 2:  Subject 2303 — Device R — 1,000 PPI — right hand (FRGP 13)
 Label: SAME PERSON  (ground truth = A)
 ```
 
-The two images look visually different — the 1,000 PPI image is much larger and sharper, captured at a different press with slightly different finger placement and pressure. But the underlying ridge patterns are the same person's biology.
+These are two resolutions of the same capture, not independent presses. As
+explained in the v2 discussion above, this makes SD302b a near-duplicate
+sensitivity experiment rather than evidence of verification across independent
+impressions. Precise and RidgeBase results must be reported separately.
 
-**Why cross-resolution?** Each subject was captured once at 500 PPI and once at 1,000 PPI. These are the only two impressions available for Device R subjects, so R_500 vs R_1,000 is the only way to create a genuine pair. This also makes the task harder: the model must recognize the same person despite a substantial appearance difference caused by resolution.
+**Why cross-resolution?** This historical protocol uses the available 500 PPI and
+1,000 PPI versions to construct mated comparisons; resolution variation does not
+establish independent acquisition.
 
 One subject produces two genuine pairs — one for the right hand and one for the left hand. After excluding the 4 errata subjects on Device R, 88 clean subjects remain, giving **176 genuine pairs** (88 right hand + 88 left hand).
 
@@ -545,3 +550,12 @@ To compile: upload `manuscript/` to [Overleaf](https://overleaf.com) and compile
   url           = {https://arxiv.org/abs/2607.15517}
 }
 ```
+
+## Repository audit
+
+See [REPO_MAP.md](REPO_MAP.md) for the inventory and [STATUS.md](STATUS.md)
+for evidence, limitations, and next steps. The former supervisor specification is
+unavailable; the audit does not certify compliance with that missing document.
+Existing summaries are historical snapshots. To generate a new summary without
+replacing one, use `python code/analyze_ridgebase.py --dir results/precise
+--output-dir reports/precise-summary-YYYYMMDD` (on one command line).

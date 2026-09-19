@@ -1,5 +1,19 @@
 # Repository instructions for agents
 
+## Project context
+- SLAPBench evaluates full four-finger images with prompted VLMs and vision
+  embeddings across SD302b, Precise and RidgeBase. See REPO_MAP.md and STATUS.md.
+- The supervisor's Fingerprint_Foundation_Model_Verification_Student_Guide.md is
+  unavailable (confirmed by the user). Do not invent its requirements or declare
+  milestones complete. Papers and the onboarding checklist are background, not
+  substitutes for the missing specification.
+- The approved scope is documentation, offline validation and summary tooling.
+  New experiments, paid calls, fine-tuning and rerunning existing experiments
+  require a separate task authorization. Preserve original scores and raw responses;
+  derived reports belong at new dated paths. Append dated findings to STATUS.md.
+- Never send subject identifiers, original filenames or ground-truth labels to
+  hosted models. Preserve all existing dev-only push requirements below.
+
 ## Git workflow (required)
 - Work on `dev` and push completed, reviewed changes to `origin` branch `dev`.
 - Before edits, inspect `git status`, the active branch, and remotes. Preserve

@@ -1,0 +1,516 @@
+{
+  "precise": {
+    "manifest": "results/precise/pairs_precise_eval.csv",
+    "categories": {
+      "diagnostic_impostor": 338,
+      "primary_impostor": 676,
+      "primary_genuine": 676
+    },
+    "runs": [
+      {
+        "path": "results/precise/gemma3/embed_gemma3_eval.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/internvl3/embed_internvl3_eval.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/pixtral/embed_pixtral_eval.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/qwen25vl/embed_qwen25vl_eval.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/qwen3vl/embed_qwen3vl_eval.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/gemma3/latest/rb_gemma3_similarity_score_20260905_1948.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": 0
+      },
+      {
+        "path": "results/precise/gemma3/latest/rb_gemma3_task_description_20260905_1948.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/gemma3/latest/rb_gemma3_zero_shot_20260905_1948.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/internvl3/latest/rb_internvl3_similarity_score_20260905_1856.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": 0
+      },
+      {
+        "path": "results/precise/internvl3/latest/rb_internvl3_task_description_20260905_1856.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/internvl3/latest/rb_internvl3_zero_shot_20260905_1856.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/pixtral/latest/rb_pixtral_similarity_score_20260908_2100.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": 688
+      },
+      {
+        "path": "results/precise/pixtral/latest/rb_pixtral_task_description_20260907_1924.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 216,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/pixtral/latest/rb_pixtral_zero_shot_20260907_1924.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 119,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/qwen25vl/latest/rb_qwen25vl_similarity_score_20260905_1923.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": 0
+      },
+      {
+        "path": "results/precise/qwen25vl/latest/rb_qwen25vl_task_description_20260905_1923.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/qwen25vl/latest/rb_qwen25vl_zero_shot_20260905_1921.csv",
+        "rows": 1689,
+        "missing": 1,
+        "missing_categories": {
+          "primary_impostor": 1
+        },
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/qwen3vl/latest/rb_qwen3vl_similarity_score_20260906_1552.csv",
+        "rows": 1689,
+        "missing": 2,
+        "missing_categories": {
+          "primary_genuine": 1,
+          "diagnostic_impostor": 1
+        },
+        "extra_ids": 1,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": 0
+      },
+      {
+        "path": "results/precise/qwen3vl/latest/rb_qwen3vl_task_description_20260906_1552.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/precise/qwen3vl/latest/rb_qwen3vl_zero_shot_20260906_1552.csv",
+        "rows": 1690,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      }
+    ]
+  },
+  "ridgebase": {
+    "manifest": "results/ridgebase/pairs_ridgebase_eval.csv",
+    "categories": {
+      "diagnostic_impostor": 300,
+      "primary_genuine": 592,
+      "primary_impostor": 592
+    },
+    "runs": [
+      {
+        "path": "results/ridgebase/gemma3/embed_gemma3_eval.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/internvl3/embed_internvl3_eval.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/pixtral/embed_pixtral_eval.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/qwen25vl/embed_qwen25vl_eval.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/qwen3vl/embed_qwen3vl_eval.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/gemma3/latest/rb_gemma3_similarity_score_20260823_1325.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": 0
+      },
+      {
+        "path": "results/ridgebase/gemma3/latest/rb_gemma3_task_description_20260823_1325.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/gemma3/latest/rb_gemma3_zero_shot_20260822_2247.csv",
+        "rows": 1484,
+        "missing": 1,
+        "missing_categories": {
+          "diagnostic_impostor": 1
+        },
+        "extra_ids": 1,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/internvl3/latest/rb_internvl3_similarity_score_20260823_1405.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": 0
+      },
+      {
+        "path": "results/ridgebase/internvl3/latest/rb_internvl3_task_description_20260823_1405.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/internvl3/latest/rb_internvl3_zero_shot_20260823_1405.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/pixtral/latest/rb_pixtral_similarity_score_20260907_1756.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": 604
+      },
+      {
+        "path": "results/ridgebase/pixtral/latest/rb_pixtral_task_description_20260907_1756.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 17,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/pixtral/latest/rb_pixtral_zero_shot_20260907_1756.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 15,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/qwen25vl/latest/rb_qwen25vl_similarity_score_20260822_2205.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": 0
+      },
+      {
+        "path": "results/ridgebase/qwen25vl/latest/rb_qwen25vl_task_description_20260822_2205.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/qwen25vl/latest/rb_qwen25vl_zero_shot_20260822_2205.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/qwen3vl/latest/rb_qwen3vl_similarity_score_20260822_2136.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": 0
+      },
+      {
+        "path": "results/ridgebase/qwen3vl/latest/rb_qwen3vl_task_description_20260822_2136.csv",
+        "rows": 1484,
+        "missing": 0,
+        "missing_categories": {},
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      },
+      {
+        "path": "results/ridgebase/qwen3vl/latest/rb_qwen3vl_zero_shot_20260822_2118.csv",
+        "rows": 1483,
+        "missing": 1,
+        "missing_categories": {
+          "primary_impostor": 1
+        },
+        "extra_ids": 0,
+        "duplicate_ids": 0,
+        "blank_ids": 0,
+        "errors": 0,
+        "invalid_binary": 0,
+        "missing_scores": null
+      }
+    ]
+  },
+  "ridgebase_subject_split": {
+    "Train": 63,
+    "Test": 25,
+    "overlap": 0
+  }
+}
