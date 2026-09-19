@@ -160,3 +160,97 @@ duplicates). The regenerated results table is byte-identical to the pre-change
 one. `ruff check code/ --select F,E9,B`, Python syntax parse of `code/**`, and
 `git diff --check` passed; each moved script's root and output paths resolve.
 Figure scripts and inference were not executed (they need datasets/GPUs).
+
+## 2026-09-19 — source instructions supplied; export and parsing audit
+
+The user supplied the professor's full 16-section STUDENT RESEARCH INSTRUCTIONS
+and authorized validation of the Qwen3 exports, response parsing and protocol
+preparation. All 16 sections have been read. The source is preserved verbatim in
+`docs/Fingerprint_Foundation_Model_Verification_Student_Guide.md`; earlier entries
+saying it was unavailable are historical. The source has no Appendix A or C1–C7
+orientation table, so those assertions in the onboarding checklist are not repeated.
+
+Evidence: `reports/response-audit-20260919/{README.md,audit.json,parsed/}` and
+`code/audit_saved_responses.py`. All 49 source inputs have before/after SHA-256
+checks; no source result was altered. No model or paid service was run.
+
+Both Qwen3 files pass 676/676 filename-pair, score, order and raw-response checks.
+The unmatched original ID contains 612 leading NUL bytes before an exact manifest
+ID; derived records normalize that prefix with all identity metadata checked.
+The missing diagnostic comparison is outside the exported populations. This is
+file-consistency validation, not verification that image identity/acquisition or
+model decisions are correct.
+
+Across 45 CSVs / 165,087 rows, conservative parsing establishes 30 unambiguous
+Pixtral A→B corrections (14 primary impostor, 7 diagnostic, 9 genuine). Missing
+Pixtral scores (688 Precise, 604 RidgeBase) are fully consistent with its saved
+malformed/empty/uncertain responses and the historical regex. There are no clear
+scores to recover from those missing rows under the audit grammar. Other numeric
+prose previously assigned scores is withheld, yielding only 145/1,690 and 105/1,484
+clear Pixtral score responses. These subsets are unsuitable for unqualified
+full-population comparisons. Detailed counts, old/new interpretations and raw-text
+hashes are preserved beside the originals.
+
+Qwen3 task-description primary-impostor acceptances remain 671/676 (Precise),
+586/592 (RidgeBase), 7,571/7,656 (SD302b) with complete binary parsing coverage.
+Thus parser errors explain some Pixtral false accepts, but not the general
+same-person bias. No causal claim that missing minutiae alone explains this bias
+is established; testing H2 is the intended controlled next experiment (§§1,15).
+
+### Reconciliation with the actual §12 deliverables
+
+| §12 item | Status | Evidence and exact remaining gap |
+|---|---|---|
+| 1 Dataset/split summary | Partial | REPO_MAP.md has mounted inventories and RidgeBase split evidence; no approved single-finger development/final-test subject lists |
+| 2 Exact pair manifest | Partial | `results/precise/pairs_precise_eval.csv`, `results/ridgebase/pairs_ridgebase_eval.csv`; existing whole-slap manifests, not the required controlled single-finger pilot |
+| 3 Bozorth3 scores/metrics | Missing evidence | No conventional output in inventoried results; NBIS commands were not found on PATH (REPO_MAP.md) |
+| 4 Image-only VLM on same pairs | Partial | `results/*/*/latest/`; source and parsing results exist, but not paired with conventional/minutiae arms under the required reviewed split |
+| 5 VLM image+minutiae | Missing evidence | Existing prompt/runner code has no explicit minutiae arm; no corresponding result artifact in REPO_MAP.md |
+| 6 Joint per-pair score/error CSV | Partial | New `reports/response-audit-20260919/parsed/` gives per-run traceability; no joint Bozorth3/image-only/minutiae score table |
+| 7 ROC/DET/distributions | Partial | `paper/manuscript/figures/fig_roc_curves.*`, score-distribution figures; no complete matched-pilot ROC/DET comparison |
+| 8 TAR at supported fixed FAR | Partial | Existing manuscript metrics are historical; no development-fixed thresholds and uncertainty for the new controlled pilot; see protocol draft |
+| 9 Minutiae benefit/failure analysis | Missing for H2 | New audit explains observed parsing/output failures; no image+minutiae experiment from which to estimate benefit |
+
+### Reconciliation with the actual §16 first assignment
+
+| §16 step | Status | Evidence and remaining gap |
+|---|---|---|
+| 1 Manageable development subset | Partial | Three mounted datasets inventoried; authorized subset with repeated single-finger impressions and approved split not fixed |
+| 2 Genuine/larger impostor lists | Partial | SD302b exhaustive list exists (176/7,656) but is a resolution-copy control; existing Precise/RidgeBase balanced lists do not fulfill a new single-finger pilot |
+| 3 Bozorth3 all-pair raw scores | Missing evidence | No result artifact; baseline installation/version still pending |
+| 4 Hosted VLM Prompt A | Partial | Existing hosted SD302b CSVs use older prompts/protocol; no approved pilot with frozen source Prompt A |
+| 5 Minutiae + Prompt B | Missing evidence | No explicit-minutiae run in recorded outputs |
+| 6 ROC/same-FAR comparison | Missing for pilot | Old figures do not compare the three required arms |
+| 7 Benefit/refusal report | Missing for H2 | Offline refusal-candidate/error audit exists, but no measured minutiae benefit |
+| 8 Review before fine-tuning | Gate still pending | No reviewer sign-off is recorded; no fine-tuning was initiated by this work |
+
+M1 (§14) is not demonstrated: conventional baseline and a reviewed controlled
+single-finger protocol remain missing. Existing slap-level experiments do not
+complete M5 (§8/§14), which requires per-finger matching and fusion comparisons.
+
+### Protocol and next actions
+
+`docs/EVALUATION_PROTOCOL_DRAFT.md` now implements the provided source rather than
+inventing a replacement specification. The guide settles the need for subject-
+disjoint development/final test, NBIS baseline, same pairs, minutiae arm, frozen
+thresholds and count-supported low-FAR claims (§§3–6,9–12,16). It does not settle
+lab data authorization, concrete subject splits, provider/model/budget, NBIS
+installation/version or optional VeriFinger access. No supervisor agreement on
+those choices is claimed, and no message was sent to the supervisor.
+
+Next: confirm those decisions, validate per-finger data and image/minutiae coordinate
+handling, establish Bozorth3 on the frozen development manifest, then run the permitted
+image-only/minutiae pilot. Investigate resizing/template/decoding as controlled
+hypotheses, not post-hoc explanations. Keep final test untouched; previously inspected
+subjects cannot silently become an unexamined confirmatory test set.
+
+Validation for this entry: six regression tests pass (including corrupted-ID
+normalization, contradictory/error responses, detection of an altered export score,
+and preserving existing output directories); CI now runs them. All 15 legacy
+metric files reproduce, correctness lint passes, and source/document hash checks
+confirm unchanged originals and a verbatim supervisor-instruction copy. The new
+parsed files are an explicitly post-hoc conservative analysis; production inference
+parsers have not been changed. Any formal new run needs the reviewed JSON parser
+and protocol before execution.
+Full offline regeneration in a temporary output directory exactly reproduced the
+machine-readable report and all 45 derived CSVs. Staged whitespace checks passed.

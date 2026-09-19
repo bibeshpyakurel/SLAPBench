@@ -1,0 +1,2253 @@
+{
+  "parser_policy": "conservative-v1",
+  "export_validation": {
+    "exports": {
+      "res_precise_676_genuine_qwen3_vl-8b.txt": {
+        "status": "PASS",
+        "rows": 676,
+        "filename_pairs_scores_order_match": true,
+        "scores_match_raw_responses": true
+      },
+      "res_precise_676_impostore_qwen3_vl-8b.txt": {
+        "status": "PASS",
+        "rows": 676,
+        "filename_pairs_scores_order_match": true,
+        "scores_match_raw_responses": true
+      }
+    },
+    "id_repairs_in_memory_only": [
+      {
+        "source_record": 1600,
+        "corrected_pair_id": "G_146_14_10629",
+        "prefix_nul_bytes": 612,
+        "method": "nul_prefix_removed_exact_metadata"
+      }
+    ],
+    "missing_categories": {
+      "diagnostic_impostor": 1
+    },
+    "limitation": "Validates saved-file consistency, not image identity or acquisition provenance."
+  },
+  "runs": [
+    {
+      "source": "results/precise/gemma3/latest/rb_gemma3_similarity_score_20260905_1948.csv",
+      "rows": 1690,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 1690
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 676,
+        "impostor": 676,
+        "auc": 0.6294444347186723
+      },
+      "conservative_score_subset": {
+        "genuine": 676,
+        "impostor": 676,
+        "auc": 0.6294444347186723
+      }
+    },
+    {
+      "source": "results/precise/gemma3/latest/rb_gemma3_task_description_20260905_1948.csv",
+      "rows": 1690,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1690
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 338,
+          "valid": 338,
+          "accepts": 338,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 338,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 676,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 676,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 676,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 676,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/precise/gemma3/latest/rb_gemma3_zero_shot_20260905_1948.csv",
+      "rows": 1690,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1690
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 338,
+          "valid": 338,
+          "accepts": 335,
+          "rejects": 3,
+          "abstains": 0,
+          "stored_accepts": 335,
+          "acceptance_given_valid": 0.9911242603550295,
+          "acceptance_over_all_rows": 0.9911242603550295,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 660,
+          "rejects": 16,
+          "abstains": 0,
+          "stored_accepts": 660,
+          "acceptance_given_valid": 0.9763313609467456,
+          "acceptance_over_all_rows": 0.9763313609467456,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 670,
+          "rejects": 6,
+          "abstains": 0,
+          "stored_accepts": 670,
+          "acceptance_given_valid": 0.9911242603550295,
+          "acceptance_over_all_rows": 0.9911242603550295,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/precise/internvl3/latest/rb_internvl3_similarity_score_20260905_1856.csv",
+      "rows": 1690,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 1690
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 676,
+        "impostor": 676,
+        "auc": 0.7086914848919855
+      },
+      "conservative_score_subset": {
+        "genuine": 676,
+        "impostor": 676,
+        "auc": 0.7086914848919855
+      }
+    },
+    {
+      "source": "results/precise/internvl3/latest/rb_internvl3_task_description_20260905_1856.csv",
+      "rows": 1690,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1690
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 338,
+          "valid": 338,
+          "accepts": 333,
+          "rejects": 5,
+          "abstains": 0,
+          "stored_accepts": 333,
+          "acceptance_given_valid": 0.985207100591716,
+          "acceptance_over_all_rows": 0.985207100591716,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 647,
+          "rejects": 29,
+          "abstains": 0,
+          "stored_accepts": 647,
+          "acceptance_given_valid": 0.9571005917159763,
+          "acceptance_over_all_rows": 0.9571005917159763,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 668,
+          "rejects": 8,
+          "abstains": 0,
+          "stored_accepts": 668,
+          "acceptance_given_valid": 0.9881656804733728,
+          "acceptance_over_all_rows": 0.9881656804733728,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/precise/internvl3/latest/rb_internvl3_zero_shot_20260905_1856.csv",
+      "rows": 1690,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1690
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 338,
+          "valid": 338,
+          "accepts": 187,
+          "rejects": 151,
+          "abstains": 0,
+          "stored_accepts": 187,
+          "acceptance_given_valid": 0.5532544378698225,
+          "acceptance_over_all_rows": 0.5532544378698225,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 292,
+          "rejects": 384,
+          "abstains": 0,
+          "stored_accepts": 292,
+          "acceptance_given_valid": 0.4319526627218935,
+          "acceptance_over_all_rows": 0.4319526627218935,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 573,
+          "rejects": 103,
+          "abstains": 0,
+          "stored_accepts": 573,
+          "acceptance_given_valid": 0.8476331360946746,
+          "acceptance_over_all_rows": 0.8476331360946746,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/precise/pixtral/latest/rb_pixtral_similarity_score_20260908_2100.csv",
+      "rows": 1690,
+      "mode": "score",
+      "parse_status": {
+        "numeric_prose_review": 870,
+        "no_numeric_score": 584,
+        "explicit_score": 145,
+        "uncertainty_or_refusal_review": 49,
+        "empty": 41,
+        "out_of_range": 1
+      },
+      "previously_missing_by_reason": {
+        "no_numeric_score": 584,
+        "uncertainty_or_refusal_review": 43,
+        "empty": 41,
+        "numeric_prose_review": 20
+      },
+      "changes": {
+        "total": 857,
+        "withheld_for_review": 857
+      },
+      "examples": {
+        "numeric_prose_review": [
+          {
+            "record": 1,
+            "stored": 20.0,
+            "derived": null,
+            "raw": "20% confident (the\n  30%%"
+          },
+          {
+            "record": 2,
+            "stored": 70.0,
+            "derived": null,
+            "raw": "70% confident (the\n\nI'may be the same as\n  80%%"
+          },
+          {
+            "record": 3,
+            "stored": 20.0,
+            "derived": null,
+            "raw": "20% confident (the same as the\n  30%%\n\nThe image is a black and white square.\n\nIt's a simple line drawing of the same as in the\nof the\nthat it does not include the\nanything.\n\nDo not include anything else.\n\nBut what about?\n\nThat's a black bo"
+          }
+        ],
+        "uncertainty_or_refusal_review": [
+          {
+            "record": 328,
+            "stored": 20.0,
+            "derived": null,
+            "raw": "20% confident (the is the same as the person.)\n\nI'm sorry, but I can't be used for identifying unique individuals in a set."
+          },
+          {
+            "record": 485,
+            "stored": 20.0,
+            "derived": null,
+            "raw": "The final result is 20% confident (the same person).\n\nDo not include anything else, but it's just as good as\n  30%% certain\n\nI'm sorry, but I don't know what it's like,\nbut it's all about,\n\nI'm wrong, but we're going to be\n\nI don't want to "
+          },
+          {
+            "record": 695,
+            "stored": 2.0,
+            "derived": null,
+            "raw": "I'm sorry, but I can't be 2% confident (the images are 3% confident\n  400% confident the numbers are 7% confident\n\n(Completingly, but it's 8% confident"
+          }
+        ],
+        "out_of_range": [
+          {
+            "record": 918,
+            "stored": 100.0,
+            "derived": null,
+            "raw": "200"
+          }
+        ]
+      },
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 390,
+        "impostor": 423,
+        "auc": 0.48939504152270114
+      },
+      "conservative_score_subset": {
+        "genuine": 63,
+        "impostor": 57,
+        "auc": 0.4413812308549151
+      }
+    },
+    {
+      "source": "results/precise/pixtral/latest/rb_pixtral_task_description_20260907_1924.csv",
+      "rows": 1690,
+      "mode": "binary",
+      "parse_status": {
+        "contradictory_review": 592,
+        "uncertainty_or_refusal_review": 153,
+        "unrecognized_review": 872,
+        "explicit_text": 68,
+        "explicit_option": 3,
+        "empty": 2
+      },
+      "previously_missing_by_reason": {
+        "unrecognized_review": 214,
+        "empty": 2
+      },
+      "changes": {
+        "total": 1620,
+        "withheld_for_review": 1619,
+        "definitive_reclassification": 1
+      },
+      "examples": {
+        "contradictory_review": [
+          {
+            "record": 1,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes, different.\n(1)\nNo, different."
+          },
+          {
+            "record": 3,
+            "stored": "B",
+            "derived": null,
+            "raw": "No, different.\n(Yes, different.)\n(Yes)\nNo, no difference between them.\n(No, yes.)"
+          },
+          {
+            "record": 6,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes, that is a unique.\n(1)\nNo, different types of fingerprints prints can be used for identification?\n\nCan you please help as observe various types of impressions?"
+          }
+        ],
+        "uncertainty_or_refusal_review": [
+          {
+            "record": 2,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, it is a group of three people?\n\n(1) I'm sorry, I can't tell you're the letters?"
+          },
+          {
+            "record": 5,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, different\n\nYes, I'm sorry, I can't see that the fingerprints?"
+          },
+          {
+            "record": 15,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, different person.\n(1)\n```Yes, I am a human.\n(2)\n\n### 3\n\nThe three images below. Do you have any of them.\n(3)\n\nI'm sorry, I can't find out more about it.\n\n### 4\n\nThe four images below.\n\nDo you have all of them.\n\n(4)\n\nI\u2019m sorry, that\u2019s no"
+          }
+        ],
+        "unrecognized_review": [
+          {
+            "record": 4,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes, I am sorry.\n(.)"
+          },
+          {
+            "record": 7,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, different persons.\n(AB) No,\nthe letters AB\nNo, not the letter C."
+          },
+          {
+            "record": 10,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes, I am sure that is a bit.\n(that is not the same as\nthe other person,\nbut it is the same thing\nas in the finger prints\nsame person\n(that we have the same\nperson\nis the same\n\nWhat do you see?"
+          }
+        ],
+        "empty": [
+          {
+            "record": 1362,
+            "stored": "INVALID",
+            "derived": null,
+            "raw": ""
+          },
+          {
+            "record": 1671,
+            "stored": "INVALID",
+            "derived": null,
+            "raw": ""
+          }
+        ],
+        "explicit_text": [
+          {
+            "record": 1598,
+            "stored": "A",
+            "derived": "B",
+            "raw": "No, different individuals"
+          }
+        ]
+      },
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 338,
+          "valid": 18,
+          "accepts": 4,
+          "rejects": 14,
+          "abstains": 320,
+          "stored_accepts": 241,
+          "acceptance_given_valid": 0.2222222222222222,
+          "acceptance_over_all_rows": 0.011834319526627219,
+          "coverage": 0.05325443786982249
+        },
+        "primary_impostor": {
+          "rows": 676,
+          "valid": 26,
+          "accepts": 4,
+          "rejects": 22,
+          "abstains": 650,
+          "stored_accepts": 501,
+          "acceptance_given_valid": 0.15384615384615385,
+          "acceptance_over_all_rows": 0.005917159763313609,
+          "coverage": 0.038461538461538464
+        },
+        "primary_genuine": {
+          "rows": 676,
+          "valid": 27,
+          "accepts": 5,
+          "rejects": 22,
+          "abstains": 649,
+          "stored_accepts": 492,
+          "acceptance_given_valid": 0.18518518518518517,
+          "acceptance_over_all_rows": 0.0073964497041420114,
+          "coverage": 0.03994082840236687
+        }
+      }
+    },
+    {
+      "source": "results/precise/pixtral/latest/rb_pixtral_zero_shot_20260907_1924.csv",
+      "rows": 1690,
+      "mode": "binary",
+      "parse_status": {
+        "unrecognized_review": 1007,
+        "uncertainty_or_refusal_review": 175,
+        "contradictory_review": 251,
+        "explicit_text": 243,
+        "explicit_option": 7,
+        "empty": 7
+      },
+      "previously_missing_by_reason": {
+        "unrecognized_review": 112,
+        "empty": 7
+      },
+      "changes": {
+        "total": 1459,
+        "withheld_for_review": 1440,
+        "definitive_reclassification": 19
+      },
+      "examples": {
+        "unrecognized_review": [
+          {
+            "record": 1,
+            "stored": "B",
+            "derived": null,
+            "raw": "No, different person.\n(1)\n2."
+          },
+          {
+            "record": 2,
+            "stored": "B",
+            "derived": null,
+            "raw": "No, it's not possible?"
+          },
+          {
+            "record": 5,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes, they're related?"
+          }
+        ],
+        "uncertainty_or_refusal_review": [
+          {
+            "record": 3,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, different types of people.\n(Yes, different kinds of people.)\n(Yes)\nNo, no more than that.\n(No, not so much.\n(Not sure this is the same as the other person.)"
+          },
+          {
+            "record": 4,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes, I am not sure\n(C)."
+          },
+          {
+            "record": 7,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, not sure\n(C) No,\nnot specified\n(D)\nNo, specified\n(E)\n\nWhat do you think this questioner?"
+          }
+        ],
+        "contradictory_review": [
+          {
+            "record": 11,
+            "stored": "A",
+            "derived": null,
+            "raw": "(1)\nNo, different persons\n\n## Fingerprint Explanation 2\n(3)\n\n### 4\n\nExplication 5\n\n(6)\n\n### Different people\n(7)\n\nYes, different types of people\n\n#### 8.\n\n### 9.\n\n(8.)\n\n### 10.\n\n### Different types of peoples:\n\n- (A) No."
+          },
+          {
+            "record": 27,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, it was not possible\nto communicate effectively that\n? (A) multiple of them\n(C) three or more than\nthe total number of items in the set should be\n(A) 1\n3. no way\nto answer this question\n?. does this correspond to that\n4. no\nit does not h"
+          },
+          {
+            "record": 33,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes, they do not necessarily have to belong to thesame person. Fingerprints can differ between hands due to variations in pressure and placement on the scanning surface. However, if both sets of fingerprints were taken simultaneouly (at app"
+          }
+        ],
+        "explicit_text": [
+          {
+            "record": 84,
+            "stored": "A",
+            "derived": "B",
+            "raw": "No, different individuals"
+          },
+          {
+            "record": 200,
+            "stored": "A",
+            "derived": "B",
+            "raw": "No, different individuals"
+          },
+          {
+            "record": 209,
+            "stored": "A",
+            "derived": "B",
+            "raw": "No, different individuals"
+          }
+        ],
+        "empty": [
+          {
+            "record": 701,
+            "stored": "INVALID",
+            "derived": null,
+            "raw": ""
+          },
+          {
+            "record": 765,
+            "stored": "INVALID",
+            "derived": null,
+            "raw": ""
+          },
+          {
+            "record": 846,
+            "stored": "INVALID",
+            "derived": null,
+            "raw": ""
+          }
+        ]
+      },
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 338,
+          "valid": 48,
+          "accepts": 9,
+          "rejects": 39,
+          "abstains": 290,
+          "stored_accepts": 222,
+          "acceptance_given_valid": 0.1875,
+          "acceptance_over_all_rows": 0.026627218934911243,
+          "coverage": 0.14201183431952663
+        },
+        "primary_impostor": {
+          "rows": 676,
+          "valid": 102,
+          "accepts": 12,
+          "rejects": 90,
+          "abstains": 574,
+          "stored_accepts": 426,
+          "acceptance_given_valid": 0.11764705882352941,
+          "acceptance_over_all_rows": 0.01775147928994083,
+          "coverage": 0.15088757396449703
+        },
+        "primary_genuine": {
+          "rows": 676,
+          "valid": 100,
+          "accepts": 23,
+          "rejects": 77,
+          "abstains": 576,
+          "stored_accepts": 462,
+          "acceptance_given_valid": 0.23,
+          "acceptance_over_all_rows": 0.034023668639053255,
+          "coverage": 0.14792899408284024
+        }
+      }
+    },
+    {
+      "source": "results/precise/qwen25vl/latest/rb_qwen25vl_similarity_score_20260905_1923.csv",
+      "rows": 1690,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 1690
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 676,
+        "impostor": 676,
+        "auc": 0.5861927103392738
+      },
+      "conservative_score_subset": {
+        "genuine": 676,
+        "impostor": 676,
+        "auc": 0.5861927103392738
+      }
+    },
+    {
+      "source": "results/precise/qwen25vl/latest/rb_qwen25vl_task_description_20260905_1923.csv",
+      "rows": 1690,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1690
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 338,
+          "valid": 338,
+          "accepts": 338,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 338,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 675,
+          "rejects": 1,
+          "abstains": 0,
+          "stored_accepts": 675,
+          "acceptance_given_valid": 0.9985207100591716,
+          "acceptance_over_all_rows": 0.9985207100591716,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 676,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 676,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/precise/qwen25vl/latest/rb_qwen25vl_zero_shot_20260905_1921.csv",
+      "rows": 1689,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1689
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 338,
+          "valid": 338,
+          "accepts": 285,
+          "rejects": 53,
+          "abstains": 0,
+          "stored_accepts": 285,
+          "acceptance_given_valid": 0.8431952662721893,
+          "acceptance_over_all_rows": 0.8431952662721893,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 675,
+          "valid": 675,
+          "accepts": 427,
+          "rejects": 248,
+          "abstains": 0,
+          "stored_accepts": 427,
+          "acceptance_given_valid": 0.6325925925925926,
+          "acceptance_over_all_rows": 0.6325925925925926,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 620,
+          "rejects": 56,
+          "abstains": 0,
+          "stored_accepts": 620,
+          "acceptance_given_valid": 0.9171597633136095,
+          "acceptance_over_all_rows": 0.9171597633136095,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/precise/qwen3vl/latest/rb_qwen3vl_similarity_score_20260906_1552.csv",
+      "rows": 1689,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 1689
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 676,
+        "impostor": 676,
+        "auc": 0.8268005321942509
+      },
+      "conservative_score_subset": {
+        "genuine": 676,
+        "impostor": 676,
+        "auc": 0.8268005321942509
+      }
+    },
+    {
+      "source": "results/precise/qwen3vl/latest/rb_qwen3vl_task_description_20260906_1552.csv",
+      "rows": 1690,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1690
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 338,
+          "valid": 338,
+          "accepts": 338,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 338,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 671,
+          "rejects": 5,
+          "abstains": 0,
+          "stored_accepts": 671,
+          "acceptance_given_valid": 0.992603550295858,
+          "acceptance_over_all_rows": 0.992603550295858,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 673,
+          "rejects": 3,
+          "abstains": 0,
+          "stored_accepts": 673,
+          "acceptance_given_valid": 0.9955621301775148,
+          "acceptance_over_all_rows": 0.9955621301775148,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/precise/qwen3vl/latest/rb_qwen3vl_zero_shot_20260906_1552.csv",
+      "rows": 1690,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1690
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 338,
+          "valid": 338,
+          "accepts": 191,
+          "rejects": 147,
+          "abstains": 0,
+          "stored_accepts": 191,
+          "acceptance_given_valid": 0.5650887573964497,
+          "acceptance_over_all_rows": 0.5650887573964497,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 281,
+          "rejects": 395,
+          "abstains": 0,
+          "stored_accepts": 281,
+          "acceptance_given_valid": 0.4156804733727811,
+          "acceptance_over_all_rows": 0.4156804733727811,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 676,
+          "valid": 676,
+          "accepts": 602,
+          "rejects": 74,
+          "abstains": 0,
+          "stored_accepts": 602,
+          "acceptance_given_valid": 0.8905325443786982,
+          "acceptance_over_all_rows": 0.8905325443786982,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/ridgebase/gemma3/latest/rb_gemma3_similarity_score_20260823_1325.csv",
+      "rows": 1484,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 592,
+        "impostor": 592,
+        "auc": 0.5049049260409058
+      },
+      "conservative_score_subset": {
+        "genuine": 592,
+        "impostor": 592,
+        "auc": 0.5049049260409058
+      }
+    },
+    {
+      "source": "results/ridgebase/gemma3/latest/rb_gemma3_task_description_20260823_1325.csv",
+      "rows": 1484,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 300,
+          "valid": 300,
+          "accepts": 300,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 300,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 592,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 592,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 592,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 592,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/ridgebase/gemma3/latest/rb_gemma3_zero_shot_20260822_2247.csv",
+      "rows": 1484,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 299,
+          "valid": 299,
+          "accepts": 299,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 299,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 579,
+          "rejects": 13,
+          "abstains": 0,
+          "stored_accepts": 579,
+          "acceptance_given_valid": 0.9780405405405406,
+          "acceptance_over_all_rows": 0.9780405405405406,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 593,
+          "valid": 593,
+          "accepts": 585,
+          "rejects": 8,
+          "abstains": 0,
+          "stored_accepts": 585,
+          "acceptance_given_valid": 0.9865092748735245,
+          "acceptance_over_all_rows": 0.9865092748735245,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/ridgebase/internvl3/latest/rb_internvl3_similarity_score_20260823_1405.csv",
+      "rows": 1484,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 592,
+        "impostor": 592,
+        "auc": 0.5044227081811541
+      },
+      "conservative_score_subset": {
+        "genuine": 592,
+        "impostor": 592,
+        "auc": 0.5044227081811541
+      }
+    },
+    {
+      "source": "results/ridgebase/internvl3/latest/rb_internvl3_task_description_20260823_1405.csv",
+      "rows": 1484,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 300,
+          "valid": 300,
+          "accepts": 299,
+          "rejects": 1,
+          "abstains": 0,
+          "stored_accepts": 299,
+          "acceptance_given_valid": 0.9966666666666667,
+          "acceptance_over_all_rows": 0.9966666666666667,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 592,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 592,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 592,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 592,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/ridgebase/internvl3/latest/rb_internvl3_zero_shot_20260823_1405.csv",
+      "rows": 1484,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 300,
+          "valid": 300,
+          "accepts": 132,
+          "rejects": 168,
+          "abstains": 0,
+          "stored_accepts": 132,
+          "acceptance_given_valid": 0.44,
+          "acceptance_over_all_rows": 0.44,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 307,
+          "rejects": 285,
+          "abstains": 0,
+          "stored_accepts": 307,
+          "acceptance_given_valid": 0.518581081081081,
+          "acceptance_over_all_rows": 0.518581081081081,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 284,
+          "rejects": 308,
+          "abstains": 0,
+          "stored_accepts": 284,
+          "acceptance_given_valid": 0.4797297297297297,
+          "acceptance_over_all_rows": 0.4797297297297297,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/ridgebase/pixtral/latest/rb_pixtral_similarity_score_20260907_1756.csv",
+      "rows": 1484,
+      "mode": "score",
+      "parse_status": {
+        "no_numeric_score": 508,
+        "numeric_prose_review": 783,
+        "uncertainty_or_refusal_review": 63,
+        "explicit_score": 105,
+        "empty": 24,
+        "out_of_range": 1
+      },
+      "previously_missing_by_reason": {
+        "no_numeric_score": 508,
+        "numeric_prose_review": 15,
+        "uncertainty_or_refusal_review": 57,
+        "empty": 24
+      },
+      "changes": {
+        "total": 775,
+        "withheld_for_review": 775
+      },
+      "examples": {
+        "numeric_prose_review": [
+          {
+            "record": 4,
+            "stored": 20.0,
+            "derived": null,
+            "raw": "The\n 20% confident (the images are\n\n### A score of\n\n#### 30% confidence (the image is from the\n\n### The\n\n#### % confident (this image is for the\n\n#### A score\n\n#### !!!!\n\nconfident (that image is of the\n\n##### 40%! confident (that's image i"
+          },
+          {
+            "record": 8,
+            "stored": 70.0,
+            "derived": null,
+            "raw": "70% confident (label).\n  80 =\n\nA score\nscoreingfingerers, close-up."
+          },
+          {
+            "record": 10,
+            "stored": 2.0,
+            "derived": null,
+            "raw": "2\n 3."
+          }
+        ],
+        "uncertainty_or_refusal_review": [
+          {
+            "record": 21,
+            "stored": 70.0,
+            "derived": null,
+            "raw": "70\n  80% confident (it is the same as the previous one).\n\nWhat does this mean?\n\nI'm sorry, I can't see it's the same thing\n\nThe answer is:\n\nYes, every **fingerprint** has unique characteristics that distinguish them from all other individua"
+          },
+          {
+            "record": 567,
+            "stored": 2.0,
+            "derived": null,
+            "raw": "2\n  30% 4\n\nAs an **expert in fingerprint examination**, I can see that:\n\n- Yes, they do look alike?\n- No,- Not sure, but it's different?\n\nYes,\n- They do look different?\n\nNo,"
+          },
+          {
+            "record": 699,
+            "stored": 95.0,
+            "derived": null,
+            "raw": "Based on the information provided, I will analyze the given fingerprint images. Here's what I found:\n\n- The ridges and deltas on all four fingers appear similar in both images.\n- There is no significant difference in the overall pattern, fl"
+          }
+        ],
+        "out_of_range": [
+          {
+            "record": 1145,
+            "stored": 100.0,
+            "derived": null,
+            "raw": "400"
+          }
+        ]
+      },
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 363,
+        "impostor": 339,
+        "auc": 0.5322249039063199
+      },
+      "conservative_score_subset": {
+        "genuine": 46,
+        "impostor": 36,
+        "auc": 0.5492149758454107
+      }
+    },
+    {
+      "source": "results/ridgebase/pixtral/latest/rb_pixtral_task_description_20260907_1756.csv",
+      "rows": 1484,
+      "mode": "binary",
+      "parse_status": {
+        "contradictory_review": 702,
+        "unrecognized_review": 422,
+        "uncertainty_or_refusal_review": 78,
+        "explicit_text": 279,
+        "empty": 3
+      },
+      "previously_missing_by_reason": {
+        "empty": 3,
+        "unrecognized_review": 14
+      },
+      "changes": {
+        "total": 1205,
+        "withheld_for_review": 1205
+      },
+      "examples": {
+        "contradictory_review": [
+          {
+            "record": 1,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, different persons\n\nCan you please help me identify this person?\n\nYes, I can see that this person is a match for both of those fingerprints?"
+          },
+          {
+            "record": 2,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, it doesn't look like this.\n(1)\nYes"
+          },
+          {
+            "record": 3,
+            "stored": "A",
+            "derived": null,
+            "raw": "No.\n(1)\nYes.\n(2)\nNo.\nNo.\n3.\n4.\n5.\n6.\n7.\n8.\n9.\n10.\n11."
+          }
+        ],
+        "unrecognized_review": [
+          {
+            "record": 5,
+            "stored": "A",
+            "derived": null,
+            "raw": "I am an expert in fingerprints and I can tell you that these two people are related?"
+          },
+          {
+            "record": 8,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, it does not.\n```It is a black and white image of a human finger print."
+          },
+          {
+            "record": 16,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes,"
+          }
+        ],
+        "uncertainty_or_refusal_review": [
+          {
+            "record": 7,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, different.\n(Yes,\nsame person\n\nCan you see the difference between the fingerprints? No,\n\nBut can't you tell me about the differences in the finger?\n\nNo,\nbut can't I tell you about the difference in the prints?\n\nNo,\n\nBut what does that me"
+          },
+          {
+            "record": 14,
+            "stored": "A",
+            "derived": null,
+            "raw": "I'm sorry, I can't see any difference between them.\nThe letters of the fingerprints and the other person's fingerprints? No,\nthe letters of their fingerprints?\n\nYes, there is no difference between the finger prints and the person's\n\nfingerp"
+          },
+          {
+            "record": 20,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, different\n\nCan you see any of the fingerprints? Can you tell me about the finger?\n\nYes, I can't see any difference between them.\n(Yes, no difference between their prints."
+          }
+        ],
+        "empty": [
+          {
+            "record": 104,
+            "stored": "INVALID",
+            "derived": null,
+            "raw": ""
+          },
+          {
+            "record": 432,
+            "stored": "INVALID",
+            "derived": null,
+            "raw": ""
+          },
+          {
+            "record": 587,
+            "stored": "INVALID",
+            "derived": null,
+            "raw": ""
+          }
+        ]
+      },
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 300,
+          "valid": 42,
+          "accepts": 19,
+          "rejects": 23,
+          "abstains": 258,
+          "stored_accepts": 235,
+          "acceptance_given_valid": 0.4523809523809524,
+          "acceptance_over_all_rows": 0.06333333333333334,
+          "coverage": 0.14
+        },
+        "primary_genuine": {
+          "rows": 592,
+          "valid": 112,
+          "accepts": 51,
+          "rejects": 61,
+          "abstains": 480,
+          "stored_accepts": 433,
+          "acceptance_given_valid": 0.45535714285714285,
+          "acceptance_over_all_rows": 0.08614864864864864,
+          "coverage": 0.1891891891891892
+        },
+        "primary_impostor": {
+          "rows": 592,
+          "valid": 125,
+          "accepts": 54,
+          "rejects": 71,
+          "abstains": 467,
+          "stored_accepts": 452,
+          "acceptance_given_valid": 0.432,
+          "acceptance_over_all_rows": 0.09121621621621621,
+          "coverage": 0.21114864864864866
+        }
+      }
+    },
+    {
+      "source": "results/ridgebase/pixtral/latest/rb_pixtral_zero_shot_20260907_1756.csv",
+      "rows": 1484,
+      "mode": "binary",
+      "parse_status": {
+        "uncertainty_or_refusal_review": 66,
+        "contradictory_review": 424,
+        "explicit_text": 373,
+        "unrecognized_review": 619,
+        "empty": 1,
+        "explicit_option": 1
+      },
+      "previously_missing_by_reason": {
+        "unrecognized_review": 14,
+        "empty": 1
+      },
+      "changes": {
+        "total": 1120,
+        "withheld_for_review": 1110,
+        "definitive_reclassification": 10
+      },
+      "examples": {
+        "uncertainty_or_refusal_review": [
+          {
+            "record": 1,
+            "stored": "A",
+            "derived": null,
+            "raw": "No, not sure\n(C) Can you please describe what is observed in this set of fingerprints?"
+          },
+          {
+            "record": 54,
+            "stored": "B",
+            "derived": null,
+            "raw": "No, not sure"
+          },
+          {
+            "record": 55,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes,\n(No, different person).\n(No,\ndifferent person.)\n(No,\n\nCan you see it?\n\nI'm sorry, I can't help\n\nIs there any other way?"
+          }
+        ],
+        "contradictory_review": [
+          {
+            "record": 2,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes,same person\n(C) No.\n(1)\nNo answers."
+          },
+          {
+            "record": 4,
+            "stored": "A",
+            "derived": null,
+            "raw": "No,\ndifferent people\n(C) No,\nsame person.\n(D) No,\n\nI am an expert in fingerprint analysis and can help you determine if they are related?"
+          },
+          {
+            "record": 13,
+            "stored": "A",
+            "derived": null,
+            "raw": "No,Yes"
+          }
+        ],
+        "unrecognized_review": [
+          {
+            "record": 5,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes, they do not match each other."
+          },
+          {
+            "record": 8,
+            "stored": "B",
+            "derived": null,
+            "raw": "No, it does not look like this?"
+          },
+          {
+            "record": 9,
+            "stored": "A",
+            "derived": null,
+            "raw": "Yes, it is possible that there will be two prints in the fingerprints?"
+          }
+        ],
+        "explicit_text": [
+          {
+            "record": 109,
+            "stored": "A",
+            "derived": "B",
+            "raw": "No, different individuals"
+          },
+          {
+            "record": 201,
+            "stored": "A",
+            "derived": "B",
+            "raw": "No,different individuals"
+          },
+          {
+            "record": 374,
+            "stored": "A",
+            "derived": "B",
+            "raw": "No, different individuals"
+          }
+        ],
+        "empty": [
+          {
+            "record": 114,
+            "stored": "INVALID",
+            "derived": null,
+            "raw": ""
+          }
+        ]
+      },
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 300,
+          "valid": 63,
+          "accepts": 32,
+          "rejects": 31,
+          "abstains": 237,
+          "stored_accepts": 220,
+          "acceptance_given_valid": 0.5079365079365079,
+          "acceptance_over_all_rows": 0.10666666666666667,
+          "coverage": 0.21
+        },
+        "primary_genuine": {
+          "rows": 592,
+          "valid": 157,
+          "accepts": 75,
+          "rejects": 82,
+          "abstains": 435,
+          "stored_accepts": 408,
+          "acceptance_given_valid": 0.47770700636942676,
+          "acceptance_over_all_rows": 0.1266891891891892,
+          "coverage": 0.2652027027027027
+        },
+        "primary_impostor": {
+          "rows": 592,
+          "valid": 154,
+          "accepts": 72,
+          "rejects": 82,
+          "abstains": 438,
+          "stored_accepts": 437,
+          "acceptance_given_valid": 0.4675324675324675,
+          "acceptance_over_all_rows": 0.12162162162162163,
+          "coverage": 0.26013513513513514
+        }
+      }
+    },
+    {
+      "source": "results/ridgebase/qwen25vl/latest/rb_qwen25vl_similarity_score_20260822_2205.csv",
+      "rows": 1484,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 592,
+        "impostor": 592,
+        "auc": 0.5502362582176772
+      },
+      "conservative_score_subset": {
+        "genuine": 592,
+        "impostor": 592,
+        "auc": 0.5502362582176772
+      }
+    },
+    {
+      "source": "results/ridgebase/qwen25vl/latest/rb_qwen25vl_task_description_20260822_2205.csv",
+      "rows": 1484,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 300,
+          "valid": 300,
+          "accepts": 300,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 300,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 592,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 592,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 592,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 592,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/ridgebase/qwen25vl/latest/rb_qwen25vl_zero_shot_20260822_2205.csv",
+      "rows": 1484,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 300,
+          "valid": 300,
+          "accepts": 107,
+          "rejects": 193,
+          "abstains": 0,
+          "stored_accepts": 107,
+          "acceptance_given_valid": 0.3566666666666667,
+          "acceptance_over_all_rows": 0.3566666666666667,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 327,
+          "rejects": 265,
+          "abstains": 0,
+          "stored_accepts": 327,
+          "acceptance_given_valid": 0.5523648648648649,
+          "acceptance_over_all_rows": 0.5523648648648649,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 271,
+          "rejects": 321,
+          "abstains": 0,
+          "stored_accepts": 271,
+          "acceptance_given_valid": 0.4577702702702703,
+          "acceptance_over_all_rows": 0.4577702702702703,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/ridgebase/qwen3vl/latest/rb_qwen3vl_similarity_score_20260822_2136.csv",
+      "rows": 1484,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 592,
+        "impostor": 592,
+        "auc": 0.5582399333455077
+      },
+      "conservative_score_subset": {
+        "genuine": 592,
+        "impostor": 592,
+        "auc": 0.5582399333455077
+      }
+    },
+    {
+      "source": "results/ridgebase/qwen3vl/latest/rb_qwen3vl_task_description_20260822_2136.csv",
+      "rows": 1484,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1484
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 300,
+          "valid": 300,
+          "accepts": 292,
+          "rejects": 8,
+          "abstains": 0,
+          "stored_accepts": 292,
+          "acceptance_given_valid": 0.9733333333333334,
+          "acceptance_over_all_rows": 0.9733333333333334,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 572,
+          "rejects": 20,
+          "abstains": 0,
+          "stored_accepts": 572,
+          "acceptance_given_valid": 0.9662162162162162,
+          "acceptance_over_all_rows": 0.9662162162162162,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 586,
+          "rejects": 6,
+          "abstains": 0,
+          "stored_accepts": 586,
+          "acceptance_given_valid": 0.9898648648648649,
+          "acceptance_over_all_rows": 0.9898648648648649,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/ridgebase/qwen3vl/latest/rb_qwen3vl_zero_shot_20260822_2118.csv",
+      "rows": 1483,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 1483
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "diagnostic_impostor": {
+          "rows": 300,
+          "valid": 300,
+          "accepts": 57,
+          "rejects": 243,
+          "abstains": 0,
+          "stored_accepts": 57,
+          "acceptance_given_valid": 0.19,
+          "acceptance_over_all_rows": 0.19,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 592,
+          "valid": 592,
+          "accepts": 187,
+          "rejects": 405,
+          "abstains": 0,
+          "stored_accepts": 187,
+          "acceptance_given_valid": 0.3158783783783784,
+          "acceptance_over_all_rows": 0.3158783783783784,
+          "coverage": 1.0
+        },
+        "primary_impostor": {
+          "rows": 591,
+          "valid": 591,
+          "accepts": 165,
+          "rejects": 426,
+          "abstains": 0,
+          "stored_accepts": 165,
+          "acceptance_given_valid": 0.27918781725888325,
+          "acceptance_over_all_rows": 0.27918781725888325,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/sd302b/anthropic/latest/task8_anthropic_task_description_20260620_2250.csv",
+      "rows": 7832,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "primary_impostor": {
+          "rows": 7656,
+          "valid": 7656,
+          "accepts": 3899,
+          "rejects": 3757,
+          "abstains": 0,
+          "stored_accepts": 3899,
+          "acceptance_given_valid": 0.5092737722048067,
+          "acceptance_over_all_rows": 0.5092737722048067,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 176,
+          "valid": 176,
+          "accepts": 176,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 176,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/sd302b/anthropic/previous/2026-06-20/task8_anthropic_similarity_score_20260620_1437.csv",
+      "rows": 7832,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 7831,
+        "uncertainty_or_refusal_review": 1
+      },
+      "previously_missing_by_reason": {},
+      "changes": {
+        "total": 1,
+        "withheld_for_review": 1
+      },
+      "examples": {
+        "uncertainty_or_refusal_review": [
+          {
+            "record": 6429,
+            "stored": 50.0,
+            "derived": null,
+            "raw": "I cannot verify the actual ridge details from these images, but I'll provide my assessment.\n\n50"
+          }
+        ]
+      },
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 176,
+        "impostor": 7656,
+        "auc": 0.953325377600456
+      },
+      "conservative_score_subset": {
+        "genuine": 175,
+        "impostor": 7656,
+        "auc": 0.9556146439767129
+      }
+    },
+    {
+      "source": "results/sd302b/anthropic/previous/2026-06-20/task8_anthropic_zero_shot_20260620_1850.csv",
+      "rows": 7832,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "primary_impostor": {
+          "rows": 7656,
+          "valid": 7656,
+          "accepts": 1545,
+          "rejects": 6111,
+          "abstains": 0,
+          "stored_accepts": 1545,
+          "acceptance_given_valid": 0.2018025078369906,
+          "acceptance_over_all_rows": 0.2018025078369906,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 176,
+          "valid": 176,
+          "accepts": 175,
+          "rejects": 1,
+          "abstains": 0,
+          "stored_accepts": 175,
+          "acceptance_given_valid": 0.9943181818181818,
+          "acceptance_over_all_rows": 0.9943181818181818,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/sd302b/gemma3/latest/task8_gemma3_similarity_score_20260620_1552.csv",
+      "rows": 7832,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 176,
+        "impostor": 7656,
+        "auc": 0.8371998788828726
+      },
+      "conservative_score_subset": {
+        "genuine": 176,
+        "impostor": 7656,
+        "auc": 0.8371998788828726
+      }
+    },
+    {
+      "source": "results/sd302b/gemma3/previous/2026-06-20/task8_gemma3_task_description_20260620_1449.csv",
+      "rows": 7832,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "primary_impostor": {
+          "rows": 7656,
+          "valid": 7656,
+          "accepts": 7654,
+          "rejects": 2,
+          "abstains": 0,
+          "stored_accepts": 7654,
+          "acceptance_given_valid": 0.9997387669801463,
+          "acceptance_over_all_rows": 0.9997387669801463,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 176,
+          "valid": 176,
+          "accepts": 176,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 176,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/sd302b/gemma3/previous/2026-06-20/task8_gemma3_zero_shot_20260620_1346.csv",
+      "rows": 7832,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "primary_impostor": {
+          "rows": 7656,
+          "valid": 7656,
+          "accepts": 7382,
+          "rejects": 274,
+          "abstains": 0,
+          "stored_accepts": 7382,
+          "acceptance_given_valid": 0.9642110762800418,
+          "acceptance_over_all_rows": 0.9642110762800418,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 176,
+          "valid": 176,
+          "accepts": 176,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 176,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/sd302b/internvl3/latest/task8_internvl3_similarity_score_20260614_1456.csv",
+      "rows": 7832,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 7828,
+        "numeric_prose_review": 4
+      },
+      "previously_missing_by_reason": {},
+      "changes": {
+        "total": 4,
+        "withheld_for_review": 4
+      },
+      "examples": {
+        "numeric_prose_review": [
+          {
+            "record": 3144,
+            "stored": 1.0,
+            "derived": null,
+            "raw": "9SLAP Fingerprint Images Comparison[[1, 5, 9, 9]]\n\n85"
+          },
+          {
+            "record": 4824,
+            "stored": 1.0,
+            "derived": null,
+            "raw": "9SLAP Fingerprint Image 1 2"
+          },
+          {
+            "record": 6482,
+            "stored": 5.0,
+            "derived": null,
+            "raw": "9SLAP Fingerprint Images Comparison[[5, 5, 9SLAP Fingerprint Images Comparison[[5, 5, 9SLAP Fingerprint Images Comparison[[5, 5,  9SLAP Fingerprint Images Comparison[[5, 5,  9SLAP Fingerprint Images Comparison[[5, 5,  9SLAP Fingerprint Imag"
+          }
+        ]
+      },
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 176,
+        "impostor": 7656,
+        "auc": 0.589507931984421
+      },
+      "conservative_score_subset": {
+        "genuine": 172,
+        "impostor": 7656,
+        "auc": 0.6030351631795096
+      }
+    },
+    {
+      "source": "results/sd302b/internvl3/previous/2026-06-14/task8_internvl3_task_description_20260614_1422.csv",
+      "rows": 7832,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "primary_impostor": {
+          "rows": 7656,
+          "valid": 7656,
+          "accepts": 7656,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 7656,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 176,
+          "valid": 176,
+          "accepts": 176,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 176,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/sd302b/internvl3/previous/2026-06-14/task8_internvl3_zero_shot_20260614_1352.csv",
+      "rows": 7832,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "primary_impostor": {
+          "rows": 7656,
+          "valid": 7656,
+          "accepts": 5538,
+          "rejects": 2118,
+          "abstains": 0,
+          "stored_accepts": 5538,
+          "acceptance_given_valid": 0.7233542319749217,
+          "acceptance_over_all_rows": 0.7233542319749217,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 176,
+          "valid": 176,
+          "accepts": 176,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 176,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/sd302b/qwen25vl/latest/task8_qwen25vl_similarity_score_20260614_1644.csv",
+      "rows": 7832,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 176,
+        "impostor": 7656,
+        "auc": 0.5666144200626959
+      },
+      "conservative_score_subset": {
+        "genuine": 176,
+        "impostor": 7656,
+        "auc": 0.5666144200626959
+      }
+    },
+    {
+      "source": "results/sd302b/qwen25vl/previous/2026-06-14/task8_qwen25vl_task_description_20260614_1609.csv",
+      "rows": 7832,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "primary_impostor": {
+          "rows": 7656,
+          "valid": 7656,
+          "accepts": 7656,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 7656,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 176,
+          "valid": 176,
+          "accepts": 176,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 176,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/sd302b/qwen25vl/previous/2026-06-14/task8_qwen25vl_zero_shot_20260614_1535.csv",
+      "rows": 7832,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "primary_impostor": {
+          "rows": 7656,
+          "valid": 7656,
+          "accepts": 5328,
+          "rejects": 2328,
+          "abstains": 0,
+          "stored_accepts": 5328,
+          "acceptance_given_valid": 0.6959247648902821,
+          "acceptance_over_all_rows": 0.6959247648902821,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 176,
+          "valid": 176,
+          "accepts": 176,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 176,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/sd302b/qwen3vl/latest/task8_qwen3vl_similarity_score_20260613_1712.csv",
+      "rows": 7832,
+      "mode": "score",
+      "parse_status": {
+        "explicit_score": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {},
+      "stored_score_subset": {
+        "genuine": 176,
+        "impostor": 7656,
+        "auc": 1.0
+      },
+      "conservative_score_subset": {
+        "genuine": 176,
+        "impostor": 7656,
+        "auc": 1.0
+      }
+    },
+    {
+      "source": "results/sd302b/qwen3vl/previous/2026-06-13/task8_qwen3vl_task_description_20260613_1635.csv",
+      "rows": 7832,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "primary_impostor": {
+          "rows": 7656,
+          "valid": 7656,
+          "accepts": 7571,
+          "rejects": 85,
+          "abstains": 0,
+          "stored_accepts": 7571,
+          "acceptance_given_valid": 0.9888975966562173,
+          "acceptance_over_all_rows": 0.9888975966562173,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 176,
+          "valid": 176,
+          "accepts": 176,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 176,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    },
+    {
+      "source": "results/sd302b/qwen3vl/previous/2026-06-13/task8_qwen3vl_zero_shot_20260613_1557.csv",
+      "rows": 7832,
+      "mode": "binary",
+      "parse_status": {
+        "explicit_option": 7832
+      },
+      "previously_missing_by_reason": {},
+      "changes": {},
+      "examples": {},
+      "binary_by_category": {
+        "primary_impostor": {
+          "rows": 7656,
+          "valid": 7656,
+          "accepts": 2028,
+          "rejects": 5628,
+          "abstains": 0,
+          "stored_accepts": 2028,
+          "acceptance_given_valid": 0.26489028213166144,
+          "acceptance_over_all_rows": 0.26489028213166144,
+          "coverage": 1.0
+        },
+        "primary_genuine": {
+          "rows": 176,
+          "valid": 176,
+          "accepts": 176,
+          "rejects": 0,
+          "abstains": 0,
+          "stored_accepts": 176,
+          "acceptance_given_valid": 1.0,
+          "acceptance_over_all_rows": 1.0,
+          "coverage": 1.0
+        }
+      }
+    }
+  ],
+  "source_sha256": {
+    "results/precise/pairs_precise_eval.csv": "fca74b5286afcd81d15d07a107686bd390b5dd210344f16b8a8b4ff144e0e99d",
+    "results/precise/qwen3vl/latest/rb_qwen3vl_similarity_score_20260906_1552.csv": "fea7fd6e5b4e3dd3c7ba2d432bed3376cf338b06d789f967b7aae8441ca882ad",
+    "results/precise/qwen3vl/res_precise_676_genuine_qwen3_vl-8b.txt": "6872bd73ac7056f30a9cd49e20bbd950500f9f2d930d5299eb10df6271e34a0f",
+    "results/precise/qwen3vl/res_precise_676_impostore_qwen3_vl-8b.txt": "100d65d94878375d93bdf6f1f6ad074eed7edf622cc8103e3a63261bd9d348a7",
+    "results/ridgebase/pairs_ridgebase_eval.csv": "a72bd5b3f26eca474b870f1d97ac141622d4fa3c97b4617267a332b9d978e165",
+    "results/precise/gemma3/latest/rb_gemma3_similarity_score_20260905_1948.csv": "5e904dfc582ea68645b7fd40bcf9df4b4bf32ed22d1feab12be83d27f28d6e91",
+    "results/precise/gemma3/latest/rb_gemma3_task_description_20260905_1948.csv": "533e1977d8c62529cd1937a13ecf0c7b7ccaf53170c7b04410269503fe2b4f78",
+    "results/precise/gemma3/latest/rb_gemma3_zero_shot_20260905_1948.csv": "f6369e3e59717ff9135657704462c11b78e118d71ff3f5fadebc1234e6cb0515",
+    "results/precise/internvl3/latest/rb_internvl3_similarity_score_20260905_1856.csv": "8252a4cf2fd616ee85d6212399255ed052150a12723d2de36414af9bc215fd50",
+    "results/precise/internvl3/latest/rb_internvl3_task_description_20260905_1856.csv": "64fe94487761804aa9351dded5f31ef9f8a648c18a9c35ab7fd4687917d35c36",
+    "results/precise/internvl3/latest/rb_internvl3_zero_shot_20260905_1856.csv": "9b0fef9fb80a2fc1300d506e225b08de49430f2799baf818960f30e1b7a2a9aa",
+    "results/precise/pixtral/latest/rb_pixtral_similarity_score_20260908_2100.csv": "38a8ae8cdd6670535d8815057f395209446a3ebb9ce2d3c0f80c135e3dbc3b7f",
+    "results/precise/pixtral/latest/rb_pixtral_task_description_20260907_1924.csv": "eff9e566fc810a57e4a1e80078a8f3abd2b055349f06047d3c6eb97a5dfb5cca",
+    "results/precise/pixtral/latest/rb_pixtral_zero_shot_20260907_1924.csv": "8a043bed4efa911c0bda143a88c06e2e0712b09ac158f3ce9c8b33b02fd8b200",
+    "results/precise/qwen25vl/latest/rb_qwen25vl_similarity_score_20260905_1923.csv": "a6a10afa00a3d459327b068eead94380dd9847d6a5bfb6b8d1a12d5ca5882d8c",
+    "results/precise/qwen25vl/latest/rb_qwen25vl_task_description_20260905_1923.csv": "c938c2be3c2b707e85aee59b433b6a1bd4f80d6e658d4c42b48d6de4c46896e9",
+    "results/precise/qwen25vl/latest/rb_qwen25vl_zero_shot_20260905_1921.csv": "cdac74edef6918f15f9fd55037dab712d7214b70ee141cee8185494357b3db2b",
+    "results/precise/qwen3vl/latest/rb_qwen3vl_task_description_20260906_1552.csv": "bb266710db1cdd8b1bb5305c741b625db6f017857165bce90c5bebbd993db7ba",
+    "results/precise/qwen3vl/latest/rb_qwen3vl_zero_shot_20260906_1552.csv": "57a1e378b73d7fa61ba7020a86217002fc4ecff6454a3bb5b3ade181dd6bf664",
+    "results/ridgebase/gemma3/latest/rb_gemma3_similarity_score_20260823_1325.csv": "2bf7938829d7613a2a496f7e2108e1565c8a1e11e7e616e08b38aff1594d29b0",
+    "results/ridgebase/gemma3/latest/rb_gemma3_task_description_20260823_1325.csv": "5d63787d38eb12afc9816cf0921b0fe618adb57d2f8ad5a54967b72b70403a86",
+    "results/ridgebase/gemma3/latest/rb_gemma3_zero_shot_20260822_2247.csv": "743128f9364dbf365e875aee40b9157e80576239b809e9f27ad35475aa17bf8d",
+    "results/ridgebase/internvl3/latest/rb_internvl3_similarity_score_20260823_1405.csv": "20db2f16f17a1f9360ef02525fc8c4378b8db5327a1a16d92ce1805fbdb351a5",
+    "results/ridgebase/internvl3/latest/rb_internvl3_task_description_20260823_1405.csv": "263b81318df327711a0382e29f4957ff8634791bf38175b8a86889004f939f4a",
+    "results/ridgebase/internvl3/latest/rb_internvl3_zero_shot_20260823_1405.csv": "851f95bdbe2543ea235599963c2f995179306df54296d2394bd6f2b06c73bb60",
+    "results/ridgebase/pixtral/latest/rb_pixtral_similarity_score_20260907_1756.csv": "b7b0b4e2a6a13f7ae1bcb57b6bf94a4116c02c9f37d0c9e52558d120dc693a9b",
+    "results/ridgebase/pixtral/latest/rb_pixtral_task_description_20260907_1756.csv": "8b91e440f3c4a65b1369e81b16996800d77a656dcd34447658f1f0ea202eeb3c",
+    "results/ridgebase/pixtral/latest/rb_pixtral_zero_shot_20260907_1756.csv": "85f69a205da0b9a79045bec65a65c5fde6f8e1823b64dc84946dfcc1bf298e9d",
+    "results/ridgebase/qwen25vl/latest/rb_qwen25vl_similarity_score_20260822_2205.csv": "46ba80dcf0a6ea74b14304bb41edbbf3101990649bea43bab36103ff4686f941",
+    "results/ridgebase/qwen25vl/latest/rb_qwen25vl_task_description_20260822_2205.csv": "32308d60403d77d5d96c1e5058b5f523cafe513e35e0e238215dea630e55b115",
+    "results/ridgebase/qwen25vl/latest/rb_qwen25vl_zero_shot_20260822_2205.csv": "d673aee4bfe139ee995da4aa8be1a9e223c33f50f619e392e066f1e1277dd35b",
+    "results/ridgebase/qwen3vl/latest/rb_qwen3vl_similarity_score_20260822_2136.csv": "88f2b237929707d505863c90d8280e230717235cff35a24278f4952bc4684a72",
+    "results/ridgebase/qwen3vl/latest/rb_qwen3vl_task_description_20260822_2136.csv": "31167296d7ed10ea69c1758f6b01ff02d949759c8cd3f10084ac60659cc5826b",
+    "results/ridgebase/qwen3vl/latest/rb_qwen3vl_zero_shot_20260822_2118.csv": "08ff20497634914d4a301a413a3e9e94512232f8c9764a2771a068afb1bf8da2",
+    "results/sd302b/anthropic/latest/task8_anthropic_task_description_20260620_2250.csv": "41e582b2fdd5d0f4c9811fc278371912adeccd0c12238b5b38dea14142cd5e20",
+    "results/sd302b/anthropic/previous/2026-06-20/task8_anthropic_similarity_score_20260620_1437.csv": "054572e3d08cb3aa0de3dff41f26197a798e2903c56f211a994dfb33c457b9c5",
+    "results/sd302b/anthropic/previous/2026-06-20/task8_anthropic_zero_shot_20260620_1850.csv": "e9704b30e3fba430f0a534c86c36ae79f2787f40a360758bcb814a37e4eb2e13",
+    "results/sd302b/gemma3/latest/task8_gemma3_similarity_score_20260620_1552.csv": "6dd0b3dfaa3f6fc6b7423ac1c38ab433571fa54133fba08a5bef687c8194c622",
+    "results/sd302b/gemma3/previous/2026-06-20/task8_gemma3_task_description_20260620_1449.csv": "f974a6a349f7f160a09da20e0d4fcc941cb0504d713ac3e0f93172a213583181",
+    "results/sd302b/gemma3/previous/2026-06-20/task8_gemma3_zero_shot_20260620_1346.csv": "19067372859765751ceb4861dc0e47b483fecfcc0cd1ff4a5ba0bc86bc8b3ec2",
+    "results/sd302b/internvl3/latest/task8_internvl3_similarity_score_20260614_1456.csv": "5ea5605903e9af4a9976b608e8ffa44075adc1668d3b5976b9efdc9db483ef54",
+    "results/sd302b/internvl3/previous/2026-06-14/task8_internvl3_task_description_20260614_1422.csv": "fa4ac971225203aa3210d3daf50e217bfdf954fc31bc9c10f2235f96416fb09f",
+    "results/sd302b/internvl3/previous/2026-06-14/task8_internvl3_zero_shot_20260614_1352.csv": "f3924f767e968b761d4ceb045fa998408c1e5c1c1be51f9babe62a0b13e01231",
+    "results/sd302b/qwen25vl/latest/task8_qwen25vl_similarity_score_20260614_1644.csv": "764c0ae8cb8bb869d4cce503c49f426ef5160788232dea372a2368f483627465",
+    "results/sd302b/qwen25vl/previous/2026-06-14/task8_qwen25vl_task_description_20260614_1609.csv": "6061d8ae7da1a2eae0629a6df43d7bf43543c853871f3ccdcc6e33fdc5f4a2da",
+    "results/sd302b/qwen25vl/previous/2026-06-14/task8_qwen25vl_zero_shot_20260614_1535.csv": "82b2a7516c005b6d62632d1c1f8c240ea6b0e78d24bfe87edbcd13a7f0663b36",
+    "results/sd302b/qwen3vl/latest/task8_qwen3vl_similarity_score_20260613_1712.csv": "c966ab12aff8db2fe5f1509c5c66b558820019d256602ab66d948f27c5931205",
+    "results/sd302b/qwen3vl/previous/2026-06-13/task8_qwen3vl_task_description_20260613_1635.csv": "f7d2ff3c96a211ed640c38c07a5ca67b679962d23fb67fe933763ea82392d1a2",
+    "results/sd302b/qwen3vl/previous/2026-06-13/task8_qwen3vl_zero_shot_20260613_1557.csv": "da446750436cfa3c853ef246abd53ba877ecb623f243e386c0df663d9476b563"
+  },
+  "audit_script_sha256": "f2e110b04aa8709b272f0c3bde3fa0d6b4ff67521806cceaffa5358608cd1140",
+  "limitations": [
+    "Conservative full-string grammar; withheld prose needs human review.",
+    "Subset AUC is descriptive and may be selection-biased; no imputed scores.",
+    "Binary diagnostic impostors are reported separately.",
+    "Source record is 1-based CSV data record, not physical line number."
+  ]
+}

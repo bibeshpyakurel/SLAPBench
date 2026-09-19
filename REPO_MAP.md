@@ -1,9 +1,9 @@
 # Repository map
 
 Inventory date: 2026-09-19. This describes observed files, not compliance with a
-supervisor specification. That specification is unavailable, confirmed by the user.
-The onboarding checklist was supplied outside the repository; its section references
-cannot substitute for the missing guide. See STATUS.md for findings and next steps.
+supervisor specification. The specification was initially unavailable; the user subsequently supplied the
+full 16-section supervisor instructions, now preserved verbatim in
+`docs/Fingerprint_Foundation_Model_Verification_Student_Guide.md`. See STATUS.md for findings and next steps.
 
 ## Layout and entry points
 
@@ -28,6 +28,8 @@ cannot substitute for the missing guide. See STATUS.md for findings and next ste
 | `code/paper/run_overnight.sh` | Experiment launcher; not run |
 | Tag `v0.1.0`, commit `d780484` | Earlier public release (flat `results/<model>/`, identical at `v0.1.0`) and the `github/` snapshot (in history at `d780484`; 3 of its 44 files are a pre-release revision). Removed from the tree 2026-09-19 |
 | `results/sd302b/current/`, `matched/`, `matched_reversed/` | Alternative pair manifests and matched results (formerly `results_current/`, `results_matched*/`) |
+| `code/audit_saved_responses.py`, `tests/test_response_audit.py` | Reproducible offline export/parser audit and regression tests |
+| `reports/response-audit-20260919/` | File hashes, Qwen export validation, conservative parsed copies and root-cause findings |
 | `reports/audit-20260919/` | Offline audit counts and new provisional summaries |
 
 ## Local datasets and models
@@ -69,6 +71,8 @@ is the smaller verification environment. `venv/` is local and ignored. No root l
 Dockerfile, conda environment definition or Makefile was found. Dependency ranges
 are not a complete record of versions used for historical runs.
 
+- `docs/Fingerprint_Foundation_Model_Verification_Student_Guide.md`: supervisor instructions, preserved exactly as supplied.
+- `docs/EVALUATION_PROTOCOL_DRAFT.md`: proposed pilot, remaining decisions and gates; not an approved experimental run plan.
 - `README.md`: benchmark explanation, historical results and reproduction notes.
 - `docs/notes/project_guide.md`: earlier workflow and metrics guidance; not the missing supervisor guide.
 - `docs/notes/paper_metrics_tracker.md`, `docs/notes/SlapBench_Plan.txt`, `docs/notes/filter_waterfall.txt`: historical planning/metric notes.

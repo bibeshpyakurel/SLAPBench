@@ -44,6 +44,9 @@ jobs:
       - name: Recompute metrics from per-pair CSVs
         run: python code/verify_metrics.py
 
+      - name: Check offline parser and export audit
+        run: python -m unittest discover -s tests -v
+
       # The results table is generated, never hand-edited. Regenerating it here
       # proves the generator still finds the results it documents.
       - name: Regenerate the results table
@@ -72,4 +75,4 @@ jobs:
 
       # Correctness rules only (pyflakes + a subset of bugbear). Style is not
       # policed here; a research repo should not fail CI over line length.
-      - run: ruff check code/ --select F,E9,B
+      - run: ruff check code/ tests/ --select F,E9,B

@@ -3,10 +3,13 @@
 ## Project context
 - SLAPBench evaluates full four-finger images with prompted VLMs and vision
   embeddings across SD302b, Precise and RidgeBase. See REPO_MAP.md and STATUS.md.
-- The supervisor's Fingerprint_Foundation_Model_Verification_Student_Guide.md is
-  unavailable (confirmed by the user). Do not invent its requirements or declare
-  milestones complete. Papers and the onboarding checklist are background, not
-  substitutes for the missing specification.
+- The supervisor's full instructions are now preserved verbatim in
+  `docs/Fingerprint_Foundation_Model_Verification_Student_Guide.md` (all 16 sections).
+  Read this source before research changes and cite its numbered sections.
+  Papers remain background. `docs/EVALUATION_PROTOCOL_DRAFT.md` proposes implementation
+  choices; pending decisions are not supervisor approval. Do not rewrite the source.
+- No M1 completion is established: a conventional baseline and controlled single-finger
+  pilot are still missing. Follow §16; no fine-tuning before results/split review.
 - The approved scope is documentation, offline validation and summary tooling.
   New experiments, paid calls, fine-tuning and rerunning existing experiments
   require a separate task authorization. Preserve original scores and raw responses;
@@ -84,5 +87,6 @@
 - For analysis changes run `python code/verify_metrics.py` with dependencies from
   requirements-verify.txt, plus relevant task-specific validation. This verifier
   checks legacy published metrics, not all newer experiments.
-- CI also runs `ruff check code/ --select F,E9,B` and regenerates the results table.
+- CI also runs `python -m unittest discover -s tests -v`,
+  `ruff check code/ tests/ --select F,E9,B` and regenerates the results table.
 - Report what changed, checks and any limitations, the commit, and destination branch.
