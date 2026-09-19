@@ -6,7 +6,7 @@ name: CI
 # committed alongside it.
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
   pull_request:
     branches: [main]
 

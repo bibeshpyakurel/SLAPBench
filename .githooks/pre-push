@@ -1,8 +1,8 @@
 #!/bin/sh
 set -eu
 while read -r local_ref local_sha remote_ref remote_sha; do
-    if [ "$remote_ref" != refs/heads/main ] || [ "$local_ref" != refs/heads/main ]; then
-        echo "Push blocked: only local main -> remote main is allowed." >&2
+    if [ "$remote_ref" != refs/heads/dev ] || [ "$local_ref" != refs/heads/dev ]; then
+        echo "Push blocked: only local dev -> remote dev is allowed." >&2
         exit 1
     fi
 done

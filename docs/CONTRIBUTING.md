@@ -2,30 +2,31 @@
 
 ## Branch and publication policy
 
-`main` is the repository's sole branch and GitHub's default branch. All completed
-changes are committed and pushed to `main`. Do not recreate `dev` or create
-other branches during routine work.
+`main` is GitHub's default branch for published work. `dev` is the working
+branch for agents and routine changes, now and in future sessions. Commit and
+push completed changes to `dev`. Update `main` from `dev` only when the user
+explicitly requests publication, after reviewing the diff and conflicts.
 Do not force-push, delete remote branches, or publish tags as part of routine work.
 
 Every completed change task includes reviewing, checking, committing, and pushing
-its publishable changes to `origin/main`, including documentation-only updates.
+its publishable changes to `origin/dev`, including documentation-only updates.
 Agents have standing authorization to do this without asking again, unless the
 user explicitly requests local-only or uncommitted work. Verify that
-`git ls-remote --heads origin main` matches `git rev-parse HEAD` before reporting
+`git ls-remote --heads origin dev` matches `git rev-parse HEAD` before reporting
 completion. If pushing is blocked, preserve the commit and report publication as
 incomplete with the blocker. Dataset and secret exclusions still apply.
 
 For a new clone:
 
 ```bash
-git switch main
+git switch dev
 git config core.hooksPath .githooks
 git config push.default simple
-git config remote.origin.push refs/heads/main:refs/heads/main
+git config remote.origin.push refs/heads/dev:refs/heads/dev
 ```
 
-The versioned pre-commit and pre-push hooks reject commits outside `main` and
-pushes to any destination other than `refs/heads/main`. Hooks are local safeguards:
+The versioned pre-commit and pre-push hooks reject commits outside `dev` and
+pushes to any destination other than `refs/heads/dev`. Hooks are local safeguards:
 new clones must enable them, and GitHub branch protection is separate.
 
 Before committing, inspect `git status --short`, stage explicit paths, and review
@@ -42,7 +43,7 @@ python code/generate_results_table.py
 ruff check code/ --select F,E9,B
 git diff --check
 git commit -m "docs: describe the change"
-git push origin main:main
+git push origin dev:dev
 ```
 
 Install verification dependencies from `requirements-verify.txt` to run the
