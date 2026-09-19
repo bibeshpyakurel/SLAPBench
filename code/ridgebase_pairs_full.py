@@ -132,7 +132,7 @@ def build(root, split, cap_genuine, cap_diag, seed):
     for r in genuine:
         g_by_group[(r["subject1"], r["hand1"])].append(r)
     gen_bal = []
-    for grp, rows in g_by_group.items():
+    for _grp, rows in g_by_group.items():
         rng.shuffle(rows)
         gen_bal.extend(rows[:cap_genuine])
     g_same = sum(r["device_pair"] == "same" for r in gen_bal)

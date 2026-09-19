@@ -89,7 +89,7 @@ def build(root, cap_gen, cap_imp_per_pos, cap_diag, seed):
     for r in genuine:
         g_by[(r["subject1"], r["hand1"])].append(r)
     gen_bal = []
-    for grp, rows in g_by.items():
+    for _grp, rows in g_by.items():
         rng.shuffle(rows); gen_bal.extend(rows[:cap_gen])
     # impostors: sample per position to match the balanced genuine count per pos
     gpos = collections.Counter(r["hand1"] for r in gen_bal)

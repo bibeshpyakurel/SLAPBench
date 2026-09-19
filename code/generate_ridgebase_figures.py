@@ -105,7 +105,7 @@ def fig_roc():
     colors = ["#1565C0", "#6A1B9A", "#2E7D32", "#EF6C00"]
     styles = ["-", "--", "-.", ":"]
     fig, ax = plt.subplots(figsize=(6, 5.6))
-    for (key, name), c, st in zip(MODELS, colors, styles):
+    for (key, name), c, st in zip(MODELS, colors, styles, strict=False):
         g, i = rb_scores(key)
         fpr, tpr, a = auc_of(g, i)
         ax.step(fpr, tpr, where="post", color=c, ls=st, lw=2,
@@ -166,7 +166,7 @@ def fig_diagnostic():
         vals = [score[k].get(pid, np.nan) for k, _ in MODELS]
         ypos = np.arange(len(names))[::-1]
         axp.barh(ypos, vals, color=col, alpha=0.55, height=0.62)
-        for y, v, nm in zip(ypos, vals, names):
+        for y, v, nm in zip(ypos, vals, names, strict=False):
             axp.text(2, y + 0.34, nm, va="bottom", ha="left", fontsize=8.5,
                      fontweight="bold", color="0.2")
             axp.text(v + 2, y, f"{v:.0f}", va="center", ha="left",

@@ -1,0 +1,32 @@
+{
+  "model": "Qwen2.5-VL-7B-Instruct",
+  "prompting": "zero_shot",
+  "total_pairs": 7832,
+  "genuine_count": 176,
+  "impostor_count": 7656,
+  "overall_acc": 31.971399387129722,
+  "genuine_acc": 100.0,
+  "impostor_acc": 30.407523510971785,
+  "far": 69.59247648902821,
+  "frr": 0.0,
+  "collapsed": false,
+  "answer_dist": {
+    "A": 0.7027579162410623,
+    "B": 0.2972420837589377
+  },
+  "invalid_count": 0,
+  "per_frgp": {
+    "13": {
+      "acc": 30.234933605720123,
+      "far": 71.36886102403344,
+      "frr": 0.0,
+      "n": 3916
+    },
+    "14": {
+      "acc": 33.70786516853933,
+      "far": 67.81609195402298,
+      "frr": 0.0,
+      "n": 3916
+    }
+  }
+}

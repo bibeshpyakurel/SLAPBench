@@ -15,7 +15,6 @@ Usage:
 """
 
 import argparse
-import sys
 from pathlib import Path
 
 MODELS_DIR = Path("/media/bibesh/DATA/models")

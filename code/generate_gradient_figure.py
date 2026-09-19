@@ -13,7 +13,7 @@ so the three points are strictly comparable.
 
 Run:  python code/generate_gradient_figure.py
 """
-import glob, os
+import os
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -51,7 +51,7 @@ def main():
     for key, name, c, ls, mk in MODELS:
         ys = [embed_auc(ds, key) for ds, _ in DATASETS]
         ax.plot(x, ys, color=c, ls=ls, marker=mk, ms=9, lw=2.2, label=name)
-        for xi, yi in zip(x, ys):
+        for xi, yi in zip(x, ys, strict=False):
             if yi is not None:
                 ax.annotate(f"{yi:.2f}", (xi, yi), textcoords="offset points",
                             xytext=(0, 9), fontsize=8.5, ha="center", color=c)

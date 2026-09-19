@@ -1,5 +1,17 @@
 # SLAPBench
 
+Development happens on **`dev`**. See [CONTRIBUTING.md](CONTRIBUTING.md)
+for setup and push safeguards, and [AGENTS.md](AGENTS.md) for agent instructions.
+Datasets, model weights, credentials, environments, and interrupted-run backups
+are excluded. Source code, pair manifests, score exports, result tables, and paper
+sources are retained. Existing manuscript illustrations include fingerprint
+examples; this is not an image-free repository. Dataset licenses remain separate
+from the code license.
+
+The `github/` directory and flat `results/<model>/` files preserve the earlier
+public release. Current experiments use `results/sd302b/`, `results/ridgebase/`,
+and `results/precise/`; do not mix these populations when reporting metrics.
+
 Benchmarking multimodal large language models on four-finger SLAP fingerprint verification using the NIST Special Database 302b dataset.
 
 ---
@@ -516,3 +528,20 @@ Title: *SLAPBench: Benchmarking Multimodal Large Language Models for Four-Finger
 Authors: Bibesh Pyakurel, M. G. Sarwar Murshed — University of Wisconsin-Green Bay
 
 To compile: upload `manuscript/` to [Overleaf](https://overleaf.com) and compile with pdfLaTeX. The `IEEEtran.cls` file must be present in the same directory as `main.tex`.
+
+
+## Citation
+
+```bibtex
+@misc{pyakurel2026slapbench,
+  title         = {SLAPBench: Benchmarking Multimodal Large Language Models
+                   for Four-Finger SLAP Fingerprint Verification},
+  author        = {Pyakurel, Bibesh and Murshed, M. G. Sarwar},
+  year          = {2026},
+  eprint        = {2607.15517},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  doi           = {10.48550/arXiv.2607.15517},
+  url           = {https://arxiv.org/abs/2607.15517}
+}
+```

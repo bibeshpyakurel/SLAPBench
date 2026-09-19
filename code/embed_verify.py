@@ -38,7 +38,6 @@ HF_REPO = {
 
 def _pool(x):
     """Mean-pool a [.., tokens, hidden] or [tokens, hidden] tensor -> [hidden]."""
-    import torch
     # Some vision towers (Qwen3-VL, deepstack variants) return a tuple/list;
     # the image features are the first element.
     while isinstance(x, (tuple, list)):
@@ -94,7 +93,6 @@ def extract_embedding(model, proc, backend, image_path):
 
 def _internvl_pixel_values(model, img):
     """Build InternVL pixel_values tensor from a PIL image."""
-    import torch
     import torchvision.transforms as T
     mean, std = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
     tf = T.Compose([T.Resize((448, 448)), T.ToTensor(), T.Normalize(mean, std)])

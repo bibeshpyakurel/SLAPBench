@@ -19,7 +19,7 @@ Usage:
   python code/run_ridgebase_prompted.py --model qwen3vl \
       --pairs ... --prompting similarity_score --limit 20         # one strategy, smoke
 """
-import argparse, csv, os, sys, time
+import argparse, csv, os, sys
 from datetime import datetime
 from pathlib import Path
 

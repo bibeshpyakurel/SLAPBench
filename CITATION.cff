@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use SLAPBench, please cite the preprint below."
+title: "SLAPBench: Benchmarking Multimodal Large Language Models for Four-Finger SLAP Fingerprint Verification"
+abstract: >-
+  SLAPBench is the first benchmark evaluating multimodal large language models
+  on four-finger SLAP fingerprint verification, built on NIST Special Database
+  302b. It evaluates 7,832 exhaustive pairs (176 genuine, 7,656 impostor)
+  across four open-source models and one API model under three prompting
+  regimes, and shows that task-description prompting collapses open-source
+  models to near-total false acceptance while similarity-scoring prompts
+  eliminate the collapse.
+authors:
+  - family-names: Pyakurel
+    given-names: Bibesh
+  - family-names: Murshed
+    given-names: M. G. S.
+repository-code: "https://github.com/bibeshpyakurel/SLAPBench"
+license: MIT
+keywords:
+  - biometrics
+  - fingerprint-verification
+  - multimodal-large-language-models
+  - benchmark
+  - NIST-SD302b
+preferred-citation:
+  type: article
+  title: "SLAPBench: Benchmarking Multimodal Large Language Models for Four-Finger SLAP Fingerprint Verification"
+  authors:
+    - family-names: Pyakurel
+      given-names: Bibesh
+    - family-names: Murshed
+      given-names: M. G. S.
+  year: 2026
+  journal: "arXiv preprint"
+  identifiers:
+    - type: other
+      value: "arXiv:2607.15517"
+  url: "https://arxiv.org/abs/2607.15517"
