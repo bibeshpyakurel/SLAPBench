@@ -25,8 +25,8 @@ Two outputs:
 Usage:
   python code/ridgebase_pairs_full.py \
     --root datasets/ridgebase/Fingerprint_Train_Test_Split --split Test \
-    --out results_ridgebase/pairs_ridgebase_full.csv \
-    --balanced-out results_ridgebase/pairs_ridgebase_eval.csv
+    --out results/ridgebase/pairs_ridgebase_full.csv \
+    --balanced-out results/ridgebase/pairs_ridgebase_eval.csv
 """
 import argparse, csv, glob, itertools, os, random, re, collections
 

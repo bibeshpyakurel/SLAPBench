@@ -22,9 +22,9 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 RESULTS = os.path.join(BASE, "results", "sd302b")
-OUT = os.path.join(BASE, "manuscript", "figures")
+OUT = os.path.join(BASE, "paper", "manuscript", "figures")
 os.makedirs(OUT, exist_ok=True)
 
 GEN_COLOR = "#1565C0"   # blue  — genuine
@@ -155,19 +155,19 @@ def save(fig, name):
 
 # ── Figure 1a: discriminating models (full-width, 1x3) ────────────────────────
 fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.9), sharey=True)
-for ax, name in zip(axes, DISCRIMINATING):
+for ax, name in zip(axes, DISCRIMINATING, strict=False):
     draw_panel(ax, name, show_ylabel=(ax is axes[0]))
 save(fig, "fig_score_dist_strong")
 
 # ── Figure 1b: failed models (landscape 1x2, so it sits inline with text) ─────
 fig, axes = plt.subplots(1, 2, figsize=(8.6, 3.6), sharey=True)
-for ax, name in zip(axes, FAILED):
+for ax, name in zip(axes, FAILED, strict=False):
     draw_panel(ax, name, show_ylabel=(ax is axes[0]))
 save(fig, "fig_score_dist_failed")
 
 # ── Figure 1c: COMBINED 5-panel (used in the LNCS/ECCV build to save space) ───
 fig, axes = plt.subplots(1, 5, figsize=(16.0, 3.4), sharey=True)
-for ax, name in zip(axes, DISCRIMINATING + FAILED):
+for ax, name in zip(axes, DISCRIMINATING + FAILED, strict=False):
     draw_panel(ax, name, show_ylabel=(ax is axes[0]))
 save(fig, "fig_score_dist_all")
 
@@ -177,7 +177,7 @@ STYLES = ["-", "-", "-.", "--", ":"]
 
 fig, ax = plt.subplots(figsize=(6, 5.5))
 
-for (name, fpr, tpr, roc_auc), color, style in zip(roc_data, COLORS, STYLES):
+for (name, fpr, tpr, roc_auc), color, style in zip(roc_data, COLORS, STYLES, strict=False):
     # true ROC is a staircase between discrete operating points
     ax.step(fpr, tpr, where="post", color=color, linestyle=style,
             linewidth=2, label=f"{name}  (AUC = {roc_auc:.3f})")
@@ -198,7 +198,7 @@ ax.grid(alpha=0.3)
 # inset: low-FAR operating region (placed in the empty upper-center band,
 # clear of both the curves and the legend)
 axins = ax.inset_axes([0.165, 0.46, 0.42, 0.42])
-for (name, fpr, tpr, roc_auc), color, style in zip(roc_data, COLORS, STYLES):
+for (_name, fpr, tpr, _roc_auc), color, style in zip(roc_data, COLORS, STYLES, strict=False):
     axins.step(fpr, tpr, where="post", color=color, linestyle=style, linewidth=1.6)
 axins.axvline(0.001, color="gray", linestyle=":", linewidth=1)
 axins.set_xlim(-0.0015, 0.05)
@@ -215,4 +215,4 @@ for ext in ("pdf", "png"):
                 bbox_inches="tight", dpi=300)
 plt.close()
 print("Saved: fig_roc_curves.[pdf|png]")
-print("\nDone. Figures written to manuscript/figures/")
+print("\nDone. Figures written to paper/manuscript/figures/")

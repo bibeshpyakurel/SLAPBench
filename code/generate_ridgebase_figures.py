@@ -2,7 +2,7 @@
 RidgeBase (v2) figures. Reuses the SLAPBench figure style (blue genuine / red
 impostor, within-class normalized histograms, AUC/EER annotation).
 
-Produces three figures into manuscript/figures/:
+Produces three figures into paper/manuscript/figures/:
   1. fig_sd302b_vs_ridgebase : the money figure. Top row = SD302b similarity
      scores (clear separation / Qwen3-VL pinned), bottom row = RidgeBase
      similarity scores (genuine and impostor coincident, AUC ~= chance) for the
@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc as sk_auc
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(BASE, "manuscript", "figures")
+OUT = os.path.join(BASE, "paper", "manuscript", "figures")
 GEN, IMP, DIA = "#1565C0", "#C62828", "#EF6C00"
 MODELS = [("qwen3vl", "Qwen3-VL-8B"), ("qwen25vl", "Qwen2.5-VL-7B"),
           ("internvl3", "InternVL3-8B"), ("gemma3", "Gemma-3-12B")]
@@ -188,7 +188,7 @@ def save(fig, name):
     for ext in ("pdf", "png"):
         fig.savefig(os.path.join(OUT, f"{name}.{ext}"), bbox_inches="tight", dpi=300)
     plt.close(fig)
-    print(f"saved -> manuscript/figures/{name}.pdf")
+    print(f"saved -> paper/manuscript/figures/{name}.pdf")
 
 
 if __name__ == "__main__":

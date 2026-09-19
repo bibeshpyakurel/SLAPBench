@@ -16,7 +16,7 @@ Filename conventions (Task 2):
 
 Usage:
   python code/ridgebase_pairs.py --root datasets/RidgeBase_extracted/Fingerprint_Train_Test_Split \
-      --split Test --protocol c2c --out results_ridgebase/pairs_c2c_test.csv
+      --split Test --protocol c2c --out results/ridgebase/pairs_c2c_test.csv
 """
 import argparse
 import csv

@@ -17,12 +17,12 @@ import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, FancyBboxPatch
+from matplotlib.patches import Rectangle
 from PIL import Image, ImageOps
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 IMG = os.path.join(BASE, "datasets", "sd302b", "images", "baseline")
-OUT = os.path.join(BASE, "manuscript", "figures")
+OUT = os.path.join(BASE, "paper", "manuscript", "figures")
 SEG500 = os.path.join(IMG, "R", "500", "slap", "segmentation_R_500_slap_png.csv")
 
 # locked per-model colours (consistent across every figure in the paper)
@@ -70,7 +70,7 @@ def draw_score_panel(ax, row):
     names = list(MC.keys())
     y = np.arange(len(names))[::-1]
     # the value that would be "correct" given ground truth (for a subtle cue)
-    for yi, name in zip(y, names):
+    for yi, name in zip(y, names, strict=False):
         s = row["scores"][name]
         ax.barh(yi, s, height=0.6, color=MC[name], alpha=0.9, edgecolor="white")
         # model name to the LEFT of the bars (clear of the plotting area)
@@ -156,4 +156,4 @@ for ext in ("pdf", "png"):
                 bbox_inches="tight", dpi=300)
 plt.close(fig)
 print("Saved: fig_slap_anatomy.[pdf|png]")
-print("Renamed source copies written to manuscript/figures/")
+print("Renamed source copies written to paper/manuscript/figures/")

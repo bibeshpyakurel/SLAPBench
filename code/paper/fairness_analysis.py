@@ -11,7 +11,7 @@ whether discrimination quality is uneven across demographic groups.
 
 Outputs:
   - console table,
-  - manuscript/figures/fig_fairness.{pdf,png}  (AUC by subgroup, per model)
+  - paper/manuscript/figures/fig_fairness.{pdf,png}  (AUC by subgroup, per model)
 """
 
 import glob
@@ -22,8 +22,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, auc
 
-BASE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(BASE, "manuscript", "figures")
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT = os.path.join(BASE, "paper", "manuscript", "figures")
 os.makedirs(OUT, exist_ok=True)
 
 # similarity-scoring CSVs for the three discriminating models
@@ -88,9 +88,9 @@ for mname, mdir in MODELS:
     gen = df[df.label == "genuine"].copy()
     imp = df[df.label == "impostor"].copy()
     for dim, col, groups in SUBGROUPS:
-        gen_a = gen["s1"].map(lambda s: attr(s, col))
-        imp_a1 = imp["s1"].map(lambda s: attr(s, col))
-        imp_a2 = imp["s2"].map(lambda s: attr(s, col))
+        gen_a = gen["s1"].map(lambda s, col=col: attr(s, col))
+        imp_a1 = imp["s1"].map(lambda s, col=col: attr(s, col))
+        imp_a2 = imp["s2"].map(lambda s, col=col: attr(s, col))
         for g in groups:
             g_scores = gen.loc[gen_a == g, "similarity_score"].astype(float).values
             i_scores = imp.loc[(imp_a1 == g) & (imp_a2 == g),
@@ -107,7 +107,7 @@ print(f"{'Model':16s} {'Dim':7s} {'Group':8s} {'nGen':>5s} {'nImp':>6s} "
       f"{'Gen':>6s} {'Imp':>6s} {'Δ':>6s} {'AUC':>6s} {'EER%':>6s}")
 print("=" * 78)
 for mname, _ in MODELS:
-    for dim, col, groups in SUBGROUPS:
+    for dim, _col, groups in SUBGROUPS:
         for g in groups:
             r = results[(mname, dim, g)]
             d = r["gmean"] - r["imean"]
@@ -121,14 +121,14 @@ fig, axes = plt.subplots(1, 2, figsize=(10, 4.0))
 COLORS = {"Qwen3-VL-8B": "#1565C0", "Claude Opus 4.8": "#6A1B9A",
           "Gemma-3-12B": "#2E7D32"}
 
-for ax, (dim, col, groups) in zip(axes, SUBGROUPS[:2]):
+for ax, (dim, _col, groups) in zip(axes, SUBGROUPS[:2], strict=False):
     x = np.arange(len(groups))
     w = 0.26
     for k, (mname, _) in enumerate(MODELS):
         vals = [results[(mname, dim, g)]["auc"] for g in groups]
         ax.bar(x + (k - 1) * w, vals, w, label=mname, color=COLORS[mname],
                alpha=0.85, edgecolor="white")
-        for xi, v in zip(x + (k - 1) * w, vals):
+        for xi, v in zip(x + (k - 1) * w, vals, strict=False):
             ax.text(xi, v + 0.012, f"{v:.2f}", ha="center", va="bottom",
                     fontsize=7.5)
     ax.set_xticks(x)

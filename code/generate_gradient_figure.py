@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import roc_auc_score
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(BASE, "manuscript", "figures")
+OUT = os.path.join(BASE, "paper", "manuscript", "figures")
 # ordered by decreasing genuine-pair overlap
 DATASETS = [("sd302b", "SD302b\n(same image)"),
             ("precise", "Precise\n(same session)"),
@@ -77,7 +77,7 @@ def main():
     for key, name, *_ in MODELS:
         print(f"  {name}: " + "  ".join(
             f"{ds}={embed_auc(ds, key)}" for ds, _ in DATASETS))
-    print("saved -> manuscript/figures/fig_capture_gradient.pdf")
+    print("saved -> paper/manuscript/figures/fig_capture_gradient.pdf")
 
 
 if __name__ == "__main__":

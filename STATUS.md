@@ -127,3 +127,36 @@ byte-for-byte deterministic Precise summary regeneration in a temporary director
 and overwrite-refusal checks all passed. The legacy verifier reproduced all 30
 metric files. Git diff confirmed no tracked changes under `results/`, `datasets/`
 or `manuscript/`. These checks do not resolve the research findings above.
+
+## 2026-09-19 — repository layout consolidation (user-approved)
+
+The user approved a restructure for a cleaner layout. No experiment, API call,
+model run, or change to any result, manifest, or paper content was made. Paths
+cited in earlier entries of this log are historical; REPO_MAP.md has current ones.
+
+- Moved: `manuscript/`, `eccv2026_submission/`, `ECCV_2026_Paper_Template/` →
+  `paper/{manuscript,eccv2026_submission,eccv2026_template}/`; root analysis scripts
+  → `code/paper/`; `CONTRIBUTING.md`, `SECURITY.md` → `docs/`; planning notes and
+  `plan /SlapBench_Plan.txt` → `docs/notes/`; `results_current/`,
+  `results_matched/`, `results_matched_reversed/` →
+  `results/sd302b/{current,matched,matched_reversed}/`. All via `git mv`.
+- Removed duplicates: flat `results/<model>/` and `results/task8_pairs*.csv`
+  (all 32 files byte-identical at tag `v0.1.0`; SD302b result CSVs/JSONs are also
+  byte-identical under `results/sd302b/`), and `github/` (41 of 44 files identical
+  at `v0.1.0`; an earlier README, `run_verification.py` and
+  `generate_results_table.py` remain in history at `d780484`). Note: the deleted
+  flat `task8_pairs.csv` differed from `results/sd302b/task8_pairs.csv` only in
+  its image-path prefix (`dataset/` vs `datasets/`).
+- Code: path constants updated (figures → `paper/manuscript/figures/`; moved
+  scripts resolve the repository root three levels up); `verify_metrics.py` reads
+  `results/sd302b/task8_pairs_all.csv`. Behaviour-preserving lint fixes in
+  `code/paper/` (now covered by `ruff check code/`): an unused import removed,
+  loop variables bound explicitly in closures, `zip(..., strict=False)`.
+  Stale usage examples (`results_ridgebase/`, flat `results/`) corrected.
+
+Validation: `verify_metrics.py` passed (manifest 7,832 = 176 + 7,656; all 15
+distinct metric files reproduce; the earlier count of 30 included the flat
+duplicates). The regenerated results table is byte-identical to the pre-change
+one. `ruff check code/ --select F,E9,B`, Python syntax parse of `code/**`, and
+`git diff --check` passed; each moved script's root and output paths resolve.
+Figure scripts and inference were not executed (they need datasets/GPUs).

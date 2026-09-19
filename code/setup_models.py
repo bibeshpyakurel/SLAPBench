@@ -186,7 +186,7 @@ def print_usage():
 
   # Resume an interrupted run:
     python code/run_verification.py --model internvl3 --prompting zero_shot --all-impostors --run \\
-        --resume results/internvl3/latest/task8_internvl3_zero_shot_YYYYMMDD_HHMM.csv
+        --resume results/sd302b/internvl3/latest/task8_internvl3_zero_shot_YYYYMMDD_HHMM.csv
 """)
 
 
@@ -248,7 +248,7 @@ if __name__ == "__main__":
     python code/run_verification.py --dry-run --all-impostors
 
   Step 5 — Run all experiments (one model at a time):
-    bash run_overnight.sh
+    bash code/paper/run_overnight.sh
 
-  Results saved to results/<model>/latest/ after every pair (safe to interrupt and resume).
+  Results saved to results/sd302b/<model>/latest/ after every pair (safe to interrupt and resume).
 """)

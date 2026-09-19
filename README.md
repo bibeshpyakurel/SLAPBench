@@ -1,6 +1,6 @@
 # SLAPBench
 
-Development happens on **`dev`**. See [CONTRIBUTING.md](CONTRIBUTING.md)
+Development happens on **`dev`**. See [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 for setup and push safeguards, and [AGENTS.md](AGENTS.md) for agent instructions.
 Datasets, model weights, credentials, environments, and interrupted-run backups
 are excluded. Source code, pair manifests, score exports, result tables, and paper
@@ -8,9 +8,11 @@ sources are retained. Existing manuscript illustrations include fingerprint
 examples; this is not an image-free repository. Dataset licenses remain separate
 from the code license.
 
-The `github/` directory and flat `results/<model>/` files preserve the earlier
-public release. Current experiments use `results/sd302b/`, `results/ridgebase/`,
-and `results/precise/`; do not mix these populations when reporting metrics.
+Results are grouped by dataset: `results/sd302b/`, `results/ridgebase/`, and
+`results/precise/`; do not mix these populations when reporting metrics. The
+earlier public release (flat `results/<model>/` layout) is preserved at tag
+[`v0.1.0`](https://github.com/bibeshpyakurel/SLAPBench/tree/v0.1.0); its SD302b
+files are byte-identical to those under `results/sd302b/`.
 
 Benchmarking multimodal large language models on four-finger SLAP fingerprint verification using the NIST Special Database 302b dataset.
 
@@ -62,11 +64,17 @@ datasets/            # not committed — see download notes below
   sd302b/            #   NIST SD302b (contact livescan slap)
   ridgebase/         #   RidgeBase Task2 (contactless four-finger)
 code/                # inference + pair-construction + evaluation
+  paper/             #   paper-only analyses and figure builders
 results/
-  sd302b/            # v1 results (per model)
+  sd302b/            # v1 results (per model) + pair manifests
   ridgebase/         # v2 results (per model) + pair manifests
-manuscript/          # the paper (LaTeX)
+  precise/           # v2 results (per model) + pair manifests
+reports/             # dated, derived audit reports
+paper/               # manuscript, ECCV submission, ECCV template (LaTeX)
+docs/                # contributing, security, historical notes
 ```
+
+See [Project Structure](#project-structure) for the full tree.
 
 Datasets are not committed (22 GB). SD302b is available from NIST; RidgeBase
 requires a signed license agreement from the University at Buffalo CUBS lab.
@@ -205,7 +213,7 @@ The current benchmark uses **176 impostor pairs** (88 right hand + 88 left hand)
 └── 176 impostor  (88 FRGP 13 + 88 FRGP 14)
 ```
 
-The pairs are fixed with `seed=42` and saved to `results/task8_pairs.csv`. Every model and every prompting strategy is evaluated on the exact same 352 pairs, making results directly comparable.
+The pairs are fixed with `seed=42` and saved to `results/sd302b/task8_pairs.csv`. Every model and every prompting strategy is evaluated on the exact same 352 pairs, making results directly comparable.
 
 ---
 
@@ -445,10 +453,10 @@ python code/run_verification.py --model qwen25vl  --prompting similarity_score -
 
 # Resume an interrupted run
 python code/run_verification.py --model internvl3 --prompting zero_shot --run \
-    --resume results/task8_internvl3_zero_shot_YYYYMMDD_HHMM.csv
+    --resume results/sd302b/internvl3/latest/task8_internvl3_zero_shot_YYYYMMDD_HHMM.csv
 
 # Print metrics from a completed results file
-python code/run_verification.py --metrics results/task8_internvl3_zero_shot_YYYYMMDD_HHMM.csv
+python code/run_verification.py --metrics results/sd302b/internvl3/latest/task8_internvl3_zero_shot_YYYYMMDD_HHMM.csv
 ```
 
 ---
@@ -456,34 +464,45 @@ python code/run_verification.py --metrics results/task8_internvl3_zero_shot_YYYY
 ## Project Structure
 
 ```
-MultiModel LLMs/
+SLAPBench/
+├── README.md  AGENTS.md  REPO_MAP.md  STATUS.md  CHANGELOG.md  CITATION.cff  LICENSE
+├── requirements.txt              # full GPU/model environment
+├── requirements-verify.txt       # lightweight CI verification environment
 ├── code/
-│   ├── run_verification.py       # main pipeline — pairs, inference, metrics
-│   ├── build_slap_images_df.py   # builds dataset/slap_images.csv
-│   ├── build_master_df.py        # builds dataset/master_dataframe.csv (per-finger)
-│   ├── archive_non_slap.py       # moves non-SLAP files to archive
-│   └── setup_models.py           # system check and model download
-├── dataset/
-│   ├── slap_images.csv           # 584 rows — one per SLAP image (active dataframe)
-│   ├── master_dataframe.csv      # 2,336 rows — one per finger per image
-│   ├── participants.csv          # subject demographics
-│   └── sd302b/
-│       └── images/baseline/
-│           ├── R/500/slap/png/   # 184 right+left hand images at 500 PPI
-│           ├── R/1000/slap/png/  # 184 right+left hand images at 1,000 PPI
-│           └── S/500/slap/png/   # 216 right+left hand images at 500 PPI
-├── models/
-│   ├── internvl3-8b/             # InternVL3-8B-Instruct weights (~16 GB)
-│   └── qwen25vl-7b/              # Qwen2.5-VL-7B-Instruct weights (~17 GB)
+│   ├── run_verification.py       # SD302b pipeline — pairs, inference, metrics
+│   ├── run_ridgebase_prompted.py # manifest-driven prompted inference (RidgeBase, Precise)
+│   ├── embed_verify.py           # vision-encoder embedding comparisons
+│   ├── *_pairs*.py               # RidgeBase / Precise pair construction
+│   ├── build_*_df.py             # SD302b metadata dataframes
+│   ├── verify_metrics.py         # CI: recompute published metrics from per-pair CSVs
+│   ├── generate_*.py             # results table and paper figures
+│   ├── analyze_ridgebase.py      # summaries from saved RidgeBase / Precise scores
+│   ├── setup_models.py           # system check and model download
+│   └── paper/                    # paper-only analyses: matched pairs, fairness,
+│                                 #   image figures, exhaustive-run figures
 ├── results/
-│   ├── task8_pairs.csv           # fixed 352-pair manifest (seed=42)
-│   ├── task8_internvl3_*.csv     # per-pair results for InternVL3
-│   ├── task8_qwen25vl_*.csv      # per-pair results for Qwen2.5-VL
-│   └── *.metrics.json            # computed metrics for each run
-├── manuscript/
-│   ├── main.tex                  # IEEE journal paper
-│   └── references.bib            # all citations
-└── venv/                         # Python virtual environment
+│   ├── sd302b/
+│   │   ├── task8_pairs.csv       # fixed 352-pair balanced manifest (seed=42)
+│   │   ├── task8_pairs_all.csv   # exhaustive 7,832-pair manifest
+│   │   ├── <model>/latest/       # current per-pair CSVs + .metrics.json
+│   │   ├── <model>/previous/     # earlier runs, by date
+│   │   ├── current/              # auditable pair manifest
+│   │   └── matched/, matched_reversed/   # resolution-matched ablation
+│   ├── ridgebase/                # pair manifests, <model>/latest/, embeddings, summaries
+│   └── precise/                  # pair manifests, <model>/latest/, embeddings, summaries
+├── reports/                      # dated, derived audit reports (never overwrite results/)
+├── paper/
+│   ├── manuscript/               # IEEE journal paper: main.tex, references.bib, figures/
+│   ├── eccv2026_submission/      # ECCV 2026 (LNCS) version + supplementary
+│   └── eccv2026_template/        # third-party ECCV template (unmodified)
+├── docs/
+│   ├── CONTRIBUTING.md  SECURITY.md
+│   └── notes/                    # historical planning and metric notes
+├── scripts/                      # release notes + conventional-commit checks
+├── .github/                      # CI, CodeQL, release workflows
+└── .githooks/                    # dev-only commit/push safeguards
+
+Not committed: datasets/ (SD302b, RidgeBase, Precise), models/, venv/, .env
 ```
 
 ---
@@ -526,13 +545,13 @@ python code/run_verification.py --dry-run
 
 ## Paper
 
-The results of this benchmark are written up as an IEEE journal paper in `manuscript/main.tex`.
+The results of this benchmark are written up as an IEEE journal paper in `paper/manuscript/main.tex`. The ECCV 2026 version is in `paper/eccv2026_submission/`.
 
 Title: *SLAPBench: Benchmarking Multimodal Large Language Models for Four-Finger SLAP Fingerprint Verification*
 
 Authors: Bibesh Pyakurel, M. G. Sarwar Murshed — University of Wisconsin-Green Bay
 
-To compile: upload `manuscript/` to [Overleaf](https://overleaf.com) and compile with pdfLaTeX. The `IEEEtran.cls` file must be present in the same directory as `main.tex`.
+To compile: upload `paper/manuscript/` to [Overleaf](https://overleaf.com) and compile with pdfLaTeX. The `IEEEtran.cls` file must be present in the same directory as `main.tex`.
 
 
 ## Citation

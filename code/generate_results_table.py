@@ -5,7 +5,7 @@ Reads the per-model `.metrics.json` files (so every number is exactly what the
 evaluation produced), computes TAR@FAR=0.1% directly from the similarity-score
 CSVs, and renders a single self-contained, styled HTML page:
 
-    results/SLAPBench_results.html
+    results/sd302b/SLAPBench_results.html
 
 The page is browser-openable and screenshot-friendly for presentations.
 A reserved row for Claude Opus 4.8 is rendered as "running" until its

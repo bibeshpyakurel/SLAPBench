@@ -8,7 +8,7 @@ Raw score arrays come from each model's similarity-scoring CSV; the AUC / EER /
 Delta labels are read from the matching `.metrics.json` so the figures agree
 exactly with Table~\\ref{tab:main_results} in the paper.
 
-Outputs (PDF + PNG) into manuscript/figures/:
+Outputs (PDF + PNG) into paper/manuscript/figures/:
     fig_score_distributions.{pdf,png}
     fig_roc_curves.{pdf,png}
 
@@ -29,7 +29,7 @@ import pandas as pd
 
 PROJECT_ROOT = Path(__file__).parent.parent
 RESULTS_DIR = PROJECT_ROOT / "results" / "sd302b"
-FIG_DIR = PROJECT_ROOT / "manuscript" / "figures"
+FIG_DIR = PROJECT_ROOT / "paper" / "manuscript" / "figures"
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
 # Display order = by similarity AUC (best first). `disp` is the on-figure label.

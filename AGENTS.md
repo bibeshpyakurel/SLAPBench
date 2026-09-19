@@ -61,16 +61,20 @@
   pair manifests, paper claims or figures unless the task specifically requires it.
 - Never fabricate scores, silently repair results, regenerate fixed pairs, or
   overwrite original runs. Keep provenance, seeds and sample populations intact.
-- Current experiment code is in `code/`; results are grouped under `results/sd302b/`,
-  `results/ridgebase/` and `results/precise/`. `github/` and flat result folders
-  preserve the earlier release; do not silently synchronize or delete them.
-- Paper sources live in `manuscript/` and `eccv2026_submission/`. Do not edit
-  third-party classes, styles, or templates for routine code changes.
+- Current experiment code is in `code/` (paper-only analyses in `code/paper/`);
+  results are grouped under `results/sd302b/`, `results/ridgebase/` and
+  `results/precise/`. The earlier flat public release is preserved at tag `v0.1.0`;
+  do not recreate top-level copies of it.
+- Paper sources live in `paper/manuscript/` and `paper/eccv2026_submission/`;
+  `paper/eccv2026_template/` is third-party. Do not edit third-party classes,
+  styles, or templates for routine code changes.
+- Keep the root minimal: new scripts go in `code/`, notes in `docs/notes/`,
+  derived analyses in dated `reports/` paths.
 - Do not run GPU jobs, dataset preparation that moves files, recovery scripts,
   model downloads, or paid API calls unless required by the user's task.
 
 ## Checks and reporting
-- Read CONTRIBUTING.md and relevant scripts before changing behavior.
+- Read docs/CONTRIBUTING.md and relevant scripts before changing behavior.
 - Run `git diff --check`; parse changed Python files for syntax errors.
 - For analysis changes run `python code/verify_metrics.py` with dependencies from
   requirements-verify.txt, plus relevant task-specific validation. This verifier

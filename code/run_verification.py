@@ -29,7 +29,7 @@ Usage
     python code/run_verification.py --model internvl3 --prompting zero_shot --run --resume path/to/existing.csv
 
 # Step 5 — Print metrics from a completed results file:
-    python code/run_verification.py --metrics results/task8_internvl3_zero_shot_YYYYMMDD_HHMM.csv
+    python code/run_verification.py --metrics results/sd302b/internvl3/latest/task8_internvl3_zero_shot_YYYYMMDD_HHMM.csv
 """
 
 import argparse

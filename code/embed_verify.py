@@ -12,8 +12,8 @@ run with --limit 20 first as a smoke test before a full sweep.
 
 Usage:
   python code/embed_verify.py --model qwen3vl \
-      --pairs results_ridgebase/pairs_c2cl_test.csv \
-      --out results_ridgebase/embed_qwen3vl_c2cl.csv [--limit 20]
+      --pairs results/ridgebase/pairs_c2cl_test.csv \
+      --out results/ridgebase/embed_qwen3vl_c2cl.csv [--limit 20]
 """
 import argparse
 import csv

@@ -70,7 +70,7 @@ def compute_auc_eer(df: pd.DataFrame) -> tuple[float, float]:
 
 
 def verify_pair_manifest(problems: list[str]) -> None:
-    manifest = RESULTS_DIR / "task8_pairs_all.csv"
+    manifest = RESULTS_DIR / "sd302b" / "task8_pairs_all.csv"
     if not manifest.exists():
         problems.append(f"{manifest.name}: missing — the exhaustive pair manifest is required")
         return

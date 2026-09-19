@@ -3,10 +3,10 @@ Run the similarity-scoring prompt on a matched-resolution manifest, reusing the
 validated inference code from code/run_verification.py without modifying it.
 
 Usage:
-  python run_matched.py --model qwen3vl --manifest results_matched/task8_pairs_matched.csv \
-      --out-dir results_matched [--limit N] [--resume PATH]
+  python code/paper/run_matched.py --model qwen3vl --manifest results/sd302b/matched/task8_pairs_matched.csv \
+      --out-dir results/sd302b/matched [--limit N] [--resume PATH]
 
-Writes results_matched/<model>/task8_<model>_similarity_score_matched.csv with the
+Writes results/sd302b/matched/<model>/task8_<model>_similarity_score_matched.csv with the
 same schema as the existing similarity-scoring CSVs.
 """
 import argparse
@@ -18,7 +18,7 @@ from datetime import datetime
 
 import pandas as pd
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "code"))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import run_verification as rv  # noqa: E402
 
 SS = "similarity_score"
@@ -28,7 +28,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True, choices=["qwen3vl", "internvl3", "qwen25vl", "gemma3"])
     ap.add_argument("--manifest", required=True)
-    ap.add_argument("--out-dir", default="results_matched")
+    ap.add_argument("--out-dir", default="results/sd302b/matched")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--resume", default=None)
     args = ap.parse_args()

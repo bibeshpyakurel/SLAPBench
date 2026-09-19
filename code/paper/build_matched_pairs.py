@@ -7,8 +7,8 @@ Matched-resolution protocol (both classes share the SAME 1000-vs-500 structure):
   - Non-mated (impostor): subject A 1000 PPI vs subject B 500 PPI (A<B), same FRGP.
 
 Two orderings are emitted:
-  results_matched/            image order = (1000, 500)
-  results_matched_reversed/   image order = (500, 1000)   [Task 2b ablation]
+  results/sd302b/matched/            image order = (1000, 500)
+  results/sd302b/matched_reversed/   image order = (500, 1000)   [Task 2b ablation]
 
 Each manifest has explicit, reproducible columns:
   pair_id, label, frgp, subject1, subject2, img1_path, img2_path, res1, res2
@@ -19,7 +19,7 @@ import os
 
 import pandas as pd
 
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SLAP_DF = os.path.join(BASE, "datasets", "sd302b", "slap_images.csv")
 DATASET_ROOT = os.path.join(BASE, "datasets", "sd302b")
 
@@ -36,7 +36,7 @@ def build(reverse: bool):
         p1000 = r1000[r1000.frgp_slap == frgp].set_index("subject_id")
         subs = sorted(set(p500.index) & set(p1000.index))
 
-        def add(pair_id, label, s1, s2, hi_row, lo_row):
+        def add(pair_id, label, s1, s2, hi_row, lo_row, frgp=frgp, hand=hand):
             # hi_row = the 1000 PPI side, lo_row = the 500 PPI side (canonical)
             hi = (str(hi_row.file_path), 1000)
             lo = (str(lo_row.file_path), 500)
@@ -60,7 +60,7 @@ def build(reverse: bool):
     return pd.DataFrame(rows)
 
 
-for reverse, outdir in [(False, "results_matched"), (True, "results_matched_reversed")]:
+for reverse, outdir in [(False, "results/sd302b/matched"), (True, "results/sd302b/matched_reversed")]:
     m = build(reverse)
     os.makedirs(os.path.join(BASE, outdir), exist_ok=True)
     path = os.path.join(BASE, outdir, "task8_pairs_matched.csv")

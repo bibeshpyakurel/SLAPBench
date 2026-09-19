@@ -7,7 +7,21 @@ Entries from v0.1.0 onward are generated from Conventional Commits by
 
 ## [Unreleased]
 
-Nothing yet.
+### Changed
+
+- Repository layout consolidated. Paper sources moved to `paper/`
+  (`manuscript/`, `eccv2026_submission/`, `eccv2026_template/`); root analysis
+  scripts to `code/paper/`; `CONTRIBUTING.md` and `SECURITY.md` to `docs/`;
+  planning notes to `docs/notes/`; `results_current/` and `results_matched*/`
+  to `results/sd302b/{current,matched,matched_reversed}/`. Scripts write figures
+  to `paper/manuscript/figures/`.
+
+### Removed
+
+- Duplicate copies of the v0.1.0 release: `github/` and the flat
+  `results/<model>/` + `results/task8_pairs*.csv`. The same SD302b results live
+  under `results/sd302b/`; the originals remain at tag `v0.1.0` and in history.
+  `code/verify_metrics.py` now reads `results/sd302b/task8_pairs_all.csv`.
 
 ## [0.1.0] — 2026-09-15
 

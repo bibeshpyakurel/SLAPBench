@@ -51,7 +51,7 @@ jobs:
 
       - name: Check every analysis script imports cleanly
         run: |
-          for f in code/*.py; do
+          for f in code/*.py code/paper/*.py; do
             python -c "import ast,sys; ast.parse(open('$f').read())" || exit 1
           done
 

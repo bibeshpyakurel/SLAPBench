@@ -24,10 +24,10 @@ cannot substitute for the missing guide. See STATUS.md for findings and next ste
 | `code/verify_metrics.py` | Verifies legacy SD302b metric JSONs against sibling CSVs |
 | `code/generate_figures.py`, `code/generate_ridgebase_figures.py`, `code/generate_gradient_figure.py` | Paper figures |
 | `code/generate_results_table.py` | SD302b HTML results table |
-| Root `build_*`, `run_matched.py`, `generate_figures.py`, `fairness_analysis.py` | Matched-pair construction, inference and paper analyses |
-| `run_overnight.sh` | Experiment launcher; not run |
-| `github/`, flat `results/<model>/` | Earlier public-release copies; coexist with newer dataset-specific folders |
-| `results_current/`, `results_matched/`, `results_matched_reversed/` | Alternative pair manifests and matched results |
+| `code/paper/build_*`, `run_matched.py`, `generate_figures.py`, `fairness_analysis.py` | Matched-pair construction, inference and paper analyses (formerly at repository root) |
+| `code/paper/run_overnight.sh` | Experiment launcher; not run |
+| Tag `v0.1.0`, commit `d780484` | Earlier public release (flat `results/<model>/`, identical at `v0.1.0`) and the `github/` snapshot (in history at `d780484`; 3 of its 44 files are a pre-release revision). Removed from the tree 2026-09-19 |
+| `results/sd302b/current/`, `matched/`, `matched_reversed/` | Alternative pair manifests and matched results (formerly `results_current/`, `results_matched*/`) |
 | `reports/audit-20260919/` | Offline audit counts and new provisional summaries |
 
 ## Local datasets and models
@@ -70,22 +70,24 @@ Dockerfile, conda environment definition or Makefile was found. Dependency range
 are not a complete record of versions used for historical runs.
 
 - `README.md`: benchmark explanation, historical results and reproduction notes.
-- `project_guide.md`: earlier workflow and metrics guidance; not the missing supervisor guide.
-- `paper_metrics_tracker.md`, `plan /SlapBench_Plan.txt`: historical planning/metric notes.
-- `prompt_templates.txt`: prompt reference; executable prompts also live in code.
-- `manuscript/`: active LaTeX manuscript, bibliography and figures, including fingerprint examples.
-- `eccv2026_submission/`: separate submission sources and figures.
-- `ECCV_2026_Paper_Template/`: third-party template, styles and documentation.
+- `docs/notes/project_guide.md`: earlier workflow and metrics guidance; not the missing supervisor guide.
+- `docs/notes/paper_metrics_tracker.md`, `docs/notes/SlapBench_Plan.txt`, `docs/notes/filter_waterfall.txt`: historical planning/metric notes.
+- `docs/notes/prompt_templates.txt`: prompt reference; executable prompts also live in code.
+- `paper/manuscript/`: active LaTeX manuscript, bibliography and figures, including fingerprint examples.
+- `paper/eccv2026_submission/`: separate submission sources and figures.
+- `paper/eccv2026_template/`: third-party template, styles and documentation.
 - `related_papers/`: excluded third-party reference material; background only.
-- `CITATION.cff`, `LICENSE`, `CHANGELOG.md`, `SECURITY.md`: public-repository metadata.
-- `AGENTS.md`, `CONTRIBUTING.md`, `.githooks/`: dev-only publication rules and safeguards.
+- `CITATION.cff`, `LICENSE`, `CHANGELOG.md`, `docs/SECURITY.md`: public-repository metadata.
+- `AGENTS.md`, `docs/CONTRIBUTING.md`, `.githooks/`: dev-only publication rules and safeguards.
 - `.github/workflows/`: verification, lint, security analysis and release workflows.
 
 ## Version control and ambiguities
 
 Audit started on clean `dev` at `ceb43ca`, matching `origin/dev`. Recent commits
 established dev-only publication and integrated local research with the older public
-repository. Multiple copies of code/results are intentional historical material;
-which copy is authoritative must be established per analysis, not guessed.
+repository. On 2026-09-19 the duplicate release copies (`github/`, flat
+`results/<model>/`) were removed from the tree and the layout was consolidated;
+see STATUS.md. Older copies remain in Git history; which run is authoritative
+must still be established per analysis, not guessed.
 Dataset-specific summaries are snapshots, not evidence every current model was included.
 No original results, datasets, paper sources or checkpoints were changed in this audit.

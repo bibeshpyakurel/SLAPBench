@@ -20,8 +20,8 @@ __pycache__/
 *.bbl
 *.blg
 *.synctex.gz
-manuscript/*.pdf
-eccv2026_submission/*.pdf
+paper/manuscript/*.pdf
+paper/eccv2026_submission/*.pdf
 
 # Large archives
 *.zip

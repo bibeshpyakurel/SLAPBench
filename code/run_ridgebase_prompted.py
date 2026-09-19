@@ -15,7 +15,7 @@ Output columns mirror the SD302b runs, plus RidgeBase-specific `category` and
 
 Usage:
   python code/run_ridgebase_prompted.py --model qwen3vl \
-      --pairs results_ridgebase/pairs_ridgebase_eval.csv          # all 3 strategies
+      --pairs results/ridgebase/pairs_ridgebase_eval.csv          # all 3 strategies
   python code/run_ridgebase_prompted.py --model qwen3vl \
       --pairs ... --prompting similarity_score --limit 20         # one strategy, smoke
 """
