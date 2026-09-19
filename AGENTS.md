@@ -13,6 +13,23 @@
 - Stage explicit paths, review the staged diff and sizes, run relevant checks,
   commit with a Conventional Commit subject, then push. Do not use blind `git add .`.
 
+## Required completion step for every change
+- The user has given standing authorization to commit and push completed repository
+  changes to `origin/dev`. Do this for every change task, including documentation
+  and agent-instruction updates, without asking for push permission again, unless
+  the user explicitly asks to keep that task local or uncommitted.
+- Before declaring a change task complete, run relevant checks, review and commit
+  the task's publishable changes, and run `git push origin dev:dev`. A local commit
+  alone does not complete the task. Continue to respect the exclusions below and
+  preserve unrelated user work; this does not authorize publishing ignored files.
+- Verify publication with `git rev-parse HEAD` and
+  `git ls-remote --heads origin dev`. The remote SHA must match the completed local
+  commit. If the remote advances concurrently, fetch and reconcile without force
+  pushing or discarding work, then verify again.
+- If authentication, connectivity, or a repository rule prevents pushing, keep the
+  local commit, report the exact blocker and unpushed commit, and state clearly
+  that publication is incomplete. Never claim a push succeeded without verification.
+
 ## Publication boundaries
 - Never commit `datasets/`, `dataset/`, `models/`, model weights, downloaded archives,
   virtual environments, caches, credentials (`.env` and variants), private keys,

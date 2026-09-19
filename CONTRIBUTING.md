@@ -7,6 +7,14 @@ All routine changes are committed and pushed to `dev`. Never push directly to
 separately authorized pull request and the repository's required checks.
 Do not force-push, delete remote branches, or publish tags as part of routine work.
 
+Every completed change task includes reviewing, checking, committing, and pushing
+its publishable changes to `origin/dev`, including documentation-only updates.
+Agents have standing authorization to do this without asking again, unless the
+user explicitly requests local-only or uncommitted work. Verify that
+`git ls-remote --heads origin dev` matches `git rev-parse HEAD` before reporting
+completion. If pushing is blocked, preserve the commit and report publication as
+incomplete with the blocker. Dataset and secret exclusions still apply.
+
 For a new clone:
 
 ```bash
