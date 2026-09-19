@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eu
-if [ "$(git symbolic-ref --quiet --short HEAD || true)" != dev ]; then
-    echo "Commit blocked: switch to dev before committing." >&2
+if [ "$(git symbolic-ref --quiet --short HEAD || true)" != main ]; then
+    echo "Commit blocked: switch to main before committing." >&2
     exit 1
 fi

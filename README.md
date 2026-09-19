@@ -1,6 +1,6 @@
 # SLAPBench
 
-**`dev` is the only branch and GitHub's default branch.** See [CONTRIBUTING.md](docs/CONTRIBUTING.md)
+**`main` is the only branch and GitHub's default branch.** See [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 for setup and push safeguards, and [AGENTS.md](AGENTS.md) for agent instructions.
 Datasets, model weights, credentials, environments, and interrupted-run backups
 are excluded. Source code, pair manifests, score exports, result tables, and paper
@@ -500,7 +500,7 @@ SLAPBench/
 │   └── notes/                    # historical planning and metric notes
 ├── scripts/                      # release notes + conventional-commit checks
 ├── .github/                      # CI, CodeQL, release workflows
-└── .githooks/                    # dev-only commit/push safeguards
+└── .githooks/                    # main-only commit/push safeguards
 
 Not committed: datasets/ (SD302b, RidgeBase, Precise), models/, venv/, .env
 ```

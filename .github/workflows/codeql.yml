@@ -1,12 +1,12 @@
 name: CodeQL
 
-# Static analysis on every change to dev, on pull requests, and weekly so a
+# Static analysis on every change to main, on pull requests, and weekly so a
 # newly published rule finds old code without waiting for the next commit.
 on:
   push:
-    branches: [dev]
+    branches: [main]
   pull_request:
-    branches: [dev]
+    branches: [main]
   schedule:
     - cron: "27 4 * * 1"
 

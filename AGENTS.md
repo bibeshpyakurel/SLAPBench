@@ -12,34 +12,34 @@
   require a separate task authorization. Preserve original scores and raw responses;
   derived reports belong at new dated paths. Append dated findings to STATUS.md.
 - Never send subject identifiers, original filenames or ground-truth labels to
-  hosted models. Preserve all existing dev-only push requirements below.
+  hosted models. Preserve all existing main-only push requirements below.
 
 ## Git workflow (required)
-- `dev` is the sole local and remote branch and GitHub's default branch. Keep it
-  current with `git fetch --prune origin` and `git pull --ff-only origin dev`.
-- Work on `dev` and push completed, reviewed changes to `origin` branch `dev`.
+- `main` is the sole local and remote branch and GitHub's default branch. Keep it
+  current with `git fetch --prune origin` and `git pull --ff-only origin main`.
+- Work on `main` and push completed, reviewed changes to `origin` branch `main`.
 - Before edits, inspect `git status`, the active branch, and remotes. Preserve
   unrelated user changes. Fetch before synchronizing; never discard local work.
-- Do not recreate `main` or other branches as part of routine work.
+- Do not recreate `dev` or other branches as part of routine work.
 - Never force-push, delete remote branches, publish tags or releases, or change
   repository visibility without explicit user instructions.
 - Remote: https://github.com/bibeshpyakurel/SLAPBench.git
 - Enable `git config core.hooksPath .githooks` in each clone. Use explicit pushes:
-  `git push origin dev:dev`. Do not bypass hooks.
+  `git push origin main:main`. Do not bypass hooks.
 - Stage explicit paths, review the staged diff and sizes, run relevant checks,
   commit with a Conventional Commit subject, then push. Do not use blind `git add .`.
 
 ## Required completion step for every change
 - The user has given standing authorization to commit and push completed repository
-  changes to `origin/dev`. Do this for every change task, including documentation
+  changes to `origin/main`. Do this for every change task, including documentation
   and agent-instruction updates, without asking for push permission again, unless
   the user explicitly asks to keep that task local or uncommitted.
 - Before declaring a change task complete, run relevant checks, review and commit
-  the task's publishable changes, and run `git push origin dev:dev`. A local commit
+  the task's publishable changes, and run `git push origin main:main`. A local commit
   alone does not complete the task. Continue to respect the exclusions below and
   preserve unrelated user work; this does not authorize publishing ignored files.
 - Verify publication with `git rev-parse HEAD` and
-  `git ls-remote --heads origin dev`. The remote SHA must match the completed local
+  `git ls-remote --heads origin main`. The remote SHA must match the completed local
   commit. If the remote advances concurrently, fetch and reconcile without force
   pushing or discarding work, then verify again.
 - If authentication, connectivity, or a repository rule prevents pushing, keep the
