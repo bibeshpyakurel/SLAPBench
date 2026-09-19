@@ -2,9 +2,9 @@
 
 ## Branch and publication policy
 
-All routine changes are committed and pushed to `dev`. Never push directly to
-`main`, including through an admin bypass. Publication to `main` requires a
-separately authorized pull request and the repository's required checks.
+`dev` is the repository's sole branch and GitHub's default branch. All completed
+changes are committed and pushed to `dev`. Do not recreate `main` or create
+other branches during routine work.
 Do not force-push, delete remote branches, or publish tags as part of routine work.
 
 Every completed change task includes reviewing, checking, committing, and pushing

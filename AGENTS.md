@@ -15,12 +15,14 @@
   hosted models. Preserve all existing dev-only push requirements below.
 
 ## Git workflow (required)
+- `dev` is the sole local and remote branch and GitHub's default branch. Keep it
+  current with `git fetch --prune origin` and `git pull --ff-only origin dev`.
 - Work on `dev` and push completed, reviewed changes to `origin` branch `dev`.
 - Before edits, inspect `git status`, the active branch, and remotes. Preserve
   unrelated user changes. Fetch before synchronizing; never discard local work.
-- If on `main`, switch to existing `dev` (or create it if absent) before editing.
-- Never push to `main`, force-push, delete remote branches, publish tags or releases,
-  or change repository visibility. A main release requires separate user instructions.
+- Do not recreate `main` or other branches as part of routine work.
+- Never force-push, delete remote branches, publish tags or releases, or change
+  repository visibility without explicit user instructions.
 - Remote: https://github.com/bibeshpyakurel/SLAPBench.git
 - Enable `git config core.hooksPath .githooks` in each clone. Use explicit pushes:
   `git push origin dev:dev`. Do not bypass hooks.
