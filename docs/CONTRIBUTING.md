@@ -32,8 +32,10 @@ new clones must enable them, and GitHub branch protection is separate.
 
 Before committing, inspect `git status --short`, stage explicit paths, and review
 `git diff --cached --stat` and `git diff --cached`. Keep datasets, model weights,
-secrets, caches, logs and recovery backups local. Keep reproducibility code,
-small textual results, manifests, documentation and paper sources in Git.
+secrets and caches local. Keep reproducibility code, textual results, manifests,
+reviewed run logs, recovery backups, documentation and paper sources in Git.
+Scan logs and backups for secrets before staging. See REPRODUCIBILITY.md for
+the local dataset/model boundary and model setup.
 Review any file above 25 MiB before staging; never add files above 50 MiB.
 Existing paper illustrations are retained; new dataset images need an explicit
 publication request and a redistribution-rights review.

@@ -1,0 +1,53 @@
+Loading qwen3vl ...
+Loading Qwen3-VL-8B-Instruct ...
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:22<01:07, 22.60s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:51<00:52, 26.38s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:20<00:27, 27.42s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:29<00:00, 20.21s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:29<00:00, 22.36s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Resuming — 4000 already done.
+Loading qwen3vl ...
+Loading Qwen3-VL-8B-Instruct ...
+Traceback (most recent call last):
+  File "/home/bibesh/Desktop/MultiModel LLM's/venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 479, in cached_files
+    hf_hub_download(
+  File "/home/bibesh/Desktop/MultiModel LLM's/venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 106, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/home/bibesh/Desktop/MultiModel LLM's/venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 154, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/home/bibesh/Desktop/MultiModel LLM's/models/qwen3vl-8b'. Use `repo_type` argument if needed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/bibesh/Desktop/MultiModel LLM's/run_matched.py", line 91, in <module>
+    main()
+  File "/home/bibesh/Desktop/MultiModel LLM's/run_matched.py", line 52, in main
+    model, proc, backend = rv.load_model(args.model)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bibesh/Desktop/MultiModel LLM's/code/run_verification.py", line 371, in load_model
+    model = Qwen3VLForConditionalGeneration.from_pretrained(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bibesh/Desktop/MultiModel LLM's/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 277, in _wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bibesh/Desktop/MultiModel LLM's/venv/lib/python3.12/site-packages/transformers/modeling_utils.py", line 4734, in from_pretrained
+    resolved_config_file = cached_file(
+                           ^^^^^^^^^^^^
+  File "/home/bibesh/Desktop/MultiModel LLM's/venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 322, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bibesh/Desktop/MultiModel LLM's/venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 532, in cached_files
+    _get_cache_file_to_return(path_or_repo_id, filename, cache_dir, revision, repo_type)
+  File "/home/bibesh/Desktop/MultiModel LLM's/venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 143, in _get_cache_file_to_return
+    resolved_file = try_to_load_from_cache(
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bibesh/Desktop/MultiModel LLM's/venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 106, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/home/bibesh/Desktop/MultiModel LLM's/venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 154, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/home/bibesh/Desktop/MultiModel LLM's/models/qwen3vl-8b'. Use `repo_type` argument if needed.
+Resuming — 4000 already done.
+local weights not found; using HF repo Qwen/Qwen3-VL-8B-Instruct
+Loading qwen3vl ...
+Loading Qwen3-VL-8B-Instruct ...
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [02:11<06:34, 131.67s/it]Fetching 4 files:  50%|█████     | 2/4 [02:12<01:49, 54.55s/it] Fetching 4 files:  75%|███████▌  | 3/4 [02:12<00:29, 29.70s/it]Fetching 4 files: 100%|██████████| 4/4 [02:12<00:00, 33.09s/it]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:19<00:57, 19.32s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:45<00:46, 23.21s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [01:11<00:24, 24.62s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:19<00:00, 17.95s/it]Loading checkpoint shards: 100%|██████████| 4/4 [01:19<00:00, 19.82s/it]
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.

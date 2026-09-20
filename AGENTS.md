@@ -55,9 +55,13 @@
 ## Publication boundaries
 - Never commit `datasets/`, `dataset/`, `models/`, model weights, downloaded archives,
   virtual environments, caches, credentials (`.env` and variants), private keys,
-  logs, or interrupted-run backups. Do not force-add ignored files.
+  or third-party PDFs. Do not force-add ignored files.
 - Keep code, dependencies, prompts, textual scores, pair manifests, metrics,
-  documentation, paper sources and existing paper figures for reproducibility.
+  documentation, paper sources, existing paper figures, run logs and recovery
+  backups for reproducibility. Scan new logs/backups for secrets and dataset images
+  before staging; preserve their original bytes and describe their provenance.
+- Local datasets and model weights cannot be reconstructed from Git alone. Keep
+  their paths, source IDs, and setup instructions current in docs/REPRODUCIBILITY.md.
 - Review files over 25 MiB; do not commit files over 50 MiB. Check for credentials
   without printing their values. Gitignore does not remove already tracked content.
 - Dataset images can also occur outside dataset directories. Do not add new raw

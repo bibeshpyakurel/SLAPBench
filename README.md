@@ -2,9 +2,10 @@
 
 **`main` is GitHub's default branch; `dev` is where agents work and push changes.** See [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 for setup and push safeguards, and [AGENTS.md](AGENTS.md) for agent instructions.
-Datasets, model weights, credentials, environments, and interrupted-run backups
-are excluded. Source code, pair manifests, score exports, result tables, and paper
-sources are retained. Existing manuscript illustrations include fingerprint
+Datasets, model weights, credentials, and environments are excluded. Source code,
+pair manifests, score exports, run logs, recovery backups, result tables, and paper
+sources are retained. See [reproducibility notes](docs/REPRODUCIBILITY.md) for
+local-only assets and setup. Existing manuscript illustrations include fingerprint
 examples; this is not an image-free repository. Dataset licenses remain separate
 from the code license.
 
@@ -76,7 +77,7 @@ docs/                # contributing, security, historical notes
 
 See [Project Structure](#project-structure) for the full tree.
 
-Datasets are not committed (22 GB). SD302b is available from NIST; RidgeBase
+Datasets are not committed. SD302b is available from NIST; RidgeBase
 requires a signed license agreement from the University at Buffalo CUBS lab.
 
 ---
@@ -220,7 +221,7 @@ The pairs are fixed with `seed=42` and saved to `results/sd302b/task8_pairs.csv`
 ## Models
 
 ### InternVL3-8B-Instruct
-- Source: `OpenGVLab/InternVL3-8B-Instruct`
+- Source: `OpenGVLab/InternVL3-8B`
 - Local path: `models/internvl3-8b/`
 - Loaded in bfloat16
 - VRAM: ~16 GB
@@ -423,11 +424,13 @@ python code/build_slap_images_df.py
 ```
 
 ### `code/setup_models.py`
-System check and model download utility. Verifies GPU VRAM, disk space, and required packages. Optionally downloads both models from HuggingFace.
+System check and model download utility. Reports GPU, free disk space, and
+required packages. Optionally downloads four models to the local model
+directory and Pixtral to the Hugging Face cache.
 
 ```bash
 python code/setup_models.py --check-only    # check system only
-python code/setup_models.py --download      # download both models
+python code/setup_models.py --download      # download model weights
 ```
 
 ### `code/run_verification.py`
@@ -503,6 +506,8 @@ SLAPBench/
 └── .githooks/                    # dev-only commit/push safeguards
 
 Not committed: datasets/ (SD302b, RidgeBase, Precise), models/, venv/, .env
+Committed: source, dependency files, paper sources, score results, reviewed logs and
+recovery backups. A clone cannot run inference until local data and weights are restored.
 ```
 
 ---
@@ -513,31 +518,31 @@ Not committed: datasets/ (SD302b, RidgeBase, Precise), models/, venv/, .env
 
 - Python 3.10+
 - CUDA GPU with at least 6 GB VRAM (16 GB recommended for InternVL3)
-- ~53 GB free disk space for both models
+- Enough disk space for the selected model weights and datasets; sizes vary
 
 ### Install packages
 
 ```bash
-pip install 'transformers>=4.49.0' huggingface_hub accelerate bitsandbytes \
-            qwen-vl-utils pandas Pillow torch torchvision
+pip install -r requirements.txt
 ```
 
 ### HuggingFace login (once)
 
 ```bash
-huggingface-cli login
+hf login
 ```
 
 ### Download models
 
 ```bash
+python code/setup_models.py --check-only
+# Optional on a machine with adequate local storage:
 python code/setup_models.py --download
 ```
 
 ### Verify setup
 
 ```bash
-python code/setup_models.py --check-only
 python code/run_verification.py --dry-run
 ```
 

@@ -1,44 +1,19 @@
 """
 SLAPBench Model Setup
 =====================
-Checks GPU/disk/packages and optionally downloads all three active models:
-  Qwen3-VL-8B-Instruct       (Qwen/Qwen3-VL-8B-Instruct,          ~16 GB, 4-bit NF4)
-  InternVL3-8B               (OpenGVLab/InternVL3-8B,              ~16 GB, bfloat16)
-  Qwen2.5-VL-7B-Instruct     (Qwen/Qwen2.5-VL-7B-Instruct,        ~17 GB, 4-bit NF4)
+Checks GPU/disk/packages and optionally downloads five VLMs.
+Four use the local model directory; Pixtral uses the Hugging Face cache.
 
 Models are loaded directly via transformers — no vLLM required.
 
 Usage:
     python code/setup_models.py                  # check + show instructions
-    python code/setup_models.py --download       # also download all models
+    python code/setup_models.py --download       # also download model weights
     python code/setup_models.py --check-only     # GPU/disk/package check only
 """
 
 import argparse
-from pathlib import Path
-
-MODELS_DIR = Path("/media/bibesh/DATA/models")
-
-MODELS = [
-    {
-        "name":    "Qwen3-VL-8B-Instruct",
-        "hf_id":  "Qwen/Qwen3-VL-8B-Instruct",
-        "size_gb": 16,
-        "notes":  "4-bit NF4 bitsandbytes, ~8 GB VRAM at inference",
-    },
-    {
-        "name":    "InternVL3-8B",
-        "hf_id":  "OpenGVLab/InternVL3-8B",
-        "size_gb": 16,
-        "notes":  "bfloat16, ~16 GB VRAM",
-    },
-    {
-        "name":    "Qwen2.5-VL-7B-Instruct",
-        "hf_id":  "Qwen/Qwen2.5-VL-7B-Instruct",
-        "size_gb": 17,
-        "notes":  "4-bit NF4 bitsandbytes, ~6 GB VRAM at inference",
-    },
-]
+from model_registry import LOCAL_MODELS, MODELS_DIR, PIXTRAL_ID
 
 
 # ── GPU check ─────────────────────────────────────────────────────────────────
@@ -63,13 +38,7 @@ def check_gpu():
 
         print(f"\n  Total VRAM: {total_vram:.0f} GB across {n} GPU(s)")
 
-        if total_vram >= 16:
-            print("  ✓  Sufficient for all models (run one at a time).")
-        elif total_vram >= 8:
-            print("  ✓  Sufficient for Qwen3-VL and Qwen2.5-VL at 4-bit.")
-            print("     InternVL3-8B requires ~16 GB bfloat16.")
-        else:
-            print("  ✗  Less than 8 GB VRAM — insufficient for these models.")
+        print("  Check each model's actual VRAM needs before inference.")
         return True
 
     except ImportError:
@@ -104,9 +73,7 @@ def check_packages():
             all_ok = False
 
     if not all_ok:
-        print("\n  Install all missing packages with:")
-        print("  pip install 'transformers>=4.51,<5.0' huggingface_hub accelerate "
-              "bitsandbytes qwen-vl-utils einops timm pandas Pillow")
+        print("\n  Install dependencies with: pip install -r requirements.txt")
     return all_ok
 
 
@@ -117,17 +84,18 @@ def check_disk():
     print("DISK SPACE CHECK")
     print("=" * 60)
     import shutil
-    total_needed = sum(m["size_gb"] for m in MODELS) + 20  # +20 GB buffer
-    check_path = MODELS_DIR if MODELS_DIR.exists() else Path.home()
+    if MODELS_DIR.is_symlink() and not MODELS_DIR.exists():
+        print(f"  ✗  Model symlink target is unavailable: {MODELS_DIR}")
+        print("     Mount its drive or set SLAPBENCH_MODELS_DIR to available storage.")
+    check_path = MODELS_DIR if MODELS_DIR.exists() else MODELS_DIR.parent
+    while not check_path.exists():
+        check_path = check_path.parent
     stat = shutil.disk_usage(check_path)
     free_gb = stat.free / 1e9
     print(f"  Checking: {check_path}")
     print(f"  Free disk space: {free_gb:.0f} GB")
-    print(f"  Space needed:    ~{total_needed} GB (all models + buffer)")
-    if free_gb >= total_needed:
-        print("  ✓  Sufficient disk space.")
-    else:
-        print(f"  ✗  Need ~{total_needed - free_gb:.0f} GB more disk space.")
+    print("  Model sizes vary by revision; confirm free space before downloading.")
+    print("  Pixtral downloads to the Hugging Face cache, possibly on another disk.")
 
 
 # ── Download models ────────────────────────────────────────────────────────────
@@ -142,18 +110,33 @@ def download_models():
         print("  huggingface_hub not installed. Run: pip install huggingface_hub")
         return
 
+    if MODELS_DIR.is_symlink() and not MODELS_DIR.exists():
+        raise SystemExit(
+            f"Model symlink target is unavailable: {MODELS_DIR}. "
+            "Mount its drive or set SLAPBENCH_MODELS_DIR."
+        )
     MODELS_DIR.mkdir(parents=True, exist_ok=True)
-    for m in MODELS:
-        local_dir = MODELS_DIR / m["name"].lower().replace("-instruct", "").replace(".", "").replace("-", "")
-        print(f"\n  Downloading {m['name']}  (~{m['size_gb']} GB) ...")
-        print(f"  HuggingFace ID: {m['hf_id']}")
+    failures = []
+    for key, (repo_id, folder) in LOCAL_MODELS.items():
+        local_dir = MODELS_DIR / folder
+        print(f"\n  Downloading {key} from {repo_id} to {local_dir} ...")
         try:
-            path = snapshot_download(repo_id=m["hf_id"], repo_type="model",
+            path = snapshot_download(repo_id=repo_id, repo_type="model",
                                      local_dir=str(local_dir))
             print(f"  ✓  Saved to: {path}")
         except Exception as e:
             print(f"  ✗  Failed: {e}")
-            print("     If authentication is required: hf login")
+            print("     If access requires authentication, run: hf login")
+            failures.append(key)
+    print(f"\n  Downloading pixtral from {PIXTRAL_ID} to the Hugging Face cache ...")
+    try:
+        path = snapshot_download(repo_id=PIXTRAL_ID, repo_type="model")
+        print(f"  ✓  Cached at: {path}")
+    except Exception as e:
+        print(f"  ✗  Failed: {e}")
+        failures.append("pixtral")
+    if failures:
+        raise SystemExit(f"Model downloads failed: {', '.join(failures)}")
 
 
 # ── How to run inference ──────────────────────────────────────────────────────
@@ -197,15 +180,9 @@ def print_hf_note():
     print("HUGGINGFACE AUTHENTICATION")
     print("=" * 60)
     print("""
-  All models are public but require a HuggingFace account token to download.
-
-    1. Create a free account at https://huggingface.co
-    2. Go to https://huggingface.co/settings/tokens
-    3. Create a token with "read" permissions
-    4. Run:  hf login
-             (paste your token when prompted)
-
-  Tokens are cached locally — you only need to do this once per machine.
+  Some model repositories may require accepting terms or authentication.
+  If access is denied, check the model page and run: hf login
+  Keep tokens on this machine; never commit them to Git.
 """)
 
 
@@ -214,7 +191,7 @@ def print_hf_note():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--download",   action="store_true",
-                        help="Download all models from HuggingFace")
+                        help="Download local models and cache Pixtral")
     parser.add_argument("--check-only", action="store_true",
                         help="Only run system checks, do not download")
     args = parser.parse_args()
@@ -234,8 +211,7 @@ if __name__ == "__main__":
     print("=" * 60)
     print("""
   Step 1 — Install packages:
-    pip install 'transformers>=4.51,<5.0' huggingface_hub accelerate \\
-                bitsandbytes qwen-vl-utils einops timm pandas Pillow
+    pip install -r requirements.txt
 
   Step 2 — Log in to HuggingFace (once):
     hf login

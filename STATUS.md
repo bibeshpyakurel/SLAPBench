@@ -254,3 +254,22 @@ parsers have not been changed. Any formal new run needs the reviewed JSON parser
 and protocol before execution.
 Full offline regeneration in a temporary output directory exactly reproduced the
 machine-readable report and all 45 derived CSVs. Staged whitespace checks passed.
+
+## 2026-09-20 — Repository portability and artifact publication
+
+The working branch now tracks the reviewed text run logs and two Pixtral
+interrupted-run backups so a clone retains the research trail. These are
+historical artifacts, not new validated comparisons. A content scan found no
+common credential patterns or email addresses in those seven files; the logs
+do contain local workstation paths. Datasets, model weights, credentials,
+environments and caches remain excluded. See `docs/REPRODUCIBILITY.md` for
+local asset locations, model IDs and the limits of clone-only reproduction.
+The seven files' byte sizes and SHA-256 hashes are recorded in
+`reports/artifact-inventory-20260920.csv`.
+
+Model setup and SD302b inference now share local weight directory names and
+support `SLAPBENCH_MODELS_DIR`. The setup utility also covers Gemma and caches
+Pixtral by the repository ID used at inference. The local `models` symlink
+currently points to an unmounted `/media/bibesh/DATA/models`, so weight contents
+and revisions were not verifiable here. No dataset images, model weights, paid
+calls, downloads or GPU inference were involved in this publication update.
