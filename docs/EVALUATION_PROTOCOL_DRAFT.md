@@ -23,14 +23,37 @@ This pasted source has no Appendix A or C1–C7 table; neither has been invented
 No supervisor contact or sign-off is recorded. The quoted email supplies the
 research direction, not authorization of a particular dataset or API budget.
 
+## Feasible single-finger starting point on this workstation
+
+The local RidgeBase download includes **Task1 single-finger images**, so the
+first pilot need not begin by segmenting Task2 four-finger images. A read-only
+aggregate inventory in `reports/ridgebase-task1-inventory-20260920.json`
+(`python code/audit_ridgebase_task1.py`) found 63 Train subjects and 25 Test
+subjects with zero overlap. In Train/Contactbased, 416 subject/hand/finger groups
+have images labelled as two sessions. Those are promising candidate genuine
+pairs, subject to checking capture independence, image quality and dataset access
+terms. Test/Contactbased has one image per subject/hand/finger group, so it
+cannot provide same-modality, two-impression genuine pairs by itself.
+
+The contactless folders have multiple crops per finger, but Test files all carry
+one session label. Distinct file names need to be linked to independent parent
+captures before treating them as genuine repeats. The numeric contactless finger
+codes 0–3 must be mapped and checked against the named contact-based positions;
+the inventory does not assume that mapping. The supplied Test subjects have
+appeared in earlier Task2 research analyses, so they should not silently become
+an untouched confirmatory set. A possible controlled pilot is an internal
+subject-disjoint development/held-out split within Task1 Train using distinct
+contact-based sessions, with the split, pair rules and data access reviewed
+before any final-test claim. This is a proposal, not a frozen protocol.
+
 ## Proposed first pilot (§§4,8,12,16)
 
-1. Establish a single-finger pilot before claiming a slap-fusion result. Select an
-   authorized repeated-impression dataset with reliable finger-position labels.
-   Existing Precise/RidgeBase hand images could supply verified per-finger crops,
-   but segmentation/position mapping would first need validation. This is a
-   proposal, not confirmation those crops or licenses are ready. Keep SD302b
-   cross-resolution comparisons a separately labeled near-duplicate control.
+1. Establish a single-finger pilot before claiming a slap-fusion result. RidgeBase
+   Task1 is the concrete candidate already on disk; confirm its access terms,
+   session independence, image quality and finger-position labels first. Precise
+   and RidgeBase Task2 hand images could be used later after crop/position
+   validation. Keep SD302b cross-resolution comparisons a separately labeled
+   near-duplicate control.
 2. Assign subjects to development and final test before constructing pairs. Keep
    every finger, sensor, session, derivative and parent capture from one subject
    in the same partition. Check hashes/near-duplicates across partitions. Save
