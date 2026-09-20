@@ -288,3 +288,27 @@ fingerprint images and secrets embedded in otherwise publishable files.
 Existing tracked pair manifests and scores contain subject identifiers and image
 filenames, and manuscript figures include fingerprint examples; that publication
 boundary needs a data-rights review before a new public release.
+
+## 2026-09-20 — Task1 single-finger feasibility check
+
+The previously drafted pilot understated what is already on disk: RidgeBase
+Task1 contains pre-segmented single-finger images. A new read-only aggregate
+inventory (`code/audit_ridgebase_task1.py`,
+`reports/ridgebase-task1-inventory-20260920.json`) found 63 Train subjects and
+25 disjoint Test subjects. Train/Contactbased has 416 subject/hand/finger groups
+with files labelled as two distinct sessions; Test/Contactbased has only one
+image per such group. Contactless Test images repeat finger groups but use a
+single session label, so file counts alone do not prove independent captures.
+The numeric contactless finger codes have not been checked against named fingers.
+
+This makes a modest **candidate** single-finger M1 pilot feasible without first
+segmenting slap images: validate capture/position metadata and authorization,
+freeze a subject-disjoint internal Train split, then run MINDTCT/Bozorth3 and
+image-only versus image-plus-minutiae VLM on exactly the same pairs. No split,
+pair manifest, matcher score or VLM experiment was created by this inventory.
+`mindtct` and `bozorth3` are still absent from PATH, and the `models` symlink
+target remains unmounted. The supplied Test subjects have been used in earlier
+Task2 analyses, so a confirmatory test designation needs explicit review.
+Low-FAR claims cannot be inferred from this small subject pool or correlated
+pair enumeration. The updated draft protocol records these limits and the
+remaining supervisor decisions.

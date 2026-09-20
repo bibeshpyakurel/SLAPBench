@@ -1,0 +1,96 @@
+{
+  "limitations": [
+    "Filename/session counts do not prove that captures are independent.",
+    "Contactless finger codes 0-3 have not been mapped to named finger positions.",
+    "No dataset-license, image-quality, minutiae or matcher validation is implied."
+  ],
+  "scope": "RidgeBase Task1 image files only",
+  "splits": {
+    "Test": {
+      "Contactbased": {
+        "devices": {
+          "contact": 200
+        },
+        "finger_labels": {
+          "index": 50,
+          "little": 50,
+          "middle": 50,
+          "ring": 50
+        },
+        "groups_with_multiple_images": 0,
+        "groups_with_two_sessions": 0,
+        "images": 200,
+        "session_labels": {
+          "1": 196,
+          "2": 4
+        },
+        "subject_hand_finger_groups": 200,
+        "subjects": 25
+      },
+      "Contactless": {
+        "devices": {
+          "apple": 1065,
+          "google": 1164
+        },
+        "finger_labels": {
+          "0": 558,
+          "1": 557,
+          "2": 557,
+          "3": 557
+        },
+        "groups_with_multiple_images": 200,
+        "groups_with_two_sessions": 0,
+        "images": 2229,
+        "session_labels": {
+          "1": 2229
+        },
+        "subject_hand_finger_groups": 200,
+        "subjects": 25
+      }
+    },
+    "Train": {
+      "Contactbased": {
+        "devices": {
+          "contact": 920
+        },
+        "finger_labels": {
+          "index": 230,
+          "little": 230,
+          "middle": 230,
+          "ring": 230
+        },
+        "groups_with_multiple_images": 416,
+        "groups_with_two_sessions": 416,
+        "images": 920,
+        "session_labels": {
+          "1": 460,
+          "2": 460
+        },
+        "subject_hand_finger_groups": 504,
+        "subjects": 63
+      },
+      "Contactless": {
+        "devices": {
+          "apple": 5584,
+          "google": 5668
+        },
+        "finger_labels": {
+          "0": 2813,
+          "1": 2813,
+          "2": 2813,
+          "3": 2813
+        },
+        "groups_with_multiple_images": 504,
+        "groups_with_two_sessions": 456,
+        "images": 11252,
+        "session_labels": {
+          "1": 5756,
+          "2": 5496
+        },
+        "subject_hand_finger_groups": 504,
+        "subjects": 63
+      }
+    }
+  },
+  "train_test_subject_overlap": 0
+}

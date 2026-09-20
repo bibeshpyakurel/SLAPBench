@@ -18,6 +18,7 @@ full 16-section supervisor instructions, now preserved verbatim in
 | `code/embed_verify.py` | Vision-encoder embedding comparisons saved as cosine scores |
 | `code/test_paid_models.py`, `code/count_tokens_check.py` | Hosted-model preflight and token checks; may call paid services |
 | `code/setup_models.py` | Checks/downloads model weights |
+| `code/audit_ridgebase_task1.py` | Read-only aggregate inventory of available single-finger Task1 data; excludes subject IDs from its report |
 | `code/resume_precise_pixtral.py` | Repairs an interrupted CSV and resumes inference; not an audit command |
 | `code/export_precise_qwen3_scores.py` | Joins scores to manifests and writes two 676-line exports |
 | `code/analyze_ridgebase.py` | Summarizes saved RidgeBase or Precise scores; supports separate output directories |
@@ -45,6 +46,11 @@ Excluded from Git. Counts below describe the mounted files observed during this 
 Subject/hand information is recoverable from filenames and manifests; these are
 sensitive metadata, not anonymous model prompts. `code/precise_pairs.py` and
 `code/ridgebase_pairs_full.py` encode the filename conventions.
+RidgeBase Task1 contains pre-segmented single-finger images. The aggregate
+`reports/ridgebase-task1-inventory-20260920.json` records 63 Train/25 Test
+subjects with no overlap. Train/Contactbased has 416 subject/hand/finger groups
+labelled with two sessions; Test/Contactbased has no two-session groups. Capture
+independence and contactless finger-code mapping are not established by filenames.
 `models` is a symlink to `/media/bibesh/DATA/models`; its target was unavailable.
 Consequently checkpoint inventory and training provenance could not be inspected.
 No `.xyt` files were found under datasets. `mindtct` and `bozorth3` were not on PATH;
