@@ -1,4 +1,4 @@
-# Data (22 GB) — never commit; provide download instructions in README
+# Fingerprint datasets remain on the authorized local machine.
 datasets/
 dataset/
 models
@@ -39,7 +39,7 @@ related_papers/
 # Local Claude Code config
 .claude/
 
-# Local environments, credentials, experiment recovery files and model weights
+# Local environments, credentials, and model weights
 .env.*
 !.env.example
 .venv/

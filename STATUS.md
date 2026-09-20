@@ -273,3 +273,18 @@ Pixtral by the repository ID used at inference. The local `models` symlink
 currently points to an unmounted `/media/bibesh/DATA/models`, so weight contents
 and revisions were not verifiable here. No dataset images, model weights, paid
 calls, downloads or GPU inference were involved in this publication update.
+
+### Publication boundary recheck
+
+A fresh index/ignored-file audit found no uncommitted code, results or findings.
+The local-only files outside the dataset tree are the Python environment,
+model symlink, credentials, caches, third-party paper full texts and a LaTeX
+font log. These are excluded deliberately; bibliography, code and research
+notes are tracked. The local automation settings remain ignored, and a check
+found no local archive credential in tracked files. A new index check
+now rejects dataset/model/environment paths, credential files and files over
+50 MiB before commit and in CI. Content review remains necessary for raw
+fingerprint images and secrets embedded in otherwise publishable files.
+Existing tracked pair manifests and scores contain subject identifiers and image
+filenames, and manuscript figures include fingerprint examples; that publication
+boundary needs a data-rights review before a new public release.

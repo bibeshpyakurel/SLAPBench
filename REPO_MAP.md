@@ -59,7 +59,8 @@ filenames. Historical SD302b files also live under `previous/<date>/`.
 Embedding comparisons use `embed_<model>_eval.csv`. Pair manifests carry identities,
 labels and image paths. Prompted CSVs contain raw response text, latency, model key,
 prompting setting and timestamp; score prompts and binary prompts have different fields.
-Crash skips can be recorded in `.csv.skipped`; recovery backups are ignored.
+Crash skips can be recorded in `.csv.skipped`; reviewed recovery backups and run
+logs are now tracked with checksums in `reports/artifact-inventory-20260920.csv`.
 The most recent timestamped result filename inspected is the Precise Pixtral
 similarity run `20260908_2100`; this is a filename timestamp, not independent proof
 of execution time. Existing summary files predate inclusion of Pixtral in the generator.
@@ -81,6 +82,8 @@ are not a complete record of versions used for historical runs.
 - `paper/eccv2026_submission/`: separate submission sources and figures.
 - `paper/eccv2026_template/`: third-party template, styles and documentation.
 - `related_papers/`: excluded third-party reference material; background only.
+- `docs/REPRODUCIBILITY.md`: local assets, public artifact policy and clone setup.
+- `scripts/check_publication_scope.py`: index guard for local-only paths and size.
 - `CITATION.cff`, `LICENSE`, `CHANGELOG.md`, `docs/SECURITY.md`: public-repository metadata.
 - `AGENTS.md`, `docs/CONTRIBUTING.md`, `.githooks/`: dev-only publication rules and safeguards.
 - `.github/workflows/`: verification, lint, security analysis and release workflows.

@@ -34,6 +34,9 @@
   `git push origin dev:dev`. Do not bypass hooks.
 - Stage explicit paths, review the staged diff and sizes, run relevant checks,
   commit with a Conventional Commit subject, then push. Do not use blind `git add .`.
+- The versioned pre-commit hook and CI run `scripts/check_publication_scope.py`
+  against Git's index. Keep it enabled; the check does not replace manual review
+  of logs, results, paper figures, or anything containing subject information.
 
 ## Required completion step for every change
 - The user has given standing authorization to commit and push completed repository
@@ -62,6 +65,8 @@
   before staging; preserve their original bytes and describe their provenance.
 - Local datasets and model weights cannot be reconstructed from Git alone. Keep
   their paths, source IDs, and setup instructions current in docs/REPRODUCIBILITY.md.
+- The local `.claude/` settings and third-party full-text papers also stay out of
+  Git; use the public bibliography and research notes to preserve their context.
 - Review files over 25 MiB; do not commit files over 50 MiB. Check for credentials
   without printing their values. Gitignore does not remove already tracked content.
 - Dataset images can also occur outside dataset directories. Do not add new raw

@@ -7,6 +7,21 @@ recorded analyses. A clone alone cannot regenerate model outputs: the licensed
 fingerprint datasets, downloaded model weights, credentials and GPU environment
 are local assets and are intentionally absent from Git.
 
+This is a research repository, not a byte-for-byte backup of the workstation.
+The 28 GiB fingerprint dataset tree, downloaded model checkpoints, the 8 GiB
+Python environment, local credentials and personal automation settings stay
+here. Model weights are large, may have separate terms, and their external drive
+was unavailable at audit time; the code, model identifiers and download procedure
+are published instead. Without the datasets, a clone cannot train or reproduce
+the fingerprint experiments even if it can install the software. This is a
+practical separation of assets, not a technical access control: someone who
+independently obtains authorized data and weights could run the public code.
+
+The `related_papers/` directory holds third-party full-text copies and stays
+local. The public [`references.bib`](../paper/manuscript/references.bib),
+[`STATUS.md`](../STATUS.md), and protocol draft preserve source citations,
+findings and research direction without redistributing those copies.
+
 ## Local assets and paths
 
 | Asset | Path expected by code | What a new machine needs |
@@ -68,7 +83,10 @@ RidgeBase and Precise manifests use paths recorded when the pairs were made.
 Check each manifest's `img1_path` and `img2_path` before a new run. Remap paths
 in a **new** manifest when moving computers; keep committed originals intact and
 preserve the pair IDs, labels, sampling rules and audit trail. The recorded score
-tables remain inspectable without local images.
+tables remain inspectable without local images. Existing manifests and score
+tables include subject IDs and source filenames, while some manuscript figures
+show fingerprint examples. Review these public artifacts and applicable data
+terms before promoting a working-branch snapshot to a public release.
 
 The logs under `logs/` and `.interrupted-backup` files under `results/` preserve
 run history and crash recovery state. They are not additional verified result
@@ -84,3 +102,11 @@ The current research status and unresolved protocol decisions are in
 Precise/RidgeBase metrics and the post-hoc parser audit have known limits; do
 not treat the old SD302b near-duplicate pairs as independent-capture biometric
 evidence or make unsupported low-FAR claims.
+
+## Publication check
+
+`scripts/check_publication_scope.py` checks the Git index for dataset/model/
+environment/credential paths and files over 50 MiB. It runs in CI and, when
+`git config core.hooksPath .githooks` is set, before each commit. Agents must
+still review the contents of new text results, logs and figures, because file
+names alone cannot prove that a file has no credentials or raw fingerprint data.
