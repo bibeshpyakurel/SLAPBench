@@ -38,11 +38,17 @@ jobs:
       - name: Install verification dependencies
         run: pip install -r requirements-verify.txt
 
+      - name: Check repository publication boundary
+        run: python scripts/check_publication_scope.py
+
       # Recomputes AUC, EER and pair counts from every results CSV and fails if
       # any committed .metrics.json disagrees. This is what stops a results file
       # being replaced without the analysis being rerun.
       - name: Recompute metrics from per-pair CSVs
         run: python code/verify_metrics.py
+
+      - name: Check offline parser and export audit
+        run: python -m unittest discover -s tests -v
 
       # The results table is generated, never hand-edited. Regenerating it here
       # proves the generator still finds the results it documents.
@@ -72,4 +78,4 @@ jobs:
 
       # Correctness rules only (pyflakes + a subset of bugbear). Style is not
       # policed here; a research repo should not fail CI over line length.
-      - run: ruff check code/ --select F,E9,B
+      - run: ruff check code/ tests/ --select F,E9,B

@@ -4,3 +4,4 @@ if [ "$(git symbolic-ref --quiet --short HEAD || true)" != dev ]; then
     echo "Commit blocked: switch to dev before committing." >&2
     exit 1
 fi
+python3 scripts/check_publication_scope.py

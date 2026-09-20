@@ -49,6 +49,7 @@ if TYPE_CHECKING:
     from PIL.Image import Image
 
 import pandas as pd
+from model_registry import MODELS_DIR, PIXTRAL_ID
 
 # Load API keys from .env if present
 try:
@@ -69,28 +70,28 @@ PAIRS_ALL_CSV  = RESULTS_DIR / "task8_pairs_all.csv"   # exhaustive (176G + 7,65
 MODELS = {
     "internvl3": {
         "display":   "InternVL3-8B-Instruct",
-        "hf_id":     str(PROJECT_ROOT / "models" / "internvl3-8b"),
+        "hf_id":     str(MODELS_DIR / "internvl3-8b"),
         "backend":   "internvl3",
         "dtype":     "bfloat16",
         "load_4bit": False,
     },
     "qwen25vl": {
         "display":   "Qwen2.5-VL-7B-Instruct",
-        "hf_id":     str(PROJECT_ROOT / "models" / "qwen25vl-7b"),
+        "hf_id":     str(MODELS_DIR / "qwen25vl-7b"),
         "backend":   "qwen25vl",
         "dtype":     "float16",
         "load_4bit": True,
     },
     "qwen3vl": {
         "display":   "Qwen3-VL-8B-Instruct",
-        "hf_id":     str(PROJECT_ROOT / "models" / "qwen3vl-8b"),
+        "hf_id":     str(MODELS_DIR / "qwen3vl-8b"),
         "backend":   "qwen3vl",
         "dtype":     "bfloat16",
         "load_4bit": True,
     },
     "gemma3": {
         "display":   "Gemma-3-12B-IT",
-        "hf_id":     str(PROJECT_ROOT / "models" / "gemma3-12b"),
+        "hf_id":     str(MODELS_DIR / "gemma3-12b"),
         "backend":   "gemma3",
         "dtype":     "bfloat16",
         "load_4bit": True,
@@ -100,7 +101,7 @@ MODELS = {
         # Pre-quantized bnb-4bit repo (official mistralai repo is 25GB bf16 and
         # doesn't fit local disk headroom; this repo already bakes the 4-bit
         # quantization_config into config.json, so no BitsAndBytesConfig needed).
-        "hf_id":     "unsloth/Pixtral-12B-2409-bnb-4bit",
+        "hf_id":     PIXTRAL_ID,
         "backend":   "pixtral",
         "dtype":     "bfloat16",
         "load_4bit": True,

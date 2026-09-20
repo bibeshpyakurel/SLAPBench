@@ -29,11 +29,17 @@ git config remote.origin.push refs/heads/dev:refs/heads/dev
 The versioned pre-commit and pre-push hooks reject commits outside `dev` and
 pushes to any destination other than `refs/heads/dev`. Hooks are local safeguards:
 new clones must enable them, and GitHub branch protection is separate.
+The pre-commit hook and CI also run `scripts/check_publication_scope.py` against
+the Git index to catch local-only paths and oversized files before publication.
+Review content yourself; a path check cannot recognize a fingerprint image or
+a credential copied into a text result.
 
 Before committing, inspect `git status --short`, stage explicit paths, and review
 `git diff --cached --stat` and `git diff --cached`. Keep datasets, model weights,
-secrets, caches, logs and recovery backups local. Keep reproducibility code,
-small textual results, manifests, documentation and paper sources in Git.
+secrets and caches local. Keep reproducibility code, textual results, manifests,
+reviewed run logs, recovery backups, documentation and paper sources in Git.
+Scan logs and backups for secrets before staging. See REPRODUCIBILITY.md for
+the local dataset/model boundary and model setup.
 Review any file above 25 MiB before staging; never add files above 50 MiB.
 Existing paper illustrations are retained; new dataset images need an explicit
 publication request and a redistribution-rights review.
