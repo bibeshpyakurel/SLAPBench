@@ -1,0 +1,8 @@
+{
+  "headlineMetric": "7,832 SLAP fingerprint pairs from NIST SD302b (176 mated, 7,656 non-mated) evaluated across five multimodal LLMs",
+  "role": "First author: benchmark design, evaluation pipeline, and manuscript",
+  "resumeEligible": true,
+  "stack": ["Python", "PyTorch", "Hugging Face Transformers", "InternVL3-8B", "Qwen2.5-VL-7B", "Qwen3-VL-8B", "Gemma-3-12B", "Claude Opus 4.8", "LaTeX"],
+  "oneLiner": "The first benchmark evaluating multimodal LLMs on four-finger SLAP fingerprint verification using NIST SD302b.",
+  "startDate": "2026-05"
+}
