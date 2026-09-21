@@ -1,5 +1,24 @@
 # SLAPBench
 
+[![arXiv](https://img.shields.io/badge/arXiv-2607.15517-b31b1b.svg)](https://arxiv.org/abs/2607.15517)
+[![DOI](https://img.shields.io/badge/DOI-10.48550%2FarXiv.2607.15517-blue.svg)](https://doi.org/10.48550/arXiv.2607.15517)
+[![CI](https://github.com/bibeshpyakurel/SLAPBench/actions/workflows/ci.yml/badge.svg)](https://github.com/bibeshpyakurel/SLAPBench/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**Paper:** *SLAPBench: Benchmarking Multimodal Large Language Models for
+Four-Finger SLAP Fingerprint Verification* —
+Bibesh Pyakurel, M. G. Sarwar Murshed (University of Wisconsin–Green Bay).
+[arXiv:2607.15517](https://arxiv.org/abs/2607.15517) ·
+[PDF](https://arxiv.org/pdf/2607.15517) ·
+DOI [10.48550/arXiv.2607.15517](https://doi.org/10.48550/arXiv.2607.15517) ·
+[how to cite](#citation)
+
+**Reproducing the paper:** every table and headline number is mapped to the
+file that holds it and the command that produces it in
+[REPRODUCE.md](REPRODUCE.md). The metric check runs without a GPU, a dataset or
+an API key. [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) documents the
+local-only asset boundary.
+
 **`main` is GitHub's default branch; `dev` is where agents work and push changes.** See [CONTRIBUTING.md](docs/CONTRIBUTING.md)
 for setup and push safeguards, and [AGENTS.md](AGENTS.md) for agent instructions.
 Datasets, model weights, credentials, and environments are excluded. Source code,
@@ -314,6 +333,12 @@ The same person's fingers produce slightly different images each time they press
 ```
 
 ### chain_of_thought
+
+> **Not implemented in the current code.** `PROMPTS` in
+> `code/run_verification.py` defines only `zero_shot`, `task_description` and
+> `similarity_score`, and those are the only values `--prompting` accepts. No
+> published number comes from this strategy.
+
 Asks the model to reason step by step before answering. The model produces a paragraph of analysis examining ridges, shape, and proportions, then answers.
 
 ```
@@ -367,6 +392,15 @@ The model is not performing fingerprint verification. It is defaulting to "same 
 ---
 
 ## Results
+
+> **These are historical numbers from an earlier evaluation round and do not
+> correspond to the 7,832-pair exhaustive runs reported in the paper.** The
+> published results are Table I of
+> [arXiv:2607.15517](https://arxiv.org/abs/2607.15517), rendered from the
+> committed metrics by `python code/generate_results_table.py` into
+> `results/sd302b/SLAPBench_results.html`. See
+> [REPRODUCE.md](REPRODUCE.md#paper-claim--file--command) for the claim-by-claim
+> mapping.
 
 All 8 evaluations completed. Results are in `results/`.
 
@@ -468,7 +502,7 @@ python code/run_verification.py --metrics results/sd302b/internvl3/latest/task8_
 
 ```
 SLAPBench/
-├── README.md  AGENTS.md  REPO_MAP.md  STATUS.md  CHANGELOG.md  CITATION.cff  LICENSE
+├── README.md  REPRODUCE.md  AGENTS.md  REPO_MAP.md  STATUS.md  CHANGELOG.md  CITATION.cff  LICENSE
 ├── requirements.txt              # full GPU/model environment
 ├── requirements-verify.txt       # lightweight CI verification environment
 ├── code/
@@ -499,7 +533,7 @@ SLAPBench/
 │   ├── eccv2026_submission/      # ECCV 2026 (LNCS) version + supplementary
 │   └── eccv2026_template/        # third-party ECCV template (unmodified)
 ├── docs/
-│   ├── CONTRIBUTING.md  SECURITY.md
+│   ├── CONTRIBUTING.md  SECURITY.md  REPRODUCIBILITY.md  ZENODO.md
 │   └── notes/                    # historical planning and metric notes
 ├── scripts/                      # release notes + conventional-commit checks
 ├── .github/                      # CI, CodeQL, release workflows
@@ -574,6 +608,13 @@ To compile: upload `paper/manuscript/` to [Overleaf](https://overleaf.com) and c
   url           = {https://arxiv.org/abs/2607.15517}
 }
 ```
+
+See [CITATION.cff](CITATION.cff) for machine-readable citation metadata
+(GitHub's *Cite this repository* button reads it). Tag
+[`v0.1.0`](https://github.com/bibeshpyakurel/SLAPBench/releases/tag/v0.1.0) is
+the state of the code behind the preprint. A Zenodo DOI for the archived
+snapshot is not minted yet; [docs/ZENODO.md](docs/ZENODO.md) has the exact
+steps.
 
 ## Repository audit
 

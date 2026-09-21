@@ -15,7 +15,12 @@ authors:
   - family-names: Murshed
     given-names: M. G. S.
 repository-code: "https://github.com/bibeshpyakurel/SLAPBench"
+url: "https://github.com/bibeshpyakurel/SLAPBench"
+type: software
 license: MIT
+# `doi:` at this level identifies the archived *software*. Add the Zenodo DOI
+# here after the first Zenodo-backed release; see docs/ZENODO.md. The preprint's
+# DOI belongs to `preferred-citation` below, not here.
 keywords:
   - biometrics
   - fingerprint-verification
@@ -31,8 +36,13 @@ preferred-citation:
     - family-names: Murshed
       given-names: M. G. S.
   year: 2026
-  journal: "arXiv preprint"
+  journal: "arXiv"
+  doi: "10.48550/arXiv.2607.15517"
+  url: "https://arxiv.org/abs/2607.15517"
   identifiers:
+    - type: doi
+      value: "10.48550/arXiv.2607.15517"
+      description: "arXiv DOI for the preprint"
     - type: other
       value: "arXiv:2607.15517"
-  url: "https://arxiv.org/abs/2607.15517"
+      description: "arXiv identifier"
