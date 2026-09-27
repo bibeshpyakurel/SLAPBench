@@ -50,9 +50,8 @@ accept 671/676 Precise and 586/592 RidgeBase primary impostors, with 100% valid
 output coverage under the conservative grammar. SD302b accepts 7,571/7,656.
 The saved explicit answers themselves produce these high acceptance rates; the
 letter-search parser does not explain them. The current pipeline provides images
-and language prompts but no conventional minutiae extraction/registration. Whether
-minutiae grounding solves the behavior remains hypothesis H2 (§1 of the supervisor
-instructions), not a conclusion of this audit.
+and language prompts but no conventional minutiae extraction/registration. The
+cause of the model behavior is not established by this audit.
 
 **Hypotheses requiring controlled development experiments:** 448-pixel preprocessing
 may remove local ridge detail; global appearance may dominate; prompting/decision
@@ -92,5 +91,3 @@ python -m unittest discover -s tests -v
 The output directory must not exist. The script verifies source hashes again
 after reading and refuses to overwrite a previous report. The inference parsers
 and original result files were left unchanged to preserve historical provenance.
-Future pilot runs should use the fixed JSON schema and validation proposed in
-`docs/EVALUATION_PROTOCOL_DRAFT.md` (§§6,11), once the run protocol is approved.

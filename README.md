@@ -619,13 +619,8 @@ steps.
 ## Repository audit
 
 See [REPO_MAP.md](REPO_MAP.md) for the inventory and [STATUS.md](STATUS.md)
-for evidence, limitations, and next steps. The full
-[supervisor instructions](docs/Fingerprint_Foundation_Model_Verification_Student_Guide.md)
-are now available; STATUS.md reconciles all §12 deliverables and §16 steps.
-The [response audit](reports/response-audit-20260919/README.md) validates the two
-Qwen3 exports and explains parsing failures. The
-[protocol draft](docs/EVALUATION_PROTOCOL_DRAFT.md) records the proposed controlled
-minutiae experiment and decisions still awaiting review.
+for evidence and limitations. The [response audit](reports/response-audit-20260919/README.md)
+validates the two Qwen3 exports and explains parsing failures.
 Existing summaries are historical snapshots. To generate a new summary without
 replacing one, use `python code/analyze_ridgebase.py --dir results/precise
 --output-dir reports/precise-summary-YYYYMMDD` (on one command line).
