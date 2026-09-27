@@ -18,9 +18,9 @@ practical separation of assets, not a technical access control: someone who
 independently obtains authorized data and weights could run the public code.
 
 The `related_papers/` directory holds third-party full-text copies and stays
-local. The public [`references.bib`](../paper/manuscript/references.bib),
-[`STATUS.md`](../STATUS.md), and protocol draft preserve source citations,
-findings and research direction without redistributing those copies.
+local. The public [`references.bib`](../paper/manuscript/references.bib) and
+[`STATUS.md`](../STATUS.md) preserve source citations and findings without
+redistributing those copies.
 
 ## Local assets and paths
 
@@ -96,9 +96,7 @@ checked for credentials and accidental dataset images before publication.
 SHA-256 checksums and sizes for the seven newly published artifacts are in
 [`artifact-inventory-20260920.csv`](../reports/artifact-inventory-20260920.csv).
 
-The current research status and unresolved protocol decisions are in
-[`STATUS.md`](../STATUS.md) and
-[`EVALUATION_PROTOCOL_DRAFT.md`](EVALUATION_PROTOCOL_DRAFT.md). Existing
+The current research status is in [`STATUS.md`](../STATUS.md). Existing
 Precise/RidgeBase metrics and the post-hoc parser audit have known limits; do
 not treat the old SD302b near-duplicate pairs as independent-capture biometric
 evidence or make unsupported low-FAR claims.

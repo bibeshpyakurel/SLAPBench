@@ -3,13 +3,6 @@
 ## Project context
 - SLAPBench evaluates full four-finger images with prompted VLMs and vision
   embeddings across SD302b, Precise and RidgeBase. See REPO_MAP.md and STATUS.md.
-- The supervisor's full instructions are now preserved verbatim in
-  `docs/Fingerprint_Foundation_Model_Verification_Student_Guide.md` (all 16 sections).
-  Read this source before research changes and cite its numbered sections.
-  Papers remain background. `docs/EVALUATION_PROTOCOL_DRAFT.md` proposes implementation
-  choices; pending decisions are not supervisor approval. Do not rewrite the source.
-- No M1 completion is established: a conventional baseline and controlled single-finger
-  pilot are still missing. Follow §16; no fine-tuning before results/split review.
 - The approved scope is documentation, offline validation and summary tooling.
   New experiments, paid calls, fine-tuning and rerunning existing experiments
   require a separate task authorization. Preserve original scores and raw responses;
