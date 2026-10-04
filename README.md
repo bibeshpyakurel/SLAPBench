@@ -34,7 +34,14 @@ earlier public release (flat `results/<model>/` layout) is preserved at tag
 [`v0.1.0`](https://github.com/bibeshpyakurel/SLAPBench/tree/v0.1.0); its SD302b
 files are byte-identical to those under `results/sd302b/`.
 
-Benchmarking multimodal large language models on four-finger SLAP fingerprint verification using the NIST Special Database 302b dataset.
+**Current research direction (2026-10-04): Precise.** The professor selected
+Precise for the next fingerprint-matching study. Preparation is limited to
+documentation and offline validation while the task, architecture, subject split
+and evaluation protocol are clarified. See the
+[Precise preparation note](docs/notes/precise_preparation_20261004.md) and
+[aggregate inventory](reports/precise-readiness-20261004/README.md).
+SD302b and RidgeBase materials below document earlier work and remain available
+for reproducibility; they are not the datasets selected for the next study.
 
 ---
 
@@ -48,7 +55,7 @@ No benchmark existed for this before. The closest prior work (FPBench) tested LL
 
 ---
 
-## v2 — The RidgeBase Extension (in progress)
+## v2 — The RidgeBase Extension (historical)
 
 The first version of this benchmark was built entirely on SD302b, where each
 finger position has only **one** capture, so a mated pair could only be formed
@@ -81,8 +88,9 @@ structure.
 
 ```
 datasets/            # not committed — see download notes below
-  sd302b/            #   NIST SD302b (contact livescan slap)
-  ridgebase/         #   RidgeBase Task2 (contactless four-finger)
+  Precise/           #   current research data; task/protocol pending
+  sd302b/            #   historical NIST SD302b (contact livescan slap)
+  ridgebase/         #   historical RidgeBase Task2 (contactless four-finger)
 code/                # inference + pair-construction + evaluation
   paper/             #   paper-only analyses and figure builders
 results/

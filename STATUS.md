@@ -221,3 +221,47 @@ references to them; their findings about the existing benchmark are unchanged. T
 removed files remain in Git history at `54bf2f8`. The SLAPBench benchmark code,
 results, paper and the earlier four-finger plan (`docs/notes/SlapBench_Plan.txt`)
 are retained. No experiment, model call or result change was involved.
+
+## 2026-10-04 — Precise direction and offline preparation
+
+The user supplied updated professor feedback choosing Precise for the next
+study and requested background repository preparation while research decisions
+are discussed. README, AGENTS.md, REPO_MAP.md and setup documentation now
+identify Precise as the current direction. SD302b/RidgeBase datasets, code,
+manifests, original scores and paper materials remain at their existing paths.
+No historical claim or result was rewritten.
+
+Synchronizing clean `dev` fast-forwarded from `cd61246` to `97ad07b`, including
+the 2026-09-27 removal of the previous proposed guide/protocol. That cleanup is
+preserved. A new dated note, `docs/notes/precise_preparation_20261004.md`, records
+the confirmed dataset decision, questions for the professor/collaborator and
+preparation that can proceed without fixing an architecture. The earlier guide
+was read before synchronization; its §§4,8,9,11,16 inform the discussion, with
+its historical location recorded in the note. No fine-tuning approval or
+completed controlled baseline milestone is established by the new feedback.
+
+New read-only tooling, `code/audit_precise_dataset.py`, inventories filename
+labels and SHA-256 byte duplicates without model/image-decoding dependencies.
+The aggregate report at `reports/precise-readiness-20261004/inventory.json`
+contains no subject identifiers, filenames, per-image hashes or absolute paths.
+It observes 7,358 JPEGs, 338 filename-labeled subjects, 4,907 four-finger slap
+files (2,452 right / 2,455 left), and 2,451 thumb files. All 338 subjects have
+both hands; all 676 slap subject/hand groups have multiple distinct byte
+contents. No exact byte duplicates were found. Nine files use three filename
+tokens; 7,349 use four. Middle tokens are not assumed to denote sessions.
+Byte differences do not establish independent captures or prevent decoded-pixel
+or near duplicates. Per-finger labels, acquisition/session metadata, image
+resolution/quality and prior training/evaluation exposure remain unverified.
+
+No image movement, segmentation, pair generation, split selection, NBIS build,
+model download, GPU job, paid call or fine-tuning was performed. NBIS tools were
+not found on PATH; VeriFinger access and the reported 95% result still need
+protocol artifacts. Preparation does not imply authorization to run experiments.
+
+Validation: all 17 repository unit tests pass, including four new inventory
+contracts for aggregate privacy, byte-duplicate/label conflicts, preserving
+existing outputs and redacting source paths on read failures. Correctness lint,
+changed-Python syntax and whitespace checks pass. All 15 legacy metric files
+reproduce; results-table regeneration in a temporary directory is byte-identical
+to the historical table. Those checks do not validate new model performance or
+resolve acquisition provenance. No historical result file was regenerated in place.

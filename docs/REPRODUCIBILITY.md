@@ -61,6 +61,31 @@ runs may not have all of this provenance.
 
 ## Practical setup
 
+### Current Precise preparation (2026-10-04)
+
+The next study uses `datasets/Precise/`. SD302b and RidgeBase assets and commands
+remain available for reproducing historical work. Do not move or delete those
+assets to change the research focus; existing manifests depend on their paths.
+Precise source/acquisition documentation, session meanings, image resolution,
+data terms and the collaborator's training/evaluation subjects still need to be
+established before freezing a protocol. See the
+[preparation note](notes/precise_preparation_20261004.md).
+
+The aggregate inventory needs only Python's standard library:
+
+```bash
+python3 code/audit_precise_dataset.py --root datasets/Precise
+# To retain another audit, choose a new dated path; existing reports are refused:
+# python3 code/audit_precise_dataset.py --root datasets/Precise --output reports/precise-readiness-YYYYMMDD/inventory.json
+```
+
+This reads filenames and complete file bytes, without image decoding, GPU work,
+network requests or dataset writes. It reports byte duplicates and aggregate
+subject/hand coverage, not capture independence or single-finger labels.
+Subject identifiers, source filenames, paths and per-image hashes are omitted.
+
+### Historical full experiment environment
+
 ```bash
 git switch dev
 git config core.hooksPath .githooks

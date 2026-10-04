@@ -1,0 +1,89 @@
+{
+  "exact_byte_duplicates": {
+    "content_groups_spanning_position_labels": 0,
+    "content_groups_spanning_subject_labels": 0,
+    "duplicate_content_groups": 0,
+    "redundant_files": 0,
+    "unique_contents": 7358
+  },
+  "filename_token_count_histogram": {
+    "3": 9,
+    "4": 7349
+  },
+  "four_finger_slap_images": 4907,
+  "four_finger_slap_subjects": 338,
+  "jpeg_bytes": 5843734089,
+  "jpeg_images": 7358,
+  "limitations": [
+    "Different bytes do not prove independent impressions; decoded-pixel and near-duplicate checks remain pending.",
+    "Intermediate filename tokens are not interpreted as sessions, sensors or capture IDs.",
+    "Hand labels do not establish segmented single-finger labels.",
+    "Resolution, image readability/quality, data rights and SDK access are not validated.",
+    "No subject split, pair manifest, model evaluation or training is created."
+  ],
+  "methods": {
+    "duplicates": "SHA-256 of complete file bytes",
+    "image_decoding": "Not performed",
+    "labels": "First/last filename tokens; three or four nonempty tokens"
+  },
+  "other_top_level_files": 0,
+  "positions": {
+    "13": {
+      "files_per_group_histogram": {
+        "2": 1,
+        "4": 1,
+        "5": 1,
+        "6": 233,
+        "9": 1,
+        "10": 97,
+        "16": 4
+      },
+      "groups_with_multiple_distinct_byte_contents": 338,
+      "groups_with_multiple_files": 338,
+      "images": 2452,
+      "meaning_from_existing_pair_builder": "right_four_finger_slap",
+      "subject_position_groups": 338,
+      "subjects": 338
+    },
+    "14": {
+      "files_per_group_histogram": {
+        "2": 1,
+        "4": 1,
+        "5": 1,
+        "6": 232,
+        "7": 1,
+        "10": 97,
+        "11": 1,
+        "16": 4
+      },
+      "groups_with_multiple_distinct_byte_contents": 338,
+      "groups_with_multiple_files": 338,
+      "images": 2455,
+      "meaning_from_existing_pair_builder": "left_four_finger_slap",
+      "subject_position_groups": 338,
+      "subjects": 338
+    },
+    "15": {
+      "files_per_group_histogram": {
+        "2": 1,
+        "4": 1,
+        "5": 3,
+        "6": 231,
+        "10": 98,
+        "16": 4
+      },
+      "groups_with_multiple_distinct_byte_contents": 338,
+      "groups_with_multiple_files": 338,
+      "images": 2451,
+      "meaning_from_existing_pair_builder": "thumbs",
+      "subject_position_groups": 338,
+      "subjects": 338
+    }
+  },
+  "schema_version": 1,
+  "scope": "Top-level Precise JPEG files; aggregate counts only",
+  "slap_subjects_with_both_hands": 338,
+  "subjects_with_recognized_labels": 338,
+  "uninspected_subdirectories": 0,
+  "unrecognized_filename_count": 0
+}

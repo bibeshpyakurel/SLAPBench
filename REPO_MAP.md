@@ -3,6 +3,13 @@
 Inventory date: 2026-09-19. This describes observed files. See STATUS.md for
 findings and limitations.
 
+Current direction, updated 2026-10-04: prepare the next study on Precise only.
+SD302b and RidgeBase entries document retained historical assets. The new
+aggregate inventory and pending decisions are in
+`reports/precise-readiness-20261004/` and
+`docs/notes/precise_preparation_20261004.md`; no new experiment is approved by
+this inventory.
+
 ## Layout and entry points
 
 | Location | Observed purpose |
@@ -11,6 +18,7 @@ findings and limitations.
 | `code/archive_non_slap.py` | Moves non-SLAP images; not run in this audit |
 | `code/ridgebase_pairs.py`, `code/ridgebase_pairs_full.py` | RidgeBase pair construction; full variant supports Train/Test and device categories |
 | `code/precise_pairs.py` | Precise genuine, primary-impostor and diagnostic pair construction |
+| `code/audit_precise_dataset.py` | Read-only Precise filename/byte-duplicate inventory; aggregate output without identifiers |
 | `code/run_verification.py` | Model loaders, prompts, response parsing, SD302b inference and metrics |
 | `code/run_ridgebase_prompted.py` | Manifest-driven prompted inference, also used for Precise |
 | `code/embed_verify.py` | Vision-encoder embedding comparisons saved as cosine scores |
@@ -71,6 +79,7 @@ Dockerfile, conda environment definition or Makefile was found. Dependency range
 are not a complete record of versions used for historical runs.
 
 - `README.md`: benchmark explanation, historical results and reproduction notes.
+- `docs/notes/precise_preparation_20261004.md`: current Precise direction, background preparation and decisions pending with the professor/collaborator.
 - `docs/notes/project_guide.md`: earlier workflow and metrics guidance.
 - `docs/notes/paper_metrics_tracker.md`, `docs/notes/SlapBench_Plan.txt`, `docs/notes/filter_waterfall.txt`: historical planning/metric notes.
 - `docs/notes/prompt_templates.txt`: prompt reference; executable prompts also live in code.

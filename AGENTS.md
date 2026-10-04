@@ -3,6 +3,15 @@
 ## Project context
 - SLAPBench evaluates full four-finger images with prompted VLMs and vision
   embeddings across SD302b, Precise and RidgeBase. See REPO_MAP.md and STATUS.md.
+- The current research direction uses Precise only, following the professor's
+  feedback supplied on 2026-10-04. SD302b and RidgeBase code, data paths and results
+  remain historical reproducibility assets; do not delete or move them merely to
+  change research focus. See `docs/notes/precise_preparation_20261004.md` for the
+  confirmed direction and pending task, architecture and protocol decisions.
+- Prepare documentation and read-only inventories now; do not create a training
+  split, regenerate pairs, segment images or train a model before the applicable
+  decisions and task authorization. No controlled first milestone is established;
+  retain results/split review before fine-tuning unless the supervisor revises it.
 - The approved scope is documentation, offline validation and summary tooling.
   New experiments, paid calls, fine-tuning and rerunning existing experiments
   require a separate task authorization. Preserve original scores and raw responses;
