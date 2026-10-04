@@ -62,6 +62,65 @@ runs may not have all of this provenance.
 
 ## Practical setup
 
+### October 2026 local model additions
+
+On 2026-10-04 the user separately authorized downloading and setting up these
+three models. This authorizes setup, not a fingerprint experiment or training.
+The sources and immutable revisions are in `code/model_registry.py`; complete
+file sizes and SHA-256 digests are in
+[`snapshots.json`](../reports/model-setup-20261004/snapshots.json).
+
+| Runner key | Official repository | Directory | Environment |
+| --- | --- | --- | --- |
+| `qwen35` | `Qwen/Qwen3.5-9B` | `qwen35-9b/` | Separate Transformers 5 environment (`.venv/`) |
+| `gemma4` | `google/gemma-4-12B-it` | `gemma4-12b-it/` | Separate Transformers 5 environment (`.venv/`) |
+| `internvl35` | `OpenGVLab/InternVL3_5-8B` | `internvl35-8b/` | Historical Transformers 4 environment (`venv/`, observed 4.57.6) |
+
+The workstation stores these snapshots at
+`/home/bibesh/.local/share/slapbench/models/`. The historical `models` symlink is
+preserved. `.cache/local-model-storage.json` stores the new models' machine-local
+directory; `SLAPBENCH_MODELS_DIR` takes precedence. The config, environments and
+weights are ignored and must not be published. Historical model paths and the
+default `code/setup_models.py` download set are unchanged.
+
+For Qwen and Gemma, create a separate environment rather than upgrading the
+environment used by earlier experiments:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-local-models.txt
+.venv/bin/python code/setup_next_models.py --download --verify \
+    --models-dir "$HOME/.local/share/slapbench/models" --save-location
+# No weights loaded, no inference, only synthetic images/configuration:
+.venv/bin/python code/check_next_models.py --models qwen35 gemma4
+```
+
+Use the Transformers 4 environment for the original InternVL checkpoint's
+custom model code. A fresh historical environment is installed from
+`requirements.txt`; the setup check recorded here used Transformers 4.57.6.
+
+```bash
+venv/bin/python code/check_next_models.py --models internvl35
+```
+
+All three keys are registered in `run_verification.py` and in the manifest-driven
+`run_ridgebase_prompted.py` runner used for Precise. The new loaders require the
+downloaded local directories and working CUDA, and configure 4-bit NF4 loading.
+They do not fall back to downloading another checkpoint during inference.
+InternVL uses the original checkpoint's locally downloaded Python code
+(`trust_remote_code=True`), with FlashAttention disabled; its revision and code
+digests are recorded alongside the weights. Qwen and Gemma use native model
+classes and templates with thinking disabled. The image adapters preserve the
+historical 448px preprocessing; this is an implementation choice to review
+alongside the new protocol, not evidence that it retains sufficient ridge detail.
+
+The workstation currently has no NVIDIA device nodes and `nvidia-smi` cannot
+communicate with its driver. Therefore GPU weight loading, generation, runtime
+memory use and fingerprint performance remain unverified. Restore CUDA access
+before attempting inference. Existing parsers also need the previously required
+review before a formal run; no pair generation, segmentation, fine-tuning or
+fingerprint experiment was performed during setup.
+
 ### Current Precise preparation (2026-10-04)
 
 See [WORKSPACE_LAYOUT.md](WORKSPACE_LAYOUT.md) for the prepared local folders,

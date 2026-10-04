@@ -249,6 +249,12 @@ The pairs are fixed with `seed=42` and saved to `results/sd302b/task8_pairs.csv`
 
 ## Models
 
+The separately authorized October 2026 additions are **Qwen3.5-9B** (`qwen35`),
+**Gemma 4 12B IT** (`gemma4`), and **InternVL3.5-8B** (`internvl35`). They have
+pinned downloads and separate setup environments; they do not have benchmark
+results yet. See [local setup](docs/REPRODUCIBILITY.md#october-2026-local-model-additions)
+and `code/setup_next_models.py`. Historical models and results below are retained.
+
 ### InternVL3-8B-Instruct
 - Source: `OpenGVLab/InternVL3-8B`
 - Local path: `models/internvl3-8b/`

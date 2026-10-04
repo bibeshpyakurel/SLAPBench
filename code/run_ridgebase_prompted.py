@@ -27,6 +27,7 @@ import pandas as pd
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import run_verification as rv  # noqa: E402
+from model_registry import ADDITIONAL_MODELS  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 RB_RESULTS = PROJECT_ROOT / "results" / "ridgebase"
@@ -38,6 +39,7 @@ HF_REPO = {
     "gemma3":    "google/gemma-3-12b-it",
     "pixtral":   "unsloth/Pixtral-12B-2409-bnb-4bit",
 }
+HF_REPO.update({key: repo for key, (repo, _, _) in ADDITIONAL_MODELS.items()})
 
 
 def out_columns(score_mode):
@@ -133,6 +135,8 @@ def main():
         rv.MODELS["openai"]["api_model"] = a.openai_model
         rv.MODELS["openai"]["display"] = a.openai_model
     # Local open-source: models/ symlink may be unmounted -> HF cache fallback.
+    elif a.model in ADDITIONAL_MODELS and not os.path.isdir(rv.MODELS[a.model]["hf_id"]):
+        raise FileNotFoundError("Download the pinned snapshot with code/setup_next_models.py first.")
     elif not os.path.isdir(rv.MODELS[a.model]["hf_id"]):
         rv.MODELS[a.model]["hf_id"] = HF_REPO[a.model]
 

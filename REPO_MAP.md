@@ -29,6 +29,7 @@ result paths are unchanged; the new folders do not contain experiment artifacts.
 | `code/embed_verify.py` | Vision-encoder embedding comparisons saved as cosine scores |
 | `code/test_paid_models.py`, `code/count_tokens_check.py` | Hosted-model preflight and token checks; may call paid services |
 | `code/setup_models.py` | Checks/downloads model weights |
+| `code/setup_next_models.py`, `code/check_next_models.py`, `code/local_model_backends.py` | Pinned October 2026 model downloads/checksums, offline synthetic setup checks, and local-only runner adapters |
 | `code/resume_precise_pixtral.py` | Repairs an interrupted CSV and resumes inference; not an audit command |
 | `code/export_precise_qwen3_scores.py` | Joins scores to manifests and writes two 676-line exports |
 | `code/analyze_ridgebase.py` | Summarizes saved RidgeBase or Precise scores; supports separate output directories |

@@ -50,6 +50,7 @@ if TYPE_CHECKING:
 
 import pandas as pd
 from model_registry import MODELS_DIR, PIXTRAL_ID
+from local_model_backends import MODEL_CONFIGS, load_local_model, prepare_image_pair
 
 # Load API keys from .env if present
 try:
@@ -117,6 +118,8 @@ MODELS = {
         "api_model": "claude-sonnet-4-6",   # overwritten at runtime by --anthropic-model
     },
 }
+
+MODELS.update(MODEL_CONFIGS)
 
 # ── Prompts ────────────────────────────────────────────────────────────────────
 SYSTEM_PROMPT = "You are an expert fingerprint examiner."
@@ -320,6 +323,9 @@ def load_model(model_key: str):
     """
     cfg     = MODELS[model_key]
     backend = cfg["backend"]
+
+    if model_key in MODEL_CONFIGS:
+        return load_local_model(model_key, cfg)
 
     if backend not in ("openai", "anthropic"):
         import torch
@@ -823,7 +829,9 @@ def call_model(model, proc_or_tok, backend: str,
                prompt_text: str) -> tuple[str, float]:
     """Unified inference call. Returns (raw_response, latency_seconds)."""
     t0 = time.perf_counter()
-    if backend == "internvl3":
+    if backend in ("qwen35", "gemma4"):
+        raw = _infer_modern_local(model, proc_or_tok, img1, img2, prompt_text)
+    elif backend in ("internvl3", "internvl35"):
         raw = _infer_internvl3(model, proc_or_tok, img1, img2, prompt_text)
     elif backend == "qwen25vl":
         raw = _infer_qwen25vl(model, proc_or_tok, img1, img2, prompt_text)
@@ -840,6 +848,20 @@ def call_model(model, proc_or_tok, backend: str,
     else:
         raise ValueError(f"Unknown backend: {backend}")
     return raw, time.perf_counter() - t0
+
+
+def _infer_modern_local(model, processor, img1_path, img2_path, prompt_text):
+    """Preserve historical 448px preprocessing; new experiments need protocol review."""
+    import torch
+
+    inputs = prepare_image_pair(
+        processor, load_pil(img1_path, size=448), load_pil(img2_path, size=448),
+        prompt_text, SYSTEM_PROMPT,
+    ).to(model.device)
+    input_length = inputs["input_ids"].shape[-1]
+    with torch.inference_mode():
+        output = model.generate(**inputs, max_new_tokens=128, do_sample=False, use_cache=True)
+    return processor.decode(output[0][input_length:], skip_special_tokens=True).strip()
 
 
 def parse_answer(raw: str) -> str:

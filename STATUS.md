@@ -304,3 +304,36 @@ raster images were checked by path and all remain under `paper/`; this is not
 a new image-content or data-rights audit. An unrelated concurrent edit to
 `code/model_registry.py` appeared during verification and was left untouched and
 excluded from this task's staging.
+
+## 2026-10-04 — authorized local-model downloads and setup
+
+The user explicitly authorized downloading Qwen3.5-9B, Gemma 4 12B IT and
+InternVL3.5-8B and preparing them for this project. All three official snapshots
+were downloaded at pinned revisions to
+`/home/bibesh/.local/share/slapbench/models/`: 60,353,970,909 bytes across 49 files.
+Every snapshot file passed remote-metadata size and digest verification. Model
+weights and machine-local configuration remain excluded from Git. The existing
+external-drive `models` symlink and historical environment are preserved.
+
+Evidence: `reports/model-setup-20261004/{snapshots,preflight,environment}.json`.
+The new setup utility selects only the authorized additions, verifies immutable
+snapshot digests and refuses to overwrite reports. Separate local storage is
+recorded in an ignored config; the old default download set remains unchanged.
+The runners now recognize `qwen35`, `gemma4` and `internvl35` through local-only
+4-bit loaders. Qwen/Gemma use a separate Transformers 5.18.0 environment;
+InternVL's original custom model code was inspected and checked with 4.57.6.
+
+Offline preflight loaded configurations/tokenizers and constructed all three
+architectures on the meta device without checkpoint weights. Qwen and Gemma
+accepted two synthetic 448px images through their native processors. These
+checks establish setup compatibility, not model predictions or fingerprint
+performance. NVIDIA device nodes are absent and CUDA is unavailable, so GPU
+weight loading, generation, memory headroom and runtime quantization remain
+unverified. No driver changes or fingerprint experiments were performed.
+
+Validation: all 26 offline unit tests pass, correctness lint and Python syntax
+checks pass, dependency checks pass for the new environment, and all 15
+historical metric files still reproduce. The results table regenerates. No
+original results, manifests, datasets or paper sources were changed. Formal
+experiments still require the pending protocol/parser review and separate run
+authorization.

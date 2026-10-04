@@ -1,0 +1,89 @@
+[
+  {
+    "model_class": "InternVLChatModel",
+    "text_tokens": 6,
+    "image_tokens_per_patch": 256,
+    "key": "internvl35",
+    "transformers": "4.57.6",
+    "torch": "2.6.0+cu124",
+    "cuda_available": false,
+    "parameters": 8528318464,
+    "parameter_devices": [
+      "meta"
+    ],
+    "weights_loaded": false,
+    "inference_run": false
+  },
+  {
+    "model_class": "Qwen3_5ForConditionalGeneration",
+    "synthetic_input_shapes": {
+      "input_ids": [
+        1,
+        425
+      ],
+      "attention_mask": [
+        1,
+        425
+      ],
+      "mm_token_type_ids": [
+        1,
+        425
+      ],
+      "pixel_values": [
+        1568,
+        1536
+      ],
+      "image_grid_thw": [
+        2,
+        3
+      ]
+    },
+    "key": "qwen35",
+    "transformers": "5.18.0",
+    "torch": "2.6.0+cu124",
+    "cuda_available": false,
+    "parameters": 9409813744,
+    "parameter_devices": [
+      "meta"
+    ],
+    "weights_loaded": false,
+    "inference_run": false
+  },
+  {
+    "model_class": "Gemma4UnifiedForConditionalGeneration",
+    "synthetic_input_shapes": {
+      "input_ids": [
+        1,
+        547
+      ],
+      "attention_mask": [
+        1,
+        547
+      ],
+      "mm_token_type_ids": [
+        1,
+        547
+      ],
+      "pixel_values": [
+        2,
+        280,
+        6912
+      ],
+      "image_position_ids": [
+        2,
+        280,
+        2
+      ]
+    },
+    "key": "gemma4",
+    "transformers": "5.18.0",
+    "torch": "2.6.0+cu124",
+    "cuda_available": false,
+    "parameters": 12966363136,
+    "parameter_devices": [
+      "meta"
+    ],
+    "weights_loaded": false,
+    "inference_run": false
+  }
+]
