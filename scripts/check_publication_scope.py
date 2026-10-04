@@ -12,6 +12,8 @@ import sys
 LOCAL_ONLY_ROOTS = {
     "datasets", "dataset", "models", "venv", ".venv", "env",
     ".cache", ".ruff_cache", "related_papers", ".claude",
+    "local", "checkpoints", "runs", "wandb", "mlruns", "lightning_logs",
+    "tensorboard",
 }
 LOCAL_ONLY_SUFFIXES = {
     ".pem", ".key", ".safetensors", ".pt", ".pth", ".ckpt",

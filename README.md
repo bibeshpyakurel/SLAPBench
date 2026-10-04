@@ -40,6 +40,8 @@ documentation and offline validation while the task, architecture, subject split
 and evaluation protocol are clarified. See the
 [Precise preparation note](docs/notes/precise_preparation_20261004.md) and
 [aggregate inventory](reports/precise-readiness-20261004/README.md).
+The [workspace layout](docs/WORKSPACE_LAYOUT.md) describes local preparation and
+future training storage, with reviewed code/reports exported to Git.
 SD302b and RidgeBase materials below document earlier work and remain available
 for reproducibility; they are not the datasets selected for the next study.
 

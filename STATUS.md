@@ -265,3 +265,42 @@ changed-Python syntax and whitespace checks pass. All 15 legacy metric files
 reproduce; results-table regeneration in a temporary directory is byte-identical
 to the historical table. Those checks do not validate new model performance or
 resolve acquisition provenance. No historical result file was regenerated in place.
+
+## 2026-10-04 — Local workspace organization and training-output exclusions
+
+The user clarified that this directory is the primary workspace, future training
+will execute locally, and the public repository should receive only appropriate
+reviewed artifacts. At the user's request, empty preparation directories were
+created under ignored `local/precise/`: `metadata/`, `splits/`, `manifests/`,
+`crops/`, `minutiae/`, `checkpoints/` and `runs/`, plus a local README pointing to
+`docs/WORKSPACE_LAYOUT.md`. No subjects were partitioned and no model, split,
+manifest, crop or training output was generated. The existing runners continue
+using their documented paths; these folders are storage preparation only.
+
+The only relocated file was an ignored historical LaTeX font log:
+`manuscript/missfont.log` to `local/legacy-build/manuscript/missfont.log`.
+SHA-256 equality was checked before/after the rename. The now-empty root
+`manuscript/` directory was removed. Original datasets, weights/symlink, scores,
+manifests, run logs and paper sources were preserved. No duplicate `github/`
+tree was created; `.github/` remains the CI/configuration directory.
+
+`.gitignore` and the index publication guard now exclude `local/` and common
+root-level training-output folders: `checkpoints/`, `runs/`, `wandb/`, `mlruns/`,
+`lightning_logs/` and `tensorboard/`. These exclusions cover small text/config
+files as well as weights, so default training outputs cannot be accidentally
+published through these paths. Existing reviewed textual results and paper
+figures remain publishable under the existing manual review policy. This is
+not a content audit or removal of previously published subject information.
+
+Workspace documentation, README, AGENTS.md, REPO_MAP.md and reproducibility notes
+now record the local folder layout, paths to preserve and reviewed exports to
+dated reports. Tests validate both Git ignore behavior and index rejection of
+private workspace/training paths. All 18 unit tests and correctness lint pass.
+No training, inference, paid call, model download or dataset preparation ran.
+
+The index path/size guard, Git ignore checks, changed-Python syntax and whitespace
+checks pass. All 15 historical metric files still reproduce. Existing tracked
+raster images were checked by path and all remain under `paper/`; this is not
+a new image-content or data-rights audit. An unrelated concurrent edit to
+`code/model_registry.py` appeared during verification and was left untouched and
+excluded from this task's staging.

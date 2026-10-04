@@ -29,6 +29,7 @@ redistributing those copies.
 | SD302b | `datasets/sd302b/` | Authorized source data plus the local metadata/processed images expected by `code/build_master_df.py` and `code/run_verification.py` |
 | RidgeBase | `datasets/ridgebase/Fingerprint_Train_Test_Split/` | Data obtained under its own access terms; pair builder accepts `--root` |
 | Precise | `datasets/Precise/` | Authorized JPEG collection; pair builder accepts `--root` |
+| Private Precise preparation/training artifacts | `local/precise/` | Re-create the empty folders from [WORKSPACE_LAYOUT.md](WORKSPACE_LAYOUT.md); metadata, crops, minutiae, subject splits, checkpoints and raw runs remain local |
 | Local VLM weights | `models/` or `SLAPBENCH_MODELS_DIR` | Download separately using `code/setup_models.py --download` or restore an existing weight directory |
 | Pixtral weights | Hugging Face cache | Separately cache the repository listed below; inference loads it by ID |
 | API credentials | local `.env` or environment variables | Only if running paid API experiments; never commit credentials |
@@ -62,6 +63,10 @@ runs may not have all of this provenance.
 ## Practical setup
 
 ### Current Precise preparation (2026-10-04)
+
+See [WORKSPACE_LAYOUT.md](WORKSPACE_LAYOUT.md) for the prepared local folders,
+historical asset locations and reviewed-publication workflow. This checkout is
+the primary workspace; future authorized training runs locally.
 
 The next study uses `datasets/Precise/`. SD302b and RidgeBase assets and commands
 remain available for reproducing historical work. Do not move or delete those

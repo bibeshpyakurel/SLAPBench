@@ -12,6 +12,11 @@ this inventory.
 
 ## Layout and entry points
 
+See `docs/WORKSPACE_LAYOUT.md` for the current local/public folder layout.
+The ignored `local/precise/` tree is prepared for private metadata, future
+splits/manifests, crops, minutiae, checkpoints and raw runs. Existing data and
+result paths are unchanged; the new folders do not contain experiment artifacts.
+
 | Location | Observed purpose |
 |---|---|
 | `code/build_master_df.py`, `code/build_slap_images_df.py` | SD302b metadata preparation |
@@ -88,6 +93,7 @@ are not a complete record of versions used for historical runs.
 - `paper/eccv2026_template/`: third-party template, styles and documentation.
 - `related_papers/`: excluded third-party reference material; background only.
 - `docs/REPRODUCIBILITY.md`: local assets, public artifact policy and clone setup.
+- `docs/WORKSPACE_LAYOUT.md`: primary local workspace, prepared Precise folders and reviewed exports to Git.
 - `scripts/check_publication_scope.py`: index guard for local-only paths and size.
 - `CITATION.cff`, `LICENSE`, `CHANGELOG.md`, `docs/SECURITY.md`: public-repository metadata.
 - `AGENTS.md`, `docs/CONTRIBUTING.md`, `.githooks/`: dev-only publication rules and safeguards.

@@ -58,6 +58,11 @@
   that publication is incomplete. Never claim a push succeeded without verification.
 
 ## Publication boundaries
+- This checkout is the primary local research workspace. Future authorized
+  training runs locally; put private preparation, crops, minutiae, manifests,
+  checkpoints and raw run outputs under ignored `local/precise/` as described in
+  `docs/WORKSPACE_LAYOUT.md`. Export only explicitly reviewed publishable
+  artifacts. Do not create a duplicate `github/` project tree.
 - Never commit `datasets/`, `dataset/`, `models/`, model weights, downloaded archives,
   virtual environments, caches, credentials (`.env` and variants), private keys,
   or third-party PDFs. Do not force-add ignored files.
