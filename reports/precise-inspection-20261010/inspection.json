@@ -1,0 +1,75 @@
+{
+  "headers": {
+    "dimensions_px": {
+      "1600x1500": 7358
+    },
+    "dpi_metadata": {
+      "missing": 7358
+    },
+    "exif_orientation_tags": {
+      "missing_or_unrecognized": 7358
+    },
+    "jpeg_files": 7358,
+    "modes": {
+      "L": 7358
+    },
+    "opened": 7358,
+    "unreadable": 0
+  },
+  "limitations": [
+    "Header success does not establish full-image readability outside the decoded sample.",
+    "DPI and orientation metadata are not independently verified physical resolution or finger labels.",
+    "Intensity summaries and visual review are descriptive, not validated biometric quality scores.",
+    "Sample duplicate checks do not rule out duplicates elsewhere, near-duplicates or shared parent captures.",
+    "Middle filename tokens are counted but not interpreted as sessions, sensors or capture IDs.",
+    "The inspection sample is not a training/development/test split or a matching pair manifest."
+  ],
+  "middle_token_cardinalities_by_filename_length": {
+    "3": {
+      "1": 4
+    },
+    "4": {
+      "1": 2700,
+      "2": 4615
+    }
+  },
+  "sample": {
+    "decoded": 35,
+    "exact_decoded_grayscale_duplicate_groups": 0,
+    "grayscale_statistics_ranges": {
+      "black_pixel_fraction": {
+        "max": 0.004995,
+        "min": 0.0
+      },
+      "gray_stddev": {
+        "max": 57.421,
+        "min": 18.428
+      },
+      "mean_gray": {
+        "max": 252.35,
+        "min": 233.214
+      },
+      "white_pixel_fraction": {
+        "max": 0.951975,
+        "min": 0.080152
+      }
+    },
+    "images": 35,
+    "position_counts": {
+      "13": 15,
+      "14": 15,
+      "15": 5
+    },
+    "requested_subjects": 6,
+    "seed": 20261010,
+    "selected_subjects_for_main_coverage": 6,
+    "selection": "First and last sorted files per hand for seeded subjects with both hands; up to two thumbs and nine three-token variants; not random image-level sampling",
+    "source_byte_checks_passed": 35,
+    "unreadable": 0
+  },
+  "schema_version": 1,
+  "scope": "Offline header inventory and small visual-inspection sample; no matching experiment",
+  "software": {
+    "pillow": "12.2.0"
+  }
+}

@@ -337,3 +337,49 @@ historical metric files still reproduce. The results table regenerates. No
 original results, manifests, datasets or paper sources were changed. Formal
 experiments still require the pending protocol/parser review and separate run
 authorization.
+
+## 2026-10-10 — four Precise background tasks completed
+
+The user authorized a research question, an educational pipeline explanation,
+a small read-only image inspection and a subject-disjoint protocol sketch after
+sharing Konain's update. The discussion brief is
+`docs/notes/precise_research_brief_20261010.md`; it links the worked-example primer,
+protocol sketch and aggregate report. Model contribution, whole-slap versus
+per-finger processing, split sizes/subjects, capture provenance and first
+experiment remain joint decisions rather than implemented choices.
+
+Konain reports full-slap VeriFinger fusion and per-finger sums. His supplied
+summary shows 2,057/2,100 genuine accepts and 0/2,100 impostor accepts for both
+score types, while his message names 0.1% FAR and the screenshot names 0.01%.
+These are collaborator observations, not independently reproduced results.
+Raw comparisons, threshold selection and subject/image exposure are still
+unverified. The notes distinguish exact-pair exclusion from subject separation
+and explain empirical FAR resolution and the assumptions of zero-error bounds.
+
+New `code/inspect_precise_images.py` inventories all 7,358 JPEG headers and fully
+decodes a deterministic 35-image inspection sample. All headers opened as
+1600×1500 grayscale, with no DPI or recognized EXIF orientation tags. All sample
+images decoded, their before/after source-byte hashes agree, and no exact
+canonical grayscale duplicates occur within that sample. Native acquisition
+PPI, independent impressions, session meanings and dataset-wide decoded/near
+duplicates remain unverified. Visual review of all 35 thumbnails and three
+native-size images records placement, contrast, ridge-continuity and contact-area
+variation without making biometric-quality or identity judgments.
+
+Public aggregates and the method are at `reports/precise-inspection-20261010/`.
+Identifying records, contact sheets, review copies and notes stay under ignored
+`local/precise/metadata/inspection-20261010/`. No source images, existing scores,
+manifests or manuscript assets were changed. No actual subject split, new
+matching pairs, segmentation, minutiae extraction, training or matcher inference
+was performed. README, repository map, workspace layout and reproducibility
+instructions now link the completed preparation.
+
+Validation: all 32 offline unit tests pass, including six synthetic-image tests
+covering source preservation, private output, failure counts, deterministic
+sampling, output boundaries and overwrite refusal. Correctness lint, changed
+Python syntax, whitespace, documentation links, calculations and publication
+content checks pass. The current inspection script reproduces both the saved
+aggregate and serialized private records exactly. All 15 legacy metric files
+still reproduce; the results table regenerates identically in a temporary
+directory. These checks do not validate Konain's unavailable raw scores or
+establish learned-matcher performance.

@@ -121,7 +121,7 @@ before attempting inference. Existing parsers also need the previously required
 review before a formal run; no pair generation, segmentation, fine-tuning or
 fingerprint experiment was performed during setup.
 
-### Current Precise preparation (2026-10-04)
+### Current Precise preparation (updated 2026-10-10)
 
 See [WORKSPACE_LAYOUT.md](WORKSPACE_LAYOUT.md) for the prepared local folders,
 historical asset locations and reviewed-publication workflow. This checkout is
@@ -130,7 +130,7 @@ the primary workspace; future authorized training runs locally.
 The next study uses `datasets/Precise/`. SD302b and RidgeBase assets and commands
 remain available for reproducing historical work. Do not move or delete those
 assets to change the research focus; existing manifests depend on their paths.
-Precise source/acquisition documentation, session meanings, image resolution,
+Precise source/acquisition documentation, session meanings, physical resolution,
 data terms and the collaborator's training/evaluation subjects still need to be
 established before freezing a protocol. See the
 [preparation note](notes/precise_preparation_20261004.md).
@@ -147,6 +147,22 @@ This reads filenames and complete file bytes, without image decoding, GPU work,
 network requests or dataset writes. It reports byte duplicates and aggregate
 subject/hand coverage, not capture independence or single-finger labels.
 Subject identifiers, source filenames, paths and per-image hashes are omitted.
+
+The separate image-inspection utility requires Pillow. Its completed
+[2026-10-10 report](../reports/precise-inspection-20261010/README.md) records
+7,358 headers and 35 fully decoded sample images. Both output directories must
+be new; choose a new date or suffix when reproducing:
+
+```bash
+python3 code/inspect_precise_images.py --output-dir reports/precise-inspection-YYYYMMDD --private-dir local/precise/metadata/inspection-YYYYMMDD
+```
+
+Only aggregate JSON goes to `reports/`. Identifying header/sample records and
+contact sheets stay under ignored `local/`; source images are opened read-only.
+The sample is not a subject split or a matching manifest. Pixel dimensions are
+verified, but actual acquisition PPI and capture independence remain unknown.
+The [research brief](notes/precise_research_brief_20261010.md) links the proposed
+question, pipeline primer and protocol sketch awaiting joint review.
 
 ### Historical full experiment environment
 

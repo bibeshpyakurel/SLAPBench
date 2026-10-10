@@ -24,6 +24,7 @@ result paths are unchanged; the new folders do not contain experiment artifacts.
 | `code/ridgebase_pairs.py`, `code/ridgebase_pairs_full.py` | RidgeBase pair construction; full variant supports Train/Test and device categories |
 | `code/precise_pairs.py` | Precise genuine, primary-impostor and diagnostic pair construction |
 | `code/audit_precise_dataset.py` | Read-only Precise filename/byte-duplicate inventory; aggregate output without identifiers |
+| `code/inspect_precise_images.py` | Read-only headers and sampled decoding; public aggregates, private identifying records and contact sheets |
 | `code/run_verification.py` | Model loaders, prompts, response parsing, SD302b inference and metrics |
 | `code/run_ridgebase_prompted.py` | Manifest-driven prompted inference, also used for Precise |
 | `code/embed_verify.py` | Vision-encoder embedding comparisons saved as cosine scores |
@@ -86,6 +87,8 @@ are not a complete record of versions used for historical runs.
 
 - `README.md`: benchmark explanation, historical results and reproduction notes.
 - `docs/notes/precise_preparation_20261004.md`: current Precise direction, background preparation and decisions pending with the professor/collaborator.
+- `docs/notes/precise_research_brief_20261010.md`: proposed question and links to the educational primer, subject-disjoint protocol sketch and aggregate image inspection.
+- `reports/precise-inspection-20261010/`: all-image header inventory and 35-image sample findings; private review images remain under ignored `local/precise/metadata/`.
 - `docs/notes/project_guide.md`: earlier workflow and metrics guidance.
 - `docs/notes/paper_metrics_tracker.md`, `docs/notes/SlapBench_Plan.txt`, `docs/notes/filter_waterfall.txt`: historical planning/metric notes.
 - `docs/notes/prompt_templates.txt`: prompt reference; executable prompts also live in code.

@@ -81,3 +81,16 @@ compares cosine similarity. It is a historical baseline, not evidence of
 fingerprint-specific metric training. Existing `code/precise_pairs.py` builds
 whole-hand pairs without a subject split. Neither script was run or modified in
 this preparation, and neither fixes the pending research choices.
+
+## Follow-up — 2026-10-10
+
+The user authorized four background tasks after sharing Konain's update. The
+[research brief](precise_research_brief_20261010.md),
+[pipeline primer](fingerprint_matching_primer_20261010.md),
+[local inspection report](../../reports/precise-inspection-20261010/README.md)
+and [protocol sketch](precise_protocol_sketch_20261010.md) complete those tasks.
+Konain confirms full-slap SDK matching with fused and per-finger scores, and
+the first/last filename-token meanings. His reported score summary is recorded
+with the FAR discrepancy and unresolved training/subject exposure. Physical
+PPI and middle-token meanings remain unknown. No subjects were assigned, pairs
+regenerated, images segmented or models trained.
