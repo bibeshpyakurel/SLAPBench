@@ -383,3 +383,50 @@ aggregate and serialized private records exactly. All 15 legacy metric files
 still reproduce; the results table regenerates identically in a temporary
 directory. These checks do not validate Konain's unavailable raw scores or
 establish learned-matcher performance.
+
+## 2026-10-11 — collaborator update and local document discovery
+
+Konain's update confirms VeriFinger-score supervision and says his training
+pair files will be uploaded. The user supplied two Downloads score files and
+then authorized searching documents on this computer. The supplied files and
+matching Desktop copies are byte-identical to the two existing 676-record
+Precise/Qwen3 exports. Six copies were checked against the repository sources;
+all match and remain byte-identical after inspection. These records do not
+identify Konain's reported 2,100 genuine/2,100 impostor VeriFinger population.
+
+Read-only discovery inspected 637 document/archive files under the user home
+and accessible media/mount locations, including 24 PDFs with extractable text,
+two Word documents and two archives. A further 259 log/configuration/backup/
+extensionless candidates yielded 244 readable text files; six credential/history
+and nine binary candidates were excluded. Structure checks reviewed 495 text/data
+files. No reported SDK testing score table, collaborator training pair list or
+adapted fine-tuning script was located in this scope. A local Word copy of the
+student guide was found and left local; it is methodological material, not the
+missing pair/score data. Document instructions were not treated as task commands.
+
+Two media locations were permission-restricted. Runtime environments, caches,
+model/checkpoint trees and program/security state were excluded; symlinks were
+not followed. Other user accounts, unmounted storage, remote shares and image
+OCR were outside this search. The negative result is not proof that files were
+never shared or are absent from all storage. Detailed path/content inventories
+stay under ignored `local/precise/metadata/discovery-20261011/`; only aggregates
+and reviewed findings are exported at
+`reports/precise-collaborator-discovery-20261011/`.
+
+The linked FPBench Qwen3 reference was inspected at revision
+`ed27ae669947bfd157522d537a9f9c77b4bf3189`. It uses LoRA supervised answer-text
+training with a pattern-classification default. It does not establish Konain's
+actual Precise target encoding, split, loss adaptations or threshold procedure.
+The report includes a ready-to-send request for the testing files and training
+pair mappings; no external message was sent. Training/testing overlap and SDK
+metrics cannot yet be audited from the unavailable records. No original data,
+results, manifests or models were changed, and no new experiments were run.
+
+A direct recursive check of `datasets/Precise/`, requested during discovery,
+finds exactly 7,358 JPEGs and no non-image files or subdirectories. Filename
+labels identify 338 subjects and 2,452 right/2,455 left/2,451 thumb slaps. The
+folder contains no SDK scores, subject partitions, pair lists or separate
+acquisition metadata. This confirms image availability without filling the
+collaborator-record gap. Aggregate/private consistency, document-link,
+publication-content and whitespace checks pass; all 15 legacy metric files
+still reproduce. No executable repository code was changed in this task.

@@ -1,0 +1,80 @@
+{
+  "additional_file_candidates": 259,
+  "additional_scan_statuses": {
+    "binary_not_scanned": 9,
+    "credential_or_history_excluded": 6,
+    "text_scanned": 244
+  },
+  "archives": [
+    {
+      "document_members": 0,
+      "member_types": {
+        ".jpeg": 7358
+      },
+      "members": 7358
+    },
+    {
+      "document_members": 2,
+      "member_types": {
+        ".html": 2
+      },
+      "members": 2
+    }
+  ],
+  "date": "2026-10-11",
+  "discovery_outcomes": {
+    "collaborator_adapted_finetuning_script": "not located in searched scope",
+    "collaborator_training_pair_list": "not located in searched scope",
+    "student_guide_word_document": "located; methodological guidance, not a testing/training pair manifest",
+    "verifinger_2100_genuine_2100_impostor_testing_scores": "not located in searched scope"
+  },
+  "document_and_archive_files_inspected": 637,
+  "document_extensions": {
+    ".csv": 126,
+    ".docx": 2,
+    ".html": 28,
+    ".json": 314,
+    ".md": 40,
+    ".pdf": 24,
+    ".py": 42,
+    ".tex": 4,
+    ".txt": 55,
+    ".zip": 2
+  },
+  "limitations": [
+    "A discovery result is not proof that files never existed or were never shared.",
+    "Credential/history locations, environments, caches, model/checkpoint trees and other program/security state were excluded.",
+    "Two media locations were permission-restricted; unmounted storage, other user accounts and remote shares were not searched.",
+    "Symlinks were not followed. Raw fingerprint images and screenshots were not OCRed; all 24 PDFs had extractable text.",
+    "Keyword/schema/population checks aid discovery; no unavailable testing or training records were reconstructed."
+  ],
+  "pdfs_with_extractable_text": 24,
+  "precise_folder_inventory": {
+    "extensions": {
+      ".jpeg": 7358
+    },
+    "filename_position_counts": {
+      "13": 2452,
+      "14": 2455,
+      "15": 2451
+    },
+    "filename_subjects": 338,
+    "files": 7358,
+    "images": 7358,
+    "nested_directories": 0,
+    "non_image_files": 0,
+    "unrecognized_image_labels": 0
+  },
+  "qwen3_export_checks": {
+    "comparisons_per_export": 676,
+    "copies_identical_to_repository_exports": 6,
+    "distinct_exports": 2,
+    "located_copies": 6,
+    "source_byte_checks_passed": 6
+  },
+  "restricted_walk_locations": 2,
+  "scope": "Read-only discovery in the user home and accessible media/mount locations; no matcher or training run",
+  "structured_text_data_files_reviewed": 495,
+  "symlink_files_not_followed": 7,
+  "word_documents_inspected": 2
+}

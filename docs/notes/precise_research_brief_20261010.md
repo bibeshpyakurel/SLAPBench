@@ -66,3 +66,10 @@ Supporting explanations are in the [pipeline primer](fingerprint_matching_primer
 and [protocol sketch](precise_protocol_sketch_20261010.md). Fingerprint-specific
 embeddings have precedent in [DeepPrint](https://arxiv.org/abs/1904.01099);
 that paper motivates this direction without establishing achievable Precise performance.
+
+**Follow-up — 2026-10-11:** Konain confirms VeriFinger-score supervision, but
+the two supplied 676-pair files match our older Qwen3 exports. The
+[local discovery report](../../reports/precise-collaborator-discovery-20261011/README.md)
+records the broader document search, the remaining unavailable testing/training
+records and a focused request for their location. The proposed protocol and
+architecture decisions remain pending.
