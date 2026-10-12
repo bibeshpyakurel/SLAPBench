@@ -471,3 +471,32 @@ independently verified. Raw source hashes remain unchanged. Correctness lint,
 Python syntax, whitespace and publication checks pass; all 15 legacy metric
 files still reproduce. The report documents the audit's limits and private-input
 reproduction requirements.
+
+## 2026-10-11 — proposed learned-matcher first milestone
+
+The user's interpretation and proposed sequence are recorded in
+`docs/notes/precise_first_milestone_proposal_20261011.md`: adapt a vision encoder
+to learn continuous fingerprint similarity on whole four-finger slaps, establish
+subject-disjoint evaluation before execution, then assess minutiae and optional
+matcher explanations. The note distinguishes DeepPrint's domain-informed
+representation from the proposed image-only baseline and SuperGlue's general
+local-feature correspondence from an unvalidated fingerprint adaptation.
+The two earlier DeepPrint links now point to the correct supplied paper.
+
+Dataset interpretation is the immediate collaborator priority: middle filename
+tokens, independently acquired genuine impressions and acquisition/session
+metadata. Training/exposure mappings remain important for protocol eligibility;
+our architecture can be designed independently of the collaborator's script.
+The note links the completed VeriFinger audit, separates four-finger and thumb
+populations and records that a sufficiently sized untouched subject cohort has
+not been established. It supplies explicit professor-review decisions without
+claiming milestone approval or selecting a model, loss, split or threshold.
+README and earlier preparation/protocol/brief notes link the latest proposal.
+
+Validation: documentation links, Markdown fences, saved aggregate figures,
+whitespace and staged publication scope/size/content review pass. Changes are
+documentation only; no executable code, original results, manifests, datasets
+or manuscript assets were modified. No split/pair creation, segmentation,
+minutiae extraction, experiment, training, download or external message occurred.
+Results/split review before fine-tuning and separate task authorization remain
+in effect pending supervisor decisions.

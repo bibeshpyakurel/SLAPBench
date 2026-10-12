@@ -94,3 +94,17 @@ the first/last filename-token meanings. His reported score summary is recorded
 with the FAR discrepancy and unresolved training/subject exposure. Physical
 PPI and middle-token meanings remain unknown. No subjects were assigned, pairs
 regenerated, images segmented or models trained.
+
+## Follow-up — 2026-10-11: first-milestone proposal
+
+The [new proposal](precise_first_milestone_proposal_20261011.md) records the
+user's interpretation: learn continuous similarity through an adapted vision
+encoder, start with whole four-finger slaps under a subject-disjoint protocol,
+then assess minutiae correspondences and optionally matcher explanations.
+The supplied [VeriFinger scores](../../reports/precise-verifinger-audit-20261011/README.md)
+have now been audited. Dataset token meanings, independent captures and session
+information are the priority collaborator questions. Training/exposure records
+remain important for protocol feasibility and reproduction, while our model
+architecture can be designed independently of his script. The professor has
+not yet approved this milestone, model or data protocol; results/split review
+and separate experiment authorization remain required.

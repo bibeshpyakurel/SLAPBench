@@ -2,6 +2,13 @@
 
 2026-10-10. This is a short discussion brief, not approval to train or evaluate.
 
+**Latest proposal — 2026-10-11:** The
+[first-milestone proposal](precise_first_milestone_proposal_20261011.md)
+now proposes whole four-finger slaps for the image-only learned baseline,
+followed by minutiae and an optional explanation layer. It prioritizes dataset
+interpretation from Konain and uses the completed score audit. This refines the
+alternatives below for professor review; it does not record an approved task.
+
 **Proposed question:** Can adapting a pretrained vision encoder for fingerprint
 verification approach VeriFinger performance on previously unseen Precise
 subjects, and does adding structured minutiae improve TAR at the same FAR?
@@ -64,7 +71,7 @@ assignments remain undecided.
 
 Supporting explanations are in the [pipeline primer](fingerprint_matching_primer_20261010.md)
 and [protocol sketch](precise_protocol_sketch_20261010.md). Fingerprint-specific
-embeddings have precedent in [DeepPrint](https://arxiv.org/abs/1904.01099);
+embeddings have precedent in [DeepPrint](https://arxiv.org/abs/1909.09901);
 that paper motivates this direction without establishing achievable Precise performance.
 
 **Follow-up — 2026-10-11:** Konain confirms VeriFinger-score supervision, but

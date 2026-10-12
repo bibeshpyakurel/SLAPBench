@@ -10,7 +10,7 @@ local filters; a vision transformer processes image patches. Either can supply
 an **embedding**, a fixed-length vector representing the print. The useful
 property for verification is that independent impressions of the same finger
 produce similar vectors while impostors are separated. A generic encoder's
-features do not automatically have this property. [DeepPrint](https://arxiv.org/abs/1904.01099)
+features do not automatically have this property. [DeepPrint](https://arxiv.org/abs/1909.09901)
 learns a fingerprint representation using fingerprint domain knowledge; it is
 a fingerprint-specific precedent, not a plug-in performance guarantee.
 

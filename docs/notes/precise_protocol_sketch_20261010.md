@@ -4,6 +4,15 @@
 model/loss, preprocessing parameters, thresholds or experiments are created by
 this document. It completes the planning task while leaving decisions explicit.
 
+**Update — 2026-10-11:** The
+[VeriFinger audit](../../reports/precise-verifinger-audit-20261011/README.md)
+now verifies the supplied testing-score calculations; earlier unavailable-score
+statements below describe the evidence on 2026-10-10. Acquisition independence,
+training exposure and development threshold provenance remain unresolved. The
+[latest milestone proposal](precise_first_milestone_proposal_20261011.md)
+proposes whole four-finger slaps first and prioritizes dataset interpretation.
+All partition and execution decisions remain pending.
+
 ## Evidence available now
 
 The [local inspection report](../../reports/precise-inspection-20261010/README.md)

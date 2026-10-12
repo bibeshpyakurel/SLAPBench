@@ -43,6 +43,9 @@ and evaluation protocol are clarified. See the
 The [2026-10-10 research brief](docs/notes/precise_research_brief_20261010.md)
 links the pipeline primer, proposed evaluation protocol and completed local
 image inspection. Subject assignments and experiment authorization remain pending.
+The [2026-10-11 milestone proposal](docs/notes/precise_first_milestone_proposal_20261011.md)
+proposes an image-only learned matcher on whole four-finger slaps for professor
+review, with dataset interpretation as the immediate collaborator priority.
 The [workspace layout](docs/WORKSPACE_LAYOUT.md) describes local preparation and
 future training storage, with reviewed code/reports exported to Git.
 SD302b and RidgeBase materials below document earlier work and remain available
