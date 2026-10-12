@@ -1,0 +1,534 @@
+{
+  "classes": {
+    "genuine": {
+      "duplicate_unordered_pair_excess": 0,
+      "filename_label_mismatches": 0,
+      "filename_subjects": 328,
+      "fused_range": [
+        0,
+        841
+      ],
+      "missing_local_basenames": 0,
+      "nfing_counts": {
+        "2": 660,
+        "4": 1440
+      },
+      "nfing_unexpected_for_slap_type": 0,
+      "records": 2100,
+      "self_image_pairs": 0,
+      "slap_type_counts": {
+        "13": 749,
+        "14": 691,
+        "15": 660
+      },
+      "sum_range": [
+        1,
+        1925
+      ],
+      "unique_image_basenames": 3183,
+      "unrecognized_filename_pairs": 0
+    },
+    "impostor": {
+      "duplicate_unordered_pair_excess": 0,
+      "filename_label_mismatches": 0,
+      "filename_subjects": 337,
+      "fused_range": [
+        0,
+        47
+      ],
+      "missing_local_basenames": 0,
+      "nfing_counts": {
+        "2": 673,
+        "4": 1427
+      },
+      "nfing_unexpected_for_slap_type": 0,
+      "records": 2100,
+      "self_image_pairs": 0,
+      "slap_type_counts": {
+        "13": 756,
+        "14": 671,
+        "15": 673
+      },
+      "sum_range": [
+        0,
+        78
+      ],
+      "unique_image_basenames": 3178,
+      "unrecognized_filename_pairs": 0
+    }
+  },
+  "combined": {
+    "cross_class_unordered_pair_overlap": 0,
+    "filename_subjects": 337,
+    "shared_images_between_classes": 1492,
+    "unique_image_basenames": 4869
+  },
+  "failure_rates": "Not established: export has scores/nfing but no pre-export failures or SDK status fields",
+  "positions_from_filenames": {
+    "13": "right_four_finger_slap",
+    "14": "left_four_finger_slap",
+    "15": "thumbs"
+  },
+  "reference_manifest_overlap": {
+    "genuine": {
+      "reference_unique_primary_pairs": 676,
+      "shared_unordered_basename_pairs": 60
+    },
+    "impostor": {
+      "reference_unique_primary_pairs": 676,
+      "shared_unordered_basename_pairs": 0
+    }
+  },
+  "schema_version": 1,
+  "scope": "Offline audit of collaborator-provided evaluation scores",
+  "score_rule": "Integer score >= threshold; larger scores indicate a match",
+  "slices": {
+    "all_slaps": {
+      "genuines": 2100,
+      "impostors": 2100,
+      "methods": {
+        "per_finger_sum": {
+          "auc": 0.9863077097505669,
+          "eer_linear_interpolation": 0.020476190476190426,
+          "genuine_zero_scores": 0,
+          "impostor_zero_scores": 8,
+          "operating_points": [
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 2057,
+              "genuines": 2100,
+              "impostors": 2100,
+              "tar": 0.9795238095238096,
+              "target_far": 0.0001,
+              "threshold": 79
+            },
+            {
+              "actual_far": 0.0009523809523809524,
+              "allowed_false_accepts": 2,
+              "false_accepts": 2,
+              "genuine_accepts": 2057,
+              "genuines": 2100,
+              "impostors": 2100,
+              "tar": 0.9795238095238096,
+              "target_far": 0.001,
+              "threshold": 72
+            },
+            {
+              "actual_far": 0.01,
+              "allowed_false_accepts": 21,
+              "false_accepts": 21,
+              "genuine_accepts": 2057,
+              "genuines": 2100,
+              "impostors": 2100,
+              "tar": 0.9795238095238096,
+              "target_far": 0.01,
+              "threshold": 57
+            }
+          ]
+        },
+        "sdk_fused": {
+          "auc": 0.9867684807256236,
+          "eer_linear_interpolation": 0.020476190476190426,
+          "genuine_zero_scores": 6,
+          "impostor_zero_scores": 144,
+          "operating_points": [
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 2057,
+              "genuines": 2100,
+              "impostors": 2100,
+              "tar": 0.9795238095238096,
+              "target_far": 0.0001,
+              "threshold": 48
+            },
+            {
+              "actual_far": 0.0004761904761904762,
+              "allowed_false_accepts": 2,
+              "false_accepts": 1,
+              "genuine_accepts": 2057,
+              "genuines": 2100,
+              "impostors": 2100,
+              "tar": 0.9795238095238096,
+              "target_far": 0.001,
+              "threshold": 39
+            },
+            {
+              "actual_far": 0.009047619047619047,
+              "allowed_false_accepts": 21,
+              "false_accepts": 19,
+              "genuine_accepts": 2057,
+              "genuines": 2100,
+              "impostors": 2100,
+              "tar": 0.9795238095238096,
+              "target_far": 0.01,
+              "threshold": 30
+            }
+          ]
+        }
+      }
+    },
+    "four_finger_only": {
+      "genuines": 1440,
+      "impostors": 1427,
+      "methods": {
+        "per_finger_sum": {
+          "auc": 0.9857984407848633,
+          "eer_linear_interpolation": 0.019444444444444486,
+          "genuine_zero_scores": 0,
+          "impostor_zero_scores": 1,
+          "operating_points": [
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 1412,
+              "genuines": 1440,
+              "impostors": 1427,
+              "tar": 0.9805555555555555,
+              "target_far": 0.0001,
+              "threshold": 79
+            },
+            {
+              "actual_far": 0.000700770847932726,
+              "allowed_false_accepts": 1,
+              "false_accepts": 1,
+              "genuine_accepts": 1412,
+              "genuines": 1440,
+              "impostors": 1427,
+              "tar": 0.9805555555555555,
+              "target_far": 0.001,
+              "threshold": 76
+            },
+            {
+              "actual_far": 0.009810791871058164,
+              "allowed_false_accepts": 14,
+              "false_accepts": 14,
+              "genuine_accepts": 1412,
+              "genuines": 1440,
+              "impostors": 1427,
+              "tar": 0.9805555555555555,
+              "target_far": 0.01,
+              "threshold": 60
+            }
+          ]
+        },
+        "sdk_fused": {
+          "auc": 0.9864724460795764,
+          "eer_linear_interpolation": 0.019444444444444486,
+          "genuine_zero_scores": 5,
+          "impostor_zero_scores": 104,
+          "operating_points": [
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 1412,
+              "genuines": 1440,
+              "impostors": 1427,
+              "tar": 0.9805555555555555,
+              "target_far": 0.0001,
+              "threshold": 48
+            },
+            {
+              "actual_far": 0.000700770847932726,
+              "allowed_false_accepts": 1,
+              "false_accepts": 1,
+              "genuine_accepts": 1412,
+              "genuines": 1440,
+              "impostors": 1427,
+              "tar": 0.9805555555555555,
+              "target_far": 0.001,
+              "threshold": 39
+            },
+            {
+              "actual_far": 0.009110021023125438,
+              "allowed_false_accepts": 14,
+              "false_accepts": 13,
+              "genuine_accepts": 1412,
+              "genuines": 1440,
+              "impostors": 1427,
+              "tar": 0.9805555555555555,
+              "target_far": 0.01,
+              "threshold": 32
+            }
+          ]
+        }
+      }
+    },
+    "left": {
+      "genuines": 691,
+      "impostors": 671,
+      "methods": {
+        "per_finger_sum": {
+          "auc": 0.985466752649026,
+          "eer_linear_interpolation": 0.01881331403762665,
+          "genuine_zero_scores": 0,
+          "impostor_zero_scores": 1,
+          "operating_points": [
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 678,
+              "genuines": 691,
+              "impostors": 671,
+              "tar": 0.9811866859623734,
+              "target_far": 0.0001,
+              "threshold": 79
+            },
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 678,
+              "genuines": 691,
+              "impostors": 671,
+              "tar": 0.9811866859623734,
+              "target_far": 0.001,
+              "threshold": 79
+            },
+            {
+              "actual_far": 0.00894187779433681,
+              "allowed_false_accepts": 6,
+              "false_accepts": 6,
+              "genuine_accepts": 678,
+              "genuines": 691,
+              "impostors": 671,
+              "tar": 0.9811866859623734,
+              "target_far": 0.01,
+              "threshold": 59
+            }
+          ]
+        },
+        "sdk_fused": {
+          "auc": 0.9864254271978881,
+          "eer_linear_interpolation": 0.01881331403762665,
+          "genuine_zero_scores": 4,
+          "impostor_zero_scores": 49,
+          "operating_points": [
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 678,
+              "genuines": 691,
+              "impostors": 671,
+              "tar": 0.9811866859623734,
+              "target_far": 0.0001,
+              "threshold": 48
+            },
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 678,
+              "genuines": 691,
+              "impostors": 671,
+              "tar": 0.9811866859623734,
+              "target_far": 0.001,
+              "threshold": 48
+            },
+            {
+              "actual_far": 0.007451564828614009,
+              "allowed_false_accepts": 6,
+              "false_accepts": 5,
+              "genuine_accepts": 678,
+              "genuines": 691,
+              "impostors": 671,
+              "tar": 0.9811866859623734,
+              "target_far": 0.01,
+              "threshold": 33
+            }
+          ]
+        }
+      }
+    },
+    "right": {
+      "genuines": 749,
+      "impostors": 756,
+      "methods": {
+        "per_finger_sum": {
+          "auc": 0.9860448852438172,
+          "eer_linear_interpolation": 0.020026702269692942,
+          "genuine_zero_scores": 0,
+          "impostor_zero_scores": 0,
+          "operating_points": [
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 734,
+              "genuines": 749,
+              "impostors": 756,
+              "tar": 0.9799732977303071,
+              "target_far": 0.0001,
+              "threshold": 72
+            },
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 734,
+              "genuines": 749,
+              "impostors": 756,
+              "tar": 0.9799732977303071,
+              "target_far": 0.001,
+              "threshold": 72
+            },
+            {
+              "actual_far": 0.009259259259259259,
+              "allowed_false_accepts": 7,
+              "false_accepts": 7,
+              "genuine_accepts": 734,
+              "genuines": 749,
+              "impostors": 756,
+              "tar": 0.9799732977303071,
+              "target_far": 0.01,
+              "threshold": 61
+            }
+          ]
+        },
+        "sdk_fused": {
+          "auc": 0.9864802099448294,
+          "eer_linear_interpolation": 0.020026702269692942,
+          "genuine_zero_scores": 1,
+          "impostor_zero_scores": 55,
+          "operating_points": [
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 734,
+              "genuines": 749,
+              "impostors": 756,
+              "tar": 0.9799732977303071,
+              "target_far": 0.0001,
+              "threshold": 39
+            },
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 734,
+              "genuines": 749,
+              "impostors": 756,
+              "tar": 0.9799732977303071,
+              "target_far": 0.001,
+              "threshold": 39
+            },
+            {
+              "actual_far": 0.009259259259259259,
+              "allowed_false_accepts": 7,
+              "false_accepts": 7,
+              "genuine_accepts": 734,
+              "genuines": 749,
+              "impostors": 756,
+              "tar": 0.9799732977303071,
+              "target_far": 0.01,
+              "threshold": 31
+            }
+          ]
+        }
+      }
+    },
+    "thumbs": {
+      "genuines": 660,
+      "impostors": 673,
+      "methods": {
+        "per_finger_sum": {
+          "auc": 0.9876120041424647,
+          "eer_linear_interpolation": 0.022727272727272707,
+          "genuine_zero_scores": 0,
+          "impostor_zero_scores": 7,
+          "operating_points": [
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 645,
+              "genuines": 660,
+              "impostors": 673,
+              "tar": 0.9772727272727273,
+              "target_far": 0.0001,
+              "threshold": 47
+            },
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 645,
+              "genuines": 660,
+              "impostors": 673,
+              "tar": 0.9772727272727273,
+              "target_far": 0.001,
+              "threshold": 47
+            },
+            {
+              "actual_far": 0.007429420505200594,
+              "allowed_false_accepts": 6,
+              "false_accepts": 5,
+              "genuine_accepts": 645,
+              "genuines": 660,
+              "impostors": 673,
+              "tar": 0.9772727272727273,
+              "target_far": 0.01,
+              "threshold": 39
+            }
+          ]
+        },
+        "sdk_fused": {
+          "auc": 0.9880352559773065,
+          "eer_linear_interpolation": 0.022727272727272707,
+          "genuine_zero_scores": 1,
+          "impostor_zero_scores": 40,
+          "operating_points": [
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 645,
+              "genuines": 660,
+              "impostors": 673,
+              "tar": 0.9772727272727273,
+              "target_far": 0.0001,
+              "threshold": 38
+            },
+            {
+              "actual_far": 0.0,
+              "allowed_false_accepts": 0,
+              "false_accepts": 0,
+              "genuine_accepts": 645,
+              "genuines": 660,
+              "impostors": 673,
+              "tar": 0.9772727272727273,
+              "target_far": 0.001,
+              "threshold": 38
+            },
+            {
+              "actual_far": 0.007429420505200594,
+              "allowed_false_accepts": 6,
+              "false_accepts": 5,
+              "genuine_accepts": 645,
+              "genuines": 660,
+              "impostors": 673,
+              "tar": 0.9772727272727273,
+              "target_far": 0.01,
+              "threshold": 27
+            }
+          ]
+        }
+      }
+    }
+  },
+  "source_byte_checks_passed": 2,
+  "source_structure": {
+    "all_rows_parsed": true,
+    "all_sums_and_nfing_counts_consistent": true
+  },
+  "threshold_provenance": "Descriptive thresholds selected on these supplied evaluation impostors; not development-fixed",
+  "training_overlap": "Not assessed: training pairs and exposure records not supplied"
+}

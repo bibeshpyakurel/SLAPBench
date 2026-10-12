@@ -73,3 +73,15 @@ the two supplied 676-pair files match our older Qwen3 exports. The
 records the broader document search, the remaining unavailable testing/training
 records and a focused request for their location. The proposed protocol and
 architecture decisions remain pending.
+
+**Later intake — 2026-10-11:** The user supplied two Drive links containing
+the reported 2,100+2,100 VeriFinger testing records. The
+[score audit](../../reports/precise-verifinger-audit-20261011/README.md) now
+reproduces 97.9524% TAR and zero observed false accepts at the screenshot
+thresholds, and reports both requested FAR targets. These lists include thumbs;
+four-finger-only counts and metrics are reported separately. All local image
+basenames exist, but only 60 genuine and zero impostor pairs overlap our prior
+primary VLM evaluation. Training overlap, acquisition independence, SDK settings
+and development-fixed thresholds remain unverified. The training mappings and
+adapted script are still needed; no experiment or protocol decision is implied
+by receipt of the testing files.

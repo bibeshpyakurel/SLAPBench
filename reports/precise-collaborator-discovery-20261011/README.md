@@ -106,3 +106,13 @@ ignored `local/precise/metadata/discovery-20261011/`. The existing
 [protocol sketch](../../docs/notes/precise_protocol_sketch_20261010.md) remains
 proposed and the [research brief](../../docs/notes/precise_research_brief_20261010.md)
 remains the discussion entry point.
+
+## Subsequent intake — 2026-10-11
+
+After this local search, the user supplied two Google Drive links containing
+the missing 2,100 genuine and 2,100 impostor VeriFinger testing scores with
+pair mappings, fused scores and per-finger sums. The
+[separate score audit](../precise-verifinger-audit-20261011/README.md) reproduces
+the screenshot and supersedes the testing-file request above. The original
+discovery record remains a statement about the earlier local search. Training
+pair mappings and the adapted fine-tuning implementation are still unavailable.

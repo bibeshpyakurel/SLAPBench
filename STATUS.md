@@ -430,3 +430,44 @@ acquisition metadata. This confirms image availability without filling the
 collaborator-record gap. Aggregate/private consistency, document-link,
 publication-content and whitespace checks pass; all 15 legacy metric files
 still reproduce. No executable repository code was changed in this task.
+
+## 2026-10-11 — Drive intake and VeriFinger testing-score audit
+
+The user's two Drive links provide the reported 2,100 genuine and 2,100
+impostor testing comparisons, including fused scores, per-finger scores, sums
+and finger counts. Original downloads, metadata, hashes and identifying audit
+records remain under ignored `local/precise/metadata/verifinger-intake-20261011/`.
+The new standard-library utility `code/audit_verifinger_scores.py` exports only
+reviewed aggregates and discrete ROC/DET coordinates to
+`reports/precise-verifinger-audit-20261011/` and refuses existing output paths.
+
+All 4,200 rows parse with consistent sums/counts and filename-derived classes.
+All referenced basenames exist locally; no self-pairs, duplicate unordered pairs
+or cross-class pair overlaps were found. The screenshot is reproduced for both
+methods: 2,057/2,100 genuine accepts (97.9524% TAR), zero impostor accepts,
+thresholds 48 fused and 79 summed. Those thresholds are evaluation-selected
+descriptive points. At target 0.1% FAR, thresholds 39/72 yield the same genuine
+accept count and 1/2 impostor accepts respectively. Neither observation
+establishes prospective low-FAR performance.
+
+Testing covers 337 filename subjects and 4,869 image basenames, and mixes
+four-finger and two-thumb slaps. The four-finger slice contains 1,440 genuine
+and 1,427 impostor comparisons; both methods accept 1,412 genuine comparisons
+(98.0556%) at zero observed false accepts using slice-specific thresholds.
+Only 60 genuine and zero impostor pairs overlap our existing primary 676+676
+evaluation, so prior VLM scores do not support a full common-pair comparison.
+The report includes a revised collaborator-request draft; no message was sent.
+
+Training pair mappings, adapted targets/script, SDK settings, acquisition
+independence and threshold-development provenance remain unavailable. Exact
+test-pair exclusion alone does not establish image- or subject-disjointness.
+No dataset, original result, fixed manifest or model was altered; no new pairs,
+splits, segmentation, matcher inference, paid calls or training were performed.
+
+Validation: all 40 offline unit tests pass, including eight synthetic score-audit
+tests. Saved aggregate/private records reproduce exactly; all ten ROC/AUC
+calculations agree with scikit-learn, and all 30 operating-point counts are
+independently verified. Raw source hashes remain unchanged. Correctness lint,
+Python syntax, whitespace and publication checks pass; all 15 legacy metric
+files still reproduce. The report documents the audit's limits and private-input
+reproduction requirements.

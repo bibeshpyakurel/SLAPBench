@@ -164,6 +164,17 @@ verified, but actual acquisition PPI and capture independence remain unknown.
 The [research brief](notes/precise_research_brief_20261010.md) links the proposed
 question, pipeline primer and protocol sketch awaiting joint review.
 
+The collaborator's separately shared VeriFinger testing exports are retained
+under ignored `local/precise/metadata/verifinger-intake-20261011/`, alongside
+private source metadata and SHA-256 checks. Public Git contains the offline
+audit utility and reviewed aggregates, not the identifying raw records. Obtain
+these two inputs from the collaborator's authorized sharing to reproduce the
+[2026-10-11 score audit](../reports/precise-verifinger-audit-20261011/README.md);
+that report provides the exact command and requires new output directories.
+No SDK license, matcher execution or model inference is needed to recompute
+these supplied scores. Training records and SDK acquisition/configuration
+provenance are separate missing inputs.
+
 ### Historical full experiment environment
 
 ```bash
