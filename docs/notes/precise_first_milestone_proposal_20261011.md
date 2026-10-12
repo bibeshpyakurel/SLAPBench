@@ -1,18 +1,25 @@
-# Precise first milestone — proposal for professor review
+# Precise first milestone — approved direction, implementation pending
 
-2026-10-11. This records the user's interpretation and proposed sequence.
-It does not establish professor approval, assign subjects, select a model/loss,
-or authorize dataset preparation or training. The confirmed direction remains
-Precise; the [preparation note](precise_preparation_20261004.md) records the
-earlier feedback and the [protocol sketch](precise_protocol_sketch_20261010.md)
-contains the detailed evaluation safeguards.
+2026-10-11. The user subsequently confirmed: **“professor approved this.”**
+This updates the original proposal to an approved research direction and
+milestone sequence: image-only learning on whole four-finger slaps with
+subject-disjoint evaluation and development-selected checkpoints/thresholds,
+followed by a minutiae extension and optional explanations. The protocol
+principles are approved; unspecified implementation parameters and unresolved
+data facts below remain open. Approval does not supply subject assignments,
+capture metadata, a selected model/loss or a separate execution task.
 
-## Proposed contribution and sequence
+The [preparation note](precise_preparation_20261004.md) preserves earlier
+feedback and the [protocol sketch](precise_protocol_sketch_20261010.md)
+contains the detailed evaluation safeguards. The original proposal filename
+is retained so existing links remain valid.
+
+## Approved contribution and sequence
 
 Learn fingerprint similarity directly: a shared vision encoder maps each input
 to a numerical representation, and a verification objective makes independent
 matching impressions similar while separating nonmatching impressions. At the
-proposed first stage, each input is a whole four-finger slap. Return a continuous
+approved first stage, each input is a whole four-finger slap. Return a continuous
 similarity score; apply a development-selected threshold only when a match
 decision is needed. A similarity score is not automatically a calibrated
 probability.
@@ -36,8 +43,8 @@ probability.
    evidence after matching is reliable. It is outside the proposed first
    milestone; generated explanations would need separate validation.
 
-The professor must confirm whether a VLM-derived vision encoder satisfies the
-project's intended contribution or a different encoder is acceptable. Language
+The encoder family and any required relationship to an LLM/VLM remain
+unspecified; approval of the direction does not select a checkpoint. Language
 generation is not required to compute the proposed embedding similarity.
 Architecture can be designed independently of Konain's fine-tuning script;
 reproducing his system still requires his actual targets, code and exposure
@@ -60,7 +67,7 @@ not an established Precise matcher or an implementation selected here.
 
 ## Input unit and comparison evidence
 
-Propose whole four-finger slaps first because those images are already available
+Use whole four-finger slaps first because those images are already available
 and the external VeriFinger result is a slap comparison. Right and left slaps
 should be compared within the same hand type. Two-thumb slaps should be excluded
 from this first milestone by an agreed rule and retained as historical assets.
@@ -81,9 +88,9 @@ same eligible subjects and exactly the same comparison list for every method;
 the old VLM/SDK aggregates cannot establish that comparison. SDK access/settings
 and scores on the future approved list remain practical dependencies.
 
-## Data protocol to approve before execution
+## Approved protocol principles and details to resolve before execution
 
-| Decision | Proposed rule | Still needed |
+| Decision | Protocol principle | Still needed |
 |---|---|---|
 | Identity and capture provenance | Genuine pairs use independent captures of the same subject and hand type | Confirm filename semantics, capture/session relationships and annotation issues |
 | Subject separation | Keep all hands, sessions, captures and derivatives of a subject in one partition; no cross-partition pairs | Exposure history, eligible subjects, feasible sizes, seed and split review |
@@ -125,13 +132,16 @@ script, example targets and SDK configuration remain useful for understanding
 or reproducing his work, but are not a prerequisite for independently drafting
 our architecture. Keep identifying mappings and source filenames local.
 
-## Professor review and next authorized task
+## Implementation decisions and next task
 
-Ask the professor to approve or revise (a) an image-only learned matcher as the
-first milestone, (b) whole four-finger slaps as the first input unit, (c) the
-encoder's required relationship to an LLM/VLM, and (d) the subject/capture,
-development-selection and final-test protocol above. Confirm baseline arms,
-FAR/uncertainty requirements and the treatment of historical exposure.
+The first milestone and general protocol no longer await initial professor
+approval. Resolve dataset interpretation and exposure eligibility first, then
+specify the concrete subject allocation, comparison sampling, encoder/revision,
+loss/trainable components, preprocessing, baseline arms, development-selection
+metric, FAR target, failure policy and uncertainty method. Review these concrete
+choices before execution rather than treating approval as answers to the open
+data questions. The frozen-encoder control and ground-truth versus teacher-score
+supervision remain implementation choices to specify.
 
 After metadata clarification, prepare the concrete split/protocol for review
 under an applicable task authorization. Retain the results/split review before
@@ -141,5 +151,5 @@ still require their applicable decisions and separate task authorization.
 Future private artifacts belong under ignored `local/precise/`; original
 datasets, scores and fixed manifests are preserved.
 
-This document supplies discussion material only. No message has been sent to
-the professor or Konain.
+This document records approval supplied by the user and the remaining
+implementation work. No message has been sent to the professor or Konain.

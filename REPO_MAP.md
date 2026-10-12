@@ -10,6 +10,12 @@ aggregate inventory and pending decisions are in
 `docs/notes/precise_preparation_20261004.md`; no new experiment is approved by
 this inventory.
 
+Approval update, 2026-10-11: the user confirmed professor approval of the
+image-only learned matcher on whole four-finger slaps and subject-disjoint,
+development-selected evaluation principles. See
+`docs/notes/precise_first_milestone_proposal_20261011.md` for the approved
+sequence and unresolved capture, exposure, split and model/loss details.
+
 ## Layout and entry points
 
 See `docs/WORKSPACE_LAYOUT.md` for the current local/public folder layout.

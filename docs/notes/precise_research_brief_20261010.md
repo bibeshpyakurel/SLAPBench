@@ -2,6 +2,13 @@
 
 2026-10-10. This is a short discussion brief, not approval to train or evaluate.
 
+**Approval update — 2026-10-11:** The user confirmed professor approval of
+the [first milestone and protocol principles](precise_first_milestone_proposal_20261011.md).
+The original alternatives and approval questions below are historical discussion
+context. Whole four-finger slaps and image-only learning are now the approved
+starting point; concrete data/model choices and execution authorization remain
+open.
+
 **Latest proposal — 2026-10-11:** The
 [first-milestone proposal](precise_first_milestone_proposal_20261011.md)
 now proposes whole four-finger slaps for the image-only learned baseline,

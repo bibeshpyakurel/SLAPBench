@@ -1,8 +1,16 @@
-# Precise evaluation protocol sketch — awaiting joint review
+# Precise evaluation protocol sketch — principles approved, details pending
 
 2026-10-10. No subject assignments, split percentages, matching pairs, selected
 model/loss, preprocessing parameters, thresholds or experiments are created by
 this document. It completes the planning task while leaving decisions explicit.
+
+**Approval update — 2026-10-11:** The user confirmed professor approval of
+the [first milestone](precise_first_milestone_proposal_20261011.md), including
+subject separation and development-selected checkpoints/thresholds. Whole
+four-finger slaps are the first input unit. References below to initial milestone
+approval being pending describe the earlier planning state; data provenance,
+exposure eligibility, concrete split/model/metric parameters and execution
+authorization remain unresolved.
 
 **Update — 2026-10-11:** The
 [VeriFinger audit](../../reports/precise-verifinger-audit-20261011/README.md)
@@ -11,7 +19,7 @@ statements below describe the evidence on 2026-10-10. Acquisition independence,
 training exposure and development threshold provenance remain unresolved. The
 [latest milestone proposal](precise_first_milestone_proposal_20261011.md)
 proposes whole four-finger slaps first and prioritizes dataset interpretation.
-All partition and execution decisions remain pending.
+Concrete partition parameters and execution decisions remain pending.
 
 ## Evidence available now
 

@@ -500,3 +500,26 @@ or manuscript assets were modified. No split/pair creation, segmentation,
 minutiae extraction, experiment, training, download or external message occurred.
 Results/split review before fine-tuning and separate task authorization remain
 in effect pending supervisor decisions.
+
+## 2026-10-11 — professor approval recorded
+
+The user confirmed “professor approved this” following the first-milestone
+proposal. The approved direction is an image-only learned similarity matcher
+on whole four-finger Precise slaps, with subject-disjoint evaluation and
+development-selected checkpoints/thresholds, followed by minutiae and optional
+matcher explanations. The milestone note now records approval, and AGENTS.md,
+README, REPO_MAP.md and the earlier preparation/brief/protocol notes distinguish
+this current state from their historical pending-approval statements.
+
+Approval establishes the direction and protocol principles, without supplying
+missing acquisition/session facts or selecting unspecified implementation
+parameters. Dataset interpretation, capture independence, training/evaluation
+exposure eligibility, concrete split, encoder/loss, FAR/uncertainty and failure
+policies remain to be resolved. Concrete results/split review before fine-tuning
+and applicable execution authorization are retained. No subject assignments,
+pairs, segmentation, inference, training or external messages were performed.
+
+Validation: documentation links, approval-state consistency, whitespace and
+staged publication path/size/content checks pass. This is a documentation and
+agent-guidance update; executable code, datasets, original scores/manifests,
+model files and manuscript assets are preserved.

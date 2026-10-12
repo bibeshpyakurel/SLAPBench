@@ -34,18 +34,22 @@ earlier public release (flat `results/<model>/` layout) is preserved at tag
 [`v0.1.0`](https://github.com/bibeshpyakurel/SLAPBench/tree/v0.1.0); its SD302b
 files are byte-identical to those under `results/sd302b/`.
 
-**Current research direction (2026-10-04): Precise.** The professor selected
-Precise for the next fingerprint-matching study. Preparation is limited to
-documentation and offline validation while the task, architecture, subject split
-and evaluation protocol are clarified. See the
+**Current research direction (updated 2026-10-11): Precise.** The professor
+approved an image-only learned matcher on whole four-finger slaps, followed by
+minutiae and optional explanations. Subject-disjoint evaluation and
+development-selected checkpoints/thresholds are approved protocol principles.
+Capture interpretation, exposure eligibility, concrete subject allocation and
+model/loss choices remain open; preparation continues through documentation and
+offline validation until applicable implementation decisions and execution
+authorization. See the
 [Precise preparation note](docs/notes/precise_preparation_20261004.md) and
 [aggregate inventory](reports/precise-readiness-20261004/README.md).
 The [2026-10-10 research brief](docs/notes/precise_research_brief_20261010.md)
 links the pipeline primer, proposed evaluation protocol and completed local
 image inspection. Subject assignments and experiment authorization remain pending.
-The [2026-10-11 milestone proposal](docs/notes/precise_first_milestone_proposal_20261011.md)
-proposes an image-only learned matcher on whole four-finger slaps for professor
-review, with dataset interpretation as the immediate collaborator priority.
+The [approved first milestone](docs/notes/precise_first_milestone_proposal_20261011.md)
+records the user's confirmation of professor approval, with dataset
+interpretation as the immediate collaborator priority.
 The [workspace layout](docs/WORKSPACE_LAYOUT.md) describes local preparation and
 future training storage, with reviewed code/reports exported to Git.
 SD302b and RidgeBase materials below document earlier work and remain available

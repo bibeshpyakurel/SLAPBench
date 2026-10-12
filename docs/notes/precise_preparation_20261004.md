@@ -108,3 +108,15 @@ remain important for protocol feasibility and reproduction, while our model
 architecture can be designed independently of his script. The professor has
 not yet approved this milestone, model or data protocol; results/split review
 and separate experiment authorization remain required.
+
+## Later update — 2026-10-11: professor approval confirmed
+
+The user confirmed **“professor approved this”** for the
+[first milestone](precise_first_milestone_proposal_20261011.md). The image-only
+learned matcher on whole four-finger slaps, subject-disjoint evaluation,
+development-selected checkpoints/thresholds and staged minutiae/optional
+explanation sequence are now approved in principle. Earlier pending-approval
+statements record the previous state. Capture independence, filename-token
+semantics, exposure eligibility, concrete subject allocation, encoder/loss and
+other unspecified implementation choices remain open. Retain concrete
+results/split review before fine-tuning and applicable execution authorization.
