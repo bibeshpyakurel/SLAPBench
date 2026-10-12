@@ -1,27 +1,26 @@
 # Repository map
 
-Inventory date: 2026-09-19. This describes observed files. See STATUS.md for
-findings and limitations.
+Navigation updated 2026-10-11; the original repository inventory is dated
+2026-09-19. See [STATUS.md](STATUS.md) for the dated audit history.
 
-Current direction, updated 2026-10-04: prepare the next study on Precise only.
-SD302b and RidgeBase entries document retained historical assets. The new
-aggregate inventory and pending decisions are in
-`reports/precise-readiness-20261004/` and
-`docs/notes/precise_preparation_20261004.md`; no new experiment is approved by
-this inventory.
-
-Approval update, 2026-10-11: the user confirmed professor approval of the
-image-only learned matcher on whole four-finger slaps and subject-disjoint,
-development-selected evaluation principles. See
-`docs/notes/precise_first_milestone_proposal_20261011.md` for the approved
-sequence and unresolved capture, exposure, split and model/loss details.
+The current study uses Precise only, following the professor's 2026-10-04
+direction. Start with the [central research plan and first-milestone
+record](docs/notes/precise_first_milestone_proposal_20261011.md). It connects
+the approved whole-slap learned-matcher direction and evaluation principles,
+completed inventories/inspection/VeriFinger audit and remaining implementation
+decisions. Concrete splits and execution authorization remain pending. SD302b
+and RidgeBase entries document retained historical assets.
 
 ## Layout and entry points
 
-See `docs/WORKSPACE_LAYOUT.md` for the current local/public folder layout.
+See [docs/WORKSPACE_LAYOUT.md](docs/WORKSPACE_LAYOUT.md) for the local/public folder layout.
 The ignored `local/precise/` tree is prepared for private metadata, future
 splits/manifests, crops, minutiae, checkpoints and raw runs. Existing data and
 result paths are unchanged; the new folders do not contain experiment artifacts.
+When implementation is authorized, new matcher code belongs in
+`code/precise_matching/` with data, encoder, verification-loss and evaluation
+modules as described in the central plan. This is a planned package, not an
+existing implementation; historical runners remain at their current paths.
 
 | Location | Observed purpose |
 |---|---|
@@ -31,6 +30,7 @@ result paths are unchanged; the new folders do not contain experiment artifacts.
 | `code/precise_pairs.py` | Precise genuine, primary-impostor and diagnostic pair construction |
 | `code/audit_precise_dataset.py` | Read-only Precise filename/byte-duplicate inventory; aggregate output without identifiers |
 | `code/inspect_precise_images.py` | Read-only headers and sampled decoding; public aggregates, private identifying records and contact sheets |
+| `code/audit_verifinger_scores.py` | Offline audit of supplied SDK testing exports; reviewed aggregates/ROC coordinates, private identifying records |
 | `code/run_verification.py` | Model loaders, prompts, response parsing, SD302b inference and metrics |
 | `code/run_ridgebase_prompted.py` | Manifest-driven prompted inference, also used for Precise |
 | `code/embed_verify.py` | Vision-encoder embedding comparisons saved as cosine scores |
@@ -50,10 +50,14 @@ result paths are unchanged; the new folders do not contain experiment artifacts.
 | `code/audit_saved_responses.py`, `tests/test_response_audit.py` | Reproducible offline export/parser audit and regression tests |
 | `reports/response-audit-20260919/` | File hashes, Qwen export validation, conservative parsed copies and root-cause findings |
 | `reports/audit-20260919/` | Offline audit counts and new provisional summaries |
+| `reports/precise-readiness-20261004/`, `reports/precise-inspection-20261010/` | Completed aggregate byte inventory, all-image headers and sampled image review |
+| `reports/precise-collaborator-discovery-20261011/` | Historical local search; subsequent Drive intake supersedes its testing-score request |
+| `reports/precise-verifinger-audit-20261011/` | Completed testing-score audit; population, metrics and comparison limits |
 
 ## Local datasets and models
 
-Excluded from Git. Counts below describe the mounted files observed during this audit.
+Excluded from Git. Counts below describe the mounted files observed in the
+2026-09-19 inventory; later Precise preparation is linked above.
 
 | Directory | Size | Files / formats |
 |---|---|---|
@@ -68,11 +72,15 @@ sensitive metadata, not anonymous model prompts. `code/precise_pairs.py` and
 Consequently checkpoint inventory and training provenance could not be inspected.
 No `.xyt` files were found under datasets. `mindtct` and `bozorth3` were not on PATH;
 this does not prove they are absent from every disk. No usable commercial SDK was
-established. Embedding score CSVs exist, but scores do not establish retained feature vectors.
+established in that inventory. Supplied VeriFinger testing scores are now
+available and audited (2026-10-11); licensed SDK execution access and settings
+remain unestablished. Embedding score CSVs exist, but scores do not establish
+retained feature vectors.
 
 ## Results and conventions
 
-`results/sd302b/`, `results/ridgebase/`, `results/precise/` are current dataset trees.
+`results/sd302b/`, `results/ridgebase/`, `results/precise/` hold recorded historical
+benchmark runs, not outputs of the new learned-matcher milestone.
 Prompted files live under `<model>/latest/` with model, strategy and timestamp in
 filenames. Historical SD302b files also live under `previous/<date>/`.
 Embedding comparisons use `embed_<model>_eval.csv`. Pair manifests carry identities,
@@ -80,9 +88,20 @@ labels and image paths. Prompted CSVs contain raw response text, latency, model 
 prompting setting and timestamp; score prompts and binary prompts have different fields.
 Crash skips can be recorded in `.csv.skipped`; reviewed recovery backups and run
 logs are now tracked with checksums in `reports/artifact-inventory-20260920.csv`.
-The most recent timestamped result filename inspected is the Precise Pixtral
+In the 2026-09-19 inventory, the most recent timestamped result filename
+inspected was the Precise Pixtral
 similarity run `20260908_2100`; this is a filename timestamp, not independent proof
 of execution time. Existing summary files predate inclusion of Pixtral in the generator.
+
+The separate VeriFinger audit validates all 4,200 supplied testing records and
+reproduces the reported 2,057/2,100 genuine accepts at zero observed false
+accepts for both fused and summed scores. Its four-finger slice has 1,440 genuine
+and 1,427 impostor comparisons; thumbs are reported separately. Thresholds are
+evaluation-selected retrospective summaries. Only 60 genuine and zero impostor
+pairs overlap the earlier primary VLM manifest, so those aggregates are not a
+common-pair method comparison. Training mappings/exposure, capture independence,
+SDK settings and development-threshold provenance remain unresolved. Raw
+collaborator scores and identifying mappings remain in ignored `local/precise/`.
 
 ## Environment and documents
 
@@ -91,9 +110,11 @@ is the smaller verification environment. `venv/` is local and ignored. No root l
 Dockerfile, conda environment definition or Makefile was found. Dependency ranges
 are not a complete record of versions used for historical runs.
 
-- `README.md`: benchmark explanation, historical results and reproduction notes.
-- `docs/notes/precise_preparation_20261004.md`: current Precise direction, background preparation and decisions pending with the professor/collaborator.
-- `docs/notes/precise_research_brief_20261010.md`: proposed question and links to the educational primer, subject-disjoint protocol sketch and aggregate image inspection.
+- `README.md`: current Precise entry point, followed by historical benchmark results and reproduction notes.
+- `docs/notes/precise_first_milestone_proposal_20261011.md`: central research plan; architecture sequence, completed evidence, protocol decisions and future package boundary.
+- `docs/notes/precise_preparation_20261004.md`: confirmed professor direction and dated preparation history.
+- `docs/notes/precise_protocol_sketch_20261010.md`: detailed evaluation safeguards supporting the central plan; current evidence updated 2026-10-11.
+- `docs/notes/precise_research_brief_20261010.md`: supporting discussion brief with current audit summary and link to the central plan.
 - `reports/precise-inspection-20261010/`: all-image header inventory and 35-image sample findings; private review images remain under ignored `local/precise/metadata/`.
 - `docs/notes/project_guide.md`: earlier workflow and metrics guidance.
 - `docs/notes/paper_metrics_tracker.md`, `docs/notes/SlapBench_Plan.txt`, `docs/notes/filter_waterfall.txt`: historical planning/metric notes.

@@ -1,4 +1,4 @@
-# Precise first milestone — approved direction, implementation pending
+# Precise research plan — first milestone approved, implementation pending
 
 2026-10-11. The user subsequently confirmed: **“professor approved this.”**
 This updates the original proposal to an approved research direction and
@@ -13,6 +13,28 @@ The [preparation note](precise_preparation_20261004.md) preserves earlier
 feedback and the [protocol sketch](precise_protocol_sketch_20261010.md)
 contains the detailed evaluation safeguards. The original proposal filename
 is retained so existing links remain valid.
+
+## Central plan and completed preparation
+
+Use this document as the central research plan. Supporting notes explain the
+background or protocol in more detail; dated reports preserve the evidence at
+the time of each preparation task.
+
+| Supporting record | Completed evidence or role | Remaining limits |
+|---|---|---|
+| [Professor direction and preparation history](precise_preparation_20261004.md) | Precise-only direction and dated follow-ups | Does not select concrete model, loss or split parameters |
+| [Read-only dataset inventory](../../reports/precise-readiness-20261004/README.md) | 7,358 JPEGs, 338 filename subjects, 4,907 four-finger slaps; no exact byte duplicates | Filename labels and distinct bytes do not prove independent acquisitions |
+| [Image inspection](../../reports/precise-inspection-20261010/README.md) | All headers are 1600×1500 grayscale; all 35 sampled images decoded | Physical PPI, sessions and whole-dataset decoded/near-duplicate status remain unknown |
+| [Collaborator-file discovery](../../reports/precise-collaborator-discovery-20261011/README.md) | Earlier scoped local search and Qwen3 export provenance | Its testing-score request was superseded by later Drive intake; training mappings remain missing |
+| [VeriFinger testing-score audit](../../reports/precise-verifinger-audit-20261011/README.md) | All 4,200 supplied testing records validate; score calculations and comparison overlap checked | Retrospective thresholds, mixed thumb/slap population; no training exposure or SDK configuration verification |
+| [Evaluation protocol sketch](precise_protocol_sketch_20261010.md) | Detailed subject/capture separation, development selection, failures and uncertainty safeguards | Concrete allocation, operating points and uncertainty method require review |
+| [Research brief](precise_research_brief_20261010.md) and [matching primer](fingerprint_matching_primer_20261010.md) | Discussion background, pipeline and metric explanations | Supporting material; current sequence and decision status are recorded here |
+| [Workspace layout](../WORKSPACE_LAYOUT.md) and [reproduction notes](../REPRODUCIBILITY.md) | Private storage, reviewed public exports and offline-audit reproduction | Data, collaborator records and weights are not reconstructible from public Git alone |
+
+The architecture sequence below depends on the data/evaluation decisions in
+this plan. Completion of the audits does not resolve capture independence or
+authorize split creation, implementation or experiments. Keep original reports
+and scores unchanged; export any later derived analyses to new dated paths.
 
 ## Approved contribution and sequence
 
@@ -131,6 +153,29 @@ necessary to assess reuse and evaluation eligibility. His adapted training
 script, example targets and SDK configuration remain useful for understanding
 or reproducing his work, but are not a prerequisite for independently drafting
 our architecture. Keep identifying mappings and source filenames local.
+
+## Future implementation and storage
+
+When implementation is authorized, create a dedicated `code/precise_matching/`
+package rather than repurposing the historical experiment scripts:
+
+| Planned module | Responsibility |
+|---|---|
+| `data.py` | Load approved private data/manifests; retain capture provenance and enforce partition boundaries |
+| `encoders.py` | Shared image encoder, pinned model revision and agreed trainable components; learned/frozen configurations |
+| `losses.py` | Agreed verification objective and explicit supervision source |
+| `evaluation.py` | Continuous scores, development threshold selection, frozen-system evaluation, coverage/failures and aggregate metrics |
+
+This cleanup documents the package boundary only. No modules, dependencies,
+training entry point or architecture choices are implemented. Preserve existing
+`code/precise_pairs.py`, `code/embed_verify.py`, `code/run_ridgebase_prompted.py`
+and other historical entry points at their current paths.
+
+Keep datasets, collaborator mappings, future splits/manifests, crops, minutiae,
+checkpoints and raw runs local using the [workspace layout](../WORKSPACE_LAYOUT.md).
+Publish reviewed code, documentation and aggregate reports. Existing published
+manifests/results and SD302b, RidgeBase and paper assets remain intact; their
+historical publication does not authorize exporting new identifying records.
 
 ## Implementation decisions and next task
 

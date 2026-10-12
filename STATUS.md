@@ -523,3 +523,37 @@ Validation: documentation links, approval-state consistency, whitespace and
 staged publication path/size/content checks pass. This is a documentation and
 agent-guidance update; executable code, datasets, original scores/manifests,
 model files and manuscript assets are preserved.
+
+## 2026-10-11 — Precise documentation and navigation cleanup
+
+README now leads with the current Precise direction, completed preparation and
+first-milestone record; the earlier SLAPBench description and reproduction setup
+are explicitly historical. The existing milestone document is the central
+research plan, linking the architecture sequence, detailed protocol safeguards,
+inventory/image inspection, collaborator discovery and completed VeriFinger
+testing-score audit. The original filename is retained for link continuity.
+This cleanup preserves the separately recorded professor approval of the
+direction and protocol principles while keeping concrete decisions and execution
+authorization pending.
+
+REPO_MAP.md, the protocol sketch, research brief, workspace layout and reproduction
+navigation now reflect the available, audited SDK testing exports. They retain
+the distinction between retrospective evaluation-selected thresholds and a
+development-fixed prospective protocol, separate thumbs from four-finger slaps,
+and preserve the mismatch with the earlier VLM comparison population. Capture
+independence, training/development exposure and SDK settings remain unresolved.
+Dated reports and prior status entries remain historical records.
+
+The central plan and workspace layout specify a future `code/precise_matching/`
+package with data, encoder, verification-loss and evaluation modules. No package
+is created or implemented by this task. Datasets, collaborator mappings, future
+splits/manifests, minutiae, checkpoints and raw runs remain local; reviewed code,
+documentation and aggregate reports are the public outputs. Existing scripts,
+SD302b/RidgeBase assets, original results/manifests and paper files are unchanged.
+
+Validation: local documentation links/anchors, Markdown fences, saved aggregate
+counts/percentages/thresholds/overlap, whitespace and staged publication
+path/size/content review pass. Changes are Markdown only; no analysis code or
+result data changed, so experiment reruns and training were not needed. No split,
+pair creation, segmentation, minutiae extraction, downloads or external messages
+were performed.

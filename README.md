@@ -5,6 +5,56 @@
 [![CI](https://github.com/bibeshpyakurel/SLAPBench/actions/workflows/ci.yml/badge.svg)](https://github.com/bibeshpyakurel/SLAPBench/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+## Current study: Precise fingerprint matching
+
+**Direction confirmed by the professor on 2026-10-04:** use Precise for the
+next study. Start with the [central research plan and first-milestone
+record](docs/notes/precise_first_milestone_proposal_20261011.md), which connects
+the architecture, evaluation protocol, completed audits and remaining decisions.
+The [preparation note](docs/notes/precise_preparation_20261004.md) preserves the
+professor's feedback and subsequent approval update.
+
+**Preparation completed through 2026-10-11:**
+
+- [Read-only inventory](reports/precise-readiness-20261004/README.md): 7,358
+  JPEGs, 338 filename subjects and 4,907 four-finger slaps; no exact byte duplicates.
+- [Image inspection](reports/precise-inspection-20261010/README.md): all headers
+  are 1600×1500 grayscale; all 35 sampled images decoded. Acquisition PPI and
+  independent-capture provenance remain unverified.
+- [VeriFinger testing-score audit](reports/precise-verifinger-audit-20261011/README.md):
+  the supplied 2,100 genuine + 2,100 impostor exports reproduce 97.9524% TAR
+  with zero observed false accepts at the screenshot thresholds. The
+  four-finger-only slice gives 98.0556% TAR with slice-specific thresholds.
+  These are retrospective, evaluation-selected operating points; the pooled
+  population includes thumbs and differs from the earlier VLM evaluation.
+
+**First milestone:** the central plan records professor approval of an
+image-only learned matcher on whole four-finger slaps and subject-disjoint,
+development-selected evaluation principles. A frozen-encoder control and
+available SDK methods on identical approved comparisons remain proposed arms.
+Establish the concrete subject/capture protocol before constructing pairs or
+training; select settings and thresholds on development and freeze them for
+final evaluation. Minutiae and optional explanations follow the baseline.
+
+Dataset interpretation, training/evaluation exposure, encoder/loss, concrete
+split and low-FAR evaluation decisions remain pending. Results/split review
+before fine-tuning and separate execution authorization remain required.
+Future matcher implementation belongs under `code/precise_matching/` when
+authorized; existing experiment scripts retain their paths.
+
+Use the [repository map](REPO_MAP.md) for navigation and the
+[workspace layout](docs/WORKSPACE_LAYOUT.md) for storage boundaries. Datasets,
+collaborator mappings, future splits/manifests, minutiae and checkpoints stay
+local; publish reviewed code, documentation and aggregate reports. SD302b,
+RidgeBase, original results, manifests and paper assets remain intact as
+research history.
+
+## Historical SLAPBench benchmark and paper
+
+The benchmark description, results and reproduction commands below document
+earlier prompted-VLM and vision-embedding work. They do not define the pending
+Precise learned-matcher experiment.
+
 **Paper:** *SLAPBench: Benchmarking Multimodal Large Language Models for
 Four-Finger SLAP Fingerprint Verification* —
 Bibesh Pyakurel, M. G. Sarwar Murshed (University of Wisconsin–Green Bay).
@@ -34,30 +84,9 @@ earlier public release (flat `results/<model>/` layout) is preserved at tag
 [`v0.1.0`](https://github.com/bibeshpyakurel/SLAPBench/tree/v0.1.0); its SD302b
 files are byte-identical to those under `results/sd302b/`.
 
-**Current research direction (updated 2026-10-11): Precise.** The professor
-approved an image-only learned matcher on whole four-finger slaps, followed by
-minutiae and optional explanations. Subject-disjoint evaluation and
-development-selected checkpoints/thresholds are approved protocol principles.
-Capture interpretation, exposure eligibility, concrete subject allocation and
-model/loss choices remain open; preparation continues through documentation and
-offline validation until applicable implementation decisions and execution
-authorization. See the
-[Precise preparation note](docs/notes/precise_preparation_20261004.md) and
-[aggregate inventory](reports/precise-readiness-20261004/README.md).
-The [2026-10-10 research brief](docs/notes/precise_research_brief_20261010.md)
-links the pipeline primer, proposed evaluation protocol and completed local
-image inspection. Subject assignments and experiment authorization remain pending.
-The [approved first milestone](docs/notes/precise_first_milestone_proposal_20261011.md)
-records the user's confirmation of professor approval, with dataset
-interpretation as the immediate collaborator priority.
-The [workspace layout](docs/WORKSPACE_LAYOUT.md) describes local preparation and
-future training storage, with reviewed code/reports exported to Git.
-SD302b and RidgeBase materials below document earlier work and remain available
-for reproducibility; they are not the datasets selected for the next study.
-
 ---
 
-## What This Project Does
+## Historical benchmark question
 
 When you enter the United States at a border crossing, an agent asks you to press your right four fingers flat on a scanner, then your left four fingers. That single flat press — all four fingers captured simultaneously in one image — is called a **SLAP** (Simultaneous Latent Acquisition Press) image. It is the standard biometric capture format used at every US border entry point and at enrollment stations worldwide.
 
@@ -108,10 +137,10 @@ code/                # inference + pair-construction + evaluation
 results/
   sd302b/            # v1 results (per model) + pair manifests
   ridgebase/         # v2 results (per model) + pair manifests
-  precise/           # v2 results (per model) + pair manifests
+  precise/           # historical VLM/embedding results + pair manifests
 reports/             # dated, derived audit reports
 paper/               # manuscript, ECCV submission, ECCV template (LaTeX)
-docs/                # contributing, security, historical notes
+docs/                # current Precise plan, contributing, security, historical notes
 ```
 
 See [Project Structure](#project-structure) for the full tree.
@@ -121,7 +150,7 @@ requires a signed license agreement from the University at Buffalo CUBS lab.
 
 ---
 
-## The Dataset — NIST Special Database 302b
+## Historical dataset — NIST Special Database 302b
 
 NIST SD302b was collected by IARPA for the Nail-to-Nail Fingerprint Challenge. 201 participants had their fingerprints captured on multiple scanner devices under controlled conditions.
 
@@ -201,7 +230,7 @@ Seven subjects in NIST SD302b have documented annotation errors — swapped labe
 
 ---
 
-## Task 8 — Fingerprint Verification
+## Historical Task 8 — Fingerprint Verification
 
 The benchmark task: given two SLAP fingerprint images, determine whether they belong to the same person.
 
@@ -560,7 +589,7 @@ SLAPBench/
 │   └── eccv2026_template/        # third-party ECCV template (unmodified)
 ├── docs/
 │   ├── CONTRIBUTING.md  SECURITY.md  REPRODUCIBILITY.md  ZENODO.md
-│   └── notes/                    # historical planning and metric notes
+│   └── notes/                    # current Precise research plan + historical notes
 ├── scripts/                      # release notes + conventional-commit checks
 ├── .github/                      # CI, CodeQL, release workflows
 └── .githooks/                    # dev-only commit/push safeguards
@@ -572,7 +601,11 @@ recovery backups. A clone cannot run inference until local data and weights are 
 
 ---
 
-## Setup
+## Historical experiment setup
+
+These commands support reproduction of earlier work when separately authorized.
+They are not preparation steps for the Precise milestone; its concrete model
+and experiment decisions remain pending in the [central plan](docs/notes/precise_first_milestone_proposal_20261011.md).
 
 ### Requirements
 

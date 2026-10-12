@@ -121,7 +121,7 @@ before attempting inference. Existing parsers also need the previously required
 review before a formal run; no pair generation, segmentation, fine-tuning or
 fingerprint experiment was performed during setup.
 
-### Current Precise preparation (updated 2026-10-10)
+### Current Precise preparation (updated 2026-10-11)
 
 See [WORKSPACE_LAYOUT.md](WORKSPACE_LAYOUT.md) for the prepared local folders,
 historical asset locations and reviewed-publication workflow. This checkout is
@@ -132,8 +132,10 @@ remain available for reproducing historical work. Do not move or delete those
 assets to change the research focus; existing manifests depend on their paths.
 Precise source/acquisition documentation, session meanings, physical resolution,
 data terms and the collaborator's training/evaluation subjects still need to be
-established before freezing a protocol. See the
-[preparation note](notes/precise_preparation_20261004.md).
+established before freezing a protocol. Start with the
+[central research plan](notes/precise_first_milestone_proposal_20261011.md);
+the [preparation note](notes/precise_preparation_20261004.md) preserves the
+professor's feedback and dated follow-ups.
 
 The aggregate inventory needs only Python's standard library:
 
@@ -161,8 +163,10 @@ Only aggregate JSON goes to `reports/`. Identifying header/sample records and
 contact sheets stay under ignored `local/`; source images are opened read-only.
 The sample is not a subject split or a matching manifest. Pixel dimensions are
 verified, but actual acquisition PPI and capture independence remain unknown.
-The [research brief](notes/precise_research_brief_20261010.md) links the proposed
-question, pipeline primer and protocol sketch awaiting joint review.
+The [central plan](notes/precise_first_milestone_proposal_20261011.md) connects
+these completed audits, the architecture sequence and protocol decisions.
+The [research brief](notes/precise_research_brief_20261010.md) and protocol
+sketch provide supporting detail.
 
 The collaborator's separately shared VeriFinger testing exports are retained
 under ignored `local/precise/metadata/verifinger-intake-20261011/`, alongside

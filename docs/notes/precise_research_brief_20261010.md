@@ -1,20 +1,15 @@
-# Precise research brief — proposal for discussion
+# Precise research brief — supporting discussion note
 
 2026-10-10. This is a short discussion brief, not approval to train or evaluate.
 
-**Approval update — 2026-10-11:** The user confirmed professor approval of
-the [first milestone and protocol principles](precise_first_milestone_proposal_20261011.md).
-The original alternatives and approval questions below are historical discussion
-context. Whole four-finger slaps and image-only learning are now the approved
-starting point; concrete data/model choices and execution authorization remain
-open.
-
-**Latest proposal — 2026-10-11:** The
-[first-milestone proposal](precise_first_milestone_proposal_20261011.md)
-now proposes whole four-finger slaps for the image-only learned baseline,
-followed by minutiae and an optional explanation layer. It prioritizes dataset
-interpretation from Konain and uses the completed score audit. This refines the
-alternatives below for professor review; it does not record an approved task.
+**Current summary — 2026-10-11:** Use the
+[central research plan](precise_first_milestone_proposal_20261011.md) for the
+architecture sequence, completed audits and remaining decisions. It records
+professor approval of image-only learning on whole four-finger slaps and
+subject-disjoint, development-selected evaluation principles, followed by
+minutiae and optional explanations. Dataset interpretation is the immediate
+priority; concrete data/model choices and execution authorization remain open.
+This brief provides supporting discussion, not a second implementation plan.
 
 **Proposed question:** Can adapting a pretrained vision encoder for fingerprint
 verification approach VeriFinger performance on previously unseen Precise
@@ -28,12 +23,11 @@ adaptation; a dedicated fingerprint encoder is an alternative requiring the
 professor's agreement. Language generation is not required for an embedding
 matcher. No particular model, loss or training budget is selected here.
 
-**Candidate pipeline:** Start with an image-only shared encoder. If the task is
-per-finger matching, retain the parent slap, match corresponding finger positions
-and combine scores into a slap score. Add an image-plus-minutiae arm only after
-the image-only baseline is reproducible. Whole-slap embedding matching remains
-a comparison arm, subject to the agreed scope. These are alternatives, not
-implemented segmentation or architecture.
+**First pipeline:** Start with an image-only shared encoder on whole four-finger
+slaps. Add an image-plus-minutiae arm after the baseline is reproducible, under
+separate design and task authorization. Per-finger processing would require
+parent-capture and anatomical correspondence/fusion decisions. No encoder,
+segmentation or matching architecture is implemented by this note.
 
 ```mermaid
 flowchart LR
@@ -47,12 +41,15 @@ flowchart LR
     T --> D[Match decision]
 ```
 
-**Comparison:** Konain reports full-slap VeriFinger fused scores and sums of
-per-finger scores. The supplied screenshot reports 2,057/2,100 genuine accepts
-(97.9524% TAR) and 0/2,100 impostor accepts for both, at thresholds 48 and 79.
-His message names 0.1% FAR; the screenshot names 0.01%. These are collaborator
-observations, not reproduced repository results. We need exact score records,
-threshold provenance and subject/image overlap before adopting the benchmark.
+**Comparison:** The [completed VeriFinger score audit](../../reports/precise-verifinger-audit-20261011/README.md)
+reproduces 2,057/2,100 genuine accepts (97.9524% TAR) and 0/2,100 impostor
+accepts for fused and summed scores at thresholds 48 and 79. The pooled exports
+include thumbs; the four-finger-only slice reports 98.0556% TAR with
+slice-specific, evaluation-selected thresholds. Only 60 genuine and zero
+impostor pairs overlap the earlier primary VLM manifest. A fair method comparison
+requires identical approved comparisons. His message's 0.1% and the screenshot's
+0.01% are distinct requested FAR targets; development-threshold provenance,
+training exposure and SDK settings remain unknown.
 
 **Evaluation sketch:** Partition subjects before constructing pairs. Training
 learns weights, development selects checkpoints/settings/thresholds, and final
@@ -70,10 +67,10 @@ unverified. The [inspection report](../../reports/precise-inspection-20261010/RE
 contains aggregate evidence; identifying review artifacts stay local.
 
 **Decisions for the professor/collaborator:** Must the contribution retain an
-LLM/VLM component? Is the first matcher whole-slap or per-finger with fusion?
+LLM/VLM component? Which encoder, loss and comparison arms implement the whole-slap milestone?
 Which subjects/images have already been exposed to training or repeated testing?
 Which FAR target and threshold-selection procedure apply? What capture metadata,
-SDK exports and training objective are available? Split sizes and actual subject
+SDK settings and training objective are available? Split sizes and actual subject
 assignments remain undecided.
 
 Supporting explanations are in the [pipeline primer](fingerprint_matching_primer_20261010.md)
@@ -81,12 +78,12 @@ and [protocol sketch](precise_protocol_sketch_20261010.md). Fingerprint-specific
 embeddings have precedent in [DeepPrint](https://arxiv.org/abs/1909.09901);
 that paper motivates this direction without establishing achievable Precise performance.
 
-**Follow-up — 2026-10-11:** Konain confirms VeriFinger-score supervision, but
+**Earlier discovery — 2026-10-11 (historical):** Konain confirms VeriFinger-score supervision, but
 the two supplied 676-pair files match our older Qwen3 exports. The
 [local discovery report](../../reports/precise-collaborator-discovery-20261011/README.md)
-records the broader document search, the remaining unavailable testing/training
-records and a focused request for their location. The proposed protocol and
-architecture decisions remain pending.
+records the broader document search and the testing/training records unavailable
+at that time. The subsequent intake below supersedes its testing-file request;
+training mappings and adapted targets/script remain missing.
 
 **Later intake — 2026-10-11:** The user supplied two Drive links containing
 the reported 2,100+2,100 VeriFinger testing records. The

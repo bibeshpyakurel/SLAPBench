@@ -4,22 +4,14 @@
 model/loss, preprocessing parameters, thresholds or experiments are created by
 this document. It completes the planning task while leaving decisions explicit.
 
-**Approval update — 2026-10-11:** The user confirmed professor approval of
-the [first milestone](precise_first_milestone_proposal_20261011.md), including
-subject separation and development-selected checkpoints/thresholds. Whole
-four-finger slaps are the first input unit. References below to initial milestone
-approval being pending describe the earlier planning state; data provenance,
-exposure eligibility, concrete split/model/metric parameters and execution
-authorization remain unresolved.
-
-**Update — 2026-10-11:** The
-[VeriFinger audit](../../reports/precise-verifinger-audit-20261011/README.md)
-now verifies the supplied testing-score calculations; earlier unavailable-score
-statements below describe the evidence on 2026-10-10. Acquisition independence,
-training exposure and development threshold provenance remain unresolved. The
-[latest milestone proposal](precise_first_milestone_proposal_20261011.md)
-proposes whole four-finger slaps first and prioritizes dataset interpretation.
-Concrete partition parameters and execution decisions remain pending.
+**Current status — 2026-10-11:** The
+[central research plan](precise_first_milestone_proposal_20261011.md) records
+professor approval of the image-only milestone on whole four-finger slaps and
+subject-disjoint, development-selected evaluation principles. This sketch
+supplies the detailed safeguards. Data provenance, exposure eligibility,
+concrete split/model/metric parameters and execution authorization remain
+unresolved. The supplied VeriFinger testing scores are now available and
+audited; their thresholds are retrospective rather than development-fixed.
 
 ## Evidence available now
 
@@ -28,13 +20,29 @@ establishes header dimensions/mode and sampled readability, not acquisition
 independence or physical PPI. Konain's message confirms that his baseline uses
 full slaps with SDK fused scores and per-finger scores whose sum is also
 evaluated. Filename subject/slap-type interpretation agrees with our parser.
-Middle-token semantics, matching slap types, thumb inclusion and per-finger
-position correspondence still need confirmation.
+Middle-token/session semantics, capture independence and physical PPI remain
+unknown. The supplied exports confirm matching filename-derived slap types and
+finger counts, including thumb comparisons; anatomical finger-position mapping
+and SDK configuration are not established by those checks.
 
-The supplied screenshot reports thresholds 48 (SDK fusion) and 79 (sum),
-2,057/2,100 genuine accepts, and zero accepts among 2,100 impostors. The text
-names 0.1% FAR; the screenshot requests 0.01%. These are collaborator-supplied
-summary observations; raw scores and exact comparisons have not been audited.
+The [2026-10-11 score audit](../../reports/precise-verifinger-audit-20261011/README.md)
+validates all 4,200 supplied testing records, their per-finger sums/counts and
+filename-derived genuine/impostor labels. It reproduces thresholds 48 (SDK
+fusion) and 79 (sum), 2,057/2,100 genuine accepts (97.9524% TAR), and zero
+accepts among 2,100 impostors. The text names 0.1% FAR; the screenshot requests
+0.01%. The audit reports both requested targets with actual acceptance counts.
+Thresholds are selected descriptively from evaluation impostors; development
+threshold provenance remains unknown.
+
+The pooled exports include thumbs. Their four-finger-only slice has 1,440
+genuine and 1,427 impostor comparisons and gives 1,412/1,440 accepts (98.0556%
+TAR) at zero observed false accepts for both methods with slice-specific
+thresholds. Only 60 genuine and zero impostor pairs overlap the earlier primary
+VLM manifest. Neither aggregate is a common-pair comparison of the methods.
+SDK testing records cover 337 filename subjects of the 338 in the local
+inventory; a sufficiently sized untouched cohort has not been established.
+Training/development exposure remains a separate missing record.
+
 “Skipped lines: 0” is a parsing observation, not proof that extraction failures
 or missing fingers were absent before score export.
 
@@ -80,11 +88,11 @@ identifies a protocol question, not a confirmed defect in Konain's work.
 
 ## Comparison unit and matching lists
 
-Proposed external comparison unit: two full slaps of the same hand type. This
-allows fair comparison to the collaborator's reported SDK interface. Whether
-the learned model internally processes a whole slap or corresponding fingers
-remains **TBD**. If segmentation is approved, preserve the parent capture and
-finger-position mapping; do not let crops cross the subject boundary. Thumb
+First-milestone comparison unit: two whole four-finger slaps of the same hand
+type, following the central plan. This supports comparison to the collaborator's
+reported SDK interface. Per-finger processing and minutiae belong to later
+extensions with separate decisions. If segmentation is approved, preserve the
+parent capture and finger-position mapping; do not let crops cross the subject boundary. Thumb
 slaps should be a separate, explicitly scoped analysis or excluded by an agreed
 rule; do not mix their two-finger scores with four-finger scores silently.
 
@@ -95,9 +103,10 @@ TBD. Do not infer capture independence from distinct filenames or pixel hashes.
 The visual review shows variation but does not establish separate sessions.
 
 Run each agreed system on exactly the same external comparison list. Proposed
-arms are SDK fusion, SDK per-finger sum, an image-only embedding baseline and
-an image-plus-minutiae model; the professor must confirm the first milestone
-and whether Bozorth3/prompted VLM arms remain required. Mark method-specific
+arms for the first milestone are the image-only learned matcher, a frozen version of
+the encoder, SDK fusion and SDK per-finger sum where access permits. The final
+arm list remains to be specified; image-plus-minutiae is a later extension,
+and Bozorth3/prompted VLM inclusion remains open. Mark method-specific
 preprocessing, unavailable fingers and extraction errors rather than dropping
 their comparisons silently. SDK and sum scores have different scales: each
 needs its own development-selected threshold.
@@ -166,10 +175,12 @@ only reviewed aggregate findings, code and appropriate reproducibility artifacts
 
 ## Readiness decisions still pending
 
-1. Professor: LLM/VLM requirement, whole-slap versus per-finger first task,
-   milestone order, baseline arms and separate experiment authorization.
-2. Collaborator: exact score/manifest artifacts, source captures/subjects used
-   in every training/evaluation stage, model/components/loss and SDK settings.
+1. Professor/implementation review: encoder relationship to an LLM/VLM,
+   concrete baseline arms/model/loss and separate execution authorization;
+   whole-slap first input and staged milestone direction are recorded in the central plan.
+2. Collaborator: training/development pair mappings and exposure records, source
+   captures/subjects used in every stage, adapted targets/script and SDK settings.
+   Testing-score mappings are already audited; do not request them as missing.
 3. Data provenance: acquisition PPI, session/middle-token meanings, independent
    impressions, finger-position correspondence, data terms and thumb scope.
 4. Joint review: actual subject sets/sizes, sampling policy, low-FAR target,
