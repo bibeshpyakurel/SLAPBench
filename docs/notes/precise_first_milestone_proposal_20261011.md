@@ -14,6 +14,13 @@ feedback and the [protocol sketch](precise_protocol_sketch_20261010.md)
 contains the detailed evaluation safeguards. The original proposal filename
 is retained so existing links remain valid.
 
+**Implementation update — 2026-10-17:** The user requested progress toward the
+plan. The offline metadata validator and development/test score evaluator are
+now implemented and tested with synthetic inputs in `code/precise_matching/`.
+See the [tooling note](precise_matching_tooling_20261017.md) for contracts,
+commands and the next collaborator request. This adds validation/summary tooling;
+it does not create a real split, select an encoder/loss or run an experiment.
+
 ## Central plan and completed preparation
 
 Use this document as the central research plan. Supporting notes explain the
@@ -33,7 +40,7 @@ the time of each preparation task.
 
 The architecture sequence below depends on the data/evaluation decisions in
 this plan. Completion of the audits does not resolve capture independence or
-authorize split creation, implementation or experiments. Keep original reports
+authorize split creation, model implementation or experiments. Keep original reports
 and scores unchanged; export any later derived analyses to new dated paths.
 
 ## Approved contribution and sequence
@@ -154,20 +161,23 @@ script, example targets and SDK configuration remain useful for understanding
 or reproducing his work, but are not a prerequisite for independently drafting
 our architecture. Keep identifying mappings and source filenames local.
 
-## Future implementation and storage
+## Implementation and storage
 
-When implementation is authorized, create a dedicated `code/precise_matching/`
-package rather than repurposing the historical experiment scripts:
+A dedicated `code/precise_matching/` package now contains offline protocol and
+evaluation tooling. Extend it for future authorized model work rather than
+repurposing the historical experiment scripts:
 
-| Planned module | Responsibility |
+| Module | Responsibility and status |
 |---|---|
-| `data.py` | Load approved private data/manifests; retain capture provenance and enforce partition boundaries |
-| `encoders.py` | Shared image encoder, pinned model revision and agreed trainable components; learned/frozen configurations |
-| `losses.py` | Agreed verification objective and explicit supervision source |
-| `evaluation.py` | Continuous scores, development threshold selection, frozen-system evaluation, coverage/failures and aggregate metrics |
+| `data.py` | Implemented: validate supplied private metadata/comparisons, capture assertions and partition consistency; no image loading or split creation |
+| `encoders.py` | Future: shared image encoder, pinned model revision and agreed trainable components; learned/frozen configurations |
+| `losses.py` | Future: agreed verification objective and explicit supervision source |
+| `evaluation.py` | Implemented: supplied continuous scores, development-only cutoff, unchanged test cutoff, coverage/failures and aggregate metrics; no inference |
+| `__main__.py` | Implemented: offline `validate` / `evaluate` commands with aggregate-only output and overwrite refusal |
 
-This cleanup documents the package boundary only. No modules, dependencies,
-training entry point or architecture choices are implemented. Preserve existing
+The 2026-10-11 cleanup documented the package boundary; the 2026-10-17 task
+implements the offline portions above using only the standard library. No
+encoder, loss, training entry point or architecture is implemented. Preserve existing
 `code/precise_pairs.py`, `code/embed_verify.py`, `code/run_ridgebase_prompted.py`
 and other historical entry points at their current paths.
 

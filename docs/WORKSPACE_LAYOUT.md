@@ -1,6 +1,6 @@
 # Local workspace and public repository layout
 
-Updated 2026-10-11. This directory is the primary research workspace and the Git
+Updated 2026-10-17. This directory is the primary research workspace and the Git
 checkout. The public repository receives explicitly reviewed files from this
 checkout; a second `github/` copy is unnecessary. `.github/` contains CI and
 repository configuration, not a duplicate research project.
@@ -60,14 +60,16 @@ publishable code and dependencies explicitly. Pair manifests or per-pair scores
 containing identities or filenames require content/data-rights review before
 publication, even though historical manifests remain tracked.
 
-## Future matcher package
+## Matcher package
 
-When implementation is authorized, create `code/precise_matching/` as the
-package for the new learned matcher. Planned modules are `data.py` for private
-data/manifest loading and provenance checks, `encoders.py` for the shared vision
-encoder, `losses.py` for verification objectives, and `evaluation.py` for scoring,
-development-threshold selection and frozen-system metrics. This is a location
-and responsibility plan; no package or model is implemented by this cleanup.
+`code/precise_matching/` now contains offline `data.py` metadata/comparison
+validation, `evaluation.py` development-only cutoff selection and test metrics
+from supplied scores, and a `validate` / `evaluate` CLI. The
+[2026-10-17 tooling note](notes/precise_matching_tooling_20261017.md) documents
+its private input schemas and aggregate outputs. It does not create splits,
+generate pairs, load images or run a matcher. `encoders.py`, `losses.py` and
+training remain future implementation after the applicable decisions and task
+authorization. Only synthetic fixtures were processed in the tooling task.
 Existing experiment scripts stay at their current paths for historical reproduction.
 Code may be published after review; inputs, identifying mappings, future splits
 and manifests, minutiae, checkpoints and raw runs stay under ignored local paths.

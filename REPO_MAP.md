@@ -1,6 +1,6 @@
 # Repository map
 
-Navigation updated 2026-10-11; the original repository inventory is dated
+Navigation updated 2026-10-17; the original repository inventory is dated
 2026-09-19. See [STATUS.md](STATUS.md) for the dated audit history.
 
 The current study uses Precise only, following the professor's 2026-10-04
@@ -17,13 +17,14 @@ See [docs/WORKSPACE_LAYOUT.md](docs/WORKSPACE_LAYOUT.md) for the local/public fo
 The ignored `local/precise/` tree is prepared for private metadata, future
 splits/manifests, crops, minutiae, checkpoints and raw runs. Existing data and
 result paths are unchanged; the new folders do not contain experiment artifacts.
-When implementation is authorized, new matcher code belongs in
-`code/precise_matching/` with data, encoder, verification-loss and evaluation
-modules as described in the central plan. This is a planned package, not an
-existing implementation; historical runners remain at their current paths.
+`code/precise_matching/` now contains offline metadata validation and score
+evaluation, documented in the [tooling guide](docs/notes/precise_matching_tooling_20261017.md).
+Encoder, verification-loss and training modules remain future work as described
+in the central plan. Historical runners remain at their current paths.
 
 | Location | Observed purpose |
 |---|---|
+| `code/precise_matching/`, `tests/test_precise_matching.py` | Standard-library protocol preflight and development-fixed score evaluation; synthetic tests, no model inference |
 | `code/build_master_df.py`, `code/build_slap_images_df.py` | SD302b metadata preparation |
 | `code/archive_non_slap.py` | Moves non-SLAP images; not run in this audit |
 | `code/ridgebase_pairs.py`, `code/ridgebase_pairs_full.py` | RidgeBase pair construction; full variant supports Train/Test and device categories |

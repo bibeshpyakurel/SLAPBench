@@ -39,8 +39,12 @@ final evaluation. Minutiae and optional explanations follow the baseline.
 Dataset interpretation, training/evaluation exposure, encoder/loss, concrete
 split and low-FAR evaluation decisions remain pending. Results/split review
 before fine-tuning and separate execution authorization remain required.
-Future matcher implementation belongs under `code/precise_matching/` when
-authorized; existing experiment scripts retain their paths.
+**Progress on 2026-10-17:** `code/precise_matching/` now implements offline
+protocol validation and development-only threshold selection with unchanged
+test evaluation from supplied scores. The [tooling guide](docs/notes/precise_matching_tooling_20261017.md)
+documents the private CSV contracts and CLI. Synthetic tests cover leakage,
+capture reuse, score alignment and failures; no real split or model run was made.
+Encoder/loss implementation remains pending; historical scripts retain their paths.
 
 Use the [repository map](REPO_MAP.md) for navigation and the
 [workspace layout](docs/WORKSPACE_LAYOUT.md) for storage boundaries. Datasets,

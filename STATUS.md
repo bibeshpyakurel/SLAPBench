@@ -557,3 +557,51 @@ path/size/content review pass. Changes are Markdown only; no analysis code or
 result data changed, so experiment reruns and training were not needed. No split,
 pair creation, segmentation, minutiae extraction, downloads or external messages
 were performed.
+
+## 2026-10-17 — offline Precise matcher protocol and evaluation implementation
+
+The user requested progress toward the approved plan and clarified that
+Konain's testing-file links remain his latest update; no new capture/session
+definitions or exposure records have been supplied. The new standard-library
+`code/precise_matching/` package implements private metadata/comparison
+validation and evaluation of already generated continuous scores. It does
+not construct a real split, generate pairs, load images, choose an encoder/loss,
+run a matcher or train a model. Historical scripts and original assets remain
+unchanged.
+
+The validator checks subject separation across every listed image, whole-slap
+hand compatibility, capture ownership, supplied raw/decoded hashes, labels,
+self-pairs and duplicate unordered image/capture comparisons. Missing or
+unreviewed capture/exposure evidence is reported as aggregate blockers, not
+guessed from filename tokens. Metadata assertions and hashes are compared as
+supplied; passing checks does not independently verify acquisition, near
+duplicates, exposure history or training readiness.
+
+The evaluator requires one score/status record per development/test comparison.
+It selects a strict-greater-than cutoff from valid development impostors using
+an exact rational FAR budget and applies it unchanged to test, rejecting ties
+that exceed the budget. Reports include fixed-cutoff TAR/FAR, denominators,
+coverage, failure statuses and descriptive valid-score ROC/DET/AUC/interpolated
+EER. Failed attempts remain visible in an additional failure-as-reject view;
+they do not relax the development budget. No independent-trial confidence
+interval or population low-FAR claim is supplied.
+
+The CLI writes only reviewed aggregate JSON under new `reports/` filenames,
+refuses overwrites and resolved paths outside that tree, checks input-byte
+stability and suppresses identifying input/error text. Private input contracts,
+usage, limitations, remaining decisions and a short unsent Konain-request draft
+are in `docs/notes/precise_matching_tooling_20261017.md`. The central plan,
+README, repository map and workspace layout link the implemented tooling;
+encoder/loss/training remain future work. Existing CI discovers its tests and
+now parses Python syntax recursively, including the matcher package.
+
+Validation: all 67 offline unit tests pass, including 27 new synthetic protocol,
+score and CLI tests. End-to-end fixtures verify source preservation, aggregate
+privacy, explicit blockers and a test FAR that changes without retuning the
+development cutoff. All 300 deterministic synthetic ROC/AUC cases agree with
+scikit-learn; 1,800 cutoff choices agree with exhaustive error-budget checks.
+All 15 legacy metric files still reproduce, and the results table regenerates
+byte-identically in temporary storage. Correctness lint, Python syntax, CI YAML,
+documentation links/fences, whitespace and publication scope/size/content checks
+pass. Only synthetic metadata/scores were processed by the new package; no
+dataset, original result, manifest, model or manuscript file was changed.
