@@ -1,0 +1,91 @@
+{
+  "byte_duplicates": {
+    "duplicate_groups": 0,
+    "groups_spanning_position_labels": 0,
+    "groups_spanning_subject_labels": 0,
+    "redundant_files": 0,
+    "unique_contents": 7358
+  },
+  "constant_grayscale_images": 0,
+  "decode_failures": 0,
+  "decoded_images": 7358,
+  "dimensions_px": {
+    "1600x1500": 7358
+  },
+  "exposure": {
+    "testing_genuine": {
+      "images_in_supplied_list": 3183,
+      "local_subjects_in_supplied_list": 328
+    },
+    "testing_impostor": {
+      "images_in_supplied_list": 3178,
+      "local_subjects_in_supplied_list": 337
+    },
+    "training_genuine": {
+      "images_in_supplied_list": 7358,
+      "local_subjects_in_supplied_list": 338
+    },
+    "training_impostor": {
+      "images_in_supplied_list": 2299,
+      "local_subjects_in_supplied_list": 332
+    }
+  },
+  "filename_token_count_histogram": {
+    "3": 9,
+    "4": 7349
+  },
+  "four_finger_images": 4907,
+  "grayscale_decoded_duplicates": {
+    "duplicate_groups": 0,
+    "groups_spanning_position_labels": 0,
+    "groups_spanning_subject_labels": 0,
+    "redundant_files": 0,
+    "unique_contents": 7358
+  },
+  "historical_list_exposure": {
+    "local_images": 4907,
+    "local_subjects": 338
+  },
+  "images": 7358,
+  "limitations": [
+    "No acquisition/session facts or actual model consumption are inferred from filenames or supplied list membership.",
+    "A dHash/thumbnail screen can miss shifted, cropped, rotated or otherwise transformed derivatives and can flag unrelated files.",
+    "Candidates require private review; no file is excluded, moved, relabeled or assigned a capture ID.",
+    "Decoded grayscale equivalence is distinct from native-mode pixel identity; both conventions are recorded.",
+    "A successful decode or nonconstant image is not a biometric quality or independent-acquisition certificate.",
+    "Historical manifest membership is not proof that a particular model consumed every listed image."
+  ],
+  "metadata_byte_checks_passed": 6,
+  "modes": {
+    "L": 7358
+  },
+  "native_decoded_duplicates": {
+    "duplicate_groups": 0,
+    "groups_spanning_position_labels": 0,
+    "groups_spanning_subject_labels": 0,
+    "redundant_files": 0,
+    "unique_contents": 7358
+  },
+  "near_duplicate_screen": {
+    "automatic_exclusions": 0,
+    "confirmed_derivative_relationships": null,
+    "cross_position_candidates": 0,
+    "cross_subject_candidates": 2497,
+    "method": "64-bit horizontal dHash, 9x8 LANCZOS; Hamming <=2; 32x32 LANCZOS grayscale MAE <=5/255",
+    "nonidentical_candidates": 2685,
+    "relationships_within_hash_radius": 4549,
+    "retrieved_file_relationships": 102500
+  },
+  "other_top_level_files": 0,
+  "ready_for_split_creation": false,
+  "schema_version": 1,
+  "scope": "Offline full top-level JPEG decode and provenance readiness; no matcher execution",
+  "software": {
+    "pillow": "12.3.0"
+  },
+  "source_byte_checks_passed": 7358,
+  "subjects": 338,
+  "uninspected_subdirectories": 0,
+  "unknown_capture_images": 7358,
+  "unreviewed_exposure_images": 7358
+}

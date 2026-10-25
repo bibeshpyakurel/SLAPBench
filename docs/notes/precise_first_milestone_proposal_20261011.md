@@ -32,6 +32,16 @@ No local training, subject allocation or target conversion was performed.
 
 ## Central plan and completed preparation
 
+**Roadmap update — 2026-10-25:** the user supplied the ten-task execution roadmap
+and confirmed that no further acquisition/exposure clarification is available.
+The [full-image readiness audit](../../reports/precise-readiness-20261025/README.md)
+extends sampled decoding to the complete local JPEG collection. A
+[concrete review proposal](precise_milestone_review_20261025.md) specifies candidate
+allocation counts, sampling/selection rules and a pinned DINOv2-small design.
+These choices require review; they are not an approved split/model configuration.
+GPU inspection again finds the NVIDIA driver unavailable. Acquisition truth,
+actual exposure and the later execution gates remain open.
+
 Use this document as the central research plan. Supporting notes explain the
 background or protocol in more detail; dated reports preserve the evidence at
 the time of each preparation task.
@@ -44,6 +54,8 @@ the time of each preparation task.
 | [Collaborator-file discovery](../../reports/precise-collaborator-discovery-20261011/README.md) | Earlier scoped local search and Qwen3 export provenance | Its testing-score request was superseded by Drive intake; its missing-training-list finding was superseded on 2026-10-24 |
 | [VeriFinger testing-score audit](../../reports/precise-verifinger-audit-20261011/README.md) | All 4,200 supplied testing records validate; score calculations and comparison overlap checked | Retrospective thresholds, mixed thumb/slap population; no training exposure or SDK configuration verification |
 | [Training-list intake and overlap audit](../../reports/precise-training-intake-20261024/README.md) | 23,103 genuine and 78,592 impostor training records; exact testing pairs excluded; image/subject overlap quantified | Right-only impostor training; incomplete component fields in 3,455 genuine rows; actual consumption, binary targets and development selection unknown |
+| [Full-image readiness and compute audit](../../reports/precise-readiness-20261025/README.md) | Whole-collection decoding, duplicate screening and private per-image capture/exposure records | Acquisition/exposure review and GPU readiness remain unresolved; no split or model execution |
+| [Concrete milestone review proposal](precise_milestone_review_20261025.md) | Proposed allocation/sampling, FAR/selection/failure policy, pinned encoder/loss and implementation design | Requires review; no real assignment, training environment or experiment is certified |
 | [Pinned FPBench reference](fpbench_reference_20261024.md) | Full upstream checkout and documented script behavior | Reference code is not Konain's private Precise binary adaptation or our embedding matcher |
 | [Evaluation protocol sketch](precise_protocol_sketch_20261010.md) | Detailed subject/capture separation, development selection, failures and uncertainty safeguards | Concrete allocation, operating points and uncertainty method require review |
 | [Research brief](precise_research_brief_20261010.md) and [matching primer](fingerprint_matching_primer_20261010.md) | Discussion background, pipeline and metric explanations | Supporting material; current sequence and decision status are recorded here |

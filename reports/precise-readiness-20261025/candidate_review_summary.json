@@ -1,0 +1,22 @@
+{
+  "all_candidates_adjudicated": false,
+  "automatic_exclusions": 0,
+  "confirmed_duplicate_count": null,
+  "cross_subject_candidates_by_position": {
+    "13": 10,
+    "14": 20,
+    "15": 2467
+  },
+  "observations": [
+    "Shared white canvas and similar finger layout can produce low hash/thumbnail distance despite visible impression differences.",
+    "Reviewed same-subject examples show changes in position, contrast or impression appearance; source acquisition independence cannot be adjudicated from these views."
+  ],
+  "schema_version": 1,
+  "screen_candidates_by_position": {
+    "13": 30,
+    "14": 38,
+    "15": 2617
+  },
+  "selection": "Four lowest thumbnail-MAE same-subject and four lowest cross-subject candidates in each of thumb and four-finger groups; targeted, not representative",
+  "visually_inspected_candidate_relationships": 16
+}

@@ -1,6 +1,6 @@
 # Repository map
 
-Navigation updated 2026-10-24; the original repository inventory is dated
+Navigation updated 2026-10-25; the original repository inventory is dated
 2026-09-19. See [STATUS.md](STATUS.md) for the dated audit history.
 
 The current study uses Precise only, following the professor's 2026-10-04
@@ -33,6 +33,7 @@ in the central plan. Historical runners remain at their current paths.
 | `code/inspect_precise_images.py` | Read-only headers and sampled decoding; public aggregates, private identifying records and contact sheets |
 | `code/audit_verifinger_scores.py` | Offline audit of supplied SDK testing exports; reviewed aggregates/ROC coordinates, private identifying records |
 | `code/audit_precise_training_pairs.py` | Offline inventory of supplied training/testing lists and unordered-pair, image and subject overlap; no pair generation |
+| `code/audit_precise_readiness.py` | Full top-level JPEG decoding, native/grayscale duplicate checks, heuristic derivative screening and private capture/exposure inventory; [aggregate report](reports/precise-readiness-20261025/README.md) |
 | `code/run_verification.py` | Model loaders, prompts, response parsing, SD302b inference and metrics |
 | `code/run_ridgebase_prompted.py` | Manifest-driven prompted inference, also used for Precise |
 | `code/embed_verify.py` | Vision-encoder embedding comparisons saved as cosine scores |
@@ -111,6 +112,12 @@ unresolved. Raw
 collaborator scores and identifying mappings remain in ignored `local/precise/`.
 
 ## Environment and documents
+
+The [2026-10-25 review proposal](docs/notes/precise_milestone_review_20261025.md)
+gives concrete candidate protocol/model settings and the ten-task roadmap state.
+The accompanying [compute inspection](reports/precise-readiness-20261025/environment.md)
+finds CUDA unavailable and the external model mount inaccessible. It does not
+certify a working matcher environment or authorize system repair/training.
 
 `requirements.txt` lists GPU/model and analysis dependencies; `requirements-verify.txt`
 is the smaller verification environment. `venv/` is local and ignored. No root lockfile,

@@ -55,6 +55,13 @@ is available locally; Konain reports Qwen3 binary fine-tuning, while his exact
 target conversion and development selection remain unverified. No training
 or new subject split was performed here.
 
+**Readiness and design on 2026-10-25:** the [full-image audit](reports/precise-readiness-20261025/README.md)
+checks complete decoding and duplicate candidates, with capture/exposure details
+kept private. The [concrete review proposal](docs/notes/precise_milestone_review_20261025.md)
+specifies one pinned encoder/loss and candidate protocol settings for review.
+Acquisition/exposure facts remain unknown and the NVIDIA driver is unavailable;
+no split, model forward pass or training run was performed.
+
 Use the [repository map](REPO_MAP.md) for navigation and the
 [workspace layout](docs/WORKSPACE_LAYOUT.md) for storage boundaries. Datasets,
 collaborator mappings, future splits/manifests, minutiae and checkpoints stay

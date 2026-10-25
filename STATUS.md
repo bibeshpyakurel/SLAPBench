@@ -647,3 +647,60 @@ paid API call or external message was performed. Public outputs contain code,
 documentation and aggregate counts; private inputs and third-party assets stay
 ignored. Final syntax, documentation-link, whitespace and staged publication
 scope/content/size checks are completed before commit.
+
+## 2026-10-25 — full-image readiness audit and concrete milestone review draft
+
+The user supplied the ten-task first-milestone roadmap and confirmed that no
+new acquisition/exposure clarification from Konain is available. The new
+`code/audit_precise_readiness.py` performs strict full-image decoding, native
+and grayscale decoded-content hashing, heuristic derivative screening and
+private per-image capture/exposure bookkeeping without constructing a split or
+experimental comparison list. The aggregate report is at
+`reports/precise-readiness-20261025/`; identifying records and visual-review
+assets remain under ignored `local/precise/metadata/readiness-20261025/`.
+
+All 7,358 JPEGs decoded, all remain 1600×1500 grayscale, no constant images or
+exact byte/native/grayscale duplicate groups were found, and all image bytes
+plus six metadata inputs were rehashed unchanged. The coarse dHash/thumbnail
+screen flags 2,685 nonidentical file relationships: 2,617 thumb, 30 right-slap
+and 38 left-slap. Of these, 2,497 cross subject labels, including 30 four-finger
+relationships. These are candidates, not confirmed duplicates or labeling
+conflicts. A targeted private visual review of 16 relationships finds visible
+impression/layout/contrast differences despite coarse similarity. It does not
+adjudicate identity or acquisition independence; no exclusion or label change
+was made. The complete candidate set and unknown capture/session/exposure fields
+remain available for collaborator review.
+
+The genuine training list contains all local images/subjects; the two historical
+Precise comparison manifests together reference all 4,907 four-finger images and
+all 338 subjects. Membership remains distinct from actual model consumption.
+Right-only training impostors, 3,455 genuine zero-score rows missing component
+fields, parent acquisitions, actual training/development use and SDK settings
+remain unresolved; no scores or missing fields were recoded.
+
+`docs/notes/precise_milestone_review_20261025.md` makes protocol/model decisions
+reviewable: conditional 202/68/68 subject counts, seed/sampling, 0.1% FAR,
+development selection/failure rules, proposed dependence-aware uncertainty and
+a DINOv2-small candidate pinned to `ed25f3a31f01632728cabb09d1542f84ab7b0056`.
+It specifies frozen/adapted components, 384-dimensional cosine embeddings,
+whole-image preprocessing, a supervised cosine contrastive loss and resource/
+implementation design. These are proposals, not approved configuration or new
+performance evidence. The central plan and navigation link the report/design.
+
+Read-only compute inspection again finds the RTX 4080 SUPER on PCI but no usable
+NVIDIA driver/device nodes; PyTorch CUDA is unavailable. Existing `.venv/`
+packages, CUDA build and RAM/disk were recorded privately; the external `models`
+target is unavailable. Public checkpoint metadata only was retrieved. Isolated
+matcher dependency setup, runtime compatibility and synthetic real-model checks
+remain pending. No system repair, weight download, real model instantiation,
+new subject split, matching-list generation, segmentation, training, paid call,
+external message or manuscript edit was performed. Later roadmap tasks remain
+behind acquisition/exposure, protocol/results/split and execution review gates.
+
+Validation: 82 offline tests pass, including seven new synthetic decode,
+duplicate/hash-retrieval, source-change, malformed-history, privacy and output
+boundary tests. All 15 legacy metrics reproduce; correctness lint, recursive
+Python syntax, changed documentation links/fences, whitespace and publication
+scope/content/size review pass. The results-table generator runs in temporary
+storage without altering its original output. Original datasets, collaborator
+lists, results/manifests, model files and paper assets are preserved.

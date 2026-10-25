@@ -1,6 +1,6 @@
 # Local workspace and public repository layout
 
-Updated 2026-10-24. This directory is the primary research workspace and the Git
+Updated 2026-10-25. This directory is the primary research workspace and the Git
 checkout. The public repository receives explicitly reviewed files from this
 checkout; a second `github/` copy is unnecessary. `.github/` contains CI and
 repository configuration, not a duplicate research project.
@@ -49,6 +49,13 @@ and verified identical to the earlier input. The training/testing lists have
 no shared exact pairs but share every testing image basename and subject.
 Actual training consumption, development allocation, capture independence and
 SDK settings remain unresolved.
+The 2026-10-25 `metadata/readiness-20261025/` record adds per-image full-decode
+hashes, unassigned acquisition/exposure fields, list-membership evidence and
+private near-duplicate candidates. `metadata/compute-20261025/` retains package,
+hardware and public model-metadata receipts. These are inventories, not a
+training split, approved capture mapping or verified model environment. See the
+[readiness report](../reports/precise-readiness-20261025/README.md) and
+[review proposal](notes/precise_milestone_review_20261025.md).
 These preparation tasks generated no new subject splits, matching manifests,
 segmented crops, minutiae, training checkpoints or matcher runs.
 

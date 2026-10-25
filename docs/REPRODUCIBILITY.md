@@ -215,6 +215,17 @@ No third-party dependencies or model checkpoints were installed or executed.
 
 ### Historical full experiment environment
 
+The [2026-10-25 readiness report](../reports/precise-readiness-20261025/README.md)
+documents the new full-decode/provenance audit and exact reproduction command.
+Its inputs are authorized local JPEGs, the four preserved collaborator lists
+and the two existing Precise comparison manifests. Private image/hash/candidate
+and exposure records stay under `local/precise/metadata/readiness-20261025/`;
+compute/package/model-metadata receipts stay under `metadata/compute-20261025/`.
+The [review design](notes/precise_milestone_review_20261025.md) pins a candidate
+DINOv2 revision without acquiring its weights. The inspected `.venv/` is not a
+verified matcher environment: CUDA is unavailable, the external model path is
+unavailable and isolated setup/synthetic model checks remain pending.
+
 ```bash
 git switch dev
 git config core.hooksPath .githooks
