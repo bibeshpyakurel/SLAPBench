@@ -704,3 +704,41 @@ Python syntax, changed documentation links/fences, whitespace and publication
 scope/content/size review pass. The results-table generator runs in temporary
 storage without altering its original output. Original datasets, collaborator
 lists, results/manifests, model files and paper assets are preserved.
+
+## 2026-10-25 — isolated candidate matcher dependencies prepared
+
+Continuing roadmap task 4, prepared a fresh Python 3.12.3 environment under
+ignored `local/precise/environments/matcher-candidate-20261025/`. Dependency
+preparation precedes the separately gated model-loading/forward/backward check
+and does not approve the proposed model/protocol. The new
+`code/precise_matching/environment/requirements.in` records direct candidate
+choices; its Linux x86_64 / CPython 3.12 / CUDA 12.4 lock fixes all 50 runtime
+wheel URLs and SHA-256 digests. Installation enforces hashes and binary wheels
+with no package-index lookup. Package source hosts are reviewed PyPI, PyTorch
+and NVIDIA endpoints; no checkpoint or dataset input was downloaded.
+
+All 50 installed runtime versions and installation-report hashes match the
+resolution. `pip check` passes. Isolated-mode, network-disabled imports of the
+selected libraries and DINOv2 model/configuration classes succeed, with module
+paths inside the new environment. No model object was created or forward/
+backward executed. Setuptools' 11 import-visible vendored metadata entries were
+verified inside its pinned wheel and distinguished from installed wheel count.
+The historical `.venv/` package inventory is unchanged. Private logs/resolver/
+installation/version/validation receipts stay under
+`local/precise/metadata/environment-preparation-20261025/`; public aggregates
+and exact restore commands are in `reports/precise-environment-20261025/`.
+
+The environment occupies about 5.3 GiB. PyTorch includes CUDA 12.4 support, but
+CUDA remains unavailable with zero devices, so usable driver/runtime compatibility,
+device memory and model execution are not verified. System repair, checkpoint
+access, model/protocol acceptance, acquisition/exposure clarification and later
+results/split/execution review gates remain pending. Current reproduction,
+workspace and review-plan notes link this follow-up; earlier audit reports
+remain historical snapshots. No original dataset, result, manifest, model or
+paper asset changed.
+
+Validation: hash-enforced install, complete lock/version/hash agreement,
+dependency consistency, offline imports, isolation and historical-environment
+preservation pass. Documentation links/fences, JSON, whitespace and publication
+scope/content/size are reviewed before commit. This change adds dependency and
+documentation artifacts only; model execution remains unverified.

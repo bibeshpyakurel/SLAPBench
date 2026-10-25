@@ -152,14 +152,17 @@ versions and disk/RAM inspection. Existing `.venv/` was inspected without
 upgrading it. Private full package/environment/model-metadata receipts are in
 `local/precise/metadata/compute-20261025/`.
 
-After model review, create an isolated environment under ignored
-`local/precise/environments/`; do not modify the historical environment. Proposed
-starting pins match inspected packages: Python 3.12.3, torch 2.6.0+cu124,
-transformers 5.18.0, Pillow 12.3.0, NumPy 2.5.3, safetensors 0.8.0 and
-huggingface-hub 1.33.0. A full resolved lock, dependency compatibility, driver
-compatibility and synthetic model check remain unverified. No new training
-environment is represented as working. System-level driver repair and restoring
-the external model drive require their own scoped work; neither was attempted.
+**Dependency preparation update — 2026-10-25:** roadmap task 4 permits isolated
+dependency preparation before model execution. A candidate environment now
+exists under ignored `local/precise/environments/matcher-candidate-20261025/`.
+The [follow-up report](../../reports/precise-environment-20261025/README.md)
+records a 50-wheel hash-pinned lock, successful dependency checks and offline
+DINOv2 class imports. The historical environment's package inventory is unchanged.
+This prepares the proposed stack without accepting the model/protocol choice.
+GPU driver/runtime compatibility, memory fit and the authorized synthetic model
+check remain unverified; no model object or training run was created. System-level
+driver repair and restoring the external model drive require their own scoped
+work; neither was attempted.
 
 ## Decisions requested and roadmap state
 
@@ -182,7 +185,7 @@ the external model drive require their own scoped work; neither was attempted.
 | 1. Provenance/quality | Full decoding and duplicate screening performed; private per-image capture/exposure unknowns recorded; acquisition facts, candidate adjudication and actual exposure still open |
 | 2. Final protocol | Concrete review draft above; finalization depends on task 1 and review |
 | 3. Model/training design | One pinned candidate and concrete configuration proposed; acceptance pending |
-| 4. Compute | Inspected and recorded; GPU unavailable, weight mount unavailable; isolated dependency setup and authorized synthetic check pending |
+| 4. Compute | Isolated candidate dependencies installed, fully wheel/hash-pinned and import-checked; GPU/weight mount unavailable; runtime compatibility and authorized synthetic check pending |
 | 5. Split/comparison generation | Gated by provenance/exposure and protocol/split review; no artifacts generated |
 | 6–7. Loader/encoder/loss/training | Design prepared; implementation follows approved configuration and task scope |
 | 8. Baseline/training | Gated by reviewed tasks 4–7 and explicit execution authorization |

@@ -224,7 +224,13 @@ compute/package/model-metadata receipts stay under `metadata/compute-20261025/`.
 The [review design](notes/precise_milestone_review_20261025.md) pins a candidate
 DINOv2 revision without acquiring its weights. The inspected `.venv/` is not a
 verified matcher environment: CUDA is unavailable, the external model path is
-unavailable and isolated setup/synthetic model checks remain pending.
+unavailable and synthetic model checks remain pending. A subsequent
+[candidate environment preparation](../reports/precise-environment-20261025/README.md)
+installs 50 hash-pinned runtime wheels under ignored
+`local/precise/environments/matcher-candidate-20261025/` and verifies dependency
+consistency and offline DINOv2 class imports. Follow that report and its platform
+lock for isolated restoration. This does not establish GPU execution readiness
+or acceptance of the proposed model/protocol.
 
 ```bash
 git switch dev

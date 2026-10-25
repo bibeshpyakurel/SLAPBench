@@ -1,0 +1,15 @@
+# Candidate dependency inputs, 2026-10-25. Protocol/model acceptance is pending.
+# Resolve on Linux x86_64, CPython 3.12. Do not upgrade the historical environment.
+# The reviewed lock pins every resolved wheel and SHA-256; prefer it for restore.
+# Dependency preparation does not authorize checkpoint loading or execution.
+--index-url https://pypi.org/simple
+--extra-index-url https://download.pytorch.org/whl/cu124
+--only-binary=:all:
+
+torch==2.6.0+cu124
+torchvision==0.21.0+cu124
+transformers==5.18.0
+Pillow==12.3.0
+numpy==2.5.3
+safetensors==0.8.0
+huggingface-hub==1.33.0

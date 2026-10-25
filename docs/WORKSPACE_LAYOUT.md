@@ -56,6 +56,12 @@ hardware and public model-metadata receipts. These are inventories, not a
 training split, approved capture mapping or verified model environment. See the
 [readiness report](../reports/precise-readiness-20261025/README.md) and
 [review proposal](notes/precise_milestone_review_20261025.md).
+The follow-up `environments/matcher-candidate-20261025/` contains the isolated
+candidate dependency environment, with private preparation/validation receipts
+under `metadata/environment-preparation-20261025/`. Reviewed requirements and
+the platform-specific wheel/hash lock live in `code/precise_matching/environment/`;
+the [public environment report](../reports/precise-environment-20261025/README.md)
+records successful dependency/import checks and the remaining GPU/execution gates.
 These preparation tasks generated no new subject splits, matching manifests,
 segmented crops, minutiae, training checkpoints or matcher runs.
 
