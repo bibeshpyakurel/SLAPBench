@@ -742,3 +742,61 @@ dependency consistency, offline imports, isolation and historical-environment
 preservation pass. Documentation links/fences, JSON, whitespace and publication
 scope/content/size are reviewed before commit. This change adds dependency and
 documentation artifacts only; model execution remains unverified.
+
+
+## 2026-10-25 — parallel source investigation and evidence handoff
+
+The user assigned the ten-task first milestone to another worktree and asked
+for parallel investigation of the upstream reference, Precise packages and
+shared Drive material. This task adds a dedicated aggregate report at
+`reports/precise-source-evidence-20261025/` and an implementation handoff at
+`docs/notes/precise_parallel_source_brief_20261025.md`, without changing the
+parallel readiness audit, matcher code, original lists or proposed protocol.
+
+The 23,103 training and 2,100 testing genuine records together cover all 25,203
+possible unordered distinct-file pairs within local subject/slap groups:
+8,393 right, 8,418 left and 8,392 thumb pairs. Known consistent endpoints,
+uniqueness and combinatorial capacity establish coverage without constructing
+new pairs. This describes supplied membership, not the original generator,
+independent captures, actual consumption or binary targets.
+
+All 7,358 penultimate filename fields parse under two candidate calendar/time
+formats (3,060 long-form and 4,298 short-form). All 1,014 subject/slap groups
+have distinct candidate times; 12 span candidate calendar dates. Only 41 of
+the 2,100 genuine test rows and 679 genuine training rows cross candidate dates.
+Acquisition/export/processing meaning remains unverified; no session or capture
+IDs were assigned. A private candidate mapping marks every interpretation false
+and narrows the remaining acquisition question without manufacturing provenance.
+
+Both local Precise ZIP central directories contain 7,358 JPEG files and no
+metadata documents. Their path/CRC/size/compressed-size maps agree, and image
+names/sizes match the dataset; full archive/image byte equality is not claimed.
+All 7,358 JPEG headers expose only JFIF fields through Pillow, with no EXIF
+tags, nonempty comments or header errors; no pixels were decoded by this probe.
+The recommended upstream FPBench checkout/history remains at the pinned
+revision. Its four reachable commits contain no Precise/binary/VeriFinger
+keyword hits in inspected code/docs/JSON/YAML; its matching training/evaluation
+schemas remain multi-image, four-option MCQs. The repository has one advertised
+branch, no advertised tags, one artifact-release issue and no pull requests at
+inspection. This is the repository Konain recommended, not an identified copy
+of his private adaptation.
+
+The upstream checkpoint Drive link returned 404 in the connected account.
+Both explicitly shared test files remain directly accessible, with no comments
+or exposed parent folder. Scoped Drive searches and six historical project
+planning documents did not locate verified acquisition definitions or the
+Precise binary conversion/consumption record. Search absence does not prove
+absence; the directly accessible genuine test file did not surface in search.
+Private receipts retain source IDs/dates/text, scope and access outcomes.
+Historical document instructions were treated as evidence, not authorization;
+the removed student guide was not restored to the active public tree.
+
+Validation: independent parsing recomputes genuine-pair coverage and candidate
+time counts; one-off private-script syntax, public-image-name/private-document-ID
+privacy scan, local document links and whitespace pass. All 15 legacy metric
+files reproduce. Staged publication scope, size and content are reviewed before
+commit. No new subject assignment, comparison list, image extraction, model
+execution, dependency/weight download, segmentation, training, paid call,
+sharing change or external message was performed. Source-evidence work can
+proceed alongside implementation; model/loss/FAR decisions still require the
+project's review rather than inference from the collaborator's materials.

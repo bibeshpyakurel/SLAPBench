@@ -1,0 +1,109 @@
+{
+  "archive_central_directory_checks": [
+    {
+      "archive_bytes": 5679745916,
+      "file_count": 7358,
+      "image_basenames_and_sizes_match_dataset": true,
+      "jpeg_count": 7358,
+      "local_archive": "Precise.zip",
+      "other_file_count": 0
+    },
+    {
+      "archive_bytes": 5679745916,
+      "file_count": 7358,
+      "image_basenames_and_sizes_match_dataset": true,
+      "jpeg_count": 7358,
+      "local_archive": "Precise (1).zip",
+      "other_file_count": 0
+    }
+  ],
+  "archive_limits": "Central-directory metadata only; images not extracted and full archive bytes not compared.",
+  "archives_have_equal_path_crc_size_compressed_size_maps": true,
+  "candidate_time_fields": {
+    "formats": {
+      "%Y%m%d%H%M%S": 3060,
+      "%y%m%d-%H%M%S": 4298
+    },
+    "genuine_rows_crossing_candidate_dates": {
+      "testing": {
+        "13": 15,
+        "14": 13,
+        "15": 13
+      },
+      "training": {
+        "13": 225,
+        "14": 227,
+        "15": 227
+      }
+    },
+    "groups_spanning_multiple_candidate_dates": 12,
+    "groups_with_multiple_distinct_candidate_times": 1014,
+    "groups_with_repeated_candidate_times": 0,
+    "images_with_valid_calendar_shapes": 7358,
+    "interpretation_verified": false,
+    "limits": "Calendar-shaped values may describe acquisition, export or processing. No capture IDs, session labels or demographic interpretation are assigned.",
+    "subject_slap_groups": 1014
+  },
+  "genuine_comparison_coverage": {
+    "all_possible_distinct_filename_genuine_pairs_accounted_for": true,
+    "all_records": 25203,
+    "all_rows_use_distinct_known_files_in_one_subject_and_slap_group": true,
+    "observed_pairs_by_slap_type": {
+      "13": 8393,
+      "14": 8418,
+      "15": 8392
+    },
+    "possible_distinct_filename_pairs_by_slap_type": {
+      "13": 8393,
+      "14": 8418,
+      "15": 8392
+    },
+    "testing_records": 2100,
+    "training_records": 23103,
+    "unique_unordered_pairs": 25203
+  },
+  "genuine_input_byte_checks_passed": 2,
+  "jpeg_metadata_probe": {
+    "exif_tag_presence_counts": {},
+    "files": 7358,
+    "header_errors": 0,
+    "info_key_presence_counts": {
+      "jfif": 7358,
+      "jfif_density": 7358,
+      "jfif_unit": 7358,
+      "jfif_version": 7358
+    },
+    "limits": "Headers only; no pixel decoding, image modification or acquisition inference.",
+    "nonempty_jpeg_comments": 0
+  },
+  "observed_date": "2026-10-25",
+  "scope": "Read-only source investigation; candidate timestamps are unverified",
+  "upstream": {
+    "keyword_hit_files_across_history": 0,
+    "limits": "Absence in this public history does not establish absence of a private adaptation.",
+    "matching_schemas": {
+      "benchmark/matching_multiple_all_data.json": {
+        "images_per_question": {
+          "3": 320,
+          "4": 484
+        },
+        "options_per_question": {
+          "4": 804
+        },
+        "questions": 804
+      },
+      "finetuning/ft_json/matching_multiple_all_data.json": {
+        "images_per_question": {
+          "3": 716,
+          "4": 1084
+        },
+        "options_per_question": {
+          "4": 1800
+        },
+        "questions": 1800
+      }
+    },
+    "reachable_commits_checked": 4,
+    "revision": "ed27ae669947bfd157522d537a9f9c77b4bf3189"
+  }
+}
