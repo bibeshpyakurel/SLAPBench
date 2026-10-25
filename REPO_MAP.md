@@ -1,6 +1,6 @@
 # Repository map
 
-Navigation updated 2026-10-17; the original repository inventory is dated
+Navigation updated 2026-10-24; the original repository inventory is dated
 2026-09-19. See [STATUS.md](STATUS.md) for the dated audit history.
 
 The current study uses Precise only, following the professor's 2026-10-04
@@ -32,6 +32,7 @@ in the central plan. Historical runners remain at their current paths.
 | `code/audit_precise_dataset.py` | Read-only Precise filename/byte-duplicate inventory; aggregate output without identifiers |
 | `code/inspect_precise_images.py` | Read-only headers and sampled decoding; public aggregates, private identifying records and contact sheets |
 | `code/audit_verifinger_scores.py` | Offline audit of supplied SDK testing exports; reviewed aggregates/ROC coordinates, private identifying records |
+| `code/audit_precise_training_pairs.py` | Offline inventory of supplied training/testing lists and unordered-pair, image and subject overlap; no pair generation |
 | `code/run_verification.py` | Model loaders, prompts, response parsing, SD302b inference and metrics |
 | `code/run_ridgebase_prompted.py` | Manifest-driven prompted inference, also used for Precise |
 | `code/embed_verify.py` | Vision-encoder embedding comparisons saved as cosine scores |
@@ -54,6 +55,8 @@ in the central plan. Historical runners remain at their current paths.
 | `reports/precise-readiness-20261004/`, `reports/precise-inspection-20261010/` | Completed aggregate byte inventory, all-image headers and sampled image review |
 | `reports/precise-collaborator-discovery-20261011/` | Historical local search; subsequent Drive intake supersedes its testing-score request |
 | `reports/precise-verifinger-audit-20261011/` | Completed testing-score audit; population, metrics and comparison limits |
+| `reports/precise-training-intake-20261024/` | Training-list receipt, exact-pair exclusion, image/subject overlap and input-format/population findings |
+| `local/precise/references/FPBench/` (ignored) | Complete pinned upstream reference; see `docs/notes/fpbench_reference_20261024.md` |
 
 ## Local datasets and models
 
@@ -100,8 +103,11 @@ accepts for both fused and summed scores. Its four-finger slice has 1,440 genuin
 and 1,427 impostor comparisons; thumbs are reported separately. Thresholds are
 evaluation-selected retrospective summaries. Only 60 genuine and zero impostor
 pairs overlap the earlier primary VLM manifest, so those aggregates are not a
-common-pair method comparison. Training mappings/exposure, capture independence,
-SDK settings and development-threshold provenance remain unresolved. Raw
+common-pair method comparison. The 2026-10-24 training intake now establishes
+supplied training-list membership: exact testing pairs are excluded, but all
+testing image basenames and subjects are shared. Actual training consumption,
+capture independence, SDK settings and development-threshold provenance remain
+unresolved. Raw
 collaborator scores and identifying mappings remain in ignored `local/precise/`.
 
 ## Environment and documents

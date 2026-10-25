@@ -605,3 +605,45 @@ byte-identically in temporary storage. Correctness lint, Python syntax, CI YAML,
 documentation links/fences, whitespace and publication scope/size/content checks
 pass. Only synthetic metadata/scores were processed by the new package; no
 dataset, original result, manifest, model or manuscript file was changed.
+
+
+## 2026-10-25 — complete collaborator training-list intake and FPBench reference
+
+The intake begun on 2026-10-24 is organized under ignored
+`local/precise/metadata/konain-intake-20261024/`: 23,103 genuine and 78,592
+impostor training records, plus 2,100 genuine and 2,100 impostor testing records.
+A fresh authenticated download of the supplied Drive link is byte-identical to
+the previously preserved impostor test input. Original files remain unchanged;
+private receipts retain source links, hashes and identifying overlap evidence.
+
+The new standard-library `code/audit_precise_training_pairs.py` inventories the
+two observed score formats and compares unordered pairs, image basenames and
+filename subjects. No exact testing pair occurs in training, including reversed
+pairs. However, all 4,869 testing images and all 337 testing subjects occur in
+the supplied training lists. For four-finger slaps alone, all 3,283 testing
+images and 330 subjects are shared. This confirms pair exclusion, not the
+approved subject-disjoint protocol or actual consumption by a training job.
+All supplied training impostors are right-hand only; 3,455 genuine training
+rows have fused score zero without per-finger fields. Missing fields remain
+unknown and zero is not converted into a failure or nonmatch target.
+
+The complete FPBench reference checkout is preserved under ignored
+`local/precise/references/FPBench/`, detached at
+`ed27ae669947bfd157522d537a9f9c77b4bf3189`. Static inspection is documented in
+`docs/notes/fpbench_reference_20261024.md`; the published answer-text fine-tuning
+script does not contain Konain's Precise-specific binary conversion or a
+subject-disjoint development protocol. His current binary fine-tuning is
+collaborator-reported, not locally verified. The approved embedding-matcher
+milestone remains unchanged. Navigation, the central plan and reproduction
+instructions now distinguish supplied training membership from actual exposure.
+
+Validation: all 75 offline unit tests pass, including eight new synthetic
+parser, overlap, source-preservation and output-boundary tests. Correctness
+lint passes and all 15 legacy metric files reproduce. An independent parser
+confirms the aggregate pair/image/subject overlap. The pinned reference passes
+Git object verification. Source records, original results and historical assets
+are preserved. No new split, pair generation, model execution, fine-tuning,
+paid API call or external message was performed. Public outputs contain code,
+documentation and aggregate counts; private inputs and third-party assets stay
+ignored. Final syntax, documentation-link, whitespace and staged publication
+scope/content/size checks are completed before commit.

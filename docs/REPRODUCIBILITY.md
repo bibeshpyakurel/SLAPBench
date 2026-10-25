@@ -121,7 +121,7 @@ before attempting inference. Existing parsers also need the previously required
 review before a formal run; no pair generation, segmentation, fine-tuning or
 fingerprint experiment was performed during setup.
 
-### Current Precise preparation (updated 2026-10-11)
+### Current Precise preparation (updated 2026-10-24)
 
 See [WORKSPACE_LAYOUT.md](WORKSPACE_LAYOUT.md) for the prepared local folders,
 historical asset locations and reviewed-publication workflow. This checkout is
@@ -131,8 +131,9 @@ The next study uses `datasets/Precise/`. SD302b and RidgeBase assets and command
 remain available for reproducing historical work. Do not move or delete those
 assets to change the research focus; existing manifests depend on their paths.
 Precise source/acquisition documentation, session meanings, physical resolution,
-data terms and the collaborator's training/evaluation subjects still need to be
-established before freezing a protocol. Start with the
+data terms and the concrete evaluation protocol still need review. Supplied
+collaborator training/testing membership is now audited, while actual training
+consumption and development allocation remain unverified. Start with the
 [central research plan](notes/precise_first_milestone_proposal_20261011.md);
 the [preparation note](notes/precise_preparation_20261004.md) preserves the
 professor's feedback and dated follow-ups.
@@ -176,8 +177,41 @@ these two inputs from the collaborator's authorized sharing to reproduce the
 [2026-10-11 score audit](../reports/precise-verifinger-audit-20261011/README.md);
 that report provides the exact command and requires new output directories.
 No SDK license, matcher execution or model inference is needed to recompute
-these supplied scores. Training records and SDK acquisition/configuration
-provenance are separate missing inputs.
+these supplied scores. The training-list receipt below supersedes earlier
+statements that those lists are missing; SDK acquisition/configuration and the
+actual binary training conversion remain separate unknowns.
+
+### Collaborator training lists and pinned FPBench reference (2026-10-24)
+
+The ignored `local/precise/metadata/konain-intake-20261024/` bundle contains:
+
+- `genuine_filtered_minus2100.txt`: 23,103 supplied genuine training records.
+- `imposter_filtered_minus2100_78592.txt`: 78,592 supplied impostor training records.
+- `testing_genuine.txt` and `testing_impostor.txt`: 2,100 records each, preserved
+  from the original intake and a fresh authenticated impostor-file download.
+- `source_provenance.json` and `audit/audit_details.json`: private origin/hash
+  records and identifying overlap evidence.
+
+Obtain the training inputs from Konain's authorized sharing. The test source IDs
+are `1rru-nFStR6cgzJszI6YKjtQmlkRIV4Kj` (genuine) and
+`1MAWGm71PZNYtlLnAA8WAY-84alA4mDdO` (impostor); the canonical Drive links and
+hashes are retained in the private receipts. Originals in Downloads and the
+earlier intake were not moved or overwritten. Follow the
+[new intake report](../reports/precise-training-intake-20261024/README.md) to
+reproduce the standard-library audit into fresh output directories.
+
+The new lists exclude exact testing pairs, but share every testing image
+basename and subject. Also, the supplied training impostors are right-hand
+only, and 3,455 genuine training rows have fused score zero without component
+fields. These inputs are collaborator records, not our approved subject split
+or a ready-to-run binary training dataset.
+
+The full FPBench repository is available at ignored
+`local/precise/references/FPBench/`, pinned to
+`ed27ae669947bfd157522d537a9f9c77b4bf3189`. The
+[reference guide](notes/fpbench_reference_20261024.md) records restoration
+commands, the Qwen entry-point digest, source terms and integration limitations.
+No third-party dependencies or model checkpoints were installed or executed.
 
 ### Historical full experiment environment
 

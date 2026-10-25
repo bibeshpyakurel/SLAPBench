@@ -21,6 +21,15 @@ See the [tooling note](precise_matching_tooling_20261017.md) for contracts,
 commands and the next collaborator request. This adds validation/summary tooling;
 it does not create a real split, select an encoder/loss or run an experiment.
 
+**Collaborator update — 2026-10-24:** the two supplied training lists and the
+existing testing files are now [organized and audited](../../reports/precise-training-intake-20261024/README.md).
+The 101,695 training pairs exclude all 4,200 exact testing pairs, but include
+every testing image basename and subject elsewhere. This is not the approved
+subject-disjoint protocol. A [pinned FPBench checkout](fpbench_reference_20261024.md)
+is preserved locally; Konain reports Qwen3 binary fine-tuning, but the reference
+does not contain his Precise-specific conversion or development procedure.
+No local training, subject allocation or target conversion was performed.
+
 ## Central plan and completed preparation
 
 Use this document as the central research plan. Supporting notes explain the
@@ -32,8 +41,10 @@ the time of each preparation task.
 | [Professor direction and preparation history](precise_preparation_20261004.md) | Precise-only direction and dated follow-ups | Does not select concrete model, loss or split parameters |
 | [Read-only dataset inventory](../../reports/precise-readiness-20261004/README.md) | 7,358 JPEGs, 338 filename subjects, 4,907 four-finger slaps; no exact byte duplicates | Filename labels and distinct bytes do not prove independent acquisitions |
 | [Image inspection](../../reports/precise-inspection-20261010/README.md) | All headers are 1600×1500 grayscale; all 35 sampled images decoded | Physical PPI, sessions and whole-dataset decoded/near-duplicate status remain unknown |
-| [Collaborator-file discovery](../../reports/precise-collaborator-discovery-20261011/README.md) | Earlier scoped local search and Qwen3 export provenance | Its testing-score request was superseded by later Drive intake; training mappings remain missing |
+| [Collaborator-file discovery](../../reports/precise-collaborator-discovery-20261011/README.md) | Earlier scoped local search and Qwen3 export provenance | Its testing-score request was superseded by Drive intake; its missing-training-list finding was superseded on 2026-10-24 |
 | [VeriFinger testing-score audit](../../reports/precise-verifinger-audit-20261011/README.md) | All 4,200 supplied testing records validate; score calculations and comparison overlap checked | Retrospective thresholds, mixed thumb/slap population; no training exposure or SDK configuration verification |
+| [Training-list intake and overlap audit](../../reports/precise-training-intake-20261024/README.md) | 23,103 genuine and 78,592 impostor training records; exact testing pairs excluded; image/subject overlap quantified | Right-only impostor training; incomplete component fields in 3,455 genuine rows; actual consumption, binary targets and development selection unknown |
+| [Pinned FPBench reference](fpbench_reference_20261024.md) | Full upstream checkout and documented script behavior | Reference code is not Konain's private Precise binary adaptation or our embedding matcher |
 | [Evaluation protocol sketch](precise_protocol_sketch_20261010.md) | Detailed subject/capture separation, development selection, failures and uncertainty safeguards | Concrete allocation, operating points and uncertainty method require review |
 | [Research brief](precise_research_brief_20261010.md) and [matching primer](fingerprint_matching_primer_20261010.md) | Discussion background, pipeline and metric explanations | Supporting material; current sequence and decision status are recorded here |
 | [Workspace layout](../WORKSPACE_LAYOUT.md) and [reproduction notes](../REPRODUCIBILITY.md) | Private storage, reviewed public exports and offline-audit reproduction | Data, collaborator records and weights are not reconstructible from public Git alone |
@@ -131,8 +142,11 @@ and scores on the future approved list remain practical dependencies.
 
 Historical evaluation exposure must be recorded separately from training
 exposure. The supplied SDK testing records cover 337 filename subjects, while
-the local inventory has 338. No sufficiently sized untouched subject cohort
-has been established. Subject-disjoint future training alone cannot make an
+the local inventory has 338. The 2026-10-24 supplied training lists cover all
+338 subjects and all 7,358 image basenames, including every testing image and
+subject. This is list membership, not proof of actual model consumption.
+No sufficiently sized untouched subject cohort has been established.
+Subject-disjoint future training alone cannot make an
 already inspected cohort an untouched prospective test; agree feasible claim
 scope and evaluation exposure with the professor before choosing a split.
 
@@ -155,10 +169,13 @@ Dataset interpretation is the immediate priority:
 3. What acquisition/session, sensor, physical resolution and annotation metadata
    exists, and are there known duplicates or labeling exceptions?
 
-Training/development pair mappings and subject/image exposure records remain
-necessary to assess reuse and evaluation eligibility. His adapted training
-script, example targets and SDK configuration remain useful for understanding
-or reproducing his work, but are not a prerequisite for independently drafting
+Training pair mappings are now available and audited; do not ask for the same
+two lists again. A separate development allocation and actual consumption records
+remain necessary for reproduction. Clarify the right-only impostor population
+and genuine zero-score rows without components. His adapted binary training
+script/example targets and SDK configuration remain useful for understanding
+or reproducing his work; the public FPBench reference does not supply those
+Precise-specific choices. These are not prerequisites for independently drafting
 our architecture. Keep identifying mappings and source filenames local.
 
 ## Implementation and storage

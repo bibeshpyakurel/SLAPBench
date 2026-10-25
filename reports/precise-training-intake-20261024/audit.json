@@ -1,0 +1,207 @@
+{
+  "classes": {
+    "testing_genuine": {
+      "complete_component_records": 2100,
+      "duplicate_unordered_pair_excess": 0,
+      "filename_label_mismatches": 0,
+      "filename_subjects": 328,
+      "fused_only_by_slap_type": {},
+      "fused_only_records": 0,
+      "fused_only_zero_records": 0,
+      "fused_score_range": [
+        0,
+        841
+      ],
+      "missing_local_image_basenames": 0,
+      "mixed_or_unknown_slap_pairs": 0,
+      "records": 2100,
+      "self_image_pairs": 0,
+      "slap_type_counts": {
+        "13": 749,
+        "14": 691,
+        "15": 660
+      },
+      "unexpected_supplied_finger_counts": 0,
+      "unique_image_basenames": 3183,
+      "unique_unordered_pairs": 2100,
+      "unrecognized_filename_pairs": 0
+    },
+    "testing_impostor": {
+      "complete_component_records": 2100,
+      "duplicate_unordered_pair_excess": 0,
+      "filename_label_mismatches": 0,
+      "filename_subjects": 337,
+      "fused_only_by_slap_type": {},
+      "fused_only_records": 0,
+      "fused_only_zero_records": 0,
+      "fused_score_range": [
+        0,
+        47
+      ],
+      "missing_local_image_basenames": 0,
+      "mixed_or_unknown_slap_pairs": 0,
+      "records": 2100,
+      "self_image_pairs": 0,
+      "slap_type_counts": {
+        "13": 756,
+        "14": 671,
+        "15": 673
+      },
+      "unexpected_supplied_finger_counts": 0,
+      "unique_image_basenames": 3178,
+      "unique_unordered_pairs": 2100,
+      "unrecognized_filename_pairs": 0
+    },
+    "training_genuine": {
+      "complete_component_records": 19648,
+      "duplicate_unordered_pair_excess": 0,
+      "filename_label_mismatches": 0,
+      "filename_subjects": 338,
+      "fused_only_by_slap_type": {
+        "13": 754,
+        "14": 1136,
+        "15": 1565
+      },
+      "fused_only_records": 3455,
+      "fused_only_zero_records": 3455,
+      "fused_score_range": [
+        0,
+        876
+      ],
+      "missing_local_image_basenames": 0,
+      "mixed_or_unknown_slap_pairs": 0,
+      "records": 23103,
+      "self_image_pairs": 0,
+      "slap_type_counts": {
+        "13": 7644,
+        "14": 7727,
+        "15": 7732
+      },
+      "unexpected_supplied_finger_counts": 0,
+      "unique_image_basenames": 7358,
+      "unique_unordered_pairs": 23103,
+      "unrecognized_filename_pairs": 0
+    },
+    "training_impostor": {
+      "complete_component_records": 78592,
+      "duplicate_unordered_pair_excess": 0,
+      "filename_label_mismatches": 0,
+      "filename_subjects": 332,
+      "fused_only_by_slap_type": {},
+      "fused_only_records": 0,
+      "fused_only_zero_records": 0,
+      "fused_score_range": [
+        0,
+        52
+      ],
+      "missing_local_image_basenames": 0,
+      "mixed_or_unknown_slap_pairs": 0,
+      "records": 78592,
+      "self_image_pairs": 0,
+      "slap_type_counts": {
+        "13": 78592
+      },
+      "unexpected_supplied_finger_counts": 0,
+      "unique_image_basenames": 2299,
+      "unique_unordered_pairs": 78592,
+      "unrecognized_filename_pairs": 0
+    }
+  },
+  "cross_class_pair_overlaps": {
+    "testing": 0,
+    "training": 0
+  },
+  "limits": [
+    "Filename availability does not verify byte identity with collaborator images.",
+    "Pair separation does not imply image or subject separation.",
+    "Zero fused scores remain supplied scores, not inferred failures or nonmatch labels.",
+    "Absent per-finger fields remain unknown and are not reconstructed.",
+    "Lists do not establish capture independence, development allocation, actual training use or binary target encoding."
+  ],
+  "pair_identity": "Unordered exact basenames; Windows/POSIX directory prefixes ignored",
+  "schema_version": 1,
+  "scope": "Offline inventory and overlap of supplied lists; no split creation or model run",
+  "source_byte_checks_passed": 4,
+  "training_testing_overlap": {
+    "all_slaps": {
+      "exact_pairs_disjoint": true,
+      "filename_subjects_disjoint": false,
+      "image_basenames_disjoint": false,
+      "shared_images": 4869,
+      "shared_pairs": 0,
+      "shared_subjects": 337,
+      "testing_records": 4200,
+      "testing_unique_images": 4869,
+      "testing_unique_pairs": 4200,
+      "testing_unique_subjects": 337,
+      "training_records": 101695,
+      "training_unique_images": 7358,
+      "training_unique_pairs": 101695,
+      "training_unique_subjects": 338
+    },
+    "four_finger_only": {
+      "exact_pairs_disjoint": true,
+      "filename_subjects_disjoint": false,
+      "image_basenames_disjoint": false,
+      "shared_images": 3283,
+      "shared_pairs": 0,
+      "shared_subjects": 330,
+      "testing_records": 2867,
+      "testing_unique_images": 3283,
+      "testing_unique_pairs": 2867,
+      "testing_unique_subjects": 330,
+      "training_records": 93963,
+      "training_unique_images": 4907,
+      "training_unique_pairs": 93963,
+      "training_unique_subjects": 338
+    },
+    "left": {
+      "exact_pairs_disjoint": true,
+      "filename_subjects_disjoint": false,
+      "image_basenames_disjoint": false,
+      "shared_images": 1588,
+      "shared_pairs": 0,
+      "shared_subjects": 315,
+      "testing_records": 1362,
+      "testing_unique_images": 1588,
+      "testing_unique_pairs": 1362,
+      "testing_unique_subjects": 315,
+      "training_records": 7727,
+      "training_unique_images": 2455,
+      "training_unique_pairs": 7727,
+      "training_unique_subjects": 338
+    },
+    "right": {
+      "exact_pairs_disjoint": true,
+      "filename_subjects_disjoint": false,
+      "image_basenames_disjoint": false,
+      "shared_images": 1695,
+      "shared_pairs": 0,
+      "shared_subjects": 326,
+      "testing_records": 1505,
+      "testing_unique_images": 1695,
+      "testing_unique_pairs": 1505,
+      "testing_unique_subjects": 326,
+      "training_records": 86236,
+      "training_unique_images": 2452,
+      "training_unique_pairs": 86236,
+      "training_unique_subjects": 338
+    },
+    "thumbs": {
+      "exact_pairs_disjoint": true,
+      "filename_subjects_disjoint": false,
+      "image_basenames_disjoint": false,
+      "shared_images": 1586,
+      "shared_pairs": 0,
+      "shared_subjects": 336,
+      "testing_records": 1333,
+      "testing_unique_images": 1586,
+      "testing_unique_pairs": 1333,
+      "testing_unique_subjects": 336,
+      "training_records": 7732,
+      "training_unique_images": 2451,
+      "training_unique_pairs": 7732,
+      "training_unique_subjects": 338
+    }
+  }
+}

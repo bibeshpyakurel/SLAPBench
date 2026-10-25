@@ -46,6 +46,15 @@ documents the private CSV contracts and CLI. Synthetic tests cover leakage,
 capture reuse, score alignment and failures; no real split or model run was made.
 Encoder/loss implementation remains pending; historical scripts retain their paths.
 
+**Collaborator intake on 2026-10-24:** the supplied 23,103 genuine and 78,592
+impostor training records are preserved locally and [audited against testing](reports/precise-training-intake-20261024/README.md).
+No exact testing pairs recur, but every testing image basename and subject
+appears elsewhere in the training lists. The supplied impostor training list
+is right-hand only. A [pinned FPBench reference](docs/notes/fpbench_reference_20261024.md)
+is available locally; Konain reports Qwen3 binary fine-tuning, while his exact
+target conversion and development selection remain unverified. No training
+or new subject split was performed here.
+
 Use the [repository map](REPO_MAP.md) for navigation and the
 [workspace layout](docs/WORKSPACE_LAYOUT.md) for storage boundaries. Datasets,
 collaborator mappings, future splits/manifests, minutiae and checkpoints stay
