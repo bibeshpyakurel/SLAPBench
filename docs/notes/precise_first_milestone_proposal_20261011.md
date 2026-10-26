@@ -43,6 +43,15 @@ A small pretrained CPU runtime probe passes. Capture/exposure facts, concrete
 protocol/split review and usable GPU resources remain outstanding; no real
 Precise training or new subject allocation has occurred.
 
+**Final-test implementation — 2026-10-26:** the scheduled evaluation work added
+[frozen-selection verification and final-test scoring](precise_final_test_20261026.md).
+It checks completed training provenance/history and replays selected development
+evidence before test pixels, applies the saved cutoff unchanged and preserves
+failure outcomes with an exclusive adapted-test claim. The
+[readiness check](precise_execution_readiness_20261026.md) still finds no usable
+CUDA or reviewed real split/receipts. This is synthetic implementation evidence,
+not new fingerprint performance or resolution of capture/exposure questions.
+
 **Roadmap update — 2026-10-25:** the user supplied the ten-task execution roadmap
 and confirmed that no further acquisition/exposure clarification is available.
 The [full-image readiness audit](../../reports/precise-readiness-20261025/README.md)
@@ -213,6 +222,7 @@ experiment scripts keep their original responsibilities and paths:
 | `data.py` | Implemented: validate supplied private metadata/comparisons, capture assertions and partition consistency; no image loading or split creation |
 | `images.py`, `encoders.py` | Implemented: reviewed whole-image loading/preprocessing, pinned local DINOv2 and frozen/adapted normalized embeddings |
 | `losses.py`, `training.py` | Implemented: cosine verification objective, training-only sampler, optimization/resume and development selection; synthetic validation |
+| `testing.py`, `code/test_precise_matcher.py` | Implemented: completed-selection/history/development replay, test-only image paths, unchanged cutoff, immutable private outcomes and adapted-test claim; synthetic validation |
 | `evaluation.py` | Implemented: supplied continuous scores, development-only cutoff, unchanged test cutoff, coverage/failures and aggregate metrics; no inference |
 | `__main__.py` | Implemented: offline `validate` / `evaluate` commands with aggregate-only output and overwrite refusal |
 

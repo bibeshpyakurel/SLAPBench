@@ -897,3 +897,57 @@ and detached base revisions, hooks, ignored context JSON and existing primary
 input paths, active service/inhibitor, handoff links, whitespace and staged
 publication scope/content/size are reviewed. No existing score, dataset,
 checkpoint or matcher implementation was changed by this setup task.
+
+
+## 2026-10-26 — scheduled final-test verification and scoring implementation
+
+The requested 3 a.m. Chicago follow-up inspected current source, both attached
+worktrees and ignored task contexts before continuing. CUDA is still unavailable
+with zero PyTorch devices, the current kernel remains 7.0.0-38-generic, no real
+approved split/comparison manifests or execution receipts exist, and no real
+training run is present. The overnight user service/logind sleep inhibitor is
+active. The completed audits, environment setup, weight download and original
+small pretrained CPU probe were not repeated. No system repair or reboot occurred.
+
+Implemented `code/precise_matching/testing.py` and `code/test_precise_matcher.py`
+in the isolated evaluation worktree. The new path requires the latest completed,
+frozen training attempt and a separate digest-bound final-test review. It verifies
+selected/final checkpoint hashes, provenance and full epoch/scheduler/sampler
+history, replays selected development scores, checks the recorded winning epoch
+and applies its strict-greater-than cutoff unchanged to pooled and left/right
+test outcomes. The CLI checks frozen source/environment compatibility and accepts
+only test comparison endpoint paths; it never trains or selects from test.
+
+A private exclusive adapted-test claim is created before test pixels. Existing
+claims prevent silent repeats in new output directories. Missing/decode/invalid-
+embedding failures remain attempted comparisons with explicit coverage and
+failure-as-reject denominators. Fatal input/resource/runtime failures retain the
+claim, flushed partial events and failure status without a successful report.
+Original training artifacts are unchanged; the claim is a new private record.
+Raw outcomes, image/pair identifiers and source mappings stay ignored. Optional
+public output is aggregate-only and still requires publication review.
+
+The training-preparation worktree supplied the readiness handoff; all reviewed
+files were integrated through primary dev with hooks enabled. Guides are
+`docs/notes/precise_final_test_20261026.md` and
+`docs/notes/precise_execution_readiness_20261026.md`. Aggregate implementation
+validation is at `reports/precise-final-test-tooling-20261026/`; navigation and
+reproduction notes link the new tooling. No new monitor or recurring schedule
+was created. The temporary keep-awake service remains available for the user.
+
+Validation: 115 local unit tests pass, including 12 new synthetic final-test
+contracts. All 41 CPU matcher-pattern tests pass in the isolated environment.
+Tests cover corrupted/incomplete or later unfinished selections, changed inputs,
+private path boundaries, development replay, test-only pixels, failure/partial
+record preservation, exclusive claiming and changed test rates with an unchanged
+cutoff. The full CLI test uses actual synthetic image decoding and a tiny fake
+encoder, never Precise images or a new pretrained-model run. Existing CPU CI
+includes the new suite. All 15 legacy metrics reproduce and correctness lint
+passes; syntax/JSON/CI YAML, documentation, temporary table generation, whitespace
+and staged publication scope/content/size checks complete review before commit.
+
+Real execution still requires administrator GPU repair and actual capture/
+exposure/protocol/results/split review. Frozen-control and common-list SDK runs,
+full-resolution resource validation and actual adapted training/final-test
+results remain future work. No subject allocation, new real pair list, research
+score, paid call, model download or original-asset modification occurred.

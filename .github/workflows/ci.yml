@@ -75,7 +75,7 @@ jobs:
           python-version: "3.12"
       - run: pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
       - run: pip install Pillow==12.3.0 numpy==2.5.3
-      - name: Run synthetic training contracts without weights or private data
+      - name: Run synthetic training and final-test contracts without private data
         env:
           HF_HUB_OFFLINE: "1"
           TRANSFORMERS_OFFLINE: "1"

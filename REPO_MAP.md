@@ -1,6 +1,6 @@
 # Repository map
 
-Navigation updated 2026-10-25; the original repository inventory is dated
+Navigation updated 2026-10-26; the original repository inventory is dated
 2026-09-19. See [STATUS.md](STATUS.md) for the dated audit history.
 
 The current study uses Precise only, following the professor's 2026-10-04
@@ -28,6 +28,7 @@ at their current paths.
 |---|---|
 | `code/precise_matching/`, `tests/test_precise_matching.py` | Standard-library protocol preflight and development-fixed score evaluation; synthetic tests, no model inference |
 | `code/train_precise_matcher.py`, `code/precise_matching/{images,encoders,losses,training}.py` | Selected DINOv2 whole-image matcher and guarded private training/resume/development selection; synthetic tests, no real Precise run |
+| `code/test_precise_matcher.py`, `code/precise_matching/testing.py` | Reviewed frozen-selection verification and adapted final-test scoring with unchanged development cutoff, private outcomes and one-time claiming; [guide](docs/notes/precise_final_test_20261026.md) |
 | `code/check_precise_training_runtime.py` | Authorized synthetic encoder update/checkpoint probe; original small CPU report at `reports/precise-training-start-20261025/` |
 | `code/build_master_df.py`, `code/build_slap_images_df.py` | SD302b metadata preparation |
 | `code/archive_non_slap.py` | Moves non-SLAP images; not run in this audit |

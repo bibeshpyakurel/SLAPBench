@@ -8,6 +8,13 @@ the existing code and implemented the training pipeline. Model choice no longer
 awaits another confirmation. Dataset acquisition/exposure facts, the final
 protocol and concrete results/split review remain unresolved.
 
+**Later update — 2026-10-26:** a separate
+[final-test entry point](precise_final_test_20261026.md) is now implemented and
+synthetically validated. The training CLI remains development-only; its absence
+of test scoring is deliberate. Earlier statements below that final-test execution
+is future work describe the state before that separate implementation. Actual
+real-data reviews and usable compute are still required.
+
 ## Implemented contracts
 
 `code/precise_matching/images.py` strictly loads reviewed bytes, checks optional

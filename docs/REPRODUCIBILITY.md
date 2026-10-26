@@ -51,6 +51,14 @@ reviewed inputs, configuration, environment, private outputs and resume. This
 small local copy does not restore the unavailable historical model drive or
 establish GPU/real-data execution readiness.
 
+The separate [final-test guide](notes/precise_final_test_20261026.md) documents
+the test-only path mapping, additional digest-bound review receipt, completed
+selection/development replay, unchanged cutoff and private adapted-test claim.
+Use new output paths and preserve failed claims; no automatic test rerun or
+test-driven retuning is supplied. The
+[October 26 readiness check](notes/precise_execution_readiness_20261026.md)
+still records unavailable CUDA and missing actual reviewed split/receipts.
+
 `code/model_registry.py` is the shared mapping used by the setup and SD302b
 inference scripts:
 

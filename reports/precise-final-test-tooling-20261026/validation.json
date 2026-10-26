@@ -1,0 +1,37 @@
+{
+  "checks": [
+    "completed/frozen selection and full epoch history",
+    "selected and final checkpoint digests/provenance",
+    "selected development score replay",
+    "unchanged cutoff despite changed test scores",
+    "test-only pixel access",
+    "private path/review/source boundaries",
+    "missing/decode/invalid-embedding outcomes retained",
+    "fatal claim and partial event preservation",
+    "one claim per adapted training run",
+    "synthetic CLI with real image decoding and fake encoder"
+  ],
+  "correctness_lint": "passed",
+  "date": "2026-10-26",
+  "legacy_metric_files_reproduced": 15,
+  "limits": [
+    "Synthetic fixtures and fake encoders provide no fingerprint performance evidence.",
+    "Administrator driver repair and actual capture/exposure/protocol/results/split review remain necessary.",
+    "Frozen-control and common-list SDK execution remain separately reviewed work.",
+    "No uncertainty interval or population low-FAR guarantee is supplied."
+  ],
+  "local_unit_tests_passed": 115,
+  "matcher_cpu_contract_tests_passed": 41,
+  "new_final_test_contract_tests_passed": 12,
+  "real_execution": {
+    "approved_split_or_execution_receipt_found": false,
+    "cuda_available": false,
+    "cuda_device_count": 0,
+    "precise_pixels_loaded": false,
+    "pretrained_model_instantiated_this_task": false,
+    "real_final_test_started": false,
+    "real_training_started": false
+  },
+  "scope": "Scheduled final-test tooling implementation and synthetic validation only",
+  "source_base_commit": "6959f4c208dcc64c53ae6a1d77c66fcd292a5cb0"
+}

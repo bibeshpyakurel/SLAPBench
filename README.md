@@ -69,6 +69,14 @@ guarded training and exact synthetic resume. A [small pretrained CPU check](repo
 passes; real Precise execution still requires capture/protocol/split review and
 usable GPU resources.
 
+**Scheduled evaluation work on 2026-10-26:** the
+[final-test scorer](docs/notes/precise_final_test_20261026.md) now verifies a
+completed frozen training selection, replays its development evidence and scores
+test with the saved cutoff unchanged. Synthetic tests cover artifact/review
+changes, failed comparisons and exclusive test claiming. The
+[execution-readiness note](docs/notes/precise_execution_readiness_20261026.md)
+records the continuing GPU and data-review blockers; no real Precise run occurred.
+
 Use the [repository map](REPO_MAP.md) for navigation and the
 [workspace layout](docs/WORKSPACE_LAYOUT.md) for storage boundaries. Datasets,
 collaborator mappings, future splits/manifests, minutiae and checkpoints stay
