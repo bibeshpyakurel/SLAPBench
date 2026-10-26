@@ -159,3 +159,22 @@ def evaluate(images: list[Image], pairs: list[Pair], scores: list[Score], target
             "No population low-FAR bound or independent-trial confidence interval is claimed.",
         ],
     }
+
+
+def evaluate_development(images, pairs, scores, target_far):
+    """Checkpoint selection without accepting, loading or requiring test scores."""
+    if not validate_protocol(images, pairs)["metadata_checks_passed"]:
+        raise InputError("Protocol metadata has unresolved blockers.")
+    by_image = {row.image_id: row for row in images}
+    expected = {p.pair_id: p for p in pairs if by_image[p.image_a].partition == "development"}
+    supplied = {s.pair_id: s for s in scores}
+    if len(supplied) != len(scores) or set(supplied) != set(expected):
+        raise InputError("Checkpoint selection accepts development comparisons only.")
+    if any(s.status != "ok" or s.score is None or not math.isfinite(s.score) for s in scores):
+        raise InputError("Development failures must be resolved before checkpoint selection.")
+    rows = [(expected[s.pair_id].label, s) for s in scores]
+    if any(not any(label == kind for label, _ in rows) for kind in ("genuine", "impostor")):
+        raise InputError("Development requires both comparison classes.")
+    cutoff = select_cutoff([s.score for label, s in rows if label == "impostor"], target_far)
+    return {"selection_source": "development_only", "threshold": cutoff,
+            "development": summarize(rows, cutoff["cutoff"])}

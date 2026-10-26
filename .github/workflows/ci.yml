@@ -64,6 +64,24 @@ jobs:
               ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
           PY
 
+  matcher-synthetic:
+    name: Synthetic matcher contracts (CPU)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: "3.12"
+      - run: pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install Pillow==12.3.0 numpy==2.5.3
+      - name: Run synthetic training contracts without weights or private data
+        env:
+          HF_HUB_OFFLINE: "1"
+          TRANSFORMERS_OFFLINE: "1"
+          OMP_NUM_THREADS: "2"
+        run: python -m unittest discover -s tests -p 'test_precise_training*.py' -v
+
   lint:
     name: Lint
     runs-on: ubuntu-latest

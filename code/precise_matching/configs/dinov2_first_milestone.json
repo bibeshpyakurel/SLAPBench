@@ -1,0 +1,15 @@
+{
+  "accumulation": 4,
+  "device": "cuda",
+  "epochs": 30,
+  "learning_rate": 0.00001,
+  "margin": 0.2,
+  "microbatches": 200,
+  "minimum_learning_rate": 0.000001,
+  "precision": "bf16",
+  "seed": 20261025,
+  "subjects_per_batch": 8,
+  "target_far": "0.001",
+  "warmup_steps": 100,
+  "weight_decay": 0.01
+}

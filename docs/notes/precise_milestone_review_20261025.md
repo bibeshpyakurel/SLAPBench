@@ -1,6 +1,12 @@
 # Precise milestone: concrete review proposal — 2026-10-25
 
-**Status: proposal for review, not an approved protocol or execution order.**
+**Status: DINOv2-first implementation accepted; real-data protocol/split review pending.**
+The user's later decision in the “Newer Models” chat selected the proposed
+DINOv2 matcher first and requested training/testing. The scheduled resumption
+verified that decision and continued the interrupted implementation. See the
+[implementation guide](precise_training_implementation_20261025.md) for completed
+code and synthetic evidence. Numeric protocol choices and real-data readiness
+remain subject to the review conditions below.
 The user supplied the ten-task roadmap on 2026-10-25 and confirmed that no new
 acquisition/exposure clarification from Konain is available. This document makes
 the next decisions reviewable while preserving the [approved principles](precise_first_milestone_proposal_20261011.md).
@@ -65,12 +71,14 @@ rare-event confidence guarantee. Zero-error bootstrap intervals can collapse
 to zero and must be marked uninformative about unobserved errors. This proposal
 does not yet constitute an agreed or implemented uncertainty method.
 
-## Proposed first matcher
+## Selected first matcher and implementation settings
 
-Select **DINOv2 ViT-S/14**, Hugging Face repository `facebook/dinov2-small`,
+The user selected **DINOv2 ViT-S/14**, Hugging Face repository `facebook/dinov2-small`,
 immutable revision **`ed25f3a31f01632728cabb09d1542f84ab7b0056`**, as the initial
-design candidate. The public model API/configuration was inspected without
-downloading weights. Its metadata lists 22,056,576 parameters, hidden width
+matcher. Initial public model API/configuration inspection did not download
+weights; the later authorized implementation obtained and verified them under
+ignored `local/precise/models/` and completed a small synthetic CPU probe.
+Its metadata lists 22,056,576 parameters, hidden width
 384, 12 blocks, six attention heads and patch size 14.
 The [upstream model card](https://github.com/facebookresearch/dinov2/blob/main/MODEL_CARD.md)
 describes class/patch outputs and support for larger patch-multiple inputs.
@@ -80,9 +88,9 @@ positional interpolation and is a new experimental choice, not an upstream
 fingerprint recommendation. These sources supply architecture facts, not
 Precise performance evidence.
 
-This compact image encoder makes the frozen/adapted comparison feasible to
-implement without a language decoder. It is not a VLM encoder; review must
-explicitly accept its relationship to the project's LLM/VLM theme. The three
+This compact image encoder implements the frozen/adapted comparison without
+a language decoder. The user selected this image-only matcher first; its
+relationship to the larger LLM/VLM research theme remains explicit. The three
 downloaded VLMs remain separate investigation candidates. No claim is made that
 this architecture is optimal for ridge detail or whole-slap verification.
 
@@ -130,19 +138,19 @@ Using a public pretrained checkpoint does not certify that Precise is absent
 from that corpus; record this separate exposure limitation alongside local and
 collaborator training/evaluation history.
 
-## Implementation design after review
+## Implemented model/training boundary
 
-Extend `code/precise_matching/` with `images.py` (private mapping/strict loader and
-preprocessing), `encoders.py` (shared frozen/adapted encoder), `losses.py` (explicit
-positive/negative masks and loss), and `training.py` (training-only sampler,
-optimizer/resume/run records and development selection). Keep the existing
-metadata/score contracts and strict cutoff unchanged. Use synthetic images and
-tiny fake encoders for unit tests; do not make CI download a checkpoint.
-Only an explicitly authorized loading check may instantiate the pinned real
-model. Refuse training when provenance flags, partition checks or immutable
-input digests are missing. Require a separate frozen run record to enable test
-scoring. Offline metadata validation remains necessary but is not execution
-approval or proof that capture assertions are correct.
+`code/precise_matching/` now implements `images.py`, `encoders.py`, `losses.py`
+and `training.py`, with a guarded `code/train_precise_matcher.py` entry point.
+The [implementation guide](precise_training_implementation_20261025.md) records
+exact contracts and synthetic tests, including exact resume and development-only
+selection. The original metadata/score contracts and strict cutoff are retained.
+CI uses synthetic images and tiny encoders without checkpoint downloads. The
+real selected encoder completed the separately authorized small CPU check.
+Training refuses missing review assertions, partition checks or immutable input
+digests. A completed selected-checkpoint record is separate from future final-test
+scoring. Validation assertions do not independently prove acquisition facts or
+replace concrete results/split review.
 
 ## Compute inspection and preparation boundary
 
@@ -160,7 +168,9 @@ records a 50-wheel hash-pinned lock, successful dependency checks and offline
 DINOv2 class imports. The historical environment's package inventory is unchanged.
 This prepares the proposed stack without accepting the model/protocol choice.
 GPU driver/runtime compatibility, memory fit and the authorized synthetic model
-check remain unverified; no model object or training run was created. System-level
+check were initially unverified; a later small synthetic CPU check now passes,
+while CUDA and full-resolution GPU memory remain unverified. No real-data
+training run was created. System-level
 driver repair and restoring the external model drive require their own scoped
 work; neither was attempted.
 
@@ -174,8 +184,8 @@ work; neither was attempted.
 3. Professor/user: review internal-reanalysis claim scope versus a new untouched
    collection, eligible population/counts, same-hand sampling, 0.1% target,
    selection/failure policy and proposed subject-resampling uncertainty.
-4. Professor/user: accept or revise the pinned DINOv2 configuration, loss and
-   absence of a language component. Review actual eligible split **after**
+4. The user selected DINOv2 first; review implementation/resource evidence and
+   concrete execution settings. Review the actual eligible split **after**
    acquisition/exposure facts are available, before fine-tuning.
 5. Authorize subsequent implementation and execution at their applicable gates;
    approve any system repair separately. No external message has been sent.
@@ -184,10 +194,10 @@ work; neither was attempted.
 |---|---|
 | 1. Provenance/quality | Full decoding and duplicate screening performed; private per-image capture/exposure unknowns recorded; acquisition facts, candidate adjudication and actual exposure still open |
 | 2. Final protocol | Concrete review draft above; finalization depends on task 1 and review |
-| 3. Model/training design | One pinned candidate and concrete configuration proposed; acceptance pending |
-| 4. Compute | Isolated candidate dependencies installed, fully wheel/hash-pinned and import-checked; GPU/weight mount unavailable; runtime compatibility and authorized synthetic check pending |
+| 3. Model/training design | DINOv2-first selected by the user; configuration, encoder/loss and guarded training implementation available |
+| 4. Compute | Isolated dependencies and selected local checkpoint verified; small synthetic CPU update/resume check passes; GPU/full-resolution resource verification pending |
 | 5. Split/comparison generation | Gated by provenance/exposure and protocol/split review; no artifacts generated |
-| 6–7. Loader/encoder/loss/training | Design prepared; implementation follows approved configuration and task scope |
+| 6–7. Loader/encoder/loss/training | Implemented with synthetic contract/resume/leakage tests; real execution requires reviewed inputs and resource readiness |
 | 8. Baseline/training | Gated by reviewed tasks 4–7 and explicit execution authorization |
 | 9. Comparative evaluation | Existing offline evaluator available; new common-list SDK/model scores and agreed uncertainty still required |
 | 10. Research package | Readiness/review documentation prepared; experimental evidence and authorized manuscript work remain future |

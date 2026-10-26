@@ -42,6 +42,15 @@ The symlink is not committed. On another computer, use a regular ignored
 the workstation's drive is unmounted, mount it before downloading; the setup
 script refuses to write through a dangling symlink.
 
+The selected first-milestone DINOv2-small checkpoint is independently restored
+under `local/precise/models/dinov2-small/ed25f3a31f01632728cabb09d1542f84ab7b0056/`.
+Its pinned source, exact configuration/weight digests and original synthetic CPU
+probe are in the [runtime report](../reports/precise-training-start-20261025/README.md).
+The [training guide](notes/precise_training_implementation_20261025.md) documents
+reviewed inputs, configuration, environment, private outputs and resume. This
+small local copy does not restore the unavailable historical model drive or
+establish GPU/real-data execution readiness.
+
 `code/model_registry.py` is the shared mapping used by the setup and SD302b
 inference scripts:
 

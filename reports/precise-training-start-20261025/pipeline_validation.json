@@ -1,0 +1,16 @@
+{
+  "cli_with_synthetic_images_and_fake_encoder_passed": true,
+  "configuration_matches_implementation_defaults": true,
+  "correctness_lint_passed": true,
+  "date": "2026-10-25",
+  "exact_resumed_weights_and_development_history": true,
+  "gpu_execution_verified": false,
+  "legacy_metrics_files_reproduced": 15,
+  "model_revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "new_subject_split_created": false,
+  "offline_unit_tests": 103,
+  "real_precise_training_performed": false,
+  "scope": "Synthetic implementation validation; no real Precise inputs or matching experiment",
+  "synthetic_training_contract_tests": 29,
+  "test_image_and_score_exclusion_passed": true
+}

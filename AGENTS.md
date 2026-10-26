@@ -16,12 +16,19 @@
 - Prepare documentation and read-only inventories now; do not create a training
   split, regenerate pairs, segment images or train a model before the applicable
   decisions and task authorization. The first milestone is approved in principle;
-  capture independence, exposure eligibility, concrete split and model/loss
-  remain unresolved. Retain results/split review before fine-tuning unless the
+  capture independence, exposure eligibility and the concrete split
+  remain unresolved. On 2026-10-25 the user selected the proposed DINOv2 matcher
+  first and requested training/testing; matcher implementation and synthetic
+  runtime checks are authorized. This does not approve missing capture facts or
+  a real split. Retain results/split review before fine-tuning unless the
   supervisor revises it.
-- The approved scope is documentation, offline validation and summary tooling.
-  New experiments, paid calls, fine-tuning and rerunning existing experiments
-  require a separate task authorization. Preserve original scores and raw responses;
+- The approved scope includes documentation, offline validation/summary tooling
+  and the selected DINOv2 matcher implementation with synthetic checks. The user
+  has requested training/testing of that matcher; real-data execution still
+  requires the applicable capture/exposure, protocol and results/split review.
+  Other new experiments, paid calls and rerunning historical experiments require
+  separate task authorization. System-level GPU repair remains separate.
+  Preserve original scores and raw responses;
   derived reports belong at new dated paths. Append dated findings to STATUS.md.
 - Never send subject identifiers, original filenames or ground-truth labels to
   hosted models. Preserve the branch and push requirements below.

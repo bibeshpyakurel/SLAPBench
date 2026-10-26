@@ -62,6 +62,13 @@ specifies one pinned encoder/loss and candidate protocol settings for review.
 Acquisition/exposure facts remain unknown and the NVIDIA driver is unavailable;
 no split, model forward pass or training run was performed.
 
+**Later DINOv2-first selection and implementation:** the user selected the proposed
+matcher and requested training/testing. The [implementation guide](docs/notes/precise_training_implementation_20261025.md)
+now documents whole-image loading, frozen/adapted encoding, verification loss,
+guarded training and exact synthetic resume. A [small pretrained CPU check](reports/precise-training-start-20261025/README.md)
+passes; real Precise execution still requires capture/protocol/split review and
+usable GPU resources.
+
 Use the [repository map](REPO_MAP.md) for navigation and the
 [workspace layout](docs/WORKSPACE_LAYOUT.md) for storage boundaries. Datasets,
 collaborator mappings, future splits/manifests, minutiae and checkpoints stay

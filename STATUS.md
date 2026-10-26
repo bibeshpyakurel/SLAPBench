@@ -800,3 +800,57 @@ execution, dependency/weight download, segmentation, training, paid call,
 sharing change or external message was performed. Source-evidence work can
 proceed alongside implementation; model/loss/FAR decisions still require the
 project's review rather than inference from the collaborator's materials.
+
+## 2026-10-25 — selected DINOv2 implementation and guarded training pipeline
+
+The scheduled 9:30 PM Chicago resumption inspected the current checkout and
+verified newer human decisions in the project's “Newer Models” chat: the user
+selected the proposed DINOv2 matcher first and requested training/testing.
+That chat ended at a usage limit after leaving encoder/image/loss modules and
+a successful small CPU probe locally. This work continued those artifacts,
+preserved the original CPU report bytes and recorded the updated authorization
+scope. Model choice no longer needs another confirmation; capture/exposure,
+protocol and concrete results/split review still do. AGENTS.md now records
+that distinction without removing the research-integrity gates.
+
+The selected local checkpoint's exact safetensors/configuration digests are
+verified. Strict whole-image loading now checks original and decoded bytes,
+letterboxes to 448×448 without cropping, and supplies the shared frozen/adapted
+DINOv2 encoder. Normalized continuous cosine scoring and the balanced supervised
+verification loss are implemented. The original CPU probe used four random
+56px inputs and two optimizer updates; it showed trainable changes, frozen
+parameter preservation and exact model/optimizer checkpoint restoration. It is
+not Precise training, a full-resolution fit check or GPU evidence.
+
+The new training entry point requires digest-bound private review assertions
+and a metadata-consistent subject-disjoint protocol before model loading.
+Training/development image paths exclude test inputs; the CLI has no test-score
+or final-test scoring input. It implements same-hand training-only sampling,
+AdamW, accumulation/clipping, warmup/cosine scheduling, deterministic seeds,
+development-only threshold/checkpoint selection and immutable epoch checkpoints.
+Resume restores optimizer/scheduler and Python/NumPy/PyTorch/CUDA/sampler states,
+rejects changed inputs/configuration/provenance or corrupted files, and preserves
+all earlier and failed attempts. Source/model/environment/input fingerprints,
+development scores, losses, selection cutoffs and timestamps remain in private
+run records. No real private run or review receipt was generated here.
+
+Synthetic tests verify that resumed and uninterrupted weights and development
+history match exactly even with dropout; test images and test-score rows never
+enter training/selection. They cover canonical capture eligibility, decoded
+hashes, loss/score contracts, failed attempts, changed inputs and checkpoint
+corruption. A dedicated CPU CI job executes the Torch tests without checkpoint
+downloads or private data. All 103 local tests pass, correctness lint passes,
+and all 15 legacy published metric files reproduce. Final recursive syntax,
+configuration/CI YAML, documentation links, unchanged table generation,
+whitespace and staged privacy/publication reviews precede commit.
+
+The implementation guide is `docs/notes/precise_training_implementation_20261025.md`;
+the original CPU evidence and source digests are summarized under
+`reports/precise-training-start-20261025/`. Current navigation, reproduction and
+model-review notes now distinguish implemented synthetic preparation from
+real-data readiness. CUDA still fails; the current kernel is `7.0.0-38-generic`.
+The selected small checkpoint has its own local copy despite the unavailable
+historical model mount. Administrator driver repair, reviewed acquisition/
+exposure evidence, an approved concrete subject split and full resource checks
+remain before real frozen/adapted/test execution. Original data, collaborator
+lists, manifests, recorded scores, historical runners and paper assets are intact.

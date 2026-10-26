@@ -92,10 +92,13 @@ publication, even though historical manifests remain tracked.
 validation, `evaluation.py` development-only cutoff selection and test metrics
 from supplied scores, and a `validate` / `evaluate` CLI. The
 [2026-10-17 tooling note](notes/precise_matching_tooling_20261017.md) documents
-its private input schemas and aggregate outputs. It does not create splits,
-generate pairs, load images or run a matcher. `encoders.py`, `losses.py` and
-training remain future implementation after the applicable decisions and task
-authorization. Only synthetic fixtures were processed in the tooling task.
+its private input schemas and aggregate outputs. That tooling task did not create
+splits, generate pairs or run a matcher. The later user-selected DINOv2
+[implementation](notes/precise_training_implementation_20261025.md) adds strict
+image loading, encoders/losses and guarded training/development selection with
+synthetic tests. Pinned selected weights and synthetic probe outputs now live
+under `local/precise/models/` and `metadata/training-start-20261025/` respectively.
+No real Precise split, trained checkpoint or model score run has been created.
 Existing experiment scripts stay at their current paths for historical reproduction.
 Code may be published after review; inputs, identifying mappings, future splits
 and manifests, minutiae, checkpoints and raw runs stay under ignored local paths.

@@ -1,0 +1,33 @@
+{
+  "batch_pairs": {
+    "negative_pairs": 4,
+    "positive_pairs": 2
+  },
+  "changed_trainable_tensors": 38,
+  "checkpoint_embeddings_identical": true,
+  "device": "cpu",
+  "embedding_shape": [
+    4,
+    384
+  ],
+  "frozen_parameters_unchanged": true,
+  "input_side": 56,
+  "limits": [
+    "Not a fingerprint training run or a test-set evaluation.",
+    "Does not establish full-batch 448px memory fit or usable CUDA when run on CPU.",
+    "Synthetic checkpoint is not a valid research-model checkpoint."
+  ],
+  "model": "facebook/dinov2-small",
+  "optimizer_state_entries_restored": 38,
+  "optimizer_updates": 2,
+  "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "scope": "Synthetic runtime check only; no fingerprint inputs or research performance",
+  "seconds": 1.468,
+  "synthetic_images": 4,
+  "synthetic_losses": [
+    0.3971960246562958,
+    0.39290839433670044
+  ],
+  "total_parameters": 22056576,
+  "trainable_parameters": 3551232
+}

@@ -19,12 +19,16 @@ splits/manifests, crops, minutiae, checkpoints and raw runs. Existing data and
 result paths are unchanged; the new folders do not contain experiment artifacts.
 `code/precise_matching/` now contains offline metadata validation and score
 evaluation, documented in the [tooling guide](docs/notes/precise_matching_tooling_20261017.md).
-Encoder, verification-loss and training modules remain future work as described
-in the central plan. Historical runners remain at their current paths.
+The selected DINOv2 encoder, verification loss and guarded training modules now
+have synthetic validation; the [implementation guide](docs/notes/precise_training_implementation_20261025.md)
+records the remaining real-data/resource review gates. Historical runners remain
+at their current paths.
 
 | Location | Observed purpose |
 |---|---|
 | `code/precise_matching/`, `tests/test_precise_matching.py` | Standard-library protocol preflight and development-fixed score evaluation; synthetic tests, no model inference |
+| `code/train_precise_matcher.py`, `code/precise_matching/{images,encoders,losses,training}.py` | Selected DINOv2 whole-image matcher and guarded private training/resume/development selection; synthetic tests, no real Precise run |
+| `code/check_precise_training_runtime.py` | Authorized synthetic encoder update/checkpoint probe; original small CPU report at `reports/precise-training-start-20261025/` |
 | `code/build_master_df.py`, `code/build_slap_images_df.py` | SD302b metadata preparation |
 | `code/archive_non_slap.py` | Moves non-SLAP images; not run in this audit |
 | `code/ridgebase_pairs.py`, `code/ridgebase_pairs_full.py` | RidgeBase pair construction; full variant supports Train/Test and device categories |

@@ -1,4 +1,4 @@
-# Precise research plan — first milestone approved, implementation pending
+# Precise research plan — selected matcher implemented, data review pending
 
 2026-10-11. The user subsequently confirmed: **“professor approved this.”**
 This updates the original proposal to an approved research direction and
@@ -31,6 +31,17 @@ does not contain his Precise-specific conversion or development procedure.
 No local training, subject allocation or target conversion was performed.
 
 ## Central plan and completed preparation
+
+**Selected matcher implementation — 2026-10-25:** the user's later decision
+selected the proposed DINOv2 matcher first and requested training/testing.
+The scheduled resumption recovered the interrupted local implementation and
+added a guarded training entry point. The
+[implementation guide](precise_training_implementation_20261025.md) documents
+whole-image loading, shared frozen/adapted encoding, verification loss,
+development-only selection, immutable checkpoints and exact synthetic resume.
+A small pretrained CPU runtime probe passes. Capture/exposure facts, concrete
+protocol/split review and usable GPU resources remain outstanding; no real
+Precise training or new subject allocation has occurred.
 
 **Roadmap update — 2026-10-25:** the user supplied the ten-task execution roadmap
 and confirmed that no further acquisition/exposure clarification is available.
@@ -95,9 +106,10 @@ probability.
    evidence after matching is reliable. It is outside the proposed first
    milestone; generated explanations would need separate validation.
 
-The encoder family and any required relationship to an LLM/VLM remain
-unspecified; approval of the direction does not select a checkpoint. Language
-generation is not required to compute the proposed embedding similarity.
+The original direction approval alone did not select an encoder. The user later
+selected the proposed DINOv2-first image matcher, with its pinned checkpoint and
+implementation documented in the 2026-10-25 update. Language generation is not
+required to compute its embedding similarity.
 Architecture can be designed independently of Konain's fine-tuning script;
 reproducing his system still requires his actual targets, code and exposure
 records.
@@ -147,7 +159,7 @@ and scores on the future approved list remain practical dependencies.
 | Identity and capture provenance | Genuine pairs use independent captures of the same subject and hand type | Confirm filename semantics, capture/session relationships and annotation issues |
 | Subject separation | Keep all hands, sessions, captures and derivatives of a subject in one partition; no cross-partition pairs | Exposure history, eligible subjects, feasible sizes, seed and split review |
 | Duplicate handling | Review exact/decoded/near duplicates and shared parent captures before freezing partitions | Agreed conflict-resolution and exclusion rules; distinct filenames do not prove independent captures |
-| Learning | Adapt the image encoder using an agreed verification objective | Encoder/revision, trainable components, loss, preprocessing, augmentation and local compute budget |
+| Learning | Adapt the selected DINOv2 encoder with the implemented verification objective | Review implementation/resource evidence and exact real-run settings; capture/protocol/split prerequisites remain |
 | Comparison | Use identical four-finger slap pairs for learned/frozen controls and available SDK methods | Method scope, licensed SDK access/settings, sampling policy and failure reporting |
 | Model and threshold selection | Use development only, then freeze checkpoint/configuration/thresholds | Primary development metric, FAR target, score acceptance rule and selection policy |
 | Final reporting | Report continuous-score ROC/DET/EER and actual fixed-threshold test TAR/FAR, counts, coverage, failures and uncertainty | Supported FAR resolution and uncertainty accounting for reused subjects/images |
@@ -193,20 +205,21 @@ our architecture. Keep identifying mappings and source filenames local.
 ## Implementation and storage
 
 A dedicated `code/precise_matching/` package now contains offline protocol and
-evaluation tooling. Extend it for future authorized model work rather than
-repurposing the historical experiment scripts:
+evaluation tooling plus the selected matcher implementation. Historical
+experiment scripts keep their original responsibilities and paths:
 
 | Module | Responsibility and status |
 |---|---|
 | `data.py` | Implemented: validate supplied private metadata/comparisons, capture assertions and partition consistency; no image loading or split creation |
-| `encoders.py` | Future: shared image encoder, pinned model revision and agreed trainable components; learned/frozen configurations |
-| `losses.py` | Future: agreed verification objective and explicit supervision source |
+| `images.py`, `encoders.py` | Implemented: reviewed whole-image loading/preprocessing, pinned local DINOv2 and frozen/adapted normalized embeddings |
+| `losses.py`, `training.py` | Implemented: cosine verification objective, training-only sampler, optimization/resume and development selection; synthetic validation |
 | `evaluation.py` | Implemented: supplied continuous scores, development-only cutoff, unchanged test cutoff, coverage/failures and aggregate metrics; no inference |
 | `__main__.py` | Implemented: offline `validate` / `evaluate` commands with aggregate-only output and overwrite refusal |
 
 The 2026-10-11 cleanup documented the package boundary; the 2026-10-17 task
-implements the offline portions above using only the standard library. No
-encoder, loss, training entry point or architecture is implemented. Preserve existing
+implemented the offline portions using only the standard library. The later
+2026-10-25 user-selected DINOv2 implementation adds image/encoder/loss/training
+modules and synthetic runtime validation. Preserve existing
 `code/precise_pairs.py`, `code/embed_verify.py`, `code/run_ridgebase_prompted.py`
 and other historical entry points at their current paths.
 
@@ -220,18 +233,19 @@ historical publication does not authorize exporting new identifying records.
 
 The first milestone and general protocol no longer await initial professor
 approval. Resolve dataset interpretation and exposure eligibility first, then
-specify the concrete subject allocation, comparison sampling, encoder/revision,
-loss/trainable components, preprocessing, baseline arms, development-selection
-metric, FAR target, failure policy and uncertainty method. Review these concrete
-choices before execution rather than treating approval as answers to the open
-data questions. The frozen-encoder control and ground-truth versus teacher-score
-supervision remain implementation choices to specify.
+review the concrete subject allocation, comparison sampling, baseline arms,
+development-selection metric, FAR target, failure policy and uncertainty method.
+The selected DINOv2 implementation supplies the encoder/loss/preprocessing design,
+frozen control and ground-truth supervision. Review its resource evidence and
+concrete execution settings rather than treating implementation as answers to
+the open data questions; teacher-score distillation is a separate extension.
 
 After metadata clarification, prepare the concrete split/protocol for review
 under an applicable task authorization. Retain the results/split review before
-fine-tuning unless the supervisor explicitly revises it. Training, split/pair
-creation, segmentation, minutiae extraction, model downloads and experiments
-still require their applicable decisions and separate task authorization.
+fine-tuning unless the supervisor explicitly revises it. The user requested
+selected-matcher training/testing, but its capture/protocol/split review and
+compute prerequisites remain incomplete. Segmentation, minutiae extraction and
+other experiments still require their own decisions and task authorization.
 Future private artifacts belong under ignored `local/precise/`; original
 datasets, scores and fixed manifests are preserved.
 
