@@ -854,3 +854,46 @@ historical model mount. Administrator driver repair, reviewed acquisition/
 exposure evidence, an approved concrete subject split and full resource checks
 remain before real frozen/adapted/test execution. Original data, collaborator
 lists, manifests, recorded scores, historical runners and paper assets are intact.
+
+
+## 2026-10-25 — overnight worktrees, evaluation scheduling and keep-awake setup
+
+Continued the user's outstanding overnight setup after the separate 9:30 p.m.
+resumption published guarded DINOv2 training at f85ccb1. Model choice is DINOv2;
+this task preserves that implementation and does not repeat its 103-test run,
+weight download or small CPU probe. The active in-chat follow-up named
+"Precise DINOv2 evaluation at 3 AM" is scheduled once for 2026-10-26 03:00
+America/Chicago (08:00 UTC). The current chat settings were verified as
+GPT-6.1 Sol with high reasoning. The scheduler rejects per-run model/effort
+fields; it uses the existing chat setting, without a separately pinned override
+or a workaround standalone cron. The already completed 9:30 p.m. resumption
+was not duplicated.
+
+Created and attached managed precise-training-prep and precise-evaluation
+worktrees from dev. They remain detached with hooks enabled; reviewed changes
+must integrate through primary dev before commit/push. Ignored per-worktree
+context files point to primary read-only images, the existing interpreter and
+pinned weights, with separate private output roots. No assets were duplicated,
+extra agents started or new chats created. The handoff is recorded in
+`docs/notes/precise_overnight_handoff_20261025.md`.
+
+Verified the active temporary user service and logind sleep:idle inhibitor,
+started at 17:01:54 Chicago on October 25 with a 24-hour limit, covering the
+scheduled run through approximately 17:01 October 26. Screen locking/blanking
+remains available and permanent power preferences are unchanged. The earlier
+duplicate session-bound inhibitor was released. Scheduled long computation
+must hold its own inhibitor if needed beyond that expiry.
+
+CUDA is still unavailable. Current kernel 7.0.0-38 lacks the NVIDIA module;
+older precompiled modules correspond to 6.8.0-45, Secure Boot is enabled, and
+administrator authentication is required. No system repair or reboot occurred.
+Capture/exposure evidence and actual protocol/results/split review remain
+unresolved; no new research split, real training or final-test scores were
+created. The scheduled task can continue synthetic evaluation tooling when
+these real execution gates remain blocked.
+
+Validation: app automation configuration/readback, both attached worktree paths
+and detached base revisions, hooks, ignored context JSON and existing primary
+input paths, active service/inhibitor, handoff links, whitespace and staged
+publication scope/content/size are reviewed. No existing score, dataset,
+checkpoint or matcher implementation was changed by this setup task.
