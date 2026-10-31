@@ -59,6 +59,14 @@ test-driven retuning is supplied. The
 [October 26 readiness check](notes/precise_execution_readiness_20261026.md)
 still records unavailable CUDA and missing actual reviewed split/receipts.
 
+The [common-list comparison guide](notes/precise_common_list_comparison_20261031.md)
+documents `python3 -m precise_matching compare` for two to four supplied method
+score tables. It requires exact identical attempted development/test coverage,
+retains method-specific failures and uses each pooled development cutoff
+unchanged for pooled/hand test reports and paired differences. This standard-library
+reporting command does not run models, certify frozen score provenance or supply
+the still-pending subject-dependent uncertainty analysis.
+
 `code/model_registry.py` is the shared mapping used by the setup and SD302b
 inference scripts:
 

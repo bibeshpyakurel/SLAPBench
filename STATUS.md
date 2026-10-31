@@ -951,3 +951,44 @@ exposure/protocol/results/split review. Frozen-control and common-list SDK runs,
 full-resolution resource validation and actual adapted training/final-test
 results remain future work. No subject allocation, new real pair list, research
 score, paid call, model download or original-asset modification occurred.
+
+
+## 2026-10-31 — common-list multi-method reporting
+
+Continued roadmap task 9 with offline reporting code after checking the current
+implementation and review boundaries. Added `code/precise_matching/comparison.py`
+and the standard-library `python3 -m precise_matching compare` command. It accepts
+two to four distinct frozen/adapted DINOv2 or VeriFinger arms using one validated
+metadata/comparison list. Every arm must provide every development/test outcome
+exactly once, including failures; training, unknown, duplicated or missing score
+rows are refused. The method names are fixed public labels, not provenance proof.
+
+Reports use each arm's pooled development-only cutoff unchanged for pooled and
+left/right test summaries. Paired genuine/impostor acceptance tables and B-minus-A
+rate differences retain the full attempted denominators. Paired coverage counts
+separate both-valid, one-valid and neither-valid comparisons. Supplemental
+both-valid differences explicitly retain their reduced denominator and original
+cutoffs. The tool does not select a winning method or implement uncertainty;
+the proposed subject-resampling method still needs statistical review. Supplied
+scores and the FAR target require separate frozen-run/configuration review.
+
+The CLI preserves existing output/privacy boundaries, rejects overwrite and
+changed input bytes, and exports aggregate summaries without private identifiers,
+paths or hashes. The guide is
+`docs/notes/precise_common_list_comparison_20261031.md`; repository navigation,
+reproduction instructions and the protocol proposal link this implementation.
+
+Validation: all 123 local unit tests pass, including eight new comparison
+contracts automatically discovered by regular CI. Tests cover score scales,
+failure/coverage asymmetry, opposing paired decisions, no hand-specific/test
+retuning, mismatched lists, metadata gates, all six four-arm comparisons,
+empty/all-failed groups, input/order invariance and CLI privacy/mutation/overwrite
+guards. All 15 legacy published metrics reproduce and correctness lint passes.
+Syntax, links, temporary result-table regeneration, whitespace and staged
+publication scope/content/size checks complete the publication review.
+
+This is synthetic implementation evidence. No real split, comparison list,
+matcher/SDK score, training run or uncertainty interval was produced; no model,
+dataset, historical result or paper asset changed. Acquisition/exposure facts,
+protocol/results/split review, usable GPU resources and subsequent real-run
+evidence remain necessary for completion of the ten-task milestone.

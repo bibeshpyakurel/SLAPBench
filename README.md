@@ -77,6 +77,12 @@ changes, failed comparisons and exclusive test claiming. The
 [execution-readiness note](docs/notes/precise_execution_readiness_20261026.md)
 records the continuing GPU and data-review blockers; no real Precise run occurred.
 
+**Offline reporting on 2026-10-31:** the [common-list comparison tool](docs/notes/precise_common_list_comparison_20261031.md)
+now compares supplied frozen/adapted/SDK scores with exact attempted-list
+coverage, per-method development cutoffs, hand summaries and paired failure/
+acceptance counts. Synthetic validation adds no research scores; uncertainty
+analysis still requires statistical review.
+
 Use the [repository map](REPO_MAP.md) for navigation and the
 [workspace layout](docs/WORKSPACE_LAYOUT.md) for storage boundaries. Datasets,
 collaborator mappings, future splits/manifests, minutiae and checkpoints stay

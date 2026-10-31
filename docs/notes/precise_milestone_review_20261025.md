@@ -59,6 +59,12 @@ cutoff**. Do not select a different hand-specific cutoff after seeing test.
 Method differences must use identical attempted lists; a valid-score intersection
 can be supplemental with its reduced denominator explicitly reported.
 
+**Implementation update — 2026-10-31:** the [common-list comparison tool](precise_common_list_comparison_20261031.md)
+now checks exact attempted-list coverage across supplied method scores and
+produces per-method pooled/hand reports and descriptive paired acceptance and
+coverage counts at unchanged development cutoffs. It does not generate scores
+or implement the proposed uncertainty analysis below.
+
 Proposed uncertainty, subject to statistical review: 2,000 paired subject-cluster
 bootstrap replicates, seed `20261025`, retaining each subject's hands/images
 together. Resample subjects with replacement; weight genuine trials by endpoint
