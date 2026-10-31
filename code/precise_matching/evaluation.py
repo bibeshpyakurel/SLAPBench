@@ -1,7 +1,8 @@
 """Select a development-only cutoff and apply it unchanged to test scores."""
 
 from collections import Counter
-from dataclasses import dataclass
+import csv
+from dataclasses import asdict, dataclass
 from fractions import Fraction
 import math
 from pathlib import Path
@@ -18,6 +19,14 @@ class Score:
     pair_id: str
     status: str
     score: float | None
+
+
+def write_scores(path: Path, scores: list[Score]):
+    """Exclusive private CSV export using the same outcome schema as loading."""
+    with path.open("x", newline="", encoding="utf-8") as stream:
+        writer = csv.DictWriter(stream, fieldnames=SCORE_FIELDS)
+        writer.writeheader()
+        writer.writerows(asdict(row) for row in scores)
 
 
 def load_scores(path: Path) -> list[Score]:

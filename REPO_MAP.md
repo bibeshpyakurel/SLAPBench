@@ -30,6 +30,7 @@ at their current paths.
 | `code/precise_matching/comparison.py`, `tests/test_precise_comparison.py` | Common-list multi-method offline reports, paired decisions/coverage and fixed-cutoff hand summaries; [guide](docs/notes/precise_common_list_comparison_20261031.md) |
 | `code/train_precise_matcher.py`, `code/precise_matching/{images,encoders,losses,training}.py` | Selected DINOv2 whole-image matcher and guarded private training/resume/development selection; synthetic tests, no real Precise run |
 | `code/test_precise_matcher.py`, `code/precise_matching/testing.py` | Reviewed frozen-selection verification and adapted final-test scoring with unchanged development cutoff, private outcomes and one-time claiming; [guide](docs/notes/precise_final_test_20261026.md) |
+| `code/run_precise_frozen.py`, `code/precise_matching/baseline.py` | Frozen-control development and separately reviewed final test, with private combined score CSV; [guide](docs/notes/precise_frozen_control_20261031.md) |
 | `code/check_precise_training_runtime.py` | Authorized synthetic encoder update/checkpoint probe; original small CPU report at `reports/precise-training-start-20261025/` |
 | `code/build_master_df.py`, `code/build_slap_images_df.py` | SD302b metadata preparation |
 | `code/archive_non_slap.py` | Moves non-SLAP images; not run in this audit |

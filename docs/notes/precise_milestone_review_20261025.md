@@ -211,3 +211,9 @@ work; neither was attempted.
 Completion of the first milestone requires the later evidence, even if the
 learned system fails to improve. This review package is progress toward the
 roadmap, not completion of all ten tasks.
+
+**Frozen-control implementation update — 2026-10-31:** the
+[two-stage baseline runner](precise_frozen_control_20261031.md) now supplies the
+missing frozen development/final-test execution path with synthetic validation.
+Its real execution remains at the same data/resource review gates. Both matcher
+arms export combined private development/test CSVs for common-list reporting.

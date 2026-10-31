@@ -27,6 +27,11 @@ The adapted scorer's [selection verification and one-time test claim](precise_fi
 remain separate from this offline reporting command. Historical collaborator
 scores cannot stand in for new common-list scores merely by renaming pair IDs.
 
+The [frozen-control runner](precise_frozen_control_20261031.md) and adapted
+final-test scorer both export a private combined development/test `scores.csv`
+in this schema. Those files can be supplied directly after their run review;
+the reporting command does not rerun development or test inference.
+
 For each arm, the evaluator chooses its own strict `score > cutoff` boundary
 using only valid pooled development impostor scores and the explicit FAR target.
 Use the same FAR target frozen in the reviewed experiment; the CLI does not

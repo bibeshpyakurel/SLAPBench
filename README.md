@@ -82,6 +82,10 @@ now compares supplied frozen/adapted/SDK scores with exact attempted-list
 coverage, per-method development cutoffs, hand summaries and paired failure/
 acceptance counts. Synthetic validation adds no research scores; uncertainty
 analysis still requires statistical review.
+The [frozen-control runner](docs/notes/precise_frozen_control_20261031.md) also
+has synthetic validation, with separate development and final-test review gates.
+Both matcher arms export compatible private CSVs for the comparison tool;
+real baseline/training execution remains pending.
 
 Use the [repository map](REPO_MAP.md) for navigation and the
 [workspace layout](docs/WORKSPACE_LAYOUT.md) for storage boundaries. Datasets,

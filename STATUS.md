@@ -992,3 +992,56 @@ matcher/SDK score, training run or uncertainty interval was produced; no model,
 dataset, historical result or paper asset changed. Acquisition/exposure facts,
 protocol/results/split review, usable GPU resources and subsequent real-run
 evidence remain necessary for completion of the ten-task milestone.
+
+
+## 2026-10-31 — frozen-control development and final-test path
+
+Closed the missing selected DINOv2 frozen-control implementation path with
+`code/precise_matching/baseline.py` and `code/run_precise_frozen.py`. It uses the
+pinned pretrained encoder, all parameters frozen, FP32 inference and the shared
+whole-slap preprocessing/CLS/cosine contract. It creates no optimizer and reads
+no training pixels. The existing outcome scorer now supports one explicit
+development/test partition while retaining the adapted test-only wrapper.
+
+Development requires reviewed phase-only endpoints, metadata/configuration and
+digest-bound capture/exposure/protocol/split/execution assertions. It preserves
+raw outcomes/events and freezes a development-only cutoff only when every
+development comparison succeeds. Final test requires a separate review binding
+the exact successful development artifacts and original protocol/configuration;
+it replays saved development scores, checks current source/environment/model
+compatibility and uses the unchanged pooled cutoff for both hands. Test pixels
+are unavailable in the development mapping and vice versa. Review flags still
+require actual acquisition evidence and human review, not generated assertions.
+
+An exclusive private frozen-test claim precedes test pixels. Repeat invocations
+are refused, including with another output path. Fatal attempts retain their
+claim, flushed partial events and failure record without a successful report.
+Completed test image failures retain full attempted denominators and explicit
+coverage. Failed development attempts cannot masquerade as frozen selections.
+
+Both frozen and adapted final-test scorers now additionally export a private
+`scores.csv` containing saved development outcomes and new test outcomes in the
+existing comparison schema. Original JSON artifacts remain. Synthetic integration
+tests pass these exports directly through the common-list evaluator without
+recomputing development inference or manually relabeling pair IDs. The new
+guide is `docs/notes/precise_frozen_control_20261031.md`; reproduction/navigation
+and final-test notes link it and describe the exports.
+
+Validation: all 135 local unit tests pass, including 12 new frozen-control
+contracts; all 53 CPU matcher-pattern tests also pass in the isolated candidate
+environment. They cover phase-only loading, immutable frozen weights/no optimizer,
+review and digest/population gates, semantic development replay, environment
+changes before model loading, incomplete/corrupt artifacts, explicit failures,
+partial-event/claim retention, repeat refusal and test-score changes without
+cutoff changes. The existing CPU CI pattern includes the new suite. All 15
+legacy metrics reproduce; correctness lint, syntax, documentation links,
+temporary byte-identical results-table regeneration, whitespace and staged
+publication scope/content/size review are required before commit.
+
+A fresh read-only preflight still finds zero files under private splits,
+manifests and runs, and NVIDIA-SMI cannot communicate with the driver. No actual
+Precise inference, full-resolution pretrained probe, training, split generation,
+model download, dependency installation or system repair occurred. Existing
+data/results and paper assets are unchanged. Real resource verification,
+acquisition/exposure/protocol/results/split review, actual frozen/adapted/SDK
+scores, agreed uncertainty and the resulting research package remain incomplete.

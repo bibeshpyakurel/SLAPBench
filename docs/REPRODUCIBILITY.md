@@ -67,6 +67,13 @@ unchanged for pooled/hand test reports and paired differences. This standard-lib
 reporting command does not run models, certify frozen score provenance or supply
 the still-pending subject-dependent uncertainty analysis.
 
+The [frozen-control guide](notes/precise_frozen_control_20261031.md) documents
+the two-stage `code/run_precise_frozen.py` runner, phase-only path mappings and
+separate digest-bound development/final-test receipts. The fixed pretrained
+encoder is never optimized. Both frozen and adapted final-test paths export a
+private combined development/test `scores.csv` for the common-list comparator;
+source images and original development artifacts remain unchanged.
+
 `code/model_registry.py` is the shared mapping used by the setup and SD302b
 inference scripts:
 

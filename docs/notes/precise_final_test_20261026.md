@@ -72,6 +72,12 @@ aggregate report and execution/source/environment record. Fatal failures retain
 the claim, partial events and a failure record; they do not produce a successful
 report. Existing outputs are never overwritten.
 
+**Export update — 2026-10-31:** successful scoring additionally writes private
+`scores.csv` with the verified saved development outcomes followed by test
+outcomes. It uses the existing `pair_id,status,score` schema and is directly
+accepted by the [common-list comparison tool](precise_common_list_comparison_20261031.md).
+Original JSON artifacts are retained; no development inference is rerun.
+
 Each required test image is encoded once. Missing, decode/decoded-integrity and
 invalid-embedding failures remain explicit comparison outcomes without imputed
 scores. Original byte drift and fatal runtime/resource failures stop the attempt.
@@ -85,6 +91,10 @@ checkpoint or operating cutoff. No confidence interval or population low-FAR
 guarantee is added. This entry point evaluates the **adapted arm**; a separately
 reviewed frozen-control execution and common-list SDK scores remain distinct
 work, not assumed to exist.
+
+The [frozen-control runner](precise_frozen_control_20261031.md) is now implemented
+with synthetic validation and separate development/test review gates; its real
+execution and the SDK scores remain pending.
 
 ## Future reviewed execution
 

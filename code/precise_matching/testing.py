@@ -13,7 +13,7 @@ import re
 
 from .data import InputError, load_protocol, read_table, validate_protocol
 from .encoders import CONFIG_SHA256, MODEL_ID, REVISION, WEIGHTS_SHA256, cosine_scores, encode
-from .evaluation import Score, evaluate_development, summarize
+from .evaluation import Score, evaluate_development, summarize, write_scores
 from .training import Config, digest, selection_key, write_json
 
 
@@ -178,12 +178,14 @@ class ImageFailure(Exception):
         self.status = status
 
 
-def score_test(model, images, pairs, pixel_loader, device, event=lambda row: None):
-    """Read each needed TEST image once; preserve every attempted comparison."""
+def score_partition(model, images, pairs, pixel_loader, device, event=lambda row: None, *, partition="test"):
+    """Read one evaluation partition only; preserve every attempted comparison."""
     import torch
 
+    if partition not in {"development", "test"}:
+        raise InputError("Scoring accepts one explicit evaluation partition only.")
     by_id = {i.image_id: i for i in images}
-    selected = [p for p in pairs if by_id[p.image_a].partition == "test"]
+    selected = [p for p in pairs if by_id[p.image_a].partition == partition]
     cache = {}
     model.eval()
     with torch.inference_mode():
@@ -218,6 +220,11 @@ def score_test(model, images, pairs, pixel_loader, device, event=lambda row: Non
     return selected, scores
 
 
+def score_test(model, images, pairs, pixel_loader, device, event=lambda row: None):
+    """Read only TEST pixels; retain the adapted final-test caller's contract."""
+    return score_partition(model, images, pairs, pixel_loader, device, event)
+
+
 def final_test(model, images, pairs, pixel_loader, config, info, output, hashes, *, integrity=lambda: None):
     """One private claim per adapted run; failed attempts remain consumed/visible."""
     if not validate_protocol(images, pairs)["metadata_checks_passed"]:
@@ -247,6 +254,8 @@ def final_test(model, images, pairs, pixel_loader, config, info, output, hashes,
             selected, scores = score_test(model, images, pairs, pixel_loader, config.device, event)
         integrity()
         write_json(output / "scores.json", [asdict(row) for row in scores])
+        development_rows = json.loads(info["files"]["development"].read_text())["scores"]
+        write_scores(output / "scores.csv", [Score(**row) for row in development_rows] + scores)
         cutoff = development["threshold"]["cutoff"]
         by_score = {row.pair_id: row for row in scores}
         by_id = {row.image_id: row for row in images}

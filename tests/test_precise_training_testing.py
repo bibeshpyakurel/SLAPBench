@@ -18,6 +18,7 @@ import test_precise_matcher as entry  # noqa: E402
 import test_precise_training_pipeline as helpers  # noqa: E402
 from precise_matching.data import IMAGE_FIELDS, PAIR_FIELDS, InputError  # noqa: E402
 from precise_matching.encoders import MODEL_ID, REVISION, WEIGHTS_SHA256, CONFIG_SHA256  # noqa: E402
+from precise_matching.evaluation import load_scores  # noqa: E402
 from precise_matching.testing import (ImageFailure, final_test, inspect_selection,
                                      reviewed_test_inputs, restore_selection, score_test)  # noqa: E402
 from precise_matching.training import Config, digest, train  # noqa: E402
@@ -149,6 +150,12 @@ class FinalTestContracts(unittest.TestCase):
             self.assertEqual(len(seen), len(set(seen)))
             self.assertNotIn("test-a-left", json.dumps(report))
             self.assertEqual(before, {k: p.read_bytes() for k, p in info["files"].items()})
+            exported = load_scores(root / "evaluation/scores.csv")
+            from precise_matching.comparison import compare_methods
+            compared = compare_methods(images, pairs, {"adapted_dinov2": exported, "frozen_dinov2": exported},
+                                       config.target_far)
+            self.assertEqual(compared["methods"]["adapted_dinov2"]["threshold"], report["threshold"])
+            self.assertEqual(len(exported), 4)
             with self.assertRaises(InputError):
                 final_test(self.model(), images, pairs, loader, config, info, root / "retry", hashes)
 
