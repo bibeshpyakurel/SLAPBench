@@ -87,6 +87,13 @@ has synthetic validation, with separate development and final-test review gates.
 Both matcher arms export compatible private CSVs for the comparison tool;
 real baseline/training execution remains pending.
 
+**Clarification on 2026-11-01:** Konain reports his training counts, a 1:4 class
+ratio and a template-extraction-failure zero convention. The professor has offered
+a ground-truth dataframe. The [new evidence note](docs/notes/precise_clarification_20261101.md)
+records a remaining ambiguity between literal fused-zero filtering and failed
+extraction, with targeted counts from the unchanged source files. Exact consumed
+records, acquisition metadata and concrete protocol/split review remain pending.
+
 Use the [repository map](REPO_MAP.md) for navigation and the
 [workspace layout](docs/WORKSPACE_LAYOUT.md) for storage boundaries. Datasets,
 collaborator mappings, future splits/manifests, minutiae and checkpoints stay

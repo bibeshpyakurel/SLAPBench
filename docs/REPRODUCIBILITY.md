@@ -74,6 +74,16 @@ encoder is never optimized. Both frozen and adapted final-test paths export a
 private combined development/test `scores.csv` for the common-list comparator;
 source images and original development artifacts remain unchanged.
 
+The [November 1 collaborator clarification](notes/precise_clarification_20261101.md)
+and [score-status reconciliation](../reports/precise-clarification-20261101/README.md)
+record reported use separately from the exact preserved list contents. Private
+correspondence/source receipts stay in
+`local/precise/metadata/clarification-20261101/`. The newly shared full-pool folder
+was inaccessible; its contents and the reported 8,992,383 impostors are not
+verified or restored locally. The promised ground-truth dataframe is still
+pending. Do not apply literal zero filtering or substitute the collaborator's
+pair-disjoint lists for the approved subject-disjoint protocol without review.
+
 `code/model_registry.py` is the shared mapping used by the setup and SD302b
 inference scripts:
 

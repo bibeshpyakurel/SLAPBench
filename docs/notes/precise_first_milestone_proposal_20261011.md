@@ -30,6 +30,16 @@ is preserved locally; Konain reports Qwen3 binary fine-tuning, but the reference
 does not contain his Precise-specific conversion or development procedure.
 No local training, subject allocation or target conversion was performed.
 
+**Clarification received — 2026-11-01:** the user supplied Konain's report of
+approximately 19,648 genuine and 78,592 impostor training pairs, his 1:4 sampling
+rationale, acknowledgement of potentially right-only selection and a template-
+conversion-failure-to-zero convention. The professor has offered a ground-truth
+dataframe, not yet received. The [clarification and reconciliation](precise_clarification_20261101.md)
+records these as reported use, while retaining uncertainty about exact consumed
+rows, development selection and independent captures. Literal nonzero filtering
+of the preserved files gives different counts, and many fused-zero comparisons
+have positive component sums. No automatic zero removal or new split follows.
+
 ## Central plan and completed preparation
 
 **Selected matcher implementation — 2026-10-25:** the user's later decision
@@ -210,6 +220,12 @@ script/example targets and SDK configuration remain useful for understanding
 or reproducing his work; the public FPBench reference does not supply those
 Precise-specific choices. These are not prerequisites for independently drafting
 our architecture. Keep identifying mappings and source filenames local.
+
+The November 1 reply partially answers these older questions: the remaining
+request is now the promised dataframe, exact post-filter consumed records/code,
+template-conversion status and development/selection history, alongside the
+still-unresolved middle tokens and parent acquisitions. See the clarification
+note above rather than repeating the original questions unchanged.
 
 ## Implementation and storage
 

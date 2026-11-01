@@ -1045,3 +1045,53 @@ model download, dependency installation or system repair occurred. Existing
 data/results and paper assets are unchanged. Real resource verification,
 acquisition/exposure/protocol/results/split review, actual frozen/adapted/SDK
 scores, agreed uncertainty and the resulting research package remain incomplete.
+
+
+## 2026-11-01 — collaborator clarification, metadata offer and zero-score reconciliation
+
+The user pasted new messages from Konain and the professor. Konain confirms
+subject/hand filename positions but defers other filename details; reports using
+approximately 19,648 genuine and 78,592 impostor training comparisons; explains
+his 1:4 class ratio and acknowledges potentially right-only selection; and says
+failed image-to-DAT conversion causes pair scores to be zero. He reports a
+remaining pool of 23,103 genuine and 8,992,383 impostor comparisons. The professor
+offers a ground-truth dataframe including resolution/subject fields and asks
+whether fine-tuning has started. No dataframe or new execution/split approval
+was supplied with these messages. Normalized correspondence/source/access
+receipts remain private in `local/precise/metadata/clarification-20261101/`.
+
+Recorded actual use as collaborator-reported evidence, distinct from the prior
+independently checked list membership. Exact consumed rows, post-filter code,
+development/selection history and parent acquisition independence remain open.
+The new folder returned NOT_FOUND/404 in connected Drive; listing was empty and
+web fallback inaccessible. This does not prove that the folder is empty or
+deleted. No new large pool or source file was downloaded.
+
+A targeted read-only reconciliation with the existing parser confirms unchanged
+source hashes against the October 24 private intake receipt. Training genuine
+contains 23,103 rows: 19,594 positive fused scores and 3,509 zeros, including
+3,455 missing-component zeros and 54 component-bearing zeros. The reported
+19,648 equals `23,103 - 3,455`, not literal positive-score filtering. The sampled
+78,592 impostors contain 73,538 positive fused scores and 5,054 component-bearing
+zeros. Positive component sums coexist with fused zero in 51 genuine and 5,017
+sampled impostor training rows, and in 6 genuine/136 impostor evaluation rows.
+The failure-to-zero convention therefore does not identify every failed image
+or justify blanket zero removal. Obtain conversion status and the exact filter;
+do not reconstruct missing fields or silently relabel original scores.
+
+New aggregate outputs are `reports/precise-clarification-20261101/`; the evidence
+and narrowed follow-up are in `docs/notes/precise_clarification_20261101.md`.
+Central proposal/review, navigation and reproduction notes link the update.
+The DINOv2 objective remains identity/capture supervision, not SDK distillation;
+thumb exclusion and subject-disjoint principles are unchanged. A collaborator's
+recommendation to mix thumbs/use nonzero pairs does not revise our protocol.
+The professor's question does not waive the existing results/split review.
+
+Validation: eight existing intake/parser synthetic tests pass; all 15 legacy
+metrics reproduce. Aggregate arithmetic/JSON, current links, unchanged input
+hashes, whitespace and staged publication scope/content/size are reviewed before
+commit. No production Python behavior, old report or metric, data, model, split,
+training run or paper asset was modified. The fresh NVIDIA-SMI check still fails.
+An accurate professor update is data/protocol validation with implemented,
+synthetically validated matcher/baseline/training/evaluation tooling; real Precise
+fine-tuning has not begun. No external response was sent.

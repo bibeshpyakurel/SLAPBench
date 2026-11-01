@@ -1,6 +1,11 @@
 # Precise milestone: concrete review proposal — 2026-10-25
 
 **Status: DINOv2-first implementation accepted; real-data protocol/split review pending.**
+The [November 1 clarification](precise_clarification_20261101.md) adds reported
+training use, a 1:4 ratio and a template-failure zero convention, plus the offer
+of a ground-truth dataframe. Exact post-filter records, development history and
+independent captures remain unresolved; it does not approve a split or automatic
+SDK-score-based exclusions.
 The user's later decision in the “Newer Models” chat selected the proposed
 DINOv2 matcher first and requested training/testing. The scheduled resumption
 verified that decision and continued the interrupted implementation. See the
@@ -184,9 +189,11 @@ work; neither was attempted.
 
 1. Konain: supply acquisition token meanings/parent-capture evidence, known
    processing variants and session/sensor/PPI metadata through the private channel.
-2. Konain: distinguish supplied-list membership from actual training/development
-   consumption; explain right-only training impostors and 3,455 zero-fused-score
-   genuine rows without components. Do not request the same four lists again.
+2. Konain: reported training counts, imbalance rationale and the template-failure
+   zero convention are now available. Supply exact post-filter consumed records
+   or code, development/selection history and template-conversion status; clarify
+   literal fused-zero versus failed-template exclusions. Do not request the same
+   four lists again. The professor's offered dataframe remains to be received.
 3. Professor/user: review internal-reanalysis claim scope versus a new untouched
    collection, eligible population/counts, same-hand sampling, 0.1% target,
    selection/failure policy and proposed subject-resampling uncertainty.

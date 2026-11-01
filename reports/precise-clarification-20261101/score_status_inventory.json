@@ -1,0 +1,51 @@
+{
+  "classes": {
+    "testing_genuine": {
+      "fused_nonzero": 2094,
+      "fused_zero": 6,
+      "records": 2100,
+      "zero_missing_components": 0,
+      "zero_with_components": 6,
+      "zero_with_positive_component_sum": 6
+    },
+    "testing_impostor": {
+      "fused_nonzero": 1956,
+      "fused_zero": 144,
+      "records": 2100,
+      "zero_missing_components": 0,
+      "zero_with_components": 144,
+      "zero_with_positive_component_sum": 136
+    },
+    "training_genuine": {
+      "fused_nonzero": 19594,
+      "fused_zero": 3509,
+      "records": 23103,
+      "zero_missing_components": 3455,
+      "zero_with_components": 54,
+      "zero_with_positive_component_sum": 51
+    },
+    "training_impostor": {
+      "fused_nonzero": 73538,
+      "fused_zero": 5054,
+      "records": 78592,
+      "zero_missing_components": 0,
+      "zero_with_components": 5054,
+      "zero_with_positive_component_sum": 5017
+    }
+  },
+  "limits": [
+    "Reported use is collaborator testimony, not an independently verified consumed-row manifest.",
+    "Zero fused score is not sufficient to distinguish template failure from a completed comparison without extraction-status evidence.",
+    "No subject split, new pair list, threshold, source edit or performance recomputation was performed."
+  ],
+  "reported_remaining_pool_counts_unverified": {
+    "genuine": 23103,
+    "impostor": 8992383
+  },
+  "reported_used_counts": {
+    "genuine": 19648,
+    "impostor": 78592
+  },
+  "schema_version": 1,
+  "scope": "Read-only score-status reconciliation after user-supplied collaborator clarification on 2026-11-01; no row exclusions or new metrics"
+}

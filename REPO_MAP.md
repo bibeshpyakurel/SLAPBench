@@ -1,6 +1,6 @@
 # Repository map
 
-Navigation updated 2026-10-31; the original repository inventory is dated
+Navigation updated 2026-11-01; the original repository inventory is dated
 2026-09-19. See [STATUS.md](STATUS.md) for the dated audit history.
 
 The current study uses Precise only, following the professor's 2026-10-04
@@ -64,6 +64,7 @@ at their current paths.
 | `reports/precise-collaborator-discovery-20261011/` | Historical local search; subsequent Drive intake supersedes its testing-score request |
 | `reports/precise-verifinger-audit-20261011/` | Completed testing-score audit; population, metrics and comparison limits |
 | `reports/precise-training-intake-20261024/` | Training-list receipt, exact-pair exclusion, image/subject overlap and input-format/population findings |
+| `docs/notes/precise_clarification_20261101.md`, `reports/precise-clarification-20261101/` | New collaborator testimony, pending professor dataframe and targeted zero/filtering reconciliation; original inputs/results unchanged |
 | `local/precise/references/FPBench/` (ignored) | Complete pinned upstream reference; see `docs/notes/fpbench_reference_20261024.md` |
 
 ## Local datasets and models
