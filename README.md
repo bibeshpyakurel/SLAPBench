@@ -94,6 +94,13 @@ records a remaining ambiguity between literal fused-zero filtering and failed
 extraction, with targeted counts from the unchanged source files. Exact consumed
 records, acquisition metadata and concrete protocol/split review remain pending.
 
+**GPU verified on 2026-11-01:** the [full-resolution synthetic check](reports/precise-gpu-runtime-20261101/README.md)
+passes on the RTX 4080 SUPER with CUDA and BF16: 16 images at 448×448, accumulation
+four and two optimizer updates. Peak allocation/reservation is 2.67/3.37 GiB;
+sampled free device memory remains at least 11.57 GiB. The earlier GPU blocker
+is resolved. No Precise images were accessed; real execution still requires
+capture/exposure, concrete protocol and results/split review.
+
 Use the [repository map](REPO_MAP.md) for navigation and the
 [workspace layout](docs/WORKSPACE_LAYOUT.md) for storage boundaries. Datasets,
 collaborator mappings, future splits/manifests, minutiae and checkpoints stay

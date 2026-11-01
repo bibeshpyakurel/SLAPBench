@@ -32,6 +32,7 @@ at their current paths.
 | `code/test_precise_matcher.py`, `code/precise_matching/testing.py` | Reviewed frozen-selection verification and adapted final-test scoring with unchanged development cutoff, private outcomes and one-time claiming; [guide](docs/notes/precise_final_test_20261026.md) |
 | `code/run_precise_frozen.py`, `code/precise_matching/baseline.py` | Frozen-control development and separately reviewed final test, with private combined score CSV; [guide](docs/notes/precise_frozen_control_20261031.md) |
 | `code/check_precise_training_runtime.py` | Authorized synthetic encoder update/checkpoint probe; original small CPU report at `reports/precise-training-start-20261025/` |
+| `code/check_precise_gpu_runtime.py` | Full-resolution synthetic CUDA/BF16 capacity check; November 1 aggregate evidence at `reports/precise-gpu-runtime-20261101/`; no Precise inputs |
 | `code/build_master_df.py`, `code/build_slap_images_df.py` | SD302b metadata preparation |
 | `code/archive_non_slap.py` | Moves non-SLAP images; not run in this audit |
 | `code/ridgebase_pairs.py`, `code/ridgebase_pairs_full.py` | RidgeBase pair construction; full variant supports Train/Test and device categories |
@@ -124,8 +125,11 @@ collaborator scores and identifying mappings remain in ignored `local/precise/`.
 The [2026-10-25 review proposal](docs/notes/precise_milestone_review_20261025.md)
 gives concrete candidate protocol/model settings and the ten-task roadmap state.
 The accompanying [compute inspection](reports/precise-readiness-20261025/environment.md)
-finds CUDA unavailable and the external model mount inaccessible. It does not
-certify a working matcher environment or authorize system repair/training.
+found CUDA unavailable and the external model mount inaccessible at that time.
+The [November 1 synthetic GPU check](reports/precise-gpu-runtime-20261101/README.md)
+now verifies CUDA/BF16 and the proposed DINOv2 workload using the existing
+isolated environment/local checkpoint. Capture/protocol/results/split review
+remains required before real-data execution.
 
 `requirements.txt` lists GPU/model and analysis dependencies; `requirements-verify.txt`
 is the smaller verification environment. `venv/` is local and ignored. No root lockfile,

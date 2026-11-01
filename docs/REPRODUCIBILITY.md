@@ -49,7 +49,13 @@ probe are in the [runtime report](../reports/precise-training-start-20261025/REA
 The [training guide](notes/precise_training_implementation_20261025.md) documents
 reviewed inputs, configuration, environment, private outputs and resume. This
 small local copy does not restore the unavailable historical model drive or
-establish GPU/real-data execution readiness.
+establish real-data execution readiness. GPU capacity was subsequently verified
+by the [November 1 full-resolution synthetic check](../reports/precise-gpu-runtime-20261101/README.md).
+Its reproduction command uses that same environment and checkpoint, 448-pixel
+inputs, 16 images, four-step accumulation and BF16. Aggregate measurements are
+published there; execution/configuration/source hashes and phase records stay
+under `local/precise/metadata/gpu-runtime-20261101/`. The check neither reads
+Precise images nor waives capture/protocol/results/split review.
 
 The separate [final-test guide](notes/precise_final_test_20261026.md) documents
 the test-only path mapping, additional digest-bound review receipt, completed
@@ -57,7 +63,9 @@ selection/development replay, unchanged cutoff and private adapted-test claim.
 Use new output paths and preserve failed claims; no automatic test rerun or
 test-driven retuning is supplied. The
 [October 26 readiness check](notes/precise_execution_readiness_20261026.md)
-still records unavailable CUDA and missing actual reviewed split/receipts.
+records the then-unavailable CUDA and missing actual reviewed split/receipts.
+The November 1 synthetic check resolves the GPU finding; the data/review gates
+remain open.
 
 The [common-list comparison guide](notes/precise_common_list_comparison_20261031.md)
 documents `python3 -m precise_matching compare` for two to four supplied method

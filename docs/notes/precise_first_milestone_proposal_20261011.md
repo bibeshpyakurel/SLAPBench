@@ -49,9 +49,11 @@ added a guarded training entry point. The
 [implementation guide](precise_training_implementation_20261025.md) documents
 whole-image loading, shared frozen/adapted encoding, verification loss,
 development-only selection, immutable checkpoints and exact synthetic resume.
-A small pretrained CPU runtime probe passes. Capture/exposure facts, concrete
-protocol/split review and usable GPU resources remain outstanding; no real
-Precise training or new subject allocation has occurred.
+A small pretrained CPU runtime probe passes. The
+[November 1 synthetic CUDA check](../../reports/precise-gpu-runtime-20261101/README.md)
+now verifies the proposed 448-pixel BF16 workload on the RTX 4080 SUPER.
+Capture/exposure facts and concrete protocol/results/split review remain
+outstanding; no real Precise training or new subject allocation has occurred.
 
 **Final-test implementation — 2026-10-26:** the scheduled evaluation work added
 [frozen-selection verification and final-test scoring](precise_final_test_20261026.md).
@@ -269,9 +271,10 @@ the open data questions; teacher-score distillation is a separate extension.
 After metadata clarification, prepare the concrete split/protocol for review
 under an applicable task authorization. Retain the results/split review before
 fine-tuning unless the supervisor explicitly revises it. The user requested
-selected-matcher training/testing, but its capture/protocol/split review and
-compute prerequisites remain incomplete. Segmentation, minutiae extraction and
-other experiments still require their own decisions and task authorization.
+selected-matcher training/testing; compute verification now passes, while
+capture/protocol/results/split review remains incomplete. Segmentation,
+minutiae extraction and other experiments still require their own decisions
+and task authorization.
 Future private artifacts belong under ignored `local/precise/`; original
 datasets, scores and fixed manifests are preserved.
 

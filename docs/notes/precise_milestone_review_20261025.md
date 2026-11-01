@@ -12,6 +12,9 @@ verified that decision and continued the interrupted implementation. See the
 [implementation guide](precise_training_implementation_20261025.md) for completed
 code and synthetic evidence. Numeric protocol choices and real-data readiness
 remain subject to the review conditions below.
+The [November 1 full-resolution synthetic GPU check](../../reports/precise-gpu-runtime-20261101/README.md)
+now verifies CUDA/BF16 and the proposed workload's memory fit. Compute is no
+longer the execution blocker; capture/protocol/results/split review remains open.
 The user supplied the ten-task roadmap on 2026-10-25 and confirmed that no new
 acquisition/exposure clarification from Konain is available. This document makes
 the next decisions reviewable while preserving the [approved principles](precise_first_milestone_proposal_20261011.md).
@@ -137,12 +140,14 @@ the balance rule must be reviewed rather than silently changing the sampler.
 At 448 pixels there are 1,024 patch tokens plus the class token. FP32 weights
 alone occupy about 84 MiB. A single BF16 attention matrix for 16 images, six
 heads and 1,025 tokens is about 192 MiB per block; implementations and retained
-activations change actual memory considerably. Plan for an **unmeasured 8–12 GiB
-training budget**, reserve at least 2 GiB outside the process, and verify with an
-authorized synthetic forward/backward before real loading. These are planning
-estimates, not a successful fit measurement. Full VLM training is not assumed
-to fit. If the synthetic check fails, revise microbatch/accumulation through a
-recorded development design change before any real run.
+activations change actual memory considerably. The original 8–12 GiB planning
+budget was superseded by the November 1 authorized synthetic measurement:
+16 images at 448×448, BF16, accumulation four and two AdamW updates peaked at
+2.67 GiB allocated / 3.37 GiB reserved, with sampled device-free memory at least
+11.57 GiB on the RTX 4080 SUPER. The 2 GiB external reserve was met. This is a
+short-run capacity check, not long-run stability or fingerprint evidence.
+Full VLM training is not assumed to fit. Future workload changes still require
+recorded review; no batch/precision fallback is automatic.
 
 Dataset membership in the encoder's original pretraining corpus is unknown.
 Using a public pretrained checkpoint does not certify that Precise is absent
@@ -178,12 +183,12 @@ The [follow-up report](../../reports/precise-environment-20261025/README.md)
 records a 50-wheel hash-pinned lock, successful dependency checks and offline
 DINOv2 class imports. The historical environment's package inventory is unchanged.
 This prepares the proposed stack without accepting the model/protocol choice.
-GPU driver/runtime compatibility, memory fit and the authorized synthetic model
-check were initially unverified; a later small synthetic CPU check now passes,
-while CUDA and full-resolution GPU memory remain unverified. No real-data
-training run was created. System-level
-driver repair and restoring the external model drive require their own scoped
-work; neither was attempted.
+GPU driver/runtime compatibility and full-resolution fit were initially
+unverified; the later small CPU check passed. On November 1 the user reported
+driver repair, and the separate synthetic CUDA check verified driver 595.99.02,
+torch 2.6.0+cu124, BF16 and the selected local encoder's proposed workload.
+No repair, installation, download or real-data training was performed in this
+verification. The historical external model drive was not needed.
 
 ## Decisions requested and roadmap state
 
@@ -208,7 +213,7 @@ work; neither was attempted.
 | 1. Provenance/quality | Full decoding and duplicate screening performed; private per-image capture/exposure unknowns recorded; acquisition facts, candidate adjudication and actual exposure still open |
 | 2. Final protocol | Concrete review draft above; finalization depends on task 1 and review |
 | 3. Model/training design | DINOv2-first selected by the user; configuration, encoder/loss and guarded training implementation available |
-| 4. Compute | Isolated dependencies and selected local checkpoint verified; small synthetic CPU update/resume check passes; GPU/full-resolution resource verification pending |
+| 4. Compute | Existing pinned environment/checkpoint verified; small CPU update/resume and November 1 full-resolution CUDA/BF16 capacity checks pass; short-run resource readiness established |
 | 5. Split/comparison generation | Gated by provenance/exposure and protocol/split review; no artifacts generated |
 | 6–7. Loader/encoder/loss/training | Implemented with synthetic contract/resume/leakage tests; real execution requires reviewed inputs and resource readiness |
 | 8. Baseline/training | Gated by reviewed tasks 4–7 and explicit execution authorization |

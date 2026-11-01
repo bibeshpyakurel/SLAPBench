@@ -1095,3 +1095,45 @@ training run or paper asset was modified. The fresh NVIDIA-SMI check still fails
 An accurate professor update is data/protocol validation with implemented,
 synthetically validated matcher/baseline/training/evaluation tooling; real Precise
 fine-tuning has not begun. No external response was sent.
+
+## 2026-11-01 — driver resolved and full-resolution synthetic GPU check passed
+
+The user reported repaired GPU access. Independent read-only verification in
+the existing pinned matcher environment confirms driver 595.99.02, PyTorch
+2.6.0+cu124, CUDA, BF16 and one RTX 4080 SUPER with 15.57 GiB device memory.
+The earlier driver blocker is resolved. No driver repair, dependency install,
+model download or repeat of the original small CPU pretrained probe was needed.
+
+Added `code/check_precise_gpu_runtime.py` and ran the authorized capacity check
+with the existing pinned DINOv2-small weights/configuration: 448×448, 16 images
+per microbatch, BF16, four-step accumulation and two AdamW updates. It exercises
+eight synthetic grayscale-to-RGB microbatches, alternating artificial hands,
+the actual loss, final two trainable blocks and final norm. Losses/gradients
+remain finite; all 38 trainable tensors change while the frozen digest stays
+unchanged. Frozen and adapted single-image FP32 inference return 384-dimensional
+embeddings. The nominal LR is used without a scheduler; existing contract tests
+cover checkpoint/resume separately.
+
+Training peaks at 2.67 GiB allocated / 3.37 GiB reserved; sampled driver-free
+memory remains at least 11.57 GiB, above the planned 2 GiB reserve. Allocator
+caches persist between phases. These are short-run capacity measurements under
+current competing usage, not long-run stability, throughput or biometric
+results. Reviewed aggregate evidence is in
+`reports/precise-gpu-runtime-20261101/`; timestamp, package/code/configuration
+hashes and phase records remain private in
+`local/precise/metadata/gpu-runtime-20261101/`.
+
+Five new synthetic contracts cover refusal before loading/overwriting,
+CUDA/BF16 preconditions, gradient accumulation and frozen/trainable invariants;
+the existing CPU matcher CI pattern includes them. All 140 repository tests,
+58 matcher-focused tests and all 15 legacy metric checks pass. Correctness lint,
+Python syntax, JSON/aggregate arithmetic, new documentation links, whitespace
+and staged publication content/scope/size are checked before commit.
+
+Compute verification is now complete for this proposed workload. Capture
+independence, exposure/claim scope, concrete protocol and actual results/split
+review remain open; no real split, comparison generation, Precise image loading,
+fine-tuning or final evaluation occurred. Konain's exact SDK filter is a
+reproduction question, not an additional requirement for identity-supervised
+DINOv2 training. Current plan/navigation/reproduction notes link the new
+evidence; older dated compute reports and original research assets are retained.
