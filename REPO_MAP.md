@@ -11,6 +11,11 @@ completed inventories/inspection/VeriFinger audit and remaining implementation
 decisions. Concrete splits and execution authorization remain pending. SD302b
 and RidgeBase entries document retained historical assets.
 
+The [November 1 professor-review plan](docs/notes/precise_dinov2_llm_plan_20261101.md)
+records the latest direction: the primary LLM question, DINOv2 as a visual
+control, proposed VLM diagnostics and the reported Excel schema. Plan review,
+the actual workbook and capture/protocol/results/split decisions remain open.
+
 ## Layout and entry points
 
 See [docs/WORKSPACE_LAYOUT.md](docs/WORKSPACE_LAYOUT.md) for the local/public folder layout.

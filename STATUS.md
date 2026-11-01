@@ -1137,3 +1137,40 @@ fine-tuning or final evaluation occurred. Konain's exact SDK filter is a
 reproduction question, not an additional requirement for identity-supervised
 DINOv2 training. Current plan/navigation/reproduction notes link the new
 evidence; older dated compute reports and original research assets are retained.
+
+## 2026-11-01 — professor requests LLM-focused DINOv2 plan and describes dataframe
+
+The user pasted a professor reply listing Excel fields: dataset, finger, slap,
+subject, quality/segmentation flags, original boxes and rotated geometry. The
+reported finger codes distinguish four-finger right/left hands and thumbs.
+This is a schema description, not workbook intake; no row unit, coverage,
+capture/session mapping or physical PPI was verified. Multiple finger/rotation
+annotations must not become multiple independent impressions. The normalized
+message receipt remains private in
+`local/precise/metadata/professor-plan-20261101/`.
+
+The professor says DINOv2 may be a candidate, asks for its plan before experiments
+and reaffirms the primary goal of investigating LLM slap verification, failures
+and possible improvements. Prepared
+`docs/notes/precise_dinov2_llm_plan_20261101.md` for review: selected DINOv2 as a
+frozen/adapted visual control, a proposed direct Qwen3-VL comparison on identical
+eligible lists, development-only input/output/supervision diagnostics and a
+separately reviewed targeted VLM adaptation. DINOv2 alone or an LLM explanation
+cannot establish LLM matching ability. Cross-model differences do not identify
+a language-module defect; proposed within-VLM controls are needed to test causes.
+
+The plan retains exact DINOv2 settings, existing shared-list/development/failure
+safeguards, conditional SDK access and historical-exposure limitations. Verified
+upstream DINOv2/Qwen model roles through primary model cards/paper; no literature
+claim validates Precise performance. The previous synthetic GPU success stands;
+it does not establish VLM memory fit. New VLM runs/adapters and all real-data
+experiments remain subject to the professor's plan review and applicable
+capture/exposure/protocol/results/split gates. Instructions and current entry
+points link this latest direction while preserving earlier dated records.
+
+Validation is documentation-only: review factual attribution, new local links,
+whitespace, staged content/size/privacy and publication scope. No model job,
+package installation, Excel read/import, new split/pair generation, source score
+change or manuscript edit occurred. No message was sent to the professor or
+collaborator. The full ten-task goal remains incomplete; this reviewable plan
+addresses the new request without treating it as experiment approval.

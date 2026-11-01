@@ -1,5 +1,15 @@
 # Precise research plan — selected matcher implemented, data review pending
 
+**Latest direction — 2026-11-01:** the professor asks for the DINOv2 plan before
+experiments and reaffirms that investigating LLM slap verification and its
+limitations is the primary goal. The
+[new plan for review](precise_dinov2_llm_plan_20261101.md) positions DINOv2 as a
+visual control alongside a proposed direct VLM arm and development-only
+diagnostics. It supersedes any reading of the earlier image-only sequence as
+the entire LLM contribution. The supplied dataframe schema helps identity,
+finger and augmentation interpretation; the workbook and independent-capture
+mapping remain pending. No plan/split/experiment approval follows from this reply.
+
 2026-10-11. The user subsequently confirmed: **“professor approved this.”**
 This updates the original proposal to an approved research direction and
 milestone sequence: image-only learning on whole four-finger slaps with
@@ -126,6 +136,10 @@ probability.
 4. **Optional explanation layer:** Consider an LLM for interpreting matcher
    evidence after matching is reliable. It is outside the proposed first
    milestone; generated explanations would need separate validation.
+
+This earlier sequence records the October milestone agreement. The November 1
+review request above requires an explicit plan for studying LLM verification;
+an optional explanation layer alone does not satisfy that research question.
 
 The original direction approval alone did not select an encoder. The user later
 selected the proposed DINOv2-first image matcher, with its pinned checkpoint and

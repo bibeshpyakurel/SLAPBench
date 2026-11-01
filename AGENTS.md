@@ -30,6 +30,16 @@
   separate task authorization. System-level GPU repair remains separate.
   Preserve original scores and raw responses;
   derived reports belong at new dated paths. Append dated findings to STATUS.md.
+- On 2026-11-01 the user supplied the professor's request for a DINOv2 plan
+  before experiments and reaffirmation that LLM slap verification is the primary
+  research question. See `docs/notes/precise_dinov2_llm_plan_20261101.md`:
+  DINOv2 is a proposed visual control, not itself an LLM result; the direct VLM
+  comparison/diagnostics are proposals requiring review and authorization.
+  The professor supplied an Excel schema description, not the workbook or
+  verified capture/session mapping. Do not equate finger/rotation annotation
+  rows with independent acquisitions. GPU readiness now passes the authorized
+  synthetic check; plan/protocol/capture/exposure/results/split review remains
+  required before real experiments.
 - Never send subject identifiers, original filenames or ground-truth labels to
   hosted models. Preserve the branch and push requirements below.
 

@@ -92,6 +92,15 @@ verified or restored locally. The promised ground-truth dataframe is still
 pending. Do not apply literal zero filtering or substitute the collaborator's
 pair-disjoint lists for the approved subject-disjoint protocol without review.
 
+The later [professor-review plan](notes/precise_dinov2_llm_plan_20261101.md)
+records the user-supplied Excel column description and the professor's request
+for an LLM-focused DINOv2 plan before experiments. The workbook has not been
+received or imported. Normalized correspondence is private under
+`local/precise/metadata/professor-plan-20261101/`. A future intake must preserve
+the workbook, verify its digest/schema and map annotation/rotation rows to
+original parent captures; the described columns alone do not supply verified
+capture IDs, physical PPI or execution approval.
+
 `code/model_registry.py` is the shared mapping used by the setup and SD302b
 inference scripts:
 

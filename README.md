@@ -14,6 +14,14 @@ the architecture, evaluation protocol, completed audits and remaining decisions.
 The [preparation note](docs/notes/precise_preparation_20261004.md) preserves the
 professor's feedback and subsequent approval update.
 
+**Professor clarification — 2026-11-01:** the central question remains whether
+LLMs can verify slaps, why they fail and how to improve reliability. The professor
+requests a DINOv2 plan before experiments. The [plan for review](docs/notes/precise_dinov2_llm_plan_20261101.md)
+uses DINOv2 as a visual control and proposes a direct VLM comparison and
+development-only diagnostics. The described Excel columns help interpret
+identity, fingers and augmentation; the workbook and capture mapping are still
+needed. This reply does not approve real training or new VLM experiments.
+
 **Preparation completed through 2026-10-11:**
 
 - [Read-only inventory](reports/precise-readiness-20261004/README.md): 7,358

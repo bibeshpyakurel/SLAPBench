@@ -1,6 +1,13 @@
 # Precise milestone: concrete review proposal — 2026-10-25
 
 **Status: DINOv2-first implementation accepted; real-data protocol/split review pending.**
+**Professor review update — 2026-11-01:** implementation acceptance records the
+user's earlier selection, not professor approval of a real DINOv2 run. The
+professor now requests the plan before experiments and reaffirms the primary
+LLM research question. See the [revised review plan](precise_dinov2_llm_plan_20261101.md)
+for DINOv2 as a visual control, a proposed direct VLM comparison and diagnostics.
+Those VLM additions are proposals, not new execution authorization. The existing
+concrete DINOv2/protocol settings below remain available for that review.
 The [November 1 clarification](precise_clarification_20261101.md) adds reported
 training use, a 1:4 ratio and a template-failure zero convention, plus the offer
 of a ground-truth dataframe. Exact post-filter records, development history and
