@@ -1265,3 +1265,41 @@ Validation: all 149 repository tests and 15 legacy metric checks pass; correctne
 lint, Python syntax, handoff/report links, aggregate arithmetic and whitespace
 checks pass. The publication review covers code, synthetic tests, documentation
 and aggregate JSON only; private source files and case lists stay ignored.
+
+## 2026-11-01 — approved concrete shared-pair route and implementation
+
+The user started the end-to-end DINOv2 goal, then directly reviewed and approved
+the exact protocol and training/calibration/test execution in
+`docs/notes/precise_shared_pair_protocol_20261101.md`. This is user review,
+not a new professor attestation or confirmation of canonical identities. Preserve
+all supplied labels/pairs, including thumbs and the 24 training/two testing
+numeric-identity disagreements. Primary claims concern supplied-label agreement
+on held-out pairs with seen images/identities. A secondary exclusion sensitivity
+keeps frozen decisions and identifies its reduced testing denominator.
+
+Implemented a separate explicit-pair route in `fixed_pairs.py`,
+`fixed_training.py`, `fixed_evaluation.py` and `run_precise_shared_pairs.py`.
+It retains every pair exactly once per epoch, including single-class/tail
+microbatches and partial accumulation windows; no within-batch cross-pairs are
+created. The approved schedule is three full epochs, final checkpoint fixed in
+advance, with each arm calibrated on training impostors at nominal 1% FAR.
+Training calibration is resubstitution, not independent validation or a promised
+test FAR. The old strict subject-disjoint runner is unchanged.
+
+Private preparation reuses the completed image/hash inventory and produces an
+exact 39,290/4,200-pair bundle with 6,778 referenced images, without reading
+pixels. Direct human approval is recorded privately against its exact bundle
+and configuration hashes. No independent-capture/subject-separation assertion
+is fabricated. Checkpoint/resume and immutable attempts preserve provenance;
+calibration failures stop selection; testing verifies the training-only cutoff
+and claims it once before pixels. Raw failures/diagnostics stay private.
+
+Thirteen new synthetic contracts include full CLI train/calibrate/test on both
+arms, deterministic dropout resume, supplied-target/thumb preservation, exact
+pair visitation, hash/phase review gates, source-path guards, failure accounting,
+selection replay, fixed pooled cutoffs and one-time testing. All 162 repository
+tests and 71 matcher-pattern tests pass. All 15 legacy metric
+checks, table generation, syntax, correctness lint and whitespace checks pass.
+GPU availability was rechecked (RTX 4080 SUPER, driver 595.99.02); no package
+installation, model download or repeated dataset audit was performed. Real-run
+outputs and the final report will be recorded separately after execution.

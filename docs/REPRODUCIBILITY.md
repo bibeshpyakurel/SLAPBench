@@ -351,6 +351,51 @@ Precise/RidgeBase metrics and the post-hoc parser audit have known limits; do
 not treat the old SD302b near-duplicate pairs as independent-capture biometric
 evidence or make unsupported low-FAR claims.
 
+## Shared-pair DINOv2 route (2026-11-01)
+
+The [concrete reviewed protocol](notes/precise_shared_pair_protocol_20261101.md)
+uses Konain's exact 39,290 training/4,200 testing attempts, including thumbs.
+It is a held-out-pair benchmark with seen images/identities. The direct user
+review authorizes its training, training-only calibration and test execution;
+it does not establish canonical identities or independent acquisitions.
+
+The separate `code/run_precise_shared_pairs.py` entry point implements
+`prepare`, `train`, `calibrate` and `test`. The strict subject-disjoint runner
+retains its original contracts. Source originals remain at
+`local/precise/collaborator/konain-followup-20261101/`; preparation reuses
+`metadata/readiness-20261025/readiness_records.json` under `local/precise/`
+and the existing public aggregate audit, without decoding images again.
+The new private bundle is
+`local/precise/manifests/shared-pairs-20261101/bundle.json` and its actual human
+review record is under `local/precise/metadata/shared-pair-execution-20261101/`.
+These ignored files must be supplied separately on an authorized machine.
+
+Use the existing pinned matcher environment and DINOv2-small revision from the
+handoff. Do not install or download again merely to run this route. Private
+outputs must use new paths under `local/precise/runs/`. A representative training
+command for the actual reviewed input bundle is:
+
+```bash
+local/precise/environments/matcher-candidate-20261025/bin/python code/run_precise_shared_pairs.py train \
+  --bundle local/precise/manifests/shared-pairs-20261101/bundle.json \
+  --config code/precise_matching/configs/dinov2_shared_pairs.json \
+  --review local/precise/metadata/shared-pair-execution-20261101/execution_review.json \
+  --source-root datasets/Precise \
+  --weights local/precise/models/dinov2-small/ed25f3a31f01632728cabb09d1542f84ab7b0056 \
+  --output local/precise/runs/shared-pairs-20261101/adapted-training
+```
+
+`--resume` accepts only verified unfinished epoch checkpoints from that run.
+For each arm, `calibrate` takes the same common inputs plus `--arm
+frozen_dinov2` or `--arm adapted_dinov2`; adaptation also requires
+`--training-run` pointing to the sealed training run. Use a separate output
+directory for every phase. `test` additionally requires `--calibration` pointing
+to that arm's completed training-calibration directory. It replays cutoff
+selection from all training scores and claims the selection once before loading
+test pixels. All attempts and diagnostics remain private; aggregate exports
+still require content review. Source must be reviewed and committed before
+execution. No original score or label is overwritten.
+
 ## Publication check
 
 `scripts/check_publication_scope.py` checks the Git index for dataset/model/

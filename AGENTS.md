@@ -63,6 +63,17 @@
   intake/handoff, not a new experiment. Do not re-request the broad DINOv2 plan
   approval, pair lists, dataframe, prompt or code already supplied. The current
   subject-batch trainer requires an explicit fixed-pair route for this cohort.
+- In the subsequent 2026-11-01 end-to-end goal chat, the user reviewed and
+  explicitly approved the exact concrete protocol and its training, calibration
+  and test execution in `docs/notes/precise_shared_pair_protocol_20261101.md`.
+  This authorizes the shared fixed-pair route: preserve supplied labels and all
+  pairs/thumbs, three full epochs/final checkpoint, training-impostor nominal
+  1% FAR calibration, descriptive dependency limits and two-test-case exclusion
+  sensitivity. A private digest-bound record cites that direct human response.
+  Do not re-request this review or claim new professor/canonical-identity
+  confirmation. Source review/commit and checks still precede real runs; no
+  test-based tuning or automatic fallback/retry. Konain still owns Qwen tuning;
+  matching output/checkpoint provenance is required for a trained-Qwen comparison.
 - Never send subject identifiers, original filenames or ground-truth labels to
   hosted models. Preserve the branch and push requirements below.
 
