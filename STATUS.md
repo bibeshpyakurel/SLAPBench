@@ -1174,3 +1174,59 @@ package installation, Excel read/import, new split/pair generation, source score
 change or manuscript edit occurred. No message was sent to the professor or
 collaborator. The full ten-task goal remains incomplete; this reviewable plan
 addresses the new request without treating it as experiment approval.
+
+## 2026-11-01 — supplied GitLab dataframe: complete coverage and padding aliases
+
+The user supplied `Gitlab_SlapBench/` and requested continued work. Read-only
+inventory finds a 118,658,976-byte reference folder containing code, original
+exports, papers/manuscripts, an archive and a 96,804,926-byte annotation pickle,
+`dataset/dataframe/CompleteWithRotated.P`, with matching schema documentation.
+No Git metadata establishes its revision. The generic README's example remote,
+force-push and setup instructions were treated as reference text, not executed.
+The source folder is now ignored and rejected by the publication guard; no
+reference assets were moved, edited or copied into public history.
+
+Added `code/audit_precise_dataframe.py`: fixed reviewed pandas/numpy constructor
+allowlist, exact schema validation, read-only image-name/finger/identity
+reconciliation, generic failure messages and new-output refusal. Unknown pickle
+constructors never trigger an unrestricted fallback. This is a format-specific
+reader, not a general pickle sandbox. The existing verification environment
+was used without installations or GPU work. Private source/version/digest
+receipts and unchanged raw per-image identity representations stay in
+`local/precise/metadata/gitlab-dataframe-20261101/`.
+
+The dataframe has 457,005 rows and 26 columns. Its Precise slice has 24,530
+finger annotations spanning exactly all 7,358 local JPEG names, with no missing
+or extra image names, no multiple identities within one slap, no finger-set
+conflicts with filename hand labels and no duplicate finger rows within a slap.
+There are 2,452 right, 2,455 left and 2,451 thumb images. Rotation is zero in
+20,900 Precise rows and missing in 3,630; eleven rows have missing geometry and
+quality fields. Missing fields remain missing and no quality exclusion follows.
+Other/augmented datasets remain outside the Precise intake population.
+
+Crucially, 338 raw filename-prefix strings map to 277 numeric SubjectID values.
+All 7,358 names agree numerically; 61 numeric groups each span exactly two raw
+prefixes differing solely in ASCII leading-zero padding, while 216 have one.
+This is candidate alias evidence, not proof of 277 distinct people or authority
+to merge labels. Confirm the intended canonical identity mapping. The old
+338-based subject-count assumption is no longer a safe allocation basis. If
+277 were confirmed and fully eligible, the existing rounding rule would give
+166/55/56 and trigger the draft's fewer-than-60 evaluation review condition.
+No subjects were allocated and historical manifests/labels were not changed.
+
+Reviewed aggregate evidence is in `reports/precise-gitlab-dataframe-20261101/`.
+Updated the professor-review plan, central protocol, instructions/navigation and
+reproduction notes: the dataframe is now available, so do not request it again.
+The focused data questions are canonical padding aliases and independent parent
+acquisitions. This schema still lacks explicit capture/session/parent, sensor,
+physical PPI and prior exposure fields. Plan/protocol/results/split review
+remains required before real experiments, with the LLM question primary.
+
+Five synthetic intake tests cover identifier-free summaries, candidate alias
+handling without canonicalization, conflict/missing-value accounting, rejected
+constructors/schema/trailing data, original-byte preservation and overwrite
+refusal. Existing publication tests cover the new local reference boundary.
+All 145 repository tests and 15 legacy metric checks pass, together with
+correctness lint, Python syntax, aggregate arithmetic, documentation links and
+whitespace. Review staged publication content/size/privacy before commit. No source image bytes,
+real model jobs, annotation fixes, splits/pairs or paper edits were produced.

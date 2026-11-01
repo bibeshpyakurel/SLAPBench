@@ -34,49 +34,58 @@ authorized new run. This is a proposed arm, not a newly approved VLM experiment.
 
 ## How to use the dataframe
 
-Only the schema description has arrived; the Excel workbook and its values
-have not. The following interpretations are reported by the professor, not
-verified workbook properties.
+After the schema description, the user supplied a local GitLab folder containing
+`CompleteWithRotated.P`, a pandas dataframe rather than an Excel workbook.
+The [read-only intake](../../reports/precise-gitlab-dataframe-20261101/README.md)
+verifies 26 matching columns and 24,530 Precise finger-annotation rows covering
+all 7,358 local images. Field meanings below are reported by the professor;
+structural consistency does not independently verify identity or acquisitions.
 
-| Reported fields | Intended use after inspecting the actual workbook | Boundary |
+| Reported fields | Intended use and intake evidence | Boundary |
 |---|---|---|
 | `Dataset` | Restrict this study to Precise | Other datasets, including children, remain outside this milestone; verify actual value spellings |
 | `SubjectID` | Check identity mapping and keep every image/derivative of a subject in one partition | Check consistency with existing filenames; never use identity as a model input |
-| `Finger` | Reported codes 2–5 identify right-hand fingers, 7–10 left-hand fingers, 11 right thumb and 12 left thumb | Confirm whether rows annotate individual fingers; do not count finger rows as separate slap acquisitions |
+| `Finger` | Reported codes 2–5 identify right-hand fingers, 7–10 left-hand fingers, 11 right thumb and 12 left thumb; complete finger sets agree with filename hand labels | Rows annotate fingers; do not count them as separate slap acquisitions |
 | `Slap` | Join annotation rows to original slap images and group their finger annotations | Verify path/name mapping, uniqueness, repeated rows and whether augmented images have their own names |
 | `augmented_angle`, rotated box sizes/centers/corners | Identify possible processing/rotation variants and their parent relationships | A rotation or another box is not a new independent impression; zero angle alone does not prove a native capture |
 | Original box coordinates | Annotation geometry, potentially useful in later work | No crop, segmentation or per-finger model input is needed for this whole-slap stage |
 | `difficult`, `dirty`, `moisture`, `overlap`, `contrast` | Check annotation coverage and definitions; propose development error strata if usable | `difficult` reportedly flags nfseg failure; it is not automatically an encoder failure or exclusion rule |
 
-Preserve the original workbook and record its digest, sheets, actual headers,
-types and coverage privately. Check the row unit before counting slaps: several
-finger/rotation annotations may refer to one image or parent acquisition.
-Reconcile conflicts rather than overwriting filename or workbook labels.
+The original dataframe and its digest are preserved, with private provenance
+and image mappings. Multiple finger annotations refer to each slap image.
+There are 277 numeric SubjectID values versus 338 raw filename-prefix strings:
+61 numeric groups have two leading-zero padding variants; all images agree
+numerically with the dataframe. Confirm whether these are the same participants
+before canonicalizing identities or defining a split. Preserve both labels.
 Filter thumbs from this four-finger study without removing their source assets.
 Keep identifiers, filenames and image-level labels out of hosted model inputs
-and public reports. No Excel import, segmentation or new filtering was run here.
+and public reports. No segmentation, image modification or quality exclusion
+was run here; annotation intake is separate from training preparation.
 
 The listed columns do **not yet establish** a capture/session identifier,
 parent-acquisition mapping, sensor, physical PPI or prior training/development
 consumption. The earlier promise of resolution information is not a verified
 PPI field in this schema. We still need a reliable way to distinguish repeated
 independent captures from augmented/processed copies. That mapping may be in
-the workbook, another table or acquisition documentation; a filename-shaped
-timestamp is insufficient evidence by itself.
+another table or acquisition documentation; a filename-shaped timestamp is
+insufficient evidence by itself.
 
 ## Proposed experiment sequence
 
-1. **Review and metadata intake.** Obtain professor feedback on this plan and
-   inspect the workbook. Resolve parent captures, identity/hand conflicts and
-   exposure/claim scope. Do not create partitions from this schema description.
+1. **Review and metadata clarification.** Obtain professor feedback on this plan
+   and confirm identity padding aliases. Resolve parent captures, remaining
+   identity/hand issues and exposure/claim scope. The intake is not split approval.
 2. **Freeze a shared protocol.** Use whole four-finger left/right slaps,
    same-hand comparisons and subject-disjoint train/development/test sets.
    Keep all fingers, hands and derivatives of each subject together. The
    [concrete protocol draft](precise_milestone_review_20261025.md) proposes
-   seed `20261025`, approximately 60/20/20 allocation (202/68/68 only if all 338
-   subjects qualify), reviewed independent-capture sampling and a primary
-   development FAR target of 0.1%. Review the eligible population and actual
-   split before fine-tuning. Historical collection exposure permits an internal
+   seed `20261025`, approximately 60/20/20 allocation, reviewed independent-capture
+   sampling and a primary development FAR target of 0.1%. The old 202/68/68
+   scenario assumed 338 distinct subjects, now unestablished. If 277 numeric
+   identities were confirmed and eligible, the existing rounding rule gives
+   166/55/56, below the draft's 60-subject evaluation review condition. Revisit
+   sizes/statistical support rather than allocating automatically. Review the
+   eligible population and actual split before fine-tuning. Historical collection exposure permits an internal
    reanalysis claim, not an untouched external-validation claim.
 3. **Compare the proposed arms below.** Construct one immutable attempted
    development/test comparison list for all methods after the preceding review.
@@ -163,9 +172,10 @@ support before making reliability claims; accuracy alone is insufficient.
 
 Please review DINOv2's role as the frozen/adapted visual control, inclusion of
 the direct VLM arm, the proposed diagnosis/intervention sequence and the
-concrete subject-disjoint protocol. Please also share the actual workbook and
-identify the parent-capture/session mapping if it is stored separately. These
-are the next inputs; the column description does not approve a split or run.
+concrete subject-disjoint protocol. Please confirm the intended canonical
+identity mapping for the padding variants and identify the parent-capture/session
+mapping if it is stored separately. These are the next data inputs; the
+annotation table does not approve a split or run.
 
-No message has been sent on the user's behalf. This plan contains no new
-research result and does not change the original data, scores or manuscript.
+No message has been sent on the user's behalf. This plan contains no new model
+performance result and does not change original data, scores or the manuscript.

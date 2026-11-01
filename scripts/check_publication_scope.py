@@ -14,6 +14,7 @@ LOCAL_ONLY_ROOTS = {
     ".cache", ".ruff_cache", "related_papers", ".claude",
     "local", "checkpoints", "runs", "wandb", "mlruns", "lightning_logs",
     "tensorboard",
+    "Gitlab_SlapBench",
 }
 LOCAL_ONLY_SUFFIXES = {
     ".pem", ".key", ".safetensors", ".pt", ".pth", ".ckpt",

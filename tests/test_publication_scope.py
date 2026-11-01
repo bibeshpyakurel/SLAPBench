@@ -24,6 +24,7 @@ class PublicationScopeTests(unittest.TestCase):
             "runs/precise/raw_scores.csv", "wandb/run/config.yaml",
             "mlruns/meta.yaml", "lightning_logs/version_0/hparams.yaml",
             "tensorboard/events.json",
+            "Gitlab_SlapBench/dataset/dataframe/CompleteWithRotated.P",
         ]:
             with self.subTest(path=path):
                 self.assertIsNotNone(scope.exclusion_reason(path, 10))
@@ -36,6 +37,7 @@ class PublicationScopeTests(unittest.TestCase):
             "local/precise/checkpoints/config.json", "checkpoints/config.json",
             "runs/raw_scores.csv", "wandb/config.yaml", "mlruns/meta.yaml",
             "lightning_logs/hparams.yaml", "tensorboard/events.json",
+            "Gitlab_SlapBench/private_annotations.csv",
         ]
         result = subprocess.run(
             ["git", "check-ignore", "--no-index", "--stdin"], cwd=ROOT,

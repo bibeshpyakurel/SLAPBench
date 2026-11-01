@@ -7,8 +7,12 @@ limitations is the primary goal. The
 visual control alongside a proposed direct VLM arm and development-only
 diagnostics. It supersedes any reading of the earlier image-only sequence as
 the entire LLM contribution. The supplied dataframe schema helps identity,
-finger and augmentation interpretation; the workbook and independent-capture
-mapping remain pending. No plan/split/experiment approval follows from this reply.
+finger and augmentation interpretation. The user subsequently supplied the
+[matching local dataframe](../../reports/precise-gitlab-dataframe-20261101/README.md):
+all 7,358 images are covered, with 277 numeric identities versus 338 raw prefix
+strings because of candidate leading-zero aliases. Canonical identity and
+independent-capture mapping still require review. No plan/split/experiment
+approval follows from these materials.
 
 2026-10-11. The user subsequently confirmed: **“professor approved this.”**
 This updates the original proposal to an approved research direction and

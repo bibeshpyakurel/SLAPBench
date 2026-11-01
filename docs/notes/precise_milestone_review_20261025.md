@@ -8,6 +8,13 @@ LLM research question. See the [revised review plan](precise_dinov2_llm_plan_202
 for DINOv2 as a visual control, a proposed direct VLM comparison and diagnostics.
 Those VLM additions are proposals, not new execution authorization. The existing
 concrete DINOv2/protocol settings below remain available for that review.
+**Dataframe intake update — 2026-11-01:** the [user-supplied annotation table](../../reports/precise-gitlab-dataframe-20261101/README.md)
+covers all local images and maps 338 raw subject-prefix strings to 277 numeric
+IDs, with 61 leading-zero padding alias groups. Confirm canonical identities
+before eligibility/allocation; the earlier 338-based counts below are a
+historical planning scenario, not a verified population. If 277 were confirmed
+and eligible, 166/55/56 under the existing rule would trigger the fewer-than-60
+evaluation-subject review condition. Capture/session independence is still open.
 The [November 1 clarification](precise_clarification_20261101.md) adds reported
 training use, a 1:4 ratio and a template-failure zero convention, plus the offer
 of a ground-truth dataframe. Exact post-filter records, development history and
@@ -36,7 +43,7 @@ records the accompanying offline checks; original collaborator lists remain inta
 | Population | Authorized Precise subjects with verified parent captures; at least two independent acquisitions for each included hand | Resolve annotation/duplicate conflicts and acquisition evidence first; never manufacture capture IDs from filenames |
 | Unit | Entire four-finger left or right slap; compare only matching hand types | Exclude two-thumb slaps from this milestone, retaining their historical assets |
 | Subject boundary | All hands, sessions, derivatives, thumbs and unused images of a subject stay together | Check raw/native/grayscale duplicates and review suspect derivative relationships |
-| Target sizes | If all 338 subjects qualify: 202 training, 68 development, 68 test | These are proposed counts, not known eligible counts or actual assignments |
+| Target sizes | Unallocated; original 338-based scenario was 202 training, 68 development, 68 test | The new dataframe has 277 numeric IDs; canonical identity/capture review and feasible sizes must precede allocation |
 | Smaller eligible population | Train `floor(0.60*N)`; development `floor((N-train)/2)`; test remainder | Return for review if either evaluation partition has fewer than 60 subjects; do not silently accept a weakened low-FAR design |
 | Allocation seed | `20261025`; rank subjects by SHA-256 of UTF-8 `precise-subject-allocation-v1\0<seed>\0<canonical opaque subject ID>`; ascending digest then opaque ID breaks ties; take train, development, test in order | `\0` denotes one NUL byte; freeze eligibility and private canonical ID mapping first; save implementation/configuration/digests before any assignment |
 | Historical exposure | Record supplied-list membership, verified consumption and prior evaluation separately | This is an internal, subject-disjoint reanalysis of a previously evaluated collection; no untouched or external-validation claim |
@@ -205,7 +212,8 @@ verification. The historical external model drive was not needed.
    zero convention are now available. Supply exact post-filter consumed records
    or code, development/selection history and template-conversion status; clarify
    literal fused-zero versus failed-template exclusions. Do not request the same
-   four lists again. The professor's offered dataframe remains to be received.
+   four lists again. The supplied dataframe is now inventoried; confirm padding
+   aliases and obtain parent-capture evidence rather than requesting it again.
 3. Professor/user: review internal-reanalysis claim scope versus a new untouched
    collection, eligible population/counts, same-hand sampling, 0.1% target,
    selection/failure policy and proposed subject-resampling uncertainty.

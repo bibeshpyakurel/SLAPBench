@@ -63,6 +63,8 @@ env/
 
 # Local research preparation and future training outputs (never auto-publish).
 /local/
+# User-supplied GitLab reference: private annotations, exports and third-party papers.
+/Gitlab_SlapBench/
 /checkpoints/
 /runs/
 /wandb/

@@ -19,8 +19,10 @@ LLMs can verify slaps, why they fail and how to improve reliability. The profess
 requests a DINOv2 plan before experiments. The [plan for review](docs/notes/precise_dinov2_llm_plan_20261101.md)
 uses DINOv2 as a visual control and proposes a direct VLM comparison and
 development-only diagnostics. The described Excel columns help interpret
-identity, fingers and augmentation; the workbook and capture mapping are still
-needed. This reply does not approve real training or new VLM experiments.
+identity, fingers and augmentation. The [subsequently supplied dataframe](reports/precise-gitlab-dataframe-20261101/README.md)
+covers every local image: 338 raw filename prefixes map to 277 numeric IDs via
+candidate leading-zero aliases. Confirm canonical identities and capture mapping
+before allocation. This reply does not approve real training or new VLM experiments.
 
 **Preparation completed through 2026-10-11:**
 

@@ -13,8 +13,10 @@ and RidgeBase entries document retained historical assets.
 
 The [November 1 professor-review plan](docs/notes/precise_dinov2_llm_plan_20261101.md)
 records the latest direction: the primary LLM question, DINOv2 as a visual
-control, proposed VLM diagnostics and the reported Excel schema. Plan review,
-the actual workbook and capture/protocol/results/split decisions remain open.
+control, proposed VLM diagnostics and the reported Excel schema. The
+[local dataframe intake](reports/precise-gitlab-dataframe-20261101/README.md) now
+verifies coverage and candidate identity-padding aliases. Plan review and
+canonical-identity/capture/protocol/results/split decisions remain open.
 
 ## Layout and entry points
 
@@ -43,6 +45,7 @@ at their current paths.
 | `code/ridgebase_pairs.py`, `code/ridgebase_pairs_full.py` | RidgeBase pair construction; full variant supports Train/Test and device categories |
 | `code/precise_pairs.py` | Precise genuine, primary-impostor and diagnostic pair construction |
 | `code/audit_precise_dataset.py` | Read-only Precise filename/byte-duplicate inventory; aggregate output without identifiers |
+| `code/audit_precise_dataframe.py` | Restricted annotation-pickle intake, local-name/finger/identity reconciliation and private review mappings; no split or image loading |
 | `code/inspect_precise_images.py` | Read-only headers and sampled decoding; public aggregates, private identifying records and contact sheets |
 | `code/audit_verifinger_scores.py` | Offline audit of supplied SDK testing exports; reviewed aggregates/ROC coordinates, private identifying records |
 | `code/audit_precise_training_pairs.py` | Offline inventory of supplied training/testing lists and unordered-pair, image and subject overlap; no pair generation |

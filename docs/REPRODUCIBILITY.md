@@ -88,18 +88,26 @@ record reported use separately from the exact preserved list contents. Private
 correspondence/source receipts stay in
 `local/precise/metadata/clarification-20261101/`. The newly shared full-pool folder
 was inaccessible; its contents and the reported 8,992,383 impostors are not
-verified or restored locally. The promised ground-truth dataframe is still
-pending. Do not apply literal zero filtering or substitute the collaborator's
+verified or restored locally. The ground-truth dataframe was still pending at
+that receipt; the subsequent local intake below supplies a matching table.
+Do not apply literal zero filtering or substitute the collaborator's
 pair-disjoint lists for the approved subject-disjoint protocol without review.
 
 The later [professor-review plan](notes/precise_dinov2_llm_plan_20261101.md)
 records the user-supplied Excel column description and the professor's request
-for an LLM-focused DINOv2 plan before experiments. The workbook has not been
-received or imported. Normalized correspondence is private under
-`local/precise/metadata/professor-plan-20261101/`. A future intake must preserve
-the workbook, verify its digest/schema and map annotation/rotation rows to
-original parent captures; the described columns alone do not supply verified
-capture IDs, physical PPI or execution approval.
+for an LLM-focused DINOv2 plan before experiments. Normalized correspondence is private under
+`local/precise/metadata/professor-plan-20261101/`. The user subsequently provided
+`Gitlab_SlapBench/dataset/dataframe/CompleteWithRotated.P`, a pandas pickle
+matching the described schema. The [read-only intake](../reports/precise-gitlab-dataframe-20261101/README.md)
+documents its original digest, reader, local-name coverage and 277 numeric IDs
+versus 338 raw prefix strings (61 candidate zero-padding alias groups).
+Private per-image/provenance records are in
+`local/precise/metadata/gitlab-dataframe-20261101/`. Keep the entire source
+GitLab folder local: it includes identifying annotations, raw exports and
+third-party papers. Its upstream revision is unknown; restore the authorized
+original export separately rather than from public Git. Canonical identity,
+independent captures and physical PPI remain unverified; the file does not
+constitute execution or split approval.
 
 `code/model_registry.py` is the shared mapping used by the setup and SD302b
 inference scripts:
