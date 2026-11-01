@@ -1,5 +1,12 @@
 # DINOv2 within the LLM slap-matching study — plan for professor review
 
+**Later update, 2026-11-01:** the professor approved DINOv2 and assigned Bibesh
+the DINOv2 comparison using Konain's shared pairs, while Konain handles Qwen3-VL.
+Read the [latest handoff](precise_next_goal_handoff_20261101.md) before acting on
+the historical pending-review statements below. The supplied benchmark includes
+thumbs and holds out pairs, not subjects; the subject-disjoint design below is
+a separate extension, not a description of those supplied lists.
+
 2026-11-01. The user supplied a new professor reply describing the dataframe
 columns and requesting a DINOv2 plan **before experiments**. The professor says
 DINOv2 may be a candidate while reaffirming the primary question: whether LLMs

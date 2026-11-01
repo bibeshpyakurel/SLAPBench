@@ -1,0 +1,105 @@
+{
+  "full_genuine_reference": {
+    "json_source_line_and_score_disagreements": 0,
+    "mapping": "Template basenames mapped by unique stem to local JPEG basenames; originals unchanged",
+    "matches_json_genuine_cohort": true,
+    "positive_sum_pairs": 19645,
+    "records": 23103,
+    "template_dat_names": true
+  },
+  "limits": [
+    "No capture/session independence is established by capture_type; it describes hand/slap type.",
+    "No labels are corrected using numeric equality; disagreements remain private review cases.",
+    "The supplied holdout excludes exact pairs, not images or subjects; do not claim subject-disjoint generalization.",
+    "The complete 1.6 GB impostor pool is not recounted here; its declared selection metadata is not a run receipt.",
+    "No development partition or checkpoint-selection history is supplied by the cohort JSON."
+  ],
+  "schema_version": 1,
+  "scope": "Read-only collaborator fixed-pair cohort reconciliation; no model execution",
+  "sources": {
+    "context/genuine_filtered_minus2100.txt": {
+      "bytes": 4412569,
+      "sha256": "58988c3496c7d537050c32c9316417b4fa31fa3aadcd21f28752bbb990c42add"
+    },
+    "random_2100_genuine_seed2026.txt": {
+      "bytes": 398628,
+      "sha256": "d21d63354050b5798034b4022349bed8fdf33cb7c8149f735b94f0885264ff3c"
+    },
+    "random_2100_impostor_seed2026.txt": {
+      "bytes": 372832,
+      "sha256": "841b4900c187ba03dbff9a6bf9378d1134a3a62ea37797e2bb8aff3dd90684f9"
+    },
+    "slap_verification_binary_ab_13_14_15_balanced.json": {
+      "bytes": 17244397,
+      "sha256": "7612469e65227093f0fa53bf4c520aee196a66d0b9ba3c124e7f23250e2f29fd"
+    }
+  },
+  "testing": {
+    "class_counts": {
+      "genuine": 2100,
+      "impostor": 2100
+    },
+    "duplicate_unordered_pairs": 0,
+    "hand_class_counts": {
+      "13_genuine": 749,
+      "13_impostor": 756,
+      "14_genuine": 691,
+      "14_impostor": 671,
+      "15_genuine": 660,
+      "15_impostor": 673
+    },
+    "hand_conflicts": 0,
+    "images": 4869,
+    "missing_image_references": 0,
+    "numeric_id_groups": 276,
+    "numeric_id_label_disagreements": 2,
+    "raw_prefix_groups": 337,
+    "raw_prefix_label_disagreements": 0,
+    "records": 4200,
+    "self_pairs": 0,
+    "unique_pairs": 4200
+  },
+  "testing_bytes_identical_to_prior_intake": {
+    "genuine": true,
+    "impostor": true
+  },
+  "train_test_overlap": {
+    "exact_pairs": 0,
+    "images": 4869,
+    "numeric_id_groups": 276,
+    "raw_prefix_groups": 337
+  },
+  "training": {
+    "class_counts": {
+      "genuine": 19645,
+      "impostor": 19645
+    },
+    "declared_class_counts_match": true,
+    "declared_suffix_disagreements": 0,
+    "duplicate_unordered_pairs": 0,
+    "finger_count_disagreements": 0,
+    "hand_class_counts": {
+      "13_genuine": 6890,
+      "13_impostor": 6890,
+      "14_genuine": 6591,
+      "14_impostor": 6591,
+      "15_genuine": 6164,
+      "15_impostor": 6164
+    },
+    "hand_conflicts": 0,
+    "images": 6778,
+    "missing_image_references": 0,
+    "numeric_id_groups": 276,
+    "numeric_id_label_disagreements": 24,
+    "positive_component_sum_records": 39290,
+    "raw_prefix_groups": 337,
+    "raw_prefix_label_disagreements": 0,
+    "records": 39290,
+    "retained_fused_zero_by_class": {
+      "genuine": 51,
+      "impostor": 1213
+    },
+    "self_pairs": 0,
+    "unique_pairs": 39290
+  }
+}

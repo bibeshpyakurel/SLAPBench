@@ -1230,3 +1230,38 @@ All 145 repository tests and 15 legacy metric checks pass, together with
 correctness lint, Python syntax, aggregate arithmetic, documentation links and
 whitespace. Review staged publication content/size/privacy before commit. No source image bytes,
 real model jobs, annotation fixes, splits/pairs or paper edits were produced.
+
+## 2026-11-01 — professor approval, shared cohort and next-goal handoff
+
+The user supplied later professor approval of DINOv2 and a request to use the
+same training pairs as Konain, who handles Qwen3-VL. Reviewed all three new Drive
+folders and the earlier remaining-pairs folder through the authenticated
+connector. Six preserved local inputs match fresh raw Drive bytes exactly:
+evaluation/fine-tuning scripts, training JSON, both testing lists and the full
+genuine source. The large impostor pool and image archive were listed only.
+
+Reviewed the existing uncommitted cohort audit and its tests; its code digest
+matches its private receipt, and its aggregate reproduced exactly in memory.
+The cohort contains 39,290 training pairs (19,645 per class), balanced by class
+within right/left/two-thumb types, and 4,200 testing pairs. All references resolve.
+Exact train/test pairs are disjoint, but all testing images/identities occur in
+training. Positive component sum, not positive fused score, is the selection
+rule. Preserve 51 genuine and 1,213 impostor fused-zero training pairs. There
+are 24 training and 2 testing numeric-identity label disagreements; private
+cases remain unchanged. No acquisition independence or actual run consumption
+is inferred. Neither collaborator script was imported/executed.
+
+Added docs/notes/precise_next_goal_handoff_20261101.md with source links,
+professor-approved ownership, facts versus code defaults, remaining label and
+checkpoint/threshold choices, fixed-pair implementation gaps, worktree asset
+requirements and a suggested next-chat goal. Updated AGENTS.md and older plan
+status so broad approval, pair lists and acquisition facts do not become stale
+blanket blockers. The shared cohort includes thumbs; the earlier strict
+subject-disjoint design is a separate extension. No existing runner guards
+were weakened, new split generated, GPU job started, new chat/worktree created,
+or message sent to a collaborator. Original inputs/results remain untouched.
+
+Validation: all 149 repository tests and 15 legacy metric checks pass; correctness
+lint, Python syntax, handoff/report links, aggregate arithmetic and whitespace
+checks pass. The publication review covers code, synthetic tests, documentation
+and aggregate JSON only; private source files and case lists stay ignored.

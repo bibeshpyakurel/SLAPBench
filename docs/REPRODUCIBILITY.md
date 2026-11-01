@@ -190,6 +190,18 @@ fingerprint experiment was performed during setup.
 
 ### Current Precise preparation (updated 2026-10-24)
 
+Later shared-benchmark update (2026-11-01): see the
+[next-goal handoff](notes/precise_next_goal_handoff_20261101.md) and
+[cohort report](../reports/precise-shared-cohort-20261101/README.md).
+The professor-approved DINOv2 comparison now has explicit collaborator training
+JSON, testing lists and evaluation/fine-tuning source under ignored
+`local/precise/collaborator/konain-followup-20261101/`. Six source files were
+verified against Drive; private receipts/cases are under
+`local/precise/metadata/shared-cohort-20261101/`. A new worktree must explicitly
+resolve these local assets, the dataset, pinned weights and environments from
+the primary checkout; Git alone does not contain them. The supplied lists
+include thumbs and are not subject-disjoint. No real DINOv2 run exists yet.
+
 See [WORKSPACE_LAYOUT.md](WORKSPACE_LAYOUT.md) for the prepared local folders,
 historical asset locations and reviewed-publication workflow. This checkout is
 the primary workspace; future authorized training runs locally.
