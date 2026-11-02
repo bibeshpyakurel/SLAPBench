@@ -74,6 +74,13 @@
   confirmation. Source review/commit and checks still precede real runs; no
   test-based tuning or automatic fallback/retry. Konain still owns Qwen tuning;
   matching output/checkpoint provenance is required for a trained-Qwen comparison.
+- The approved shared-pair DINOv2 training, both training-calibration phases and
+  both final tests completed on 2026-11-01. Start from
+  `reports/precise-dinov2-shared-20261101/README.md` and its professor report;
+  do not repeat these runs as unfinished work. The user confirmed Konain's
+  matching fine-tuned outputs are not ready. Preserve that pending comparison,
+  historical-Qwen provenance limits and all frozen decisions; additional
+  training/test runs or tuning require separate authorization.
 - Never send subject identifiers, original filenames or ground-truth labels to
   hosted models. Preserve the branch and push requirements below.
 

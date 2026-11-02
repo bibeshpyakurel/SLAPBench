@@ -1303,3 +1303,51 @@ checks, table generation, syntax, correctness lint and whitespace checks pass.
 GPU availability was rechecked (RTX 4080 SUPER, driver 595.99.02); no package
 installation, model download or repeated dataset audit was performed. Real-run
 outputs and the final report will be recorded separately after execution.
+
+## 2026-11-01 — shared-pair DINOv2 experiments and professor report complete
+
+Executed the user's reviewed protocol from commit
+`82d02111de2d13378c4be610cbc733923b0637de`: all 39,290 supplied pairs per epoch,
+three full epochs / 3,684 updates, unchanged supplied targets including thumbs
+and numeric-identity disagreements. The fixed final checkpoint was sealed before
+calibration/testing. Offline comparison with the pinned encoder loader confirms
+185 frozen tensors unchanged and all 38 selected tensors changed. No model,
+package or dataset download/install/audit was repeated.
+
+Both arms calibrated on all 19,645 training impostors, accepting 196 at nominal
+1% training FAR, and then scored exactly 4,200 testing attempts without failures.
+Frozen: cutoff 0.8937185406684875, TAR 41.71% (876/2,100), FAR 0.81% (17/2,100),
+AUC 0.8776 and descriptive EER 19.76%. Adapted: cutoff 0.9320146441459656,
+TAR 56.29% (1,182/2,100), FAR 1.10% (23/2,100), AUC 0.9800 and EER 6.52%.
+Observed TAR increases 14.57 percentage points while FAR increases 0.29 points;
+the adapted model still rejects 918 genuine attempts at its fixed cutoff.
+All numbers are finite-cohort descriptive results with training calibration.
+There is no independent development estimate or test-based retuning.
+
+Published reporting code replays private calibration/outcomes, validates exact
+common testing pairs for supplied SDK and historical Qwen exports, and reports
+pooled/per-type metrics, paired decisions, failures/coverage, reuse counts and
+the two-case label-ambiguity exclusion sensitivity. Original labels are unchanged;
+both flagged testing rows are rejected by both DINO arms. All testing images and
+numeric groups occur in training. No subject-disjoint/capture-independence,
+independent-trial interval, significance or population low-FAR claim is made.
+
+Supplied SDK fused/sum descriptive EER is 2.05%, with zero values preserved and
+extraction status unresolved. Historical Qwen score-export AUC is 0.7612 / EER
+34.03%; this uses a different 0-100 prompt with unverified model/adapter/run
+provenance. The user confirmed matching fine-tuned A/B outputs are not ready.
+No local Qwen fine-tuning was duplicated and no trained-Qwen superiority claimed.
+
+The professor-ready four-page PDF, editable Markdown, metric CSV, ROC SVG and
+aggregate JSON are at `reports/precise-dinov2-shared-20261101/`. Every final PDF
+page was rendered and visually checked. Independent NumPy/scikit-learn checks
+reproduce DINO counts/AUC/EER to numerical precision; original audited source
+hashes remain unchanged. All 170 repository tests, 74 matcher CPU contracts,
+15 legacy metric checks, table regeneration, syntax, lint and whitespace checks
+pass. The report README records operational handling of an idle launcher exit
+and offline state-key verifier correction; no model phase was repeated.
+
+Private approvals, image mappings, original inputs, checkpoints, scores and
+diagnostics remain ignored. The manuscript and historical assets are unchanged.
+Publication includes reviewed source, synthetic tests and aggregate documents
+only; commit/push and remote SHA verification complete this publication step.

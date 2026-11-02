@@ -3,6 +3,15 @@
 Navigation updated 2026-11-01; the original repository inventory is dated
 2026-09-19. See [STATUS.md](STATUS.md) for the dated audit history.
 
+**Latest completed milestone:** the [shared-pair DINOv2 results](reports/precise-dinov2-shared-20261101/README.md)
+and four-page professor report now contain the approved frozen/adapted runs on
+Konain's exact 39,290 training and 4,200 testing pairs, including thumbs. The
+[concrete reviewed protocol](docs/notes/precise_shared_pair_protocol_20261101.md)
+uses final-epoch selection and training calibration. This is held-out-pair
+evaluation with seen images/identities. Matching trained-Qwen outputs are not
+ready; earlier subject-disjoint preparation remains a separate route. Statements
+below about its pending splits/captures do not block the completed shared cohort.
+
 The current study uses Precise only, following the professor's 2026-10-04
 direction. Start with the [central research plan and first-milestone
 record](docs/notes/precise_first_milestone_proposal_20261011.md). It connects

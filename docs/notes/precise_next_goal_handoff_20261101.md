@@ -1,5 +1,13 @@
 # Precise DINOv2 shared-benchmark handoff
 
+**Later completion update (2026-11-01):** the subsequent end-to-end goal received
+the user's concrete protocol/results/cohort review and execution authorization.
+The approved fixed-pair DINOv2 training, calibration and final tests are now
+complete. Start with the [completed results and professor report](../../reports/precise-dinov2-shared-20261101/README.md)
+and [reviewed protocol](precise_shared_pair_protocol_20261101.md). The user
+confirmed matching fine-tuned Qwen outputs are not ready. The original intake
+handoff below is retained as history, not an instruction to repeat completed work.
+
 Updated 2026-11-01 after the user's latest professor/Konain conversation and
 authenticated Drive verification. This is the starting document for the next
 chat/worktree. It supersedes the pending-plan status and division of work in

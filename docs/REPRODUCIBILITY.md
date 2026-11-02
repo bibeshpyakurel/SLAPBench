@@ -353,6 +353,13 @@ evidence or make unsupported low-FAR claims.
 
 ## Shared-pair DINOv2 route (2026-11-01)
 
+**Completed:** frozen/adapted training calibration and both final tests are
+recorded in the [results and professor report](../reports/precise-dinov2-shared-20261101/README.md).
+Training ran from commit `82d02111de2d13378c4be610cbc733923b0637de` for three
+full epochs on all 39,290 pairs; no model experiment was repeated. Original
+private outcomes/checkpoints are at `local/precise/runs/shared-pairs-20261101/`.
+Do not rerun completed jobs merely to reproduce aggregate documents.
+
 The [concrete reviewed protocol](notes/precise_shared_pair_protocol_20261101.md)
 uses Konain's exact 39,290 training/4,200 testing attempts, including thumbs.
 It is a held-out-pair benchmark with seen images/identities. The direct user
@@ -395,6 +402,18 @@ selection from all training scores and claims the selection once before loading
 test pixels. All attempts and diagnostics remain private; aggregate exports
 still require content review. Source must be reviewed and committed before
 execution. No original score or label is overwritten.
+
+`code/verify_precise_shared_checkpoint.py` checks the sealed final checkpoint
+offline against the identical pinned local encoder loader's state dictionary.
+This accommodates Transformers' legacy-to-canonical attention-key conversion
+without changing any tensor or inferring that a renamed key changed a weight.
+`code/report_precise_shared_pairs.py` verifies exact common-pair coverage,
+calibration replay, saved outcome hashes and checkpoint verification before
+writing aggregate-only comparisons. `code/render_precise_shared_report.py`
+renders PDF/Markdown/CSV/SVG with ReportLab 4.4.9 from those aggregates. The
+bundled workspace Python provides that reporting dependency; it need not be
+installed in the isolated training environment. The report README gives exact
+offline export commands and flags the unavailable trained-Qwen comparison.
 
 ## Publication check
 
