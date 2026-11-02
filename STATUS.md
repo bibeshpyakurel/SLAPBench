@@ -1351,3 +1351,32 @@ Private approvals, image mappings, original inputs, checkpoints, scores and
 diagnostics remain ignored. The manuscript and historical assets are unchanged.
 Publication includes reviewed source, synthetic tests and aggregate documents
 only; commit/push and remote SHA verification complete this publication step.
+
+## 2026-11-01 — prepare the remaining trained-Qwen A/B comparison path
+
+The goal continuation verified the clean published DINO state at `36013bb` and
+the user's preserved statement that Konain's matching fine-tuned A/B outputs
+and actual run/checkpoint evidence are not ready. The completed DINO report
+already flags this external gap; it does not fulfill the remaining trained-Qwen
+comparison or justify marking the entire original goal complete.
+
+Added `code/compare_precise_qwen_ab.py` for the supplied script's actual parsed
+A/B output format, plus a documented future evidence/command contract at
+`docs/notes/precise_qwen_ab_comparison_20261101.md`. It verifies exact full pair
+coverage and class membership, preserves case variants and explicit failures,
+requires digest-bound review of actual consumed-training/prompt/environment/
+checkpoint/selection evidence, and replays both saved DINO cutoffs/outcomes.
+It exports pooled/per-type/sensitivity operating points and paired decisions,
+with no binary Qwen ROC/AUC/EER or test-based tuning. It creates no real review
+assertion and performs no model inference, training, image access or download.
+
+Seven new synthetic contracts pass, including a CLI roundtrip and mutation/
+overwrite/privacy cases. The regular CI suite includes them automatically.
+Completed DINO runs, frozen decisions, original scores and the professor PDF
+remain unchanged. This prepares independent implementation while actual Qwen
+outcomes/provenance remain the same external blocker.
+
+Validation: all 177 repository tests and all 15 legacy metric checks pass;
+results-table regeneration, Python syntax, correctness lint, whitespace and
+explicit staged publication/content review precede commit/push. No new result,
+real comparison review, score file or professor-report revision was generated.

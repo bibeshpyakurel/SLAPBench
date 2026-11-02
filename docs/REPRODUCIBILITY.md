@@ -415,6 +415,14 @@ bundled workspace Python provides that reporting dependency; it need not be
 installed in the isolated training environment. The report README gives exact
 offline export commands and flags the unavailable trained-Qwen comparison.
 
+The separate `code/compare_precise_qwen_ab.py` accepts the supplied A/B script's
+parsed output format once Konain provides actual matching outcomes and reviewed
+run/checkpoint evidence. Its [evidence and command contract](notes/precise_qwen_ab_comparison_20261101.md)
+reuses sealed DINO artifacts without model calls, threshold search or repeated
+training. It preserves failures and exact attempted pairs, reports a binary
+operating point and paired decisions, and cannot replace missing run evidence
+with code defaults. No actual trained-Qwen comparison is available yet.
+
 ## Publication check
 
 `scripts/check_publication_scope.py` checks the Git index for dataset/model/

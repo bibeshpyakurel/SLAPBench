@@ -42,6 +42,7 @@ at their current paths.
 
 | Location | Observed purpose |
 |---|---|
+| `code/compare_precise_qwen_ab.py`, `tests/test_precise_qwen_ab_comparison.py` | Offline future trained-Qwen A/B ingestion and comparison against sealed DINO decisions; [evidence contract](docs/notes/precise_qwen_ab_comparison_20261101.md); synthetic only until Konain's matching outputs arrive |
 | `code/precise_matching/`, `tests/test_precise_matching.py` | Standard-library protocol preflight and development-fixed score evaluation; synthetic tests, no model inference |
 | `code/precise_matching/comparison.py`, `tests/test_precise_comparison.py` | Common-list multi-method offline reports, paired decisions/coverage and fixed-cutoff hand summaries; [guide](docs/notes/precise_common_list_comparison_20261031.md) |
 | `code/train_precise_matcher.py`, `code/precise_matching/{images,encoders,losses,training}.py` | Selected DINOv2 whole-image matcher and guarded private training/resume/development selection; synthetic tests, no real Precise run |
