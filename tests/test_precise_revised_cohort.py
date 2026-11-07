@@ -84,7 +84,14 @@ class RevisedCohortTests(unittest.TestCase):
     def test_invalid_target_prior_bundle_change_and_missing_local_files(self):
         with tempfile.TemporaryDirectory() as tmp:
             paths = fixture(Path(tmp))
-            image = next(paths[4].iterdir());image.unlink()
+            # Inventory includes an alias image absent from the supplied pairs.
+            # Directory enumeration order must not choose the missing-file case.
+            (paths[4] / "1_synthetic_c_13.jpeg").unlink()
+            report, _ = audit.reconcile(*paths[:5])
+            self.assertEqual(report["missing_local_image_files"], 0)
+            data = json.loads((paths[0] / audit.TRAIN_JSON).read_text())
+            image = paths[4] / data["pairs"][0]["image_paths"][0]
+            image.unlink()
             report, _ = audit.reconcile(*paths[:5])
             self.assertEqual(report["missing_local_image_files"], 1)
             original = paths[2].read_text();paths[2].write_text(original + "\n")

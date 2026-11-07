@@ -1513,3 +1513,13 @@ publication/content checks pass. Publishable code, aggregate outcomes and
 notes are reviewed for commit/push to origin/dev; originals and private assets
 remain unchanged and ignored. This completes the authorized DINO study; the
 matching trained-Qwen comparison remains pending actual collaborator evidence.
+
+Post-publication CI exposed a filesystem-order-dependent synthetic intake test:
+it deleted the first directory entry, which could be an inventory-only image
+absent from the pair lists. The audit correctly counts missing referenced
+images, so CI observed zero instead of the test's expected one. The fixture now
+explicitly checks both an unused inventory image (zero missing references) and
+a training-JSON endpoint (one missing reference). This changes only the test;
+sealed runs, scientific policy, source audit and professor report are unchanged.
+Local regression checks and hosted CI are checked again for the corrective
+commit rather than repeating any model phase.
