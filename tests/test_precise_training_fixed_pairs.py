@@ -65,7 +65,7 @@ class FixedInputTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             bundle, config, review = (root / name for name in ("bundle.json", "config.json", "review.json"))
-            bundle.write_text("{}")
+            bundle.write_text('{"scope":"shared_seen_image_fixed_pairs"}')
             config.write_text(json.dumps(asdict(FixedConfig())))
             value = {flag: True for flag in REVIEW_FLAGS}
             value.update(scope="shared_seen_image_fixed_pairs", review_record="synthetic human review",

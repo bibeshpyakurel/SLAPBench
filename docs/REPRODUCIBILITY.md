@@ -423,6 +423,45 @@ training. It preserves failures and exact attempted pairs, reports a binary
 operating point and paired decisions, and cannot replace missing run evidence
 with code defaults. No actual trained-Qwen comparison is available yet.
 
+## Newly supplied revised cohort (2026-11-07)
+
+The [new-source intake](../reports/precise-revised-cohort-20261107/README.md)
+records five November 5 Drive inputs, source IDs, byte hashes and reproduction
+commands. They remain private at
+`local/precise/collaborator/konain-followup-20261107/`; raw policy/source receipts
+are under `local/precise/metadata/revised-cohort-20261107/`. The original
+November 1 sources, run artifacts, model checkpoints and report remain intact.
+
+This new cohort has 37,194 training and 4,200 changed testing pairs, with separate
+221/55 numeric groups. It is not the previously approved training membership.
+The completed adaptation already used every new testing image/group and 1,918
+exact new testing pairs. Do not relabel its checkpoint as unseen-group evidence.
+The [concrete replacement proposal](notes/precise_revised_cohort_review_20261107.md)
+was explicitly approved by the user for replacement and fresh training,
+calibration and testing. The intake reads no pixels and itself authorizes
+no experiment; the separate actual user response is the approval evidence.
+
+The OS upgrade changed `/usr/bin/python3` to 3.14 while the original environments
+still hold Python 3.12 packages. Keep those originals intact. Dated compatibility
+environments at `local/precise/environments/verification-compat-20261107/` and
+`matcher-compat-20261107/` use the bundled Python 3.12.14 and a `.pth` pointing to
+the original corresponding Python 3.12 site-packages. They were created with
+`venv --without-pip`; no dependencies were installed again. Private environment
+construction/approval records are under
+`local/precise/metadata/revised-execution-20261107/`. Use these dated interpreters
+for current verification/model commands rather than the changed `.venv` symlink.
+Restore missing original packages from the existing pinned environment locks on
+another authorized machine; a Git checkout alone does not supply them.
+
+`run_precise_shared_pairs.py prepare --scope numeric_group_disjoint_fixed_pairs`
+accepts the new audited sources and enforces numeric-prefix/image separation.
+The new config is `code/precise_matching/configs/dinov2_numeric_group_holdout.json`.
+Scope is bound in the human review, bundle and every runtime provenance record;
+it cannot be substituted for the old seen-image benchmark. The November 7
+[synthetic CUDA report](../reports/precise-gpu-runtime-20261107/README.md) verifies
+the compatible runtime. NVIDIA driver metadata comes from the loaded module if
+the management executable is absent; there is no numerical/device fallback.
+
 ## Publication check
 
 `scripts/check_publication_scope.py` checks the Git index for dataset/model/

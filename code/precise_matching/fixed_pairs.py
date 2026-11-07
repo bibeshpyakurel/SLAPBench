@@ -20,6 +20,9 @@ HANDS = {"13": "right", "14": "left", "15": "thumbs"}
 LABELS = {"genuine": "A", "impostor": "B"}
 TRAIN_FILE = "slap_verification_binary_ab_13_14_15_balanced.json"
 TEST_FILES = {kind: f"random_2100_{kind}_seed2026.txt" for kind in LABELS}
+SHARED_SCOPE = "shared_seen_image_fixed_pairs"
+GROUP_SCOPE = "numeric_group_disjoint_fixed_pairs"
+SCOPES = frozenset({SHARED_SCOPE, GROUP_SCOPE})
 REVIEW_FLAGS = ("protocol_reviewed", "results_reviewed", "cohort_reviewed",
                 "labels_as_supplied_reviewed", "execution_authorized")
 
@@ -105,21 +108,57 @@ def source_pair(index, a, b, label, phase):
     return FixedPair(f"{phase}-{index:08d}", a, b, label, HANDS[parts[0][1]], conflict)
 
 
-def prepare_bundle(intake, inventory_path, audit_path, output):
+def validate_group_holdout(training, testing):
+    """Verify numeric-prefix/image separation without asserting biological identity."""
+    validate_pairs(training)
+    validate_pairs(testing)
+    groups, images = [], []
+    for pairs in (training, testing):
+        selected, endpoints = set(), set()
+        for p in pairs:
+            check = source_pair(1, p.image_a, p.image_b, p.label, "check")
+            if (p.hand != check.hand or p.numeric_identity_disagreement != check.numeric_identity_disagreement):
+                raise InputError("Numeric-group hand/ambiguity metadata disagrees with supplied endpoints.")
+            for name in (p.image_a, p.image_b):
+                selected.add(int(Path(name).stem.split("_")[0]))
+                endpoints.add(name)
+        groups.append(selected); images.append(endpoints)
+    if groups[0] & groups[1] or images[0] & images[1]:
+        raise InputError("Numeric-group holdout requires no training/testing group or image overlap.")
+    return {"training_numeric_groups": len(groups[0]), "testing_numeric_groups": len(groups[1]),
+            "shared_numeric_groups": 0, "shared_images": 0,
+            "biological_identity_independence_confirmed": False}
+
+
+def prepare_bundle(intake, inventory_path, audit_path, output, *, scope=SHARED_SCOPE):
     """Translate supplied pairs losslessly, using the completed image inventory."""
     from audit_precise_training_pairs import read_source
 
     intake, output = Path(intake), Path(output)
     if output.exists():
         raise InputError("Preparation requires a new private bundle path.")
-    sources = {name: intake / name for name in (TRAIN_FILE, *TEST_FILES.values())}
+    if scope not in SCOPES:
+        raise InputError("Unknown fixed-pair benchmark scope.")
+    if scope == GROUP_SCOPE:
+        from audit_precise_revised_cohort import TRAIN_JSON, LISTS
+        train_name = TRAIN_JSON
+        test_names = {label: LISTS["test_" + label] for label in LABELS}
+        source_names = (train_name, *LISTS.values())
+    else:
+        train_name, test_names = TRAIN_FILE, TEST_FILES
+        source_names = (TRAIN_FILE, *TEST_FILES.values())
+    sources = {name: intake / name for name in source_names}
     sources.update(inventory=Path(inventory_path), audit=Path(audit_path))
     hashes = {name: digest(path) for name, path in sources.items()}
     audit = json.loads(Path(audit_path).read_text())
     if any(hashes[name] != audit["sources"][name]["sha256"]
-           for name in (TRAIN_FILE, *TEST_FILES.values())):
+           for name in source_names):
         raise InputError("Supplied inputs differ from the completed cohort audit.")
-    data = json.loads(sources[TRAIN_FILE].read_text())
+    if scope == GROUP_SCOPE and (audit.get("training_json_matches_supplied_training_lists_and_scores") is not True
+            or audit.get("new_train_test_overlap") != {"pairs": 0, "images": 0, "numeric_groups": 0}
+            or audit.get("declared_split_counts_match_observed") is not True):
+        raise InputError("Revised source audit must verify exact supplied lists and numeric-group separation.")
+    data = json.loads(sources[train_name].read_text())
     records = data["pairs"]
     records = list(records.values()) if isinstance(records, dict) else records
     training = []
@@ -130,13 +169,13 @@ def prepare_bundle(intake, inventory_path, audit_path, output):
             raise InputError("Explicit A/B target mismatch.")
         training.append(source_pair(index, *record["image_paths"], label, "train"))
     testing = []
-    for label, name in TEST_FILES.items():
+    for label, name in test_names.items():
         rows, _ = read_source(sources[name], label)
         for row in rows:
             testing.append(source_pair(len(testing) + 1, *row.names, label, "test"))
     for phase, pairs in (("training", training), ("testing", testing)):
         validate_pairs(pairs)
-        expected = audit[phase]
+        expected = audit["training_json" if phase == "training" and scope == GROUP_SCOPE else phase]
         if (len(pairs) != expected["records"]
                 or Counter(p.label for p in pairs) != expected["class_counts"]
                 or sum(p.numeric_identity_disagreement for p in pairs)
@@ -147,6 +186,8 @@ def prepare_bundle(intake, inventory_path, audit_path, output):
     if ({tuple(sorted((p.image_a, p.image_b))) for p in training}
             & {tuple(sorted((p.image_a, p.image_b))) for p in testing}):
         raise InputError("Exact training/testing pair overlap is prohibited.")
+    if scope == GROUP_SCOPE:
+        validate_group_holdout(training, testing)
     inventory = json.loads(Path(inventory_path).read_text())["records"]
     by_name = {row["filename"]: row for row in inventory}
     if len(by_name) != len(inventory):
@@ -160,7 +201,7 @@ def prepare_bundle(intake, inventory_path, audit_path, output):
         images[key] = {"path": key, "sha256": row["sha256"], "decoded_sha256": row["decoded_sha256"]}
     if any(digest(path) != hashes[name] for name, path in sources.items()):
         raise InputError("Source changed during private preparation.")
-    bundle = {"schema_version": 1, "scope": "shared_seen_image_fixed_pairs",
+    bundle = {"schema_version": 1, "scope": scope,
               "labels": "as_supplied", "source_sha256": hashes,
               "images": images, "training": [asdict(p) for p in training],
               "testing": [asdict(p) for p in testing]}
@@ -174,13 +215,15 @@ def prepare_bundle(intake, inventory_path, audit_path, output):
 def load_bundle(path, source_root):
     bundle = json.loads(Path(path).read_text())
     if (not isinstance(bundle, dict) or bundle.get("schema_version") != 1
-            or bundle.get("scope") != "shared_seen_image_fixed_pairs"
+            or bundle.get("scope") not in SCOPES
             or bundle.get("labels") != "as_supplied"):
         raise InputError("Unexpected private shared-benchmark schema.")
     training = [FixedPair(**row) for row in bundle["training"]]
     testing = [FixedPair(**row) for row in bundle["testing"]]
     validate_pairs(training)
     validate_pairs(testing)
+    if bundle["scope"] == GROUP_SCOPE:
+        validate_group_holdout(training, testing)
     if ({p.pair_id for p in training} & {p.pair_id for p in testing}
             or {tuple(sorted((p.image_a, p.image_b))) for p in training}
             & {tuple(sorted((p.image_a, p.image_b))) for p in testing}):
@@ -205,9 +248,11 @@ def reviewed_shared_inputs(bundle_path, config_path, review_path, phase):
         raise InputError("Unknown shared-benchmark execution phase.")
     sources = {"bundle": Path(bundle_path), "config": Path(config_path), "review": Path(review_path)}
     hashes = {key: digest(path) for key, path in sources.items()}
+    bundle = json.loads(sources["bundle"].read_text())
+    scope = bundle.get("scope") if isinstance(bundle, dict) else None
     review = json.loads(sources["review"].read_text())
     if (not isinstance(review, dict) or any(review.get(flag) is not True for flag in REVIEW_FLAGS)
-            or review.get("scope") != "shared_seen_image_fixed_pairs"
+            or scope not in SCOPES or review.get("scope") != scope
             or review.get("input_sha256") != {key: hashes[key] for key in ("bundle", "config")}
             or not isinstance(review.get("review_record"), str) or not review["review_record"].strip()
             or phase not in review.get("authorized_phases", [])):

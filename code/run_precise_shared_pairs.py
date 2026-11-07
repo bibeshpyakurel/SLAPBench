@@ -18,7 +18,8 @@ import traceback
 from precise_matching.data import InputError
 from precise_matching.encoders import CONFIG_SHA256, MODEL_ID, REVISION, WEIGHTS_SHA256, load_encoder
 from precise_matching.fixed_evaluation import calibrate_fixed, test_fixed
-from precise_matching.fixed_pairs import load_bundle, prepare_bundle, reviewed_shared_inputs
+from precise_matching.fixed_pairs import SHARED_SCOPE, SCOPES, load_bundle, prepare_bundle, reviewed_shared_inputs
+from precise_matching.hardware import cuda_driver_metadata
 from precise_matching.fixed_training import checked_checkpoint, train_fixed
 from precise_matching.images import image_tensor, prepare_image
 from precise_matching.training import digest, write_json
@@ -60,6 +61,7 @@ def main(argv=None):
     prepare = commands.add_parser("prepare")
     for name in ("intake", "inventory", "audit", "output"):
         prepare.add_argument("--" + name, type=Path, required=True)
+    prepare.add_argument("--scope", choices=sorted(SCOPES), default=SHARED_SCOPE)
     for phase in ("train", "calibrate", "test"):
         command = commands.add_parser(phase)
         for name in ("bundle", "config", "review", "source-root", "weights", "output"):
@@ -75,7 +77,7 @@ def main(argv=None):
     try:
         if args.phase == "prepare":
             output = private_path(args.output)
-            summary = prepare_bundle(args.intake, args.inventory, args.audit, output)
+            summary = prepare_bundle(args.intake, args.inventory, args.audit, output, scope=args.scope)
             print(json.dumps(summary, sort_keys=True))
             return 0
         output = private_path(args.output, "local/precise/runs")
@@ -96,22 +98,25 @@ def main(argv=None):
         os.environ["TRANSFORMERS_OFFLINE"] = "1"
         os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
         os.environ["TOKENIZERS_PARALLELISM"] = "false"
+        compatibility_path = (Path(sys.prefix) / "lib" / f"python{sys.version_info.major}.{sys.version_info.minor}"
+                              / "site-packages/preserved_packages.pth")
         provenance = {"code_commit": git_output("rev-parse", "HEAD", text=True).strip(),
             "source_sha256": source_hashes, "input_sha256": hashes,
             "source_root": str(args.source_root.resolve()), "weights_path": str(args.weights.resolve()),
             "model": MODEL_ID, "model_revision": REVISION, "weights_sha256": WEIGHTS_SHA256,
             "model_config_sha256": CONFIG_SHA256,
             "environment_lock_sha256": digest(ROOT / "code/precise_matching/environment/requirements-linux-x86_64-py312-cu124.lock"),
-            "python": platform.python_version(), "packages": package_versions()}
+            "python": platform.python_version(), "packages": package_versions(), "benchmark_scope": bundle["scope"],
+            "interpreter_path": str(Path(sys.executable).resolve()),
+            "interpreter_sha256": digest(Path(sys.executable).resolve()),
+            "compatibility_binding_sha256": digest(compatibility_path) if compatibility_path.is_file() else None}
         adapted = args.phase == "train" or args.arm == "adapted_dinov2"
         model = load_encoder(args.weights, adapted=adapted, device=config.device)
         import torch
         provenance["hardware"] = {"device": config.device, "platform": platform.platform(),
             "torch_runtime": str(torch.__version__), "torch_compiled_cuda": torch.version.cuda,
             "cuda_device": torch.cuda.get_device_name() if config.device == "cuda" else None,
-            "driver_version": (subprocess.check_output([
-                "nvidia-smi", "--query-gpu=driver_version", "--format=csv,noheader"], text=True).strip()
-                if config.device == "cuda" else None)}
+            **(cuda_driver_metadata() if config.device == "cuda" else {"driver_version": None, "driver_metadata_source": None})}
         provenance["model_identity"] = {"arm": "adapted_dinov2" if adapted else "frozen_dinov2",
                                         "base_weights_sha256": WEIGHTS_SHA256, "revision": REVISION}
         if args.phase != "train" and adapted:
@@ -138,8 +143,8 @@ def main(argv=None):
         elif args.phase != "train" and args.training_run is not None:
             raise InputError("A frozen arm cannot consume an adapted checkpoint.")
 
-        # Test endpoints may be seen training images, so authorization is by
-        # the explicit phase pair set, not a false disjoint-image assertion.
+        # Scope validation above allows overlap only in the original shared
+        # route. This loader additionally limits access to current-phase pairs.
         selected_pairs = testing if args.phase == "test" else training
         allowed = {key for pair in selected_pairs for key in (pair.image_a, pair.image_b)}
 
@@ -159,7 +164,7 @@ def main(argv=None):
         else:
             calibration = private_path(args.calibration, "local/precise/runs")
             test_fixed(model, training, testing, load, config, calibration, output, provenance,
-                       integrity=integrity, event=event)
+                       integrity=integrity, event=event, scope=bundle["scope"])
     except (InputError, OSError, ValueError, TypeError, KeyError, RuntimeError,
             ImportError, subprocess.SubprocessError):
         # The full diagnostic can contain identifying paths, so retain it only

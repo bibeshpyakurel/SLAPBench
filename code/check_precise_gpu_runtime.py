@@ -103,8 +103,8 @@ def run_gpu_probe(weights, config, private):
     torch.cuda.manual_seed_all(config.seed)
     torch.use_deterministic_algorithms(True)
     start = time.monotonic()
-    driver = subprocess.check_output(["nvidia-smi", "--query-gpu=driver_version", "--format=csv,noheader"],
-                                     text=True).splitlines()[0].strip()
+    from precise_matching.hardware import cuda_driver_metadata
+    driver = cuda_driver_metadata()
     props = torch.cuda.get_device_properties(0)
     free_start, total = torch.cuda.mem_get_info()
     reserved_start = torch.cuda.memory_reserved()
@@ -113,7 +113,7 @@ def run_gpu_probe(weights, config, private):
     report = {"schema_version": 1, "scope": "Synthetic CUDA capacity only; no Precise data or biometric evaluation",
         "passed": False, "model": MODEL_ID, "revision": REVISION, "weights_sha256": WEIGHTS_SHA256,
         "model_config_sha256": CONFIG_SHA256, "input_side": SIDE, "config": asdict(config),
-        "driver_version": driver, "torch": str(torch.__version__), "cuda_build": torch.version.cuda,
+        **driver, "torch": str(torch.__version__), "cuda_build": torch.version.cuda,
         "device": props.name, "device_total_bytes": total, "device_free_before_bytes": free_start,
         "device_capability": list(torch.cuda.get_device_capability()),
         "bf16_supported": torch.cuda.is_bf16_supported(), "external_reserve_bytes": RESERVE_BYTES,

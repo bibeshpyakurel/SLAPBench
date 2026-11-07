@@ -1380,3 +1380,78 @@ Validation: all 177 repository tests and all 15 legacy metric checks pass;
 results-table regeneration, Python syntax, correctness lint, whitespace and
 explicit staged publication/content review precede commit/push. No new result,
 real comparison review, score file or professor-report revision was generated.
+
+## 2026-11-07 — new Drive cohort found; replacement approved
+
+The user resumed the full goal and supplied replacement repository instructions.
+The checkout remains on published `dev` at `3800ce0`. A focused check of
+the previously supplied Drive folders found five new November 5 files in the
+testing/data folder; the evaluation and fine-tuning-code folders still contain
+their previously supplied scripts/JSON, not matching trained-Qwen outputs.
+
+Saved the complete five raw new sources (about 28.0 MiB) under ignored
+`local/precise/collaborator/konain-followup-20261107/`, checking provider byte sizes
+and recording Drive IDs/modified dates and SHA-256 values. No archive/model
+download, original replacement or dependency installation occurred. The new
+`code/audit_precise_revised_cohort.py` reads these inputs, reuses the completed
+image inventory and compares to the prior bundle bound to the actual DINO
+training record. It does not decode pixels, allocate identities or run models.
+
+New JSON/training lists match exactly: 37,194 pairs, 18,597 per class, balanced
+within right/left/thumb types. Testing has 4,200 pairs, with 700 per class/type.
+New training/testing share zero exact pairs, images or numeric prefix groups;
+there are 221 training groups and 55 testing groups. No raw-prefix/numeric label
+disagreements, missing references or duplicate pairs occur. All 61 inventory
+padding-alias groups occur in training only. This establishes numeric-group
+separation in the supplied rows, not confirmed biological identities or capture
+independence. Positive component sums retain 47/1,214 training and 7/142 testing
+genuine/impostor fused-zero scores; extraction status remains unverified.
+
+Only 189 new testing pairs match the old testing list; 4,011 changed. Critically,
+all 1,057 new testing images and all 55 groups, including 1,918 exact new testing
+pairs, were used by the already completed adapted model's training. Reusing that
+checkpoint cannot support an unseen-group claim. A newly reviewed numeric-group
+study would need fresh adaptation from the pinned base and separate outputs.
+
+The aggregate/README are at `reports/precise-revised-cohort-20261107/`. A concrete
+replacement proposal in `docs/notes/precise_revised_cohort_review_20261107.md`
+retains fixed three-epoch selection and nominal 1% training calibration, using
+the new sources after a separate scope/results/protocol review. The user then
+explicitly replied: “Yes—use the new lists and run fresh DINOv2 training,
+calibration and testing.” The active benchmark is now the revised cohort; this
+is actual user authorization, not approval inferred from folder content or the
+resumed goal. Completed prior runs/report,
+frozen decisions, labels, old metadata and private assets are unchanged.
+
+Four new synthetic intake contracts pass. Full offline checks and explicit
+publication review precede commit/push. This is new-source intake, not a repeat
+of completed dataset/image audits. The separately authorized fresh study is
+prepared below.
+
+The OS now reports Ubuntu 26.04.1 with default Python 3.14, while the original
+verification and matcher packages remain under Python 3.12 site directories.
+Initial verification therefore reported missing packages under the changed
+interpreter. Created dated Python 3.12.14 compatibility environments that reuse
+the existing package directories without installing packages or editing the
+original environments. The pinned matcher packages pass dependency checks;
+CUDA/BF16 is available on the RTX 4080 SUPER. No driver repair was required.
+The missing `nvidia-smi` management executable is handled for provenance only by
+reading the loaded NVIDIA module's version; model/device/precision never change.
+
+Added explicit `numeric_group_disjoint_fixed_pairs` support to preparation,
+digest-bound review, metadata validation and final-test reporting. It checks
+numeric-prefix/image separation, including padding aliases, before model access;
+the older seen-image scope retains its behavior. Synthetic full CLI contracts
+cover fresh training/calibration/testing for both scopes and retain all prior
+matcher tests. The new bundle has exactly 37,194/4,200 pairs and 6,778 images;
+preparation reads no pixels and generates no approval. Actual user review is
+preserved privately against proposal/audit bytes and bound separately to the
+new bundle/configuration before execution.
+
+The November 7 full-resolution synthetic check passes under the compatible
+runtime (driver 595.99.02, Torch 2.6.0+cu124, BF16, 16 images at 448 pixels):
+2.67 GiB peak allocated / 3.37 GiB reserved. It addresses the changed interpreter/
+OS runtime; no fingerprint image or real model score was used. All 187 repository
+tests, 80 matcher CPU contracts and 15 legacy metric checks pass after runtime
+compatibility was restored. Source/content/publication checks and commit/push
+precede fresh authorized real-data execution.

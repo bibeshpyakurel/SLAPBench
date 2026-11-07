@@ -9,7 +9,7 @@ from pathlib import Path
 from .data import InputError
 from .encoders import cosine_scores, encode
 from .evaluation import Score, load_scores, select_cutoff, summarize, write_scores
-from .fixed_pairs import canonical_digest, validate_pairs
+from .fixed_pairs import GROUP_SCOPE, SHARED_SCOPE, SCOPES, canonical_digest, validate_group_holdout, validate_pairs
 from .training import digest, write_json
 
 
@@ -154,9 +154,13 @@ def inspect_calibration(calibration, training, config, provenance):
 
 
 def test_fixed(model, training, testing, pixel_loader, config, calibration, output, provenance, *,
-               integrity=lambda: None, event=lambda row: None):
+               integrity=lambda: None, event=lambda row: None, scope=SHARED_SCOPE):
     """Claim the sealed selection once before loading any test pixels."""
     output, calibration = Path(output).resolve(), Path(calibration).resolve()
+    if scope not in SCOPES or provenance.get("benchmark_scope", SHARED_SCOPE) != scope:
+        raise InputError("Test scope must match the reviewed benchmark provenance.")
+    if scope == GROUP_SCOPE:
+        validate_group_holdout(training, testing)
     integrity()
     selection = inspect_calibration(calibration, training, config, provenance)
     if output.exists():
@@ -176,11 +180,14 @@ def test_fixed(model, training, testing, pixel_loader, config, calibration, outp
         # Guard against any mutation of the selection while inference ran.
         if inspect_calibration(calibration, training, config, provenance) != selection:
             raise InputError("Frozen calibration changed during testing.")
-        report = {"schema_version": 1, "scope": "held_out_pairs_seen_images_and_identities",
+        group_holdout = scope == GROUP_SCOPE
+        report = {"schema_version": 1, "scope": ("held_out_numeric_prefix_groups_identity_semantics_unconfirmed"
+                  if group_holdout else "held_out_pairs_seen_images_and_identities"),
             "threshold": selection["threshold"], "model_identity": provenance["model_identity"],
             "results": fixed_summary(testing, scores, selection["threshold"]["cutoff"]),
             "limits": ["Agreement with supplied labels; numeric identity ambiguities are not corrected.",
-                "All testing images and identity groups also appear in training.",
+                ("Training/testing numeric-prefix groups and images are disjoint; biological identity semantics remain unconfirmed."
+                 if group_holdout else "All testing images and identity groups also appear in training."),
                 "Threshold calibrated on training impostors, not independent development data.",
                 "Descriptive test curves/EER must not select checkpoints, cutoffs or hyperparameters.",
                 "No population confidence, low-FAR guarantee or acquisition independence is established."]}

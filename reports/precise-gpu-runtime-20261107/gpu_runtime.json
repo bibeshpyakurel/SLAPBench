@@ -1,0 +1,103 @@
+{
+  "bf16_supported": true,
+  "config": {
+    "accumulation": 4,
+    "device": "cuda",
+    "epochs": 30,
+    "learning_rate": 1e-05,
+    "margin": 0.2,
+    "microbatches": 200,
+    "minimum_learning_rate": 1e-06,
+    "precision": "bf16",
+    "seed": 20261025,
+    "subjects_per_batch": 8,
+    "target_far": "0.001",
+    "warmup_steps": 100,
+    "weight_decay": 0.01
+  },
+  "cuda_build": "12.4",
+  "device": "NVIDIA GeForce RTX 4080 SUPER",
+  "device_capability": [
+    8,
+    9
+  ],
+  "device_free_before_bytes": 16450584576,
+  "device_total_bytes": 16720199680,
+  "driver_metadata_source": "proc_driver_nvidia",
+  "driver_version": "595.99.02",
+  "estimated_headroom_at_initial_external_usage_bytes": 12835094528,
+  "external_reserve_bytes": 2147483648,
+  "external_reserve_met": true,
+  "input_side": 448,
+  "limits": [
+    "No source images, real subjects, comparison lists or research scores were accessed.",
+    "Random grayscale microbatches exercise capacity; their losses are not biometric evidence.",
+    "The nominal LR is used without a scheduler; full checkpoint/resume was checked separately.",
+    "Peak allocated/reserved bytes describe this process; sampled driver-free memory and headroom depend on other processes.",
+    "Allocator caches are retained between phases; later reserved-memory peaks can include earlier cached allocations.",
+    "Inference is single-image FP32, matching the existing development/final-test loaders.",
+    "Short-run fit does not establish long-run stability, throughput, protocol approval or actual training readiness.",
+    "No microbatch, input size, precision or device is reduced automatically on failure."
+  ],
+  "minimum_sampled_free_device_bytes": 12713459712,
+  "model": "facebook/dinov2-small",
+  "model_config_sha256": "1809f83e3bdb1609a501a610ad4a742f4fd8ae44d72ca4aa0df52d1f2ac8628d",
+  "passed": true,
+  "phases": {
+    "adapted_fp32_inference": {
+      "embedding_shape": [
+        1,
+        384
+      ],
+      "free_device_bytes_after": 12713459712,
+      "gradients_enabled": false,
+      "peak_allocated_bytes": 219444224,
+      "peak_reserved_bytes": 3615490048,
+      "precision": "fp32",
+      "seconds": 0.01
+    },
+    "adapted_training": {
+      "accumulation": 4,
+      "batch_pairs": {
+        "negative_pairs": 112,
+        "positive_pairs": 8
+      },
+      "changed_trainable_tensors": 38,
+      "free_device_bytes_after": 12713459712,
+      "frozen_parameters_unchanged": true,
+      "gradients_finite": true,
+      "images_per_microbatch": 16,
+      "input_side": 448,
+      "losses_finite": true,
+      "microbatches": 8,
+      "nominal_learning_rate": 1e-05,
+      "optimizer_state_entries": 38,
+      "optimizer_updates": 2,
+      "peak_allocated_bytes": 2864751616,
+      "peak_reserved_bytes": 3615490048,
+      "precision": "bf16",
+      "seconds": 1.4981
+    },
+    "frozen_fp32_inference": {
+      "embedding_shape": [
+        1,
+        384
+      ],
+      "free_device_bytes_after": 16161177600,
+      "gradients_enabled": false,
+      "peak_allocated_bytes": 185889792,
+      "peak_reserved_bytes": 209715200,
+      "precision": "fp32",
+      "seconds": 0.296
+    }
+  },
+  "revision": "ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "schema_version": 1,
+  "scope": "Synthetic CUDA capacity only; no Precise data or biometric evaluation",
+  "seconds": 3.197,
+  "torch": "2.6.0+cu124",
+  "total_parameters": 22056576,
+  "trainable_parameters": 3551232,
+  "weights_sha256": "ae1e99fcefd534ed978cdeb8326f08030c96e28b7a81ffcbc98a857c84d14be1",
+  "workspace_free_bytes": 229642653696
+}

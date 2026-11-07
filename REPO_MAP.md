@@ -1,6 +1,6 @@
 # Repository map
 
-Navigation updated 2026-11-01; the original repository inventory is dated
+Navigation updated 2026-11-07; the original repository inventory is dated
 2026-09-19. See [STATUS.md](STATUS.md) for the dated audit history.
 
 **Latest completed milestone:** the [shared-pair DINOv2 results](reports/precise-dinov2-shared-20261101/README.md)
@@ -11,6 +11,14 @@ uses final-epoch selection and training calibration. This is held-out-pair
 evaluation with seen images/identities. Matching trained-Qwen outputs are not
 ready; earlier subject-disjoint preparation remains a separate route. Statements
 below about its pending splits/captures do not block the completed shared cohort.
+
+**Current approved replacement:** the [November 7 intake](reports/precise-revised-cohort-20261107/README.md)
+finds a changed 37,194/4,200-pair numeric-group-disjoint cohort on Drive. The
+completed adapted model already trained on all its testing groups/images;
+the [replacement proposal](docs/notes/precise_revised_cohort_review_20261107.md)
+received explicit user review/authorization for fresh runs, with numeric-group
+validation and the same fixed schedule. The old checkpoint is not reused as an
+unseen-group result; old results remain unchanged.
 
 The current study uses Precise only, following the professor's 2026-10-04
 direction. Start with the [central research plan and first-milestone

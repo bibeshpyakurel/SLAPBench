@@ -1,0 +1,190 @@
+{
+  "alias_group_placement": {
+    "declared_forced_training_groups": 61,
+    "in_new_testing": 0,
+    "in_new_training": 61,
+    "inventory_padding_alias_groups": 61
+  },
+  "comparison_with_completed_benchmark": {
+    "new_testing_previously_exposed_to_completed_dino_training": {
+      "images": 1057,
+      "numeric_groups": 55,
+      "pairs": 1918
+    },
+    "new_training_overlap_with_previous_testing": {
+      "images": 4142,
+      "numeric_groups": 221,
+      "pairs": 1822
+    },
+    "test_membership_change": {
+      "added_pairs": 4011,
+      "new_pairs": 4200,
+      "prior_pairs": 4200,
+      "removed_pairs": 4011,
+      "shared_pairs": 189
+    },
+    "train_membership_change": {
+      "added_pairs": 20356,
+      "new_pairs": 37194,
+      "prior_pairs": 39290,
+      "removed_pairs": 22452,
+      "shared_pairs": 16838
+    }
+  },
+  "declared_finger_count_errors": 0,
+  "declared_sampling": {
+    "seed": 2026,
+    "test_fraction": 0.2,
+    "test_pairs_per_class": 2100
+  },
+  "declared_split_counts_match_observed": true,
+  "declared_suffix_counts_match": true,
+  "declared_suffix_errors": 0,
+  "declared_training_class_counts_match": true,
+  "limits": [
+    "Observed disjointness concerns numeric filename-prefix groups, not independently verified biological identities.",
+    "The dataframe's identity/capture semantics and independence are not established by these pair files.",
+    "The existing adapted DINO checkpoint has prior training exposure to new testing groups; do not claim it is unseen-group testing.",
+    "This is a different cohort from the approved 39290/4200 benchmark; no replacement, retraining or test authorization is inferred.",
+    "Source metadata and selection seeds are declarations, not proof of Konain's actual model consumption or checkpoint selection.",
+    "Score equality with the supplied new lists does not establish full upstream-pool provenance or SDK extraction success."
+  ],
+  "missing_local_image_files": 0,
+  "new_train_test_overlap": {
+    "images": 0,
+    "numeric_groups": 0,
+    "pairs": 0
+  },
+  "prior_execution_commit": "82d02111de2d13378c4be610cbc733923b0637de",
+  "prompts_equal_to_earlier_json": {
+    "options": true,
+    "system_prompt": true,
+    "user_prompt": true
+  },
+  "schema_version": 1,
+  "scope": "Read-only new collaborator cohort intake; no model execution or approval",
+  "score_status": {
+    "test_genuine": {
+      "fused_zero": 7,
+      "missing_components": 0,
+      "nonpositive_component_sum": 0,
+      "records": 2100
+    },
+    "test_impostor": {
+      "fused_zero": 142,
+      "missing_components": 0,
+      "nonpositive_component_sum": 0,
+      "records": 2100
+    },
+    "train_genuine": {
+      "fused_zero": 47,
+      "missing_components": 0,
+      "nonpositive_component_sum": 0,
+      "records": 18597
+    },
+    "train_impostor": {
+      "fused_zero": 1214,
+      "missing_components": 0,
+      "nonpositive_component_sum": 0,
+      "records": 18597
+    }
+  },
+  "sources": {
+    "slap_subject_disjoint_train_ab.json": {
+      "bytes": 21776630,
+      "sha256": "c198b739540940c66182167bb19264424ff46cc5984edc089c930a6ee345f99b"
+    },
+    "test_genuine_2100_nonzero.txt": {
+      "bytes": 391266,
+      "sha256": "a13383243516797fec82f8492cc7df4b9a4ad4dae843da0e4612c407e7cabb4e"
+    },
+    "test_impostor_2100_nonzero.txt": {
+      "bytes": 366502,
+      "sha256": "bf45d0f373028133f612dd0e80dac1d801f365a694d842aaee12f64da025be37"
+    },
+    "train_genuine_nonzero.txt": {
+      "bytes": 3537789,
+      "sha256": "b161861213ad33acd7ff8b59d468cd0fcd1a35f46aa97e876ffcf0b90f73bf08"
+    },
+    "train_impostor_nonzero.txt": {
+      "bytes": 3311195,
+      "sha256": "44bfd56660d17d6dbf027153310d3372339bd78a643082db430226b75cd65cce"
+    }
+  },
+  "testing": {
+    "class_counts": {
+      "genuine": 2100,
+      "impostor": 2100
+    },
+    "duplicate_unordered_pairs": 0,
+    "hand_class_counts": {
+      "13_genuine": 700,
+      "13_impostor": 700,
+      "14_genuine": 700,
+      "14_impostor": 700,
+      "15_genuine": 700,
+      "15_impostor": 700
+    },
+    "hand_conflicts": 0,
+    "images": 1057,
+    "missing_image_references": 0,
+    "numeric_id_groups": 55,
+    "numeric_id_label_disagreements": 0,
+    "raw_prefix_groups": 55,
+    "raw_prefix_label_disagreements": 0,
+    "records": 4200,
+    "self_pairs": 0,
+    "unique_pairs": 4200
+  },
+  "training_json": {
+    "class_counts": {
+      "genuine": 18597,
+      "impostor": 18597
+    },
+    "duplicate_unordered_pairs": 0,
+    "hand_class_counts": {
+      "13_genuine": 6569,
+      "13_impostor": 6569,
+      "14_genuine": 6247,
+      "14_impostor": 6247,
+      "15_genuine": 5781,
+      "15_impostor": 5781
+    },
+    "hand_conflicts": 0,
+    "images": 5721,
+    "missing_image_references": 0,
+    "numeric_id_groups": 221,
+    "numeric_id_label_disagreements": 0,
+    "raw_prefix_groups": 282,
+    "raw_prefix_label_disagreements": 0,
+    "records": 37194,
+    "self_pairs": 0,
+    "unique_pairs": 37194
+  },
+  "training_json_matches_supplied_training_lists_and_scores": true,
+  "training_lists": {
+    "class_counts": {
+      "genuine": 18597,
+      "impostor": 18597
+    },
+    "duplicate_unordered_pairs": 0,
+    "hand_class_counts": {
+      "13_genuine": 6569,
+      "13_impostor": 6569,
+      "14_genuine": 6247,
+      "14_impostor": 6247,
+      "15_genuine": 5781,
+      "15_impostor": 5781
+    },
+    "hand_conflicts": 0,
+    "images": 5721,
+    "missing_image_references": 0,
+    "numeric_id_groups": 221,
+    "numeric_id_label_disagreements": 0,
+    "raw_prefix_groups": 282,
+    "raw_prefix_label_disagreements": 0,
+    "records": 37194,
+    "self_pairs": 0,
+    "unique_pairs": 37194
+  }
+}

@@ -81,6 +81,22 @@
   matching fine-tuned outputs are not ready. Preserve that pending comparison,
   historical-Qwen provenance limits and all frozen decisions; additional
   training/test runs or tuning require separate authorization.
+- On 2026-11-07 a resumed read-only intake found five November 5 Drive inputs:
+  37,194 balanced training pairs and 4,200 changed testing pairs, internally
+  disjoint by numeric prefix groups (221 train / 55 test), images and pairs.
+  See `reports/precise-revised-cohort-20261107/README.md` and
+  `docs/notes/precise_revised_cohort_review_20261107.md`. These are new pair
+  inputs, not matching trained-Qwen outputs. The user then explicitly confirmed:
+  “Yes—use the new lists and run fresh DINOv2 training, calibration and testing.”
+  This replaces the active benchmark and approves the exact November 7 proposal:
+  fresh pinned base, all new pairs/thumbs, three full epochs/final checkpoint,
+  nominal 1% training calibration and numeric-group-holdout claim limits. Record
+  that actual approval against new input/configuration hashes; do not ask again.
+  All 1,057 new testing images and 55 groups, including 1,918 exact pairs,
+  were exposed to the completed DINO adaptation. Do not score that checkpoint
+  as unseen-group evaluation or infer biological/capture independence. New
+  scope/review checks and source commit precede authorized execution. Original
+  results and approved decisions remain preserved.
 - Never send subject identifiers, original filenames or ground-truth labels to
   hosted models. Preserve the branch and push requirements below.
 
