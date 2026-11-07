@@ -1,5 +1,31 @@
 # Pending trained-Qwen A/B comparison
 
+**2026-11-07 update:** the user replaced the active benchmark with the new
+37,194 training / 4,200 testing pairs and explicitly authorized fresh DINOv2
+runs under the [revised proposal](precise_revised_cohort_review_20261107.md).
+The offline importer now supports this numeric-group-holdout scope as well as
+the original shared cohort. It binds the new JSON and DINO artifacts to the
+new bundle; numeric-group/image separation is revalidated before comparison.
+Historical Qwen score outputs on the old pair list cannot fill the new gap.
+Matching new-cohort fine-tuned outputs and actual run provenance have not been
+supplied. The November 1 command below remains for its historical cohort.
+For the new cohort, use the dated compatibility verification interpreter and
+substitute these already available inputs:
+
+| Argument | New cohort |
+| --- | --- |
+| `--bundle` | `local/precise/manifests/numeric-group-holdout-20261107/bundle.json` |
+| `--config` | `code/precise_matching/configs/dinov2_numeric_group_holdout.json` |
+| `--training-json` | `local/precise/collaborator/konain-followup-20261107/slap_subject_disjoint_train_ab.json` |
+| `--dino-run-root` | `local/precise/runs/numeric-group-holdout-20261107` |
+
+The filename's subject-disjoint wording does not verify biological identities.
+For this scope the report states numeric-prefix group holdout and unconfirmed
+biological/capture semantics. There are zero numeric-label disagreements, so
+exclusion sensitivity equals the complete testing population. Other evidence,
+review, immutability and failure-accounting requirements below remain in force.
+No real Qwen outcome, run evidence or review is manufactured by this update.
+
 2026-11-01. DINOv2 experiments and the
 [professor report](../../reports/precise-dinov2-shared-20261101/README.md) are
 complete and published. The user confirmed that Konain's matching fine-tuned

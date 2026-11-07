@@ -21,7 +21,7 @@ def summary_rows(data):
         result = data["dino"][arm]
         for group, summary in [("pooled", result["results"]["pooled"]),
                                *result["results"]["by_slap_type"].items(),
-                               ("excluding_two_flagged_test_pairs", result["results"]["label_ambiguity_sensitivity"]["remaining"])]:
+                               ("excluding_two_flagged_test_pairs" if result["results"]["label_ambiguity_sensitivity"]["excluded_pairs"] == 2 else "label_ambiguity_sensitivity", result["results"]["label_ambiguity_sensitivity"]["remaining"])]:
             rates = summary["all_attempts_failure_as_reject"]
             curve = summary["descriptive_valid_score_discrimination"] or {}
             rows.append({"method": arm, "population": group, "threshold": result["threshold"]["cutoff"],
@@ -42,8 +42,9 @@ def make_roc(data, font="Helvetica"):
         ("Adapted DINOv2", data["dino"]["adapted_dinov2"]["results"]["pooled"]["descriptive_valid_score_discrimination"], "#c55b27"),
         ("VeriFinger fused", data["sdk_descriptive"]["verifinger_fusion"]["pooled"]["discrimination"], "#4f7a43"),
         ("VeriFinger sum", data["sdk_descriptive"]["verifinger_sum"]["pooled"]["discrimination"], "#7a5e9a"),
-        ("Historical Qwen score export", data["historical_qwen_scores"]["metrics"]["pooled"]["discrimination"], "#727983"),
     ]
+    if "metrics" in data.get("historical_qwen_scores", {}):
+        methods.append(("Historical Qwen score export", data["historical_qwen_scores"]["metrics"]["pooled"]["discrimination"], "#727983"))
     drawing = Drawing(520, 310)
     chart = LinePlot()
     chart.x, chart.y, chart.width, chart.height = 54, 84, 440, 202
@@ -135,14 +136,23 @@ def render_report(data, output, aggregate_digest):
         md_table.extend("| " + " | ".join(map(str, row)) + " |" for row in values)
         markdown.append("\n".join(md_table))
 
+    group_holdout = data.get("benchmark_scope") == "numeric_group_disjoint_fixed_pairs"
+    date = data.get("study_date", "2026-11-01")
     synthetic = data.get("_synthetic", False)
     title = "SYNTHETIC LAYOUT TEST" if synthetic else "Precise DINOv2 contribution"
     story.append(Paragraph(title, styles["ReportTitle"]))
     markdown.extend(["# " + title, ""])
-    para("Bibesh Pyakurel | Shared-pair benchmark | 2026-11-01", "ReportSubtitle")
+    para(f"Bibesh Pyakurel | {'Numeric-group holdout' if group_holdout else 'Shared-pair benchmark'} | {date}", "ReportSubtitle")
     if synthetic:
         para("<b>Synthetic fixtures only. This document contains no research results.</b>")
-    para("Frozen and adapted DINOv2 are evaluated on the same 4,200 supplied attempts, including right hands, "
+    if group_holdout:
+        para(f"Frozen and freshly adapted DINOv2 use the same {data['testing_pairs']:,} supplied testing attempts: "
+             "2,100 genuine and 2,100 impostor pairs, including right hands, left hands and two thumbs. "
+             f"Adaptation uses all {data['training_pairs']:,} supplied training pairs. "
+             "<b>Numeric filename-prefix groups, images and exact pairs are held out; biological subject "
+             "identity and capture independence remain unconfirmed.</b>")
+    else:
+        para("Frozen and adapted DINOv2 are evaluated on the same 4,200 supplied attempts, including right hands, "
          "left hands and two thumbs. The approved adaptation uses all 39,290 supplied training pairs. "
          "<b>Testing holds out pairs, while reusing training images and identity groups.</b>")
     heading("Primary operating-point results")
@@ -162,15 +172,26 @@ def render_report(data, output, aggregate_digest):
     para(f"Observed adapted-minus-frozen changes: TAR {(adapted['tar'] - frozen['tar']) * 100:+.2f} percentage points; "
          f"FAR {(adapted['far'] - frozen['far']) * 100:+.2f} percentage points. At this fixed cutoff the adapted arm "
          f"still rejects {adapted['genuine_comparisons'] - adapted['genuine_accepts']} of "
-         f"{adapted['genuine_comparisons']} genuine attempts. Better score ordering does not establish high acceptance "
+         f"{adapted['genuine_comparisons']} genuine attempts. Score ordering alone does not establish high acceptance "
          "at a strict operating point or statistical superiority.")
     heading("LLM comparison status")
-    para("<b>Konain's matching fine-tuned Qwen3-VL A/B results are not ready</b>, as confirmed by the user on "
+    if group_holdout:
+        para("<b>Matching fine-tuned Qwen3-VL A/B outputs and actual run provenance for these new pairs "
+             "have not been supplied.</b> The older score exports cover different testing attempts and are "
+             "not substituted. No superiority to Konain's model is claimed. Konain owns VLM fine-tuning.")
+    else:
+        para("<b>Konain's matching fine-tuned Qwen3-VL A/B results are not ready</b>, as confirmed by the user on "
          "2026-11-01. No claim of superiority to that model is made. The supplied older Qwen files are "
          "0-100 score exports using a different prompt; their descriptive results appear separately. "
          "Bibesh's work does not duplicate Konain's VLM fine-tuning.")
     heading("Claim supported by this milestone")
-    para("These are descriptive measurements of agreement with supplied benchmark labels for held-out pairs "
+    if group_holdout:
+        para("These are descriptive measurements of agreement with supplied labels on the declared numeric-group "
+             "holdout. The model starts from the pinned pretrained base; the earlier adapted checkpoint is not "
+             "reused. Numeric-group separation alone does not prove unseen biological subjects, independent "
+             "acquisitions, population confidence bounds, or the cause of a VLM limitation.")
+    else:
+        para("These are descriptive measurements of agreement with supplied benchmark labels for held-out pairs "
          "of seen images and identities. They do not establish unseen-person generalization, independent "
          "captures, population confidence bounds, or the cause of any VLM limitation.")
 
@@ -190,13 +211,18 @@ def render_report(data, output, aggregate_digest):
         for r in rows if r["population"] in {"right", "left", "thumbs"}], [145, 139, 80, 80, 84])
     para("All slap types use the same arm-specific pooled training cutoff. Type-specific cutoffs are not selected.", "ReportSmall")
     heading("Label ambiguity sensitivity")
-    para("Twenty-four training and two testing impostor labels disagree with numeric-identity equality for "
+    if group_holdout:
+        para("There are zero supplied-label disagreements with numeric-prefix equality in training or testing. "
+             "All supplied labels and pairs are retained. The ambiguity-exclusion view therefore equals the "
+             "primary result. Leading-zero aliases remain unconfirmed identity semantics, not corrected ground truth.")
+    else:
+        para("Twenty-four training and two testing impostor labels disagree with numeric-identity equality for "
          "leading-zero aliases. All labels remain as supplied. The secondary result below excludes the two "
          "flagged testing rows only; it neither corrects identity truth nor changes training, checkpoints or cutoffs.")
     table(["Arm", "Remaining genuine / impostor", "TAR", "FAR"], [
         [r["method"].split("_")[0].title(), f"{r['genuine_comparisons']} / {r['impostor_comparisons']}",
          percentage(r["tar"]), percentage(r["far"])]
-        for r in rows if r["population"] == "excluding_two_flagged_test_pairs"], [118, 210, 100, 100])
+        for r in rows if r["population"] in {"excluding_two_flagged_test_pairs", "label_ambiguity_sensitivity"}], [118, 210, 100, 100])
     heading("Paired frozen-to-adapted changes")
     paired = data["paired_dino"]["pooled"]
     table(["Supplied class", "Frozen only accepts", "Adapted only accepts", "Adapted - frozen accept rate"], [
@@ -215,15 +241,25 @@ def render_report(data, output, aggregate_digest):
     curves = [("Frozen DINOv2", data["dino"]["frozen_dinov2"]["results"]["pooled"]["descriptive_valid_score_discrimination"]),
               ("Adapted DINOv2", data["dino"]["adapted_dinov2"]["results"]["pooled"]["descriptive_valid_score_discrimination"]),
               ("VeriFinger fused", data["sdk_descriptive"]["verifinger_fusion"]["pooled"]["discrimination"]),
-              ("VeriFinger sum", data["sdk_descriptive"]["verifinger_sum"]["pooled"]["discrimination"]),
-              ("Historical Qwen score export", data["historical_qwen_scores"]["metrics"]["pooled"]["discrimination"])]
+              ("VeriFinger sum", data["sdk_descriptive"]["verifinger_sum"]["pooled"]["discrimination"])]
+    if "metrics" in data.get("historical_qwen_scores", {}):
+        curves.append(("Historical Qwen score export", data["historical_qwen_scores"]["metrics"]["pooled"]["discrimination"]))
     table(["Saved continuous-score arm", "Valid-score AUC", "Interpolated EER"], [
         [name, f"{curve['auc']:.4f}" if curve else "unavailable",
          percentage(curve["eer_linear_interpolation"]) if curve else "unavailable"] for name, curve in curves], [288, 120, 120])
-    para("Curves and interpolated EER summarize test score ordering. They do not choose an operational cutoff "
+    if group_holdout:
+        para("Curves and interpolated EER describe test score ordering, with no cutoff or checkpoint selection. "
+             "The SDK arms have no verified non-test calibration here; no operational threshold is chosen from "
+             "their testing scores. Binary Qwen A/B decisions would supply one operating point, not a score ROC/EER.")
+        para("SDK values are supplied fused scores or per-finger sums. Raw zeros remain zero. Selection uses "
+             "positive component sums; template-extraction status is unresolved. Score presence is not proof "
+             "of successful extraction, and this selected cohort is not a full upstream-pool evaluation.", "ReportSmall")
+    else:
+        para("Curves and interpolated EER summarize test score ordering. They do not choose an operational cutoff "
          "or checkpoint. SDK and historical Qwen arms have no verified non-test calibration in this report; "
          "no thresholded comparison is constructed from their test results.")
-    para("SDK values are supplied fused scores or per-finger sums. All raw zeros remain zero; template-extraction "
+    if not group_holdout:
+        para("SDK values are supplied fused scores or per-finger sums. All raw zeros remain zero; template-extraction "
          "status is unresolved, so score presence is not proof of successful extraction. Historical Qwen scores "
          "have a four-finger confidence prompt despite thumbs in the population, unpinned model/run provenance, "
          "and no supplied raw generated replies or adapter attestation.", "ReportSmall")
@@ -247,14 +283,22 @@ def render_report(data, output, aggregate_digest):
          "binomial interpretation. This report supplies exact denominators, reuse counts and label sensitivity; "
          "it does not publish population intervals, p-values or a low-FAR guarantee. One pooled false accept is "
          "1/2,100 = approximately 0.048 percentage points; this resolution is not a population bound.")
+    if group_holdout:
+        para("Cross-phase raw-file and decoded-grayscale hash overlap is zero. All 61 inventoried padding-alias "
+             "groups occur in training, limiting holdout representativeness. Earlier adaptation saw all new "
+             "testing images/groups and 1,918 exact testing pairs; that checkpoint is excluded from this run. "
+             "Prior dataset findings are known, so this is not an untouched-dataset or independent-replication claim.", "ReportSmall")
     heading("Execution and preservation")
     first = data["dino"]["adapted_dinov2"]
-    para("The user reviewed the concrete protocol and authorized training, calibration and testing on 2026-11-01. "
+    para(f"The user reviewed the concrete protocol and authorized training, calibration and testing on {data.get('review_date', '2026-11-01')}. "
          "That is not a new professor attestation or a confirmation of canonical identities. Original data, "
          "labels, scores and collaborator scripts remain unchanged. Private hashes, approval record, epoch "
          "checkpoints, calibration scores, test outcomes and failure records remain in ignored local storage.")
     if "training" in data:
         counts = data["training"]["counts"]
+        if group_holdout:
+            para(f"Fresh pinned-base initialization; {data['training']['optimizer_updates_completed']:,} optimizer updates "
+                 "completed across three full epochs; final checkpoint selected in advance.", "ReportSmall")
         para(f"Offline tensor verification found {counts['changed_frozen_tensors']} changed frozen tensors out of "
              f"{counts['frozen_tensors']}; {counts['changed_trainable_tensors']} of {counts['trainable_tensors']} selected "
              "trainable tensors changed. This is one fixed-seed adaptation run; training-seed variability is not estimated.", "ReportSmall")
@@ -276,7 +320,7 @@ def render_report(data, output, aggregate_digest):
         canvas.setStrokeColor(colors.HexColor("#d3dee3")); canvas.line(42, 39, 570, 39)
         canvas.setFont(font, 8); canvas.setFillColor(colors.HexColor("#667581"))
         canvas.drawString(42, 26, "SYNTHETIC LAYOUT TEST | No research results" if synthetic
-                          else "SLAPBench | Precise | Descriptive shared-pair evaluation")
+                          else "SLAPBench | Precise | " + ("Numeric-group holdout" if group_holdout else "Descriptive shared-pair evaluation"))
         canvas.drawRightString(570, 26, str(document.page))
         canvas.restoreState()
 

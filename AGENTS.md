@@ -97,6 +97,16 @@
   as unseen-group evaluation or infer biological/capture independence. New
   scope/review checks and source commit precede authorized execution. Original
   results and approved decisions remain preserved.
+- The authorized fresh numeric-group-holdout adaptation, both training
+  calibrations and both one-time final tests completed on 2026-11-07. Start from
+  `reports/precise-dinov2-numeric-holdout-20261107/README.md` and its professor
+  report. Do not repeat these completed runs. Frozen/adapted TAR is
+  34.76%/34.62%, FAR 0.95%/0.24%, descriptive EER 22.67%/10.95% at the unchanged
+  training-selected cutoffs. Score ordering improves without a TAR gain at
+  these operating points. Matching new-cohort trained-Qwen outputs/run evidence
+  remain unsupplied; the offline comparison path supports both cohorts. No
+  biological subject/capture independence, test tuning or further experiment
+  authorization follows from completion. Keep prior results and private assets.
 - Never send subject identifiers, original filenames or ground-truth labels to
   hosted models. Preserve the branch and push requirements below.
 

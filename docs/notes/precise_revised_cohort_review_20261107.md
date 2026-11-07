@@ -11,7 +11,7 @@ folder now contains a different 37,194-pair training cohort and a changed
 4,200-pair test cohort. The [read-only intake](../../reports/precise-revised-cohort-20261107/README.md)
 records exact counts, source digests, group separation and prior model exposure.
 
-## Decision needed
+## Recorded decision
 
 The user selected the new supplied cohort and authorized fresh training,
 calibration and testing. This was a concrete cohort/execution decision under [AGENTS.md](../../AGENTS.md),
@@ -104,3 +104,11 @@ authorized execution and provenance/content checks, then commit/push to
 `origin/dev` with matching remote SHA. Keep every original, previous report,
 private asset and frozen prior decision intact. No VLM training, paid call,
 manuscript change or additional study is included by this proposal.
+
+## Completion record
+
+The authorized fresh training, both calibrations and both one-time tests
+completed on 2026-11-07. The [new results and professor report](../../reports/precise-dinov2-numeric-holdout-20261107/README.md)
+record the exact configuration, outcomes, independent checks and remaining
+trained-Qwen evidence gap. This is completion of the reviewed run policy, not
+authorization for additional tuning or experiments.

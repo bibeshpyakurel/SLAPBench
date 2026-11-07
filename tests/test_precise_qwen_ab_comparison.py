@@ -14,7 +14,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "code"))
 import compare_precise_qwen_ab as ab  # noqa: E402
 from precise_matching.data import InputError  # noqa: E402
 from precise_matching.evaluation import Score  # noqa: E402
-from precise_matching.fixed_pairs import FixedConfig, FixedPair, TRAIN_FILE, canonical_digest  # noqa: E402
+from precise_matching.fixed_pairs import GROUP_SCOPE, SHARED_SCOPE, FixedConfig, FixedPair, TRAIN_FILE, canonical_digest  # noqa: E402
 from precise_matching.training import digest  # noqa: E402
 
 
@@ -117,17 +117,31 @@ class QwenABTests(unittest.TestCase):
         read.assert_not_called()
 
     def test_cli_synthetic_roundtrip_review_binding_overwrite_and_input_mutation(self):
+        for scope in (SHARED_SCOPE, GROUP_SCOPE):
+            with self.subTest(scope=scope):
+                self.cli_roundtrip(scope)
+
+    def cli_roundtrip(self, scope):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp); private = root / "local/precise"; private.mkdir(parents=True)
-            rows = pairs(); paths = write_outputs(private, rows, ("A", "B", "A", "B"))
+            rows = pairs()
+            if scope == GROUP_SCOPE:
+                rows[-1] = replace(rows[-1], image_b="003_synthetic_c_15.jpeg", numeric_identity_disagreement=False)
+            paths = write_outputs(private, rows, ("A", "B", "A", "B"))
             sources = {key: private / (key + ".json") for key in ("bundle", "config", "training_json", "qwen_run_record", "review")}
             sources.update({label + "_output": path for label, path in paths.items()})
             prompt = {"system_prompt": "synthetic system", "user_prompt": "synthetic prompt"}
             sources["training_json"].write_text(json.dumps(prompt))
-            sources["bundle"].write_text(json.dumps({"scope": "shared_seen_image_fixed_pairs", "labels": "as_supplied",
-                "training": [asdict(replace(p, pair_id="train-" + p.pair_id,
-                                             image_a=p.image_a.replace("_synthetic_", "_training_"))) for p in rows],
-                "testing": [asdict(p) for p in rows], "source_sha256": {TRAIN_FILE: digest(sources["training_json"])}}))
+            training = [replace(p, pair_id="train-" + p.pair_id,
+                                image_a=p.image_a.replace("_synthetic_", "_training_")) for p in rows]
+            if scope == GROUP_SCOPE:
+                def unseen(name):
+                    prefix, rest = name.split("_", 1)
+                    return str(int(prefix) + 100) + "_" + rest
+                training = [replace(p, image_a=unseen(p.image_a), image_b=unseen(p.image_b)) for p in training]
+            sources["bundle"].write_text(json.dumps({"scope": scope, "labels": "as_supplied",
+                "training": [asdict(p) for p in training], "testing": [asdict(p) for p in rows],
+                "source_sha256": {ab.TRAIN_JSON if scope == GROUP_SCOPE else TRAIN_FILE: digest(sources["training_json"])}}))
             sources["config"].write_text(json.dumps(asdict(FixedConfig(warmup_steps=0))))
             record = run_record(prompt, len(rows)); record["training_json_sha256"] = digest(sources["training_json"])
             sources["qwen_run_record"].write_text(json.dumps(record))
@@ -139,7 +153,7 @@ class QwenABTests(unittest.TestCase):
             for name in ("frozen-test", "adapted-test", "frozen-calibration", "adapted-calibration"):
                 d = dino / name; d.mkdir(parents=True)
                 if name.endswith("test"):
-                    (d / "run_record.json").write_text(json.dumps({"provenance": {"input_sha256": {
+                    (d / "run_record.json").write_text(json.dumps({"provenance": {**({"benchmark_scope": scope} if scope == GROUP_SCOPE else {}), "input_sha256": {
                         key: digest(sources[key]) for key in ("bundle", "config")}}}))
             output, receipt = root / "reports/ab.json", private / "receipt.json"
             args = [value for key, path in sources.items() for value in ("--" + key.replace("_", "-"), str(path))]
@@ -151,6 +165,10 @@ class QwenABTests(unittest.TestCase):
             result = json.loads(output.read_text())
             self.assertEqual(result["results"]["methods"]["qwen3_vl_trained_ab"]["pooled"]["all_attempts_failure_as_reject"]["tar"], 1)
             self.assertNotIn("jpeg", output.read_text())
+            self.assertEqual(result["benchmark_scope"], scope)
+            if scope == GROUP_SCOPE:
+                self.assertEqual(result["dependence"]["train_test_overlap"], {"exact_pairs": 0, "images": 0, "numeric_groups": 0})
+                self.assertNotIn("All test images/identity groups occur in training", output.read_text())
             with patch.object(ab, "ROOT", root), contextlib.redirect_stderr(io.StringIO()):
                 self.assertEqual(ab.main(args), 1)
             output2, receipt2 = root / "reports/second.json", private / "second-receipt.json"

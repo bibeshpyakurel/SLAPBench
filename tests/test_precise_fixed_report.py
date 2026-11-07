@@ -56,6 +56,20 @@ class FixedReportTests(unittest.TestCase):
             scores, _ = read_sdk(root, testing)
             self.assertIsNone(scores["verifinger_sum"][0].score)
 
+    def test_new_sdk_source_names_require_full_unchanged_membership(self):
+        _, testing = fixture()
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            names = {label: "new_" + label + ".txt" for label in ("genuine", "impostor")}
+            for p in testing:
+                (root / names[p.label]).write_text(f"{p.image_a} {p.image_b} 0 | 1 2 sum=3 nfing=2\n")
+            before = {name: (root / name).read_bytes() for name in names.values()}
+            scores, _ = read_sdk(root, testing, filenames=names)
+            self.assertEqual([s.score for s in scores["verifinger_fusion"]], [0, 0])
+            self.assertEqual(before, {name: (root / name).read_bytes() for name in names.values()})
+            with self.assertRaises(InputError):
+                read_sdk(root, [replace(testing[0], image_a="OTHER"), testing[1]], filenames=names)
+
     def test_historical_qwen_requires_exact_unordered_pairs_and_preserves_parse_failures(self):
         _, testing = fixture()
         with tempfile.TemporaryDirectory() as tmp:

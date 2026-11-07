@@ -11,6 +11,7 @@ import sys
 from precise_matching.data import InputError
 from precise_matching.encoders import TRAINABLE_PREFIXES, WEIGHTS_SHA256, load_encoder, validate_checkpoint
 from precise_matching.fixed_training import checked_checkpoint
+from precise_matching.fixed_pairs import FixedConfig
 from precise_matching.training import digest, write_json
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +39,20 @@ def parameter_integrity(base, adapted):
     return counts
 
 
+def completed_schedule(saved, config):
+    history = saved["history"]
+    if (len(history) != config.epochs
+            or [h["epoch"] for h in history] != list(range(1, config.epochs + 1))):
+        raise InputError("Checkpoint history does not contain every declared epoch.")
+    pair_count = history[0]["pairs_seen"]
+    config.validate(pair_count)
+    expected = config.steps(pair_count)
+    if (saved["scheduler"]["last_epoch"] != expected
+            or any(h["pairs_seen"] != pair_count for h in history)):
+        raise InputError("Saved scheduler/history does not match the complete fixed-pair schedule.")
+    return expected
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("training-run", "weights", "output"):
@@ -60,6 +75,8 @@ def main(argv=None):
         saved = checked_checkpoint(checkpoint, run, record)
         if (saved["history"] != selection["history"] or saved["epochs_completed"] != selection["epochs_completed"]):
             raise InputError("Checkpoint does not replay the sealed final epoch/history.")
+        config = FixedConfig(**record["config"])
+        expected_updates = completed_schedule(saved, config)
         validate_checkpoint(args.weights)
         # Transformers performs version-specific architectural key conversion
         # (for example legacy attention.query -> q_proj) when loading these
@@ -77,6 +94,7 @@ def main(argv=None):
             "selection_sha256": digest(run / "selection.json"), "counts": counts,
             "base_state_loading": "Same pinned local encoder loader as training; canonical runtime state keys.",
             "epochs_completed": selection["epochs_completed"], "history": saved["history"],
+            "optimizer_updates_completed": expected_updates,
             "image_pixels_read": False, "model_inference_performed": False})
     except (InputError, OSError, ValueError, TypeError, KeyError, ImportError, RuntimeError):
         print("Offline checkpoint verification did not complete; inspect private artifacts.", file=sys.stderr)

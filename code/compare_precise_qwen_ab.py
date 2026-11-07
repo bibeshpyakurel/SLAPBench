@@ -15,7 +15,9 @@ import sys
 from precise_matching.comparison import paired_decisions
 from precise_matching.data import InputError
 from precise_matching.evaluation import Score
-from precise_matching.fixed_pairs import FixedConfig, FixedPair, TRAIN_FILE, canonical_digest, validate_pairs
+from audit_precise_revised_cohort import TRAIN_JSON
+from precise_matching.fixed_pairs import (GROUP_SCOPE, SCOPES, SHARED_SCOPE, FixedConfig, FixedPair, TRAIN_FILE,
+                                          canonical_digest, validate_group_holdout, validate_pairs)
 from precise_matching.training import digest, write_json
 from report_precise_shared_pairs import ARMS, dependency_counts, read_dino
 
@@ -156,11 +158,15 @@ def main(argv=None):
                 or not isinstance(review.get("review_record"), str) or not review["review_record"].strip()):
             raise InputError("Actual comparison/provenance review must bind all new supplied inputs.")
         bundle = json.loads(args.bundle.read_text())
-        if bundle.get("scope") != "shared_seen_image_fixed_pairs" or bundle.get("labels") != "as_supplied":
-            raise InputError("Unexpected shared-cohort scope.")
+        scope = bundle.get("scope")
+        if scope not in SCOPES or bundle.get("labels") != "as_supplied":
+            raise InputError("Unexpected fixed-pair cohort scope.")
         training, testing = ([FixedPair(**row) for row in bundle[phase]] for phase in ("training", "testing"))
         validate_pairs(training); validate_pairs(testing)
-        if hashes["training_json"] != bundle["source_sha256"][TRAIN_FILE]:
+        if scope == GROUP_SCOPE:
+            validate_group_holdout(training, testing)
+        source_name = TRAIN_JSON if scope == GROUP_SCOPE else TRAIN_FILE
+        if hashes["training_json"] != bundle["source_sha256"][source_name]:
             raise InputError("Qwen training source is not the supplied shared cohort.")
         record = json.loads(args.qwen_run_record.read_text())
         if record.get("training_json_sha256") != hashes["training_json"]:
@@ -177,17 +183,19 @@ def main(argv=None):
                 artifacts.update({str(p.resolve()): digest(p) for p in base.iterdir() if p.suffix in {".json", ".csv"}})
             dino[arm], scores[arm] = read_dino(test, calibration, training, testing, config, arm)
             original = json.loads((test / "run_record.json").read_text())
-            if any(original["provenance"]["input_sha256"][key] != hashes[key] for key in ("bundle", "config")):
+            if (original["provenance"].get("benchmark_scope", SHARED_SCOPE) != scope
+                    or any(original["provenance"]["input_sha256"][key] != hashes[key] for key in ("bundle", "config"))):
                 raise InputError("DINO arm references another cohort or configuration.")
             cutoffs[arm] = dino[arm]["threshold"]["cutoff"]
         qwen, tokens = read_ab({label: getattr(args, label + "_output") for label in ("genuine", "impostor")}, testing)
-        report = {"schema_version": 1, "scope": "reviewed_fixed_pair_dino_vs_trained_qwen_ab",
+        report = {"schema_version": 1, "scope": "reviewed_fixed_pair_dino_vs_trained_qwen_ab", "benchmark_scope": scope,
             "results": compare_operating_points(testing, qwen, scores, cutoffs),
             "qwen_source_token_counts": tokens, "dino_cutoffs_unchanged": cutoffs,
             "qwen_identity": {key: record[key] for key in ("model", "base_revision", "checkpoint_manifest_sha256")},
             "dependence": dependency_counts(training, testing),
             "limits": ["Binary Qwen responses supply one operating point, not continuous-score ROC/AUC/EER.",
-                "All test images/identity groups occur in training; labels remain as supplied.",
+                ("Numeric-prefix groups are held out; biological subject/capture independence remains unconfirmed."
+                 if scope == GROUP_SCOPE else "All test images/identity groups occur in training; labels remain as supplied."),
                 "Review assertions and metadata do not themselves prove training consumption or selection history.",
                 "No independent-trial confidence interval, significance or population low-FAR claim.",
                 "Failures are retained and rejected for primary counts, not biometric impostor-rejection evidence.",

@@ -3,7 +3,7 @@
 Navigation updated 2026-11-07; the original repository inventory is dated
 2026-09-19. See [STATUS.md](STATUS.md) for the dated audit history.
 
-**Latest completed milestone:** the [shared-pair DINOv2 results](reports/precise-dinov2-shared-20261101/README.md)
+**Previous completed milestone:** the [shared-pair DINOv2 results](reports/precise-dinov2-shared-20261101/README.md)
 and four-page professor report now contain the approved frozen/adapted runs on
 Konain's exact 39,290 training and 4,200 testing pairs, including thumbs. The
 [concrete reviewed protocol](docs/notes/precise_shared_pair_protocol_20261101.md)
@@ -12,13 +12,17 @@ evaluation with seen images/identities. Matching trained-Qwen outputs are not
 ready; earlier subject-disjoint preparation remains a separate route. Statements
 below about its pending splits/captures do not block the completed shared cohort.
 
-**Current approved replacement:** the [November 7 intake](reports/precise-revised-cohort-20261107/README.md)
-finds a changed 37,194/4,200-pair numeric-group-disjoint cohort on Drive. The
-completed adapted model already trained on all its testing groups/images;
-the [replacement proposal](docs/notes/precise_revised_cohort_review_20261107.md)
-received explicit user review/authorization for fresh runs, with numeric-group
-validation and the same fixed schedule. The old checkpoint is not reused as an
-unseen-group result; old results remain unchanged.
+**Latest completed milestone:** the
+[numeric-group-holdout DINOv2 results](reports/precise-dinov2-numeric-holdout-20261107/README.md)
+and four-page professor report contain the fresh, explicitly approved November 7
+runs on all new 37,194 training / 4,200 testing pairs. Both arms complete every
+test attempt; adaptation improves descriptive EER without a TAR gain at the
+fixed training-calibrated cutoffs. The [new intake](reports/precise-revised-cohort-20261107/README.md)
+and [reviewed proposal](docs/notes/precise_revised_cohort_review_20261107.md)
+bind this changed cohort and scope. Numeric-prefix groups/images/pairs are held
+out; biological identity and capture independence remain unconfirmed. The old
+adapted checkpoint was not reused. Matching new-cohort trained-Qwen outputs
+remain unsupplied, and the future offline comparison supports both scopes.
 
 The current study uses Precise only, following the professor's 2026-10-04
 direction. Start with the [central research plan and first-milestone
@@ -50,6 +54,7 @@ at their current paths.
 
 | Location | Observed purpose |
 |---|---|
+| `code/report_precise_group_holdout.py`, `code/verify_precise_fixed_metrics.py`, `code/render_precise_shared_report.py` | Sealed numeric-group aggregate export, independent NumPy/scikit-learn metric checks and scope-aware professor report; no new inference |
 | `code/compare_precise_qwen_ab.py`, `tests/test_precise_qwen_ab_comparison.py` | Offline future trained-Qwen A/B ingestion and comparison against sealed DINO decisions; [evidence contract](docs/notes/precise_qwen_ab_comparison_20261101.md); synthetic only until Konain's matching outputs arrive |
 | `code/precise_matching/`, `tests/test_precise_matching.py` | Standard-library protocol preflight and development-fixed score evaluation; synthetic tests, no model inference |
 | `code/precise_matching/comparison.py`, `tests/test_precise_comparison.py` | Common-list multi-method offline reports, paired decisions/coverage and fixed-cutoff hand summaries; [guide](docs/notes/precise_common_list_comparison_20261031.md) |

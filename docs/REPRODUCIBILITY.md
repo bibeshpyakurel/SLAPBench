@@ -462,6 +462,41 @@ it cannot be substituted for the old seen-image benchmark. The November 7
 the compatible runtime. NVIDIA driver metadata comes from the loaded module if
 the management executable is absent; there is no numerical/device fallback.
 
+The [fresh runs and professor report](../reports/precise-dinov2-numeric-holdout-20261107/README.md) are complete.
+The current run root is
+`local/precise/runs/numeric-group-holdout-20261107/`; it is separate from the
+November 1 run. The new offline exporter is `code/report_precise_group_holdout.py`.
+It requires the sealed training/calibration/test artifacts, original new SDK
+lists, new source audit, exact review and offline checkpoint verification. It
+checks fresh pinned-base initialization, the complete schedule, final selection,
+unchanged frozen tensors, exact source binding and zero cross-phase content-hash
+overlap. It exports no individual filenames or identifiers and loads no pixels.
+`code/render_precise_shared_report.py` selects the new scope explicitly, retains
+the older report mode, and omits historical Qwen curves when their testing
+membership differs. Existing outputs are refused by both tools.
+
+```bash
+local/precise/environments/verification-compat-20261107/bin/python code/report_precise_group_holdout.py \
+  --bundle local/precise/manifests/numeric-group-holdout-20261107/bundle.json \
+  --config code/precise_matching/configs/dinov2_numeric_group_holdout.json \
+  --run-root local/precise/runs/numeric-group-holdout-20261107 \
+  --intake local/precise/collaborator/konain-followup-20261107 \
+  --cohort-audit reports/precise-revised-cohort-20261107/cohort_audit.json \
+  --checkpoint-verification local/precise/runs/numeric-group-holdout-20261107/checkpoint-verification.json \
+  --review local/precise/metadata/revised-execution-20261107/execution_review.json \
+  --private-receipt local/precise/metadata/revised-execution-NEWDATE/report-receipt.json \
+  --output reports/precise-dinov2-numeric-holdout-NEWDATE/aggregate.json
+```
+
+`code/verify_precise_fixed_metrics.py` independently replays the training cutoff
+and reproduces pooled/per-type DINO test confusion counts, coverage, AUC and
+interpolated EER with NumPy/scikit-learn. Supply `--bundle`, `--run-root`,
+`--aggregate` from the exact study and a new private `--output`. This is an
+offline saved-outcome check, not another experiment or test-based tuning.
+The [future Qwen comparison contract](notes/precise_qwen_ab_comparison_20261101.md)
+now also supports the new numeric-group scope; actual matching outputs and run
+provenance remain required.
+
 ## Publication check
 
 `scripts/check_publication_scope.py` checks the Git index for dataset/model/

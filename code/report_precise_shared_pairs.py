@@ -88,10 +88,10 @@ def read_dino(test_root, calibration, training, testing, config, arm):
             "hardware": provenance["hardware"]}, scores
 
 
-def read_sdk(intake, testing):
+def read_sdk(intake, testing, *, filenames=None):
     lookup, paths = {}, []
     for label in ("genuine", "impostor"):
-        path = Path(intake) / f"random_2100_{label}_seed2026.txt"
+        path = Path(intake) / (filenames[label] if filenames is not None else f"random_2100_{label}_seed2026.txt")
         paths.append(path)
         rows, _ = read_source(path, label)
         for row in rows:

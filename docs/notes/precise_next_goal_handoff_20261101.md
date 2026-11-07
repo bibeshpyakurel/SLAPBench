@@ -1,5 +1,14 @@
 # Precise DINOv2 shared-benchmark handoff
 
+**2026-11-07 latest completion:** the user explicitly replaced the active cohort
+with the newly supplied 37,194 training / 4,200 testing pairs and approved fresh
+training, calibration and testing. Those runs and the
+[new professor report](../../reports/precise-dinov2-numeric-holdout-20261107/README.md)
+are complete. The new claim is numeric-group holdout with unconfirmed biological
+identity/capture semantics. Matching fine-tuned Qwen outputs for the new cohort
+remain unsupplied. Preserve both completed studies; the older prompt below is
+historical and must not trigger another run of either benchmark.
+
 **Later completion update (2026-11-01):** the subsequent end-to-end goal received
 the user's concrete protocol/results/cohort review and execution authorization.
 The approved fixed-pair DINOv2 training, calibration and final tests are now

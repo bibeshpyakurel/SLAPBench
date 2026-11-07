@@ -1455,3 +1455,61 @@ OS runtime; no fingerprint image or real model score was used. All 187 repositor
 tests, 80 matcher CPU contracts and 15 legacy metric checks pass after runtime
 compatibility was restored. Source/content/publication checks and commit/push
 precede fresh authorized real-data execution.
+
+
+## 2026-11-07 — fresh numeric-group-holdout DINO study completed
+
+Following the direct replacement/run approval recorded above, committed and
+verified source `b5a6a128b7595afaa5b4dbac4d73cf09cd65788e` before real execution.
+Fresh adaptation from the pinned DINOv2-small base completed three full epochs
+of all 37,194 supplied pairs: 111,582 pair presentations and 3,489 updates, with
+one attempt and no resume, fallback or retry. Mean pair losses were 0.1456442,
+0.1024788 and 0.0911037. The predeclared final checkpoint SHA-256 is
+`106a860fbba8e0ac28163a34faf0510df309e80ff28a39e375ccb945376f6b09`.
+Offline tensor/scheduler verification confirms 185 frozen tensors unchanged,
+38 selected trainable tensors changed and the complete epoch/update schedule.
+
+Both training-only calibrations then completed, each accepting 185 of 18,597
+training impostors under the nominal 1% rule. Cutoffs were sealed before either
+new final test: frozen 0.8948034048080444 and adapted 0.9250705242156982, strict
+score-greater-than comparison. Both one-time final tests completed all 4,200
+attempts with zero failures. Frozen accepts 730/2,100 genuine and 20/2,100
+impostor pairs (TAR 34.76%, FAR 0.95%); adapted accepts 727 and five (TAR 34.62%,
+FAR 0.24%). Descriptive EER changes from 22.67% to 10.95% and AUC from 0.8495
+to 0.9416. Adaptation improves score ordering without a TAR gain at these
+training-calibrated operating points; no matched-test-FAR or superiority claim
+and no subsequent test tuning is made.
+
+The new aggregate exporter replays sealed outcomes/calibrations, verifies fresh
+initialization and exact source/review/cohort binding, and confirms zero
+cross-phase raw/decoded image-hash overlap. Numeric groups are held out, with
+221 training/55 testing groups and 5,721/1,057 images. All images recur within
+phase; testing reuses each image across up to 16 pairs. Biological subject and
+capture independence remain unconfirmed. All 61 inventoried padding-alias
+groups occur in training, limiting holdout representativeness. Zero label
+conflicts mean exclusion sensitivity equals the full population. Prior dataset
+findings are known; the old adapted checkpoint, which saw every new testing
+image/group and 1,918 exact pairs, was not reused.
+
+Supplied new SDK scores match all new testing pairs: fused/sum descriptive EER
+3.57%, with all seven genuine/142 impostor fused-zero scores retained. Positive
+component-sum source selection and unknown extraction status remain explicit;
+no SDK cutoff was selected on testing. Historical Qwen scores cover a different
+testing list and are excluded. Matching fine-tuned Qwen outputs/run provenance
+for this cohort remain unsupplied; Konain owns fine-tuning. The offline A/B
+importer now accepts both reviewed cohort scopes, retaining exact coverage,
+unchanged DINO cutoffs, failures, binary-only reporting and actual-evidence
+review requirements. No VLM experiment or message to the professor was sent.
+
+New results, tables, ROC and the four-page professor PDF/editable report are in
+`reports/precise-dinov2-numeric-holdout-20261107/`. Every final PDF page was
+rendered and visually inspected. A separate NumPy/scikit-learn verifier
+reproduces pooled/per-type DINO confusion counts, failures, training-cutoff
+replay, AUC and interpolated EER. New synthetic contracts cover reporting
+provenance, full schedules, new source names, exact outcome coverage and tied
+scores/failures. All 196 repository tests, 80 matcher CPU contracts, 15 legacy
+metric checks, correctness lint, syntax, table regeneration, links and
+publication/content checks pass. Publishable code, aggregate outcomes and
+notes are reviewed for commit/push to origin/dev; originals and private assets
+remain unchanged and ignored. This completes the authorized DINO study; the
+matching trained-Qwen comparison remains pending actual collaborator evidence.
