@@ -3,11 +3,6 @@
 Navigation updated 2026-11-07; the original repository inventory is dated
 2026-09-19. See [STATUS.md](STATUS.md) for the dated audit history.
 
-**New contributor workflow:** the
-[onboarding and preprocessing plan](docs/notes/precise_onboarding_preprocessing_20261107.md)
-starts with current saved results, traces one pair through the implementation
-and explains offline metric verification before proposing a new experiment.
-
 **Previous completed milestone:** the [shared-pair DINOv2 results](reports/precise-dinov2-shared-20261101/README.md)
 and four-page professor report now contain the approved frozen/adapted runs on
 Konain's exact 39,290 training and 4,200 testing pairs, including thumbs. The

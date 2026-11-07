@@ -1523,28 +1523,3 @@ a training-JSON endpoint (one missing reference). This changes only the test;
 sealed runs, scientific policy, source audit and professor report are unchanged.
 Local regression checks and hosted CI are checked again for the corrective
 commit rather than repeating any model phase.
-
-## 2026-11-07 — contributor onboarding and preprocessing study plan
-
-Added the [onboarding and preprocessing guide](docs/notes/precise_onboarding_preprocessing_20261107.md)
-and linked it from the README and repository map. It starts with understanding
-the current saved report, tracing a pair through the implementation and
-reproducing saved metrics offline before specifying additional experiments.
-The primary research question remains LLM slap verification; DINOv2 is the
-visual control. Preprocessing settings, model/training settings and evaluation
-policy have separate roles in a controlled comparison.
-
-The guide distinguishes the completed November 1 shared-image study from the
-completed November 7 numeric-group holdout, explains aspect-preserving
-448-pixel letterboxing and reproduces the reported accuracy/TAR/FAR arithmetic
-from all four published confusion matrices. It includes a public reading
-sequence and a proposed contrast-first study, followed by resolution and
-alignment. The exact collaborator reading assignment remains unidentified;
-the references are relevant onboarding sources. Whole-image alignment changes
-are not treated as independent finger movement or capture evidence.
-
-Documentation checks validate local links, all four numerical examples and
-the separation of public guidance from private connection/conversation data.
-Private onboarding context and downloaded third-party references remain in
-ignored local storage. No source images, pairs, checkpoints, model behavior,
-original scores or paper claims changed, and no new model phase was run.
