@@ -14,6 +14,13 @@ the architecture, evaluation protocol, completed audits and remaining decisions.
 The [preparation note](docs/notes/precise_preparation_20261004.md) preserves the
 professor's feedback and subsequent approval update.
 
+**New contributor starting point:** the
+[onboarding and preprocessing plan](docs/notes/precise_onboarding_preprocessing_20261107.md)
+explains the current versus earlier cohorts, a pair's path through DINOv2,
+offline metric reproduction, confusion-matrix calculations, a reading sequence
+and a proposed preprocessing study. Start with saved outcomes before planning
+new experiments.
+
 **Professor clarification — 2026-11-01:** the central question remains whether
 LLMs can verify slaps, why they fail and how to improve reliability. The professor
 requests a DINOv2 plan before experiments. The [plan for review](docs/notes/precise_dinov2_llm_plan_20261101.md)
