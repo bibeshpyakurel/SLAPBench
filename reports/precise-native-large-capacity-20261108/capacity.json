@@ -1,0 +1,65 @@
+{
+  "changed_trainable_tensors": 12,
+  "completed_at_utc": "2026-11-08T22:18:22.748681+00:00",
+  "config": {
+    "accumulation": 32,
+    "attention": "sdpa_forced_flash_only",
+    "batch_pairs": 1,
+    "deterministic_algorithms": true,
+    "gradient_checkpointing": "nonreentrant",
+    "images_per_microbatch": 2,
+    "model": "facebook/dinov2-large",
+    "original_width_height": [
+      1600,
+      1500
+    ],
+    "padded_width_height": [
+      1610,
+      1512
+    ],
+    "precision": "bf16",
+    "revision": "47b73eefe95e8d44ec3623f8890bd894b6ea2d6c",
+    "seed": 2026,
+    "source_sha256": {
+      "code/check_precise_native_large.py": "ec57a54b87cff514b724c536713bc5110d0a8e53612b8c62c733b4024d818246",
+      "code/precise_matching/native_large.py": "66fd76900bb6dc6a8f20dc2b51b9479d590e79d468d4ebd73554d8eae57fac5c"
+    },
+    "updates": 2,
+    "weights_sha256": "399fba97a95f22c36834418bc69373364a99af3a1153da1c0fb31db567c92e23"
+  },
+  "elapsed_seconds": 50.783127639995655,
+  "embedding_dtype": "torch.float32",
+  "finite_gradients": true,
+  "finite_losses": true,
+  "frozen_and_adapted_bf16_inference_passed": true,
+  "frozen_parameters_unchanged": true,
+  "hardware": {
+    "driver_metadata_source": "proc_driver_nvidia",
+    "driver_version": "595.99.02",
+    "free_before_model_bytes": 16450584576,
+    "name": "NVIDIA GeForce RTX 4080 SUPER",
+    "total_bytes": 16720199680
+  },
+  "limits": [
+    "Synthetic throughput excludes fingerprint decoding, disk I/O and run-integrity checks.",
+    "Short-run capacity does not prove full-run stability, biometric accuracy or protocol approval.",
+    "No original image pixels, real subject pairs or testing scores were accessed."
+  ],
+  "minimum_free_bytes": 12826705920,
+  "optimizer_state_entries": 38,
+  "packages": {
+    "Pillow": "12.3.0",
+    "numpy": "2.5.3",
+    "torch": "2.6.0+cu124",
+    "transformers": "5.18.0"
+  },
+  "parameters": {
+    "total_parameters": 304368640,
+    "trainable_parameters": 25198592
+  },
+  "passed": true,
+  "peak_allocated_bytes": 3229826560,
+  "peak_reserved_bytes": 3502243840,
+  "scope": "synthetic_native_large_capacity_only",
+  "synthetic_pairs_per_second": 1.2602610940724146
+}

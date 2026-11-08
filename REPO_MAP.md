@@ -24,6 +24,13 @@ out; biological identity and capture independence remain unconfirmed. The old
 adapted checkpoint was not reused. Matching new-cohort trained-Qwen outputs
 remain unsupplied, and the future offline comparison supports both scopes.
 
+**November 8 evidence and next direction:** [supplied Qwen predictions](reports/precise-qwen-supplied-results-20261108/README.md)
+now cover the exact new test pairs and reproduce 63.31%/89.67% accuracy, with
+actual-run provenance gaps explicit. The [Large/native proposal](docs/notes/precise_large_native_protocol_20261108.md)
+implements the professor's larger-model/original-resolution direction. Its
+[synthetic capacity check](reports/precise-native-large-capacity-20261108/README.md)
+passes; the user explicitly approved the exact new training/calibration/test proposal.
+
 The current study uses Precise only, following the professor's 2026-10-04
 direction. Start with the [central research plan and first-milestone
 record](docs/notes/precise_first_milestone_proposal_20261011.md). It connects

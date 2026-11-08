@@ -17,11 +17,11 @@ from precise_matching.training import digest, write_json
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def parameter_integrity(base, adapted):
+def parameter_integrity(base, adapted, *, trainable_prefixes=TRAINABLE_PREFIXES):
     import torch
 
     if (not base or set(base) != set(adapted)
-            or any(not any(name.startswith(prefix) for name in base) for prefix in TRAINABLE_PREFIXES)):
+            or any(not any(name.startswith(prefix) for name in base) for prefix in trainable_prefixes)):
         raise InputError("Base/adapted state dictionaries or expected trainable groups disagree.")
     counts = {"frozen_tensors": 0, "frozen_parameters": 0, "changed_frozen_tensors": 0,
               "trainable_tensors": 0, "trainable_parameters": 0, "changed_trainable_tensors": 0}
@@ -30,7 +30,7 @@ def parameter_integrity(base, adapted):
         if (original.shape != trained.shape or original.dtype != trained.dtype
                 or not torch.isfinite(original).all() or not torch.isfinite(trained).all()):
             raise InputError("Nonfinite or incompatible checkpoint tensor.")
-        group = "trainable" if name.startswith(TRAINABLE_PREFIXES) else "frozen"
+        group = "trainable" if name.startswith(trainable_prefixes) else "frozen"
         counts[group + "_tensors"] += 1
         counts[group + "_parameters"] += original.numel()
         counts["changed_" + group + "_tensors"] += not torch.equal(original, trained)

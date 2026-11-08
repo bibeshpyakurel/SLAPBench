@@ -497,6 +497,53 @@ The [future Qwen comparison contract](notes/precise_qwen_ab_comparison_20261101.
 now also supports the new numeric-group scope; actual matching outputs and run
 provenance remain required.
 
+## November 8 Qwen intake and native DINOv2-Large preparation
+
+Konain's new originals are at `local/precise/collaborator/konain-results-20261108/`:
+both summaries, four parsed full-pair outputs, updated matched evaluation code,
+training-source JSON/script and selected files from `checkpoint-27897/`. The
+17-file raw receipt and separate base-summary receipt retain provider IDs, sizes
+and SHA-256 values. Stored adapter weights are 132,149,144 bytes and stay ignored;
+optimizer/RNG/scheduler binaries were listed but not downloaded or executed.
+Training arguments were inspected statically with `pickletools`, not unpickled.
+See the [source-verified outcome report](../reports/precise-qwen-supplied-results-20261108/README.md)
+for exact-pair joins, counts, limitations and the offline reproduction command.
+Private intake/review receipts are under `local/precise/metadata/qwen-results-20261108/`.
+
+The official pinned `facebook/dinov2-large` files are at
+`local/precise/models/dinov2-large/47b73eefe95e8d44ec3623f8890bd894b6ea2d6c/`.
+Provider: [official model repository](https://huggingface.co/facebook/dinov2-large).
+`model.safetensors` is 1,217,522,888 bytes, SHA-256
+`399fba97a95f22c36834418bc69373364a99af3a1153da1c0fb31db567c92e23`;
+config SHA-256 is
+`12df51c069a2dc1305e34ba71ef58bc2407ea553b75f4722a1715c1bce3bbed0`.
+The local download receipt pins all three official source URLs/hashes. Keep
+weights and receipts local. The existing dated matcher compatibility environment
+is reused without installation, model replacement or GPU repair.
+
+Native preparation preserves each 1600 x 1500 grayscale raster, centers it in a
+1610 x 1512 white canvas, replicates RGB channels and applies the original
+normalization. It does not resample. The exact-policy synthetic result/source
+hashes are at `local/precise/metadata/native-large-exact-capacity-20261108/` and
+[the public capacity aggregate](../reports/precise-native-large-capacity-20261108/capacity.json).
+The preliminary synthetic artifacts/source snapshots remain separately under
+`local/precise/metadata/native-large-capacity-20261108/`. Neither reads real pixels.
+
+The new real-data CLI is `code/run_precise_native_large.py`, with
+`code/precise_matching/configs/dinov2_large_native.json`, the unchanged November 7
+bundle and a **new actual digest-bound review** carrying
+`model_profile: dinov2_large_native_v1`, `native_pixels_reviewed: true` and the
+pinned `weights_sha256`, in addition to existing review/phase fields. Do not
+create those assertions before actual review. The source must be committed;
+keep its protected runtime source unchanged across training/scoring phases.
+The native entry records the last commit affecting those protected paths, so
+unrelated documentation commits do not invalidate a long-running job.
+Flash-only SDPA, BF16 inference/training and deterministic algorithms are fixed.
+`code/verify_precise_native_checkpoint.py` verifies the final native checkpoint
+offline against the pinned large base; the existing small-model verifier keeps
+its defaults. See the [full run proposal](notes/precise_large_native_protocol_20261108.md)
+for exact schedule, unchanged calibration/test claiming and review status.
+
 ## Publication check
 
 `scripts/check_publication_scope.py` checks the Git index for dataset/model/

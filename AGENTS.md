@@ -109,6 +109,32 @@
   authorization follows from completion. Keep prior results and private assets.
 - Never send subject identifiers, original filenames or ground-truth labels to
   hosted models. Preserve the branch and push requirements below.
+- On 2026-11-08 the user supplied new Qwen summaries, all four full parsed
+  prediction files, matched evaluation code, updated training JSON and adapter
+  checkpoint/training metadata. Start from
+  `reports/precise-qwen-supplied-results-20261108/README.md`. Exact new-cohort
+  pair coverage and the 63.31%/89.67% accuracies reproduce; these outputs are no
+  longer missing. Preserve their source-verified outcome status and explicit
+  run-provenance limits: actual `binary_training_config.json`, resolved base
+  revisions/environment, raw replies and checkpoint-selection/evaluation-digest
+  evidence remain incomplete. Do not invent them or equate different operating
+  policies to matched test FAR. No duplicate Qwen tuning is required.
+- The user also relayed the professor's request for a larger DINOv2 model and
+  original high-resolution images. The concrete DINOv2-Large/native proposal is
+  `docs/notes/precise_large_native_protocol_20261108.md`; the user explicitly
+  approved the exact proposal and its training, calibration and test execution
+  in the current chat. The direct response and original proposal bytes are bound
+  privately to the new configuration/input hashes. Native preparation, gated
+  train/calibrate/test entry point, offline verification and synthetic checks are
+  implemented. Pinned large weights are already downloaded/verified locally.
+  The exact deterministic/BF16/Flash-only native synthetic check passes; see
+  `reports/precise-native-large-capacity-20261108/README.md`. Keep originals and
+  completed small-model studies intact. Real execution follows reviewed source
+  checks/commit/publication. Keep protected runtime source, inputs and review
+  fixed across training/calibration/tests. The native entry point records the
+  last commit affecting its protected source paths, so unrelated documentation
+  commits do not invalidate later phases. Do not ask for the exact approval
+  again or infer additional experiments from it.
 
 ## Git workflow (required)
 - `main` is GitHub's default and publication branch. `dev` is the working branch

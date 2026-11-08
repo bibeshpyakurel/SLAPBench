@@ -40,6 +40,15 @@ class SharedCheckpointTests(unittest.TestCase):
                 with self.assertRaises(InputError):
                     parameter_integrity(base, adapted)
 
+    def test_large_model_prefixes_are_explicit_without_changing_small_defaults(self):
+        import torch
+        base = {name: torch.ones(2) for name in ("embeddings.weight", "encoder.layer.22.weight", "encoder.layer.23.weight", "layernorm.weight")}
+        adapted = {name: value.clone() for name, value in base.items()};adapted["encoder.layer.22.weight"] += .1
+        prefixes = ("encoder.layer.22.", "encoder.layer.23.", "layernorm.")
+        counts = parameter_integrity(base, adapted, trainable_prefixes=prefixes)
+        self.assertEqual(counts["frozen_tensors"], 1);self.assertEqual(counts["changed_trainable_tensors"], 1)
+        with self.assertRaises(InputError):parameter_integrity(base, adapted)
+
     def test_serialization_key_mismatch_is_not_mistaken_for_tensor_changes(self):
         base, adapted = self.fixture(), self.fixture()
         base["encoder.layer.10.attention.attention.query.weight"] = base.pop("encoder.layer.10.weight")

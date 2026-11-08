@@ -1523,3 +1523,67 @@ a training-JSON endpoint (one missing reference). This changes only the test;
 sealed runs, scientific policy, source audit and professor report are unchanged.
 Local regression checks and hosted CI are checked again for the corrective
 commit rather than repeating any model phase.
+
+
+## 2026-11-08 — new Qwen outputs verified; native-large route prepared
+
+The user supplied Konain's newly uploaded evaluation and fine-tuning/checkpoint
+folders and relayed the professor's request for a larger DINOv2 model with
+original high-resolution images. This is new evidence/direction after the
+completed November 7 study. It does not overwrite or repeat that study.
+
+Preserved both new Qwen summaries, four complete prediction files, updated
+matched evaluation code, training-source JSON/script and adapter/checkpoint
+metadata under ignored `local/precise/collaborator/konain-results-20261108/`.
+Raw provider IDs/byte hashes are recorded privately. Downloaded adapter bytes
+are 132,149,144; no Qwen model was executed, trained or installed. Training
+arguments were inspected as pickle opcodes without executing the pickle.
+
+The source audit joins every new output to exactly 4,200 supplied new test pairs
+with labels, zero duplicates/missing/extra rows and zero INVALID/ERROR outcomes.
+It reproduces base TP 1927 / TN 732 / FP 1368 / FN 173 (accuracy 63.31%, TAR 91.76%, FAR 65.14%)
+and fine-tuned TP 2040 / TN 1726 / FP 374 / FN 60 (accuracy 89.67%, TAR 97.14%, FAR 17.81%).
+The training JSON matches the DINO bundle byte-for-byte. Both prompts match the
+training JSON; the summaries' list-based prompt hashes reproduce. The supplied
+checkpoint state records epoch 3 / step 27897 and is consistent with the declared
+37,194-example, batch 1 / accumulation 4 / three-epoch schedule. Actual
+`binary_training_config.json`, resolved base revisions/runtime versions, raw
+replies and selection/evaluation-digest evidence remain incomplete. These facts
+are separated from verified saved-outcome arithmetic. Different DINO/Qwen
+operating policies are not treated as matched test FAR. The new aggregate,
+per-type table and source review are in `reports/precise-qwen-supplied-results-20261108/`.
+
+Verified/downloaded official `facebook/dinov2-large` at pinned revision
+47b73eefe95e8d44ec3623f8890bd894b6ea2d6c (304,368,640 parameters). Existing
+benchmark inventory records all 6,778 images at 1600 x 1500. Added native preparation
+that preserves every grayscale pixel, centered in a 1610 x 1512 white canvas with
+no resampling/cropping. Added separate native-large train/calibrate/test gates,
+explicit BF16 scoring, Flash-only SDPA, nonreentrant gradient checkpointing and
+native offline checkpoint verification. Only blocks 22/23 and final norm adapt.
+Old model/configuration defaults and all original assets remain intact.
+
+A preliminary synthetic capacity check passed, followed by an exact-policy
+check adding deterministic execution and both BF16 inference contexts. The
+exact check completes 64 microbatches / two AdamW updates with frozen tensors
+unchanged, finite gradients and about 3.01 GiB peak allocated / 3.26 GiB reserved on
+the RTX 4080 SUPER. It uses synthetic pixels only. Measured 1.26 pairs/second implies
+about 24.6 hours of model computation for the proposed three epochs, plus actual
+pipeline overhead/calibration/testing. No performance or long-run fit is inferred.
+
+The concrete new proposal is `docs/notes/precise_large_native_protocol_20261108.md`:
+same 37,194 / 4,200 pairs, fresh pinned large base, native pixel preservation,
+1 pair / accumulation 32, three full epochs/final checkpoint, nominal 1% training FAR
+and one-time tests. The user then directly approved the exact proposal and its training, calibration
+and test execution. The original proposal bytes/response are preserved privately
+and bound to the new bundle/configuration; no identity/capture facts are inferred.
+Real execution follows source checks/commit/publication.
+New tests cover exact pixel preservation, source hashes, summary arithmetic,
+explicit INVALID failures, static training-argument reading, native phase
+provenance/precision dispatch and explicit large tensor-group verification.
+Full verification/content review and publication precede real execution.
+
+Local verification passes: 206 repository tests, 83 matcher CPU contracts and
+15 legacy metric checks, plus correctness lint, changed-file syntax, generated
+table consistency, 84 relative links and publication/privacy/content checks.
+The exact native-large execution review is recorded; new real phases follow
+the reviewed source commit and verified push.

@@ -1,5 +1,16 @@
 # Pending trained-Qwen A/B comparison
 
+**2026-11-08 update:** the [new supplied-result review](../../reports/precise-qwen-supplied-results-20261108/README.md)
+joins both complete prediction sets to the exact new 4,200 testing pairs and
+reproduces the summaries. Prediction files, updated code, training JSON and
+adapter/trainer metadata are now available; do not request them again. The
+source-verified outcome report keeps actual-run provenance incomplete rather
+than manufacturing the missing binary training configuration, resolved base
+revisions/environment, raw replies or selection/evaluation-digest evidence.
+The strict fully reviewed comparison command below retains those requirements.
+The updated supplied parser emits `INVALID` in addition to the older failure
+tokens; the importer now preserves it as an explicit invalid-response failure.
+
 **2026-11-07 update:** the user replaced the active benchmark with the new
 37,194 training / 4,200 testing pairs and explicitly authorized fresh DINOv2
 runs under the [revised proposal](precise_revised_cohort_review_20261107.md).

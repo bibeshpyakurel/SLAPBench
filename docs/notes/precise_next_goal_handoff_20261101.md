@@ -1,5 +1,15 @@
 # Precise DINOv2 shared-benchmark handoff
 
+**2026-11-08 latest intake/direction:** Konain's full before/after new-cohort
+Qwen prediction files and checkpoint metadata have now arrived. Their
+[exact-pair outcome review](../../reports/precise-qwen-supplied-results-20261108/README.md)
+reproduces 63.31%/89.67% accuracy and retains the remaining actual-run provenance
+gaps. The professor requested a larger DINOv2 model and original-resolution
+images. A [concrete Large/native proposal](precise_large_native_protocol_20261108.md)
+and [synthetic capacity evidence](../../reports/precise-native-large-capacity-20261108/README.md)
+are ready; the user explicitly approved the exact new execution proposal. Do not repeat the completed
+small-model runs or request the Qwen prediction files already supplied.
+
 **2026-11-07 latest completion:** the user explicitly replaced the active cohort
 with the newly supplied 37,194 training / 4,200 testing pairs and approved fresh
 training, calibration and testing. Those runs and the

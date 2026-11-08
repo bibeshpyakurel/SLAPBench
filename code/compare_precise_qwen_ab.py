@@ -52,8 +52,8 @@ def read_ab(paths, testing):
                 raise InputError("Unexpected, repeated or wrong-class A/B pair; no intersection filtering.")
             if token in {"A", "a", "B", "b"}:
                 outcome = Decision(p.pair_id, "ok", token in {"A", "a"})
-            elif token in {"UNKNOWN", "ERROR"}:
-                outcome = Decision(p.pair_id, "unknown_response" if token == "UNKNOWN" else "execution_error", None)
+            elif token in {"UNKNOWN", "INVALID", "ERROR"}:
+                outcome = Decision(p.pair_id, "execution_error" if token == "ERROR" else ("invalid_response" if token == "INVALID" else "unknown_response"), None)
             else:
                 raise InputError("Unknown preserved outcome token; do not guess or repair model replies.")
             tokens[token] += 1
