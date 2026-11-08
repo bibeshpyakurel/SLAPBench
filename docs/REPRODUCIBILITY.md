@@ -544,6 +544,36 @@ offline against the pinned large base; the existing small-model verifier keeps
 its defaults. See the [full run proposal](notes/precise_large_native_protocol_20261108.md)
 for exact schedule, unchanged calibration/test claiming and review status.
 
+The approved native adaptation started after verified publication of execution
+source `06d12c249ec7f5db53124f673b2c6947c4b144b7` and successful hosted CI/CodeQL.
+The live process and its private phase paths are recorded in
+`local/precise/metadata/native-large-execution-20261108/CONTINUATION.json`.
+Consult this record before continuing; an expired observation session does not
+authorize another training run or retry.
+
+After the final checkpoint, both calibrations and both one-time tests are
+sealed, `code/report_precise_native_large.py` reproduces saved outcomes offline,
+checks execution source against its recorded commit, verifies the large base and
+final schedule, and rechecks the source-verified Qwen decisions on the exact
+same cohort. It requires explicit bundle/config/review, checkpoint verification,
+run root, SDK intake/cohort audit, prior small aggregate, Qwen intake/aggregate,
+new public aggregate/private receipt paths and actual study date. It rejects
+incomplete phase outputs and refuses overwrite. No image pixels are read and no
+model inference is performed; checkpoint bytes are hashed for integrity.
+
+Render its aggregate with `code/render_precise_native_report.py --aggregate
+reports/precise-dinov2-large-native-NEWDATE/aggregate.json --output-dir
+reports/precise-dinov2-large-native-NEWDATE`. This creates the professor PDF/Markdown,
+all-method operating-point CSV and descriptive continuous-score ROC SVG. Inspect
+every final PDF page and independently verify metrics before publication. Layout
+fixtures live only in ignored metadata and are explicitly synthetic; they are
+not native model results. The original small-model and Qwen reports stay intact.
+
+The [Qwen JSON clarification](notes/precise_qwen_config_clarification_20261108.md)
+distinguishes optional evaluation prompt input from saved training metadata.
+The actual supplied training-data JSON is already verified; do not request it
+again or infer missing runtime settings from code defaults.
+
 ## Publication check
 
 `scripts/check_publication_scope.py` checks the Git index for dataset/model/

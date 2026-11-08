@@ -135,6 +135,15 @@
   last commit affecting its protected source paths, so unrelated documentation
   commits do not invalidate later phases. Do not ask for the exact approval
   again or infer additional experiments from it.
+- The approved Large/native adaptation has started from source commit
+  `06d12c249ec7f5db53124f673b2c6947c4b144b7`, after local checks and successful
+  hosted CI/CodeQL. Consult the ignored execution `CONTINUATION.json` before
+  acting; monitor that existing run rather than starting another. Reporting
+  code is independent of the protected runtime paths. The new report exporter
+  requires sealed training, both calibrations and both final tests; no native
+  results exist merely because report-layout checks pass. Konain's clarification
+  about optional `--prompt_json` is distinguished from the separately saved
+  training configuration in `docs/notes/precise_qwen_config_clarification_20261108.md`.
 
 ## Git workflow (required)
 - `main` is GitHub's default and publication branch. `dev` is the working branch

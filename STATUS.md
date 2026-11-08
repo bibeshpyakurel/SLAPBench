@@ -1587,3 +1587,40 @@ Local verification passes: 206 repository tests, 83 matcher CPU contracts and
 table consistency, 84 relative links and publication/privacy/content checks.
 The exact native-large execution review is recorded; new real phases follow
 the reviewed source commit and verified push.
+
+## 2026-11-08 — approved native training active; offline final-report path ready
+
+After source publication at `06d12c249ec7f5db53124f673b2c6947c4b144b7`, all
+four hosted CI jobs and CodeQL passed. The approved Large/native adaptation
+started at 22:31:35 UTC in a new ignored run directory. Its existing process,
+session and continuation details are recorded privately under
+`local/precise/metadata/native-large-execution-20261108/`. Monitor this run;
+do not start another because a terminal observation expires. Training remains
+active; native calibration, final tests and final research results are pending.
+The protected runtime/configuration/input/review bytes remain unchanged.
+
+Added an offline exporter for the eventual sealed native outcomes, final large
+checkpoint verification and exact-cohort small/Qwen/SDK comparison. It replays
+both calibrations/tests, checks committed execution source, rechecks Qwen pooled
+and per-type source outcomes, and preserves binary-Qwen provenance limits. Added
+a separate six-page professor-report renderer with before/after accuracy and
+confusion matrices, native preprocessing, actual training elapsed time, per-type
+rates, paired decisions, continuous DINO/SDK ROC only and reproducibility limits.
+A clearly marked synthetic layout preview was inspected on every page under
+ignored metadata. It contains no new native-model measurements and is not a
+public result. Prior reports remain unchanged.
+
+The user also relayed Konain's clarification about optional prompt JSON and his
+confirmation that the training-data JSON was already uploaded. The supplied
+code distinguishes optional evaluation `--prompt_json` from the automatically
+saved `binary_training_config.json`, which contains selected counts and actual
+argument values as well as prompts. The training-data JSON is already present
+and verified byte-for-byte; it is not requested again. No new saved config or
+training command accompanied these replies. See
+`docs/notes/precise_qwen_config_clarification_20261108.md`. These limits do not
+hold up the approved native run or authorize a restart/new experiment.
+
+Verification for this reporting change passes 209 repository tests, all 15
+legacy metric checks, correctness lint, changed-Python syntax and unchanged
+results-table regeneration. Final native results still require completed real
+phases, independent metric verification and final report review/publication.

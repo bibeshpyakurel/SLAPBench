@@ -28,7 +28,7 @@ def content_overlap(bundle, training, testing):
             for field in ("sha256", "decoded_sha256")}
 
 
-def check_final_training(run, verification, config, training, identity, bundle_sha, config_sha):
+def check_final_training(run, verification, config, training, identity, bundle_sha, config_sha, *, expected_base_sha=WEIGHTS_SHA256, expected_profile=None):
     record = json.loads((run / "run_record.json").read_text())
     selection = json.loads((run / "selection.json").read_text())
     first = json.loads((run / "attempt-0001/attempt.json").read_text())
@@ -36,8 +36,9 @@ def check_final_training(run, verification, config, training, identity, bundle_s
     attempts = sorted(p.name for p in run.iterdir() if p.is_dir() and p.name.startswith("attempt-"))
     if (attempts != ["attempt-0001"] or not checkpoint.is_relative_to(run.resolve())
             or record.get("config") != asdict(config)
-            or record["provenance"].get("weights_sha256") != WEIGHTS_SHA256
+            or record["provenance"].get("weights_sha256") != expected_base_sha
             or record["provenance"].get("benchmark_scope") != GROUP_SCOPE
+            or expected_profile is not None and record["provenance"].get("model_profile") != expected_profile
             or record["provenance"]["input_sha256"]["bundle"] != bundle_sha
             or record["provenance"]["input_sha256"]["config"] != config_sha
             or first.get("resume_sha256") is not None or first.get("start_epoch") != 0
@@ -48,7 +49,7 @@ def check_final_training(run, verification, config, training, identity, bundle_s
             or digest(checkpoint) != identity["checkpoint_sha256"]
             or digest(run / "selection.json") != identity["selection_sha256"]
             or verification.get("passed") is not True
-            or verification.get("base_weights_sha256") != WEIGHTS_SHA256
+            or verification.get("base_weights_sha256") != expected_base_sha
             or verification.get("checkpoint_sha256") != identity["checkpoint_sha256"]
             or verification.get("selection_sha256") != identity["selection_sha256"]
             or verification.get("epochs_completed") != config.epochs
