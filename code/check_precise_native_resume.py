@@ -16,6 +16,10 @@ from precise_matching.training import digest
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def interruption_observation_path():
+    return ROOT / "reports/precise-native-large-interruption-20261110/integrity.json"
+
+
 def inspect_resume_review(path, run, record):
     path, run = Path(path).resolve(), Path(run).resolve()
     if not path.is_relative_to(ROOT / "local/precise"):
@@ -71,16 +75,30 @@ def check_resume_chain(path, run, record, selection):
             or selection.get("checkpoint") != "attempt-0002/epoch-0003.pt"
             or result != selection):
         raise InputError("Actual attempts do not follow the single approved resume chain.")
-    elapsed = (datetime.fromisoformat(selection["finished_at_utc"]) -
-               datetime.fromisoformat(second["started_at_utc"])).total_seconds()
-    if elapsed < 0:
+    first_start = datetime.fromisoformat(first["started_at_utc"])
+    resumed_start = datetime.fromisoformat(second["started_at_utc"])
+    finished = datetime.fromisoformat(selection["finished_at_utc"])
+    observation = interruption_observation_path()
+    observed = json.loads(observation.read_text())
+    if (observed.get("scope") != inspected["scope"]
+            or observed.get("input_sha256") != inspected["input_sha256"]):
+        raise InputError("Published interruption timestamp does not bind the inspected original sources.")
+    last_log = datetime.fromisoformat(observed["console_last_write_utc"])
+    elapsed = (finished - resumed_start).total_seconds()
+    if not first_start <= last_log <= resumed_start <= finished:
         raise InputError("Resume attempt timing is inconsistent.")
+    logged_first_elapsed = (last_log - first_start).total_seconds()
     retained = sum(h["pairs_seen"] for h in selection["history"])
     discarded = inspected["last_reported_progress"]["pairs_seen"]
     return {"single_explicit_resume_reviewed": True, "review_sha256": digest(Path(path)),
             "interruption_verification_sha256": hashes["interruption_verification"],
+            "interruption_observation_sha256": digest(observation),
             "resume_checkpoint_sha256": hashes["resume_checkpoint"], "epochs_restored": 2,
             "attempts": 2, "resume_attempt_elapsed_seconds": elapsed,
+            "first_attempt_last_log_write_utc": last_log.isoformat(),
+            "first_attempt_logged_elapsed_seconds": logged_first_elapsed,
+            "minimum_observed_training_attempt_elapsed_seconds": logged_first_elapsed + elapsed,
+            "timing_interpretation": "Pipeline wall intervals, not GPU kernel time; original crash tail is not timed exactly.",
             "retained_trajectory_pair_presentations": retained,
             "minimum_observed_total_pair_presentations": retained + discarded,
             "discarded_partial_epoch_last_reported_progress": inspected["last_reported_progress"],

@@ -1676,3 +1676,11 @@ three-epoch trajectory from at least 130,654 presentations across both attempts,
 including the last reported 19,072 discarded partial-epoch presentations. This
 is a lower bound on executed work because crash progress was logged periodically.
 The model configuration/optimizer schedule and protected runtime remain unchanged.
+
+Added reproducible recovery timing from the already published interruption
+observation joined to the original record/checkpoint/console hashes. Final
+reporting separates the first logged attempt interval plus resumed elapsed time
+(a lower bound on pipeline attempt time) from total wall time including the
+interruption gap. It does not call either quantity GPU kernel time or reconstruct
+the observation from copied file modification times. Updated synthetic layout
+remains six pages with every page inspected; 213 repository tests and lint pass.

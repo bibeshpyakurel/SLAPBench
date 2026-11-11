@@ -28,7 +28,8 @@ class ResumeReviewTests(unittest.TestCase):
                                'benchmark_scope':GROUP_SCOPE,'weights_sha256':WEIGHTS_SHA256,
                                'input_sha256':{'bundle':'b','config':'c','review':'r'}}}
         write_json(run/'run_record.json',record)
-        write_json(run/'attempt-0001/attempt.json',{'start_epoch':0,'resume_sha256':None})
+        write_json(run/'attempt-0001/attempt.json',{'start_epoch':0,'resume_sha256':None,
+                                                 'started_at_utc':'2026-11-10T00:00:00+00:00'})
         checkpoint = run/'attempt-0001/epoch-0002.pt';checkpoint.write_bytes(b'SYNTHETIC NOT MODEL WEIGHTS')
         checkpoint.with_suffix('.sha256').write_text(digest(checkpoint)+'\n')
         console = run.parent/'training-console.log';console.write_text('synthetic interrupted progress\n')
@@ -37,10 +38,13 @@ class ResumeReviewTests(unittest.TestCase):
         human=meta/'human.json';write_json(human,{'response':'APPROVED SYNTHETIC FIXTURE ONLY','proposal_sha256':digest(proposal)})
         inspection=meta/'inspection.json'
         history=[{'epoch':n,'pairs_seen':6} for n in (1,2)]
-        write_json(inspection,{'passed':True,'epochs_completed':2,'epochs_remaining':1,'training_complete':False,
+        write_json(inspection,{'scope':'synthetic_interruption_integrity','passed':True,'epochs_completed':2,'epochs_remaining':1,'training_complete':False,
             'counts':{'changed_frozen_tensors':0},'execution_source_commit':'a'*40,'history':history,
             'input_sha256':{'record':digest(run/'run_record.json'),'checkpoint':digest(checkpoint),'console':digest(console)},
             'last_reported_progress':{'epoch':3,'pairs_seen':2},'crash_root_cause':'unconfirmed'})
+        observation=root/'reports/precise-native-large-interruption-20261110/integrity.json'
+        observation.parent.mkdir(parents=True)
+        write_json(observation,{**json.loads(inspection.read_text()),'console_last_write_utc':'2026-11-10T00:30:00+00:00'})
         evidence={'training_record':run/'run_record.json','resume_checkpoint':checkpoint,'interruption_verification':inspection,
                   'proposal':proposal,'review_record':human}
         config={'scope':'one_explicit_native_epoch_boundary_resume','execution_authorized':True,'max_new_attempts':1,
@@ -73,9 +77,16 @@ class ResumeReviewTests(unittest.TestCase):
             write_json(second/'result.json',selected)
             result=review.check_resume_chain(path,run,record,selected)
             self.assertEqual(result['resume_attempt_elapsed_seconds'],60)
+            self.assertEqual(result['first_attempt_logged_elapsed_seconds'],1800)
+            self.assertEqual(result['minimum_observed_training_attempt_elapsed_seconds'],1860)
             self.assertEqual(result['retained_trajectory_pair_presentations'],18)
             self.assertEqual(result['minimum_observed_total_pair_presentations'],20)
             self.assertTrue(result['training_wall_interval_includes_interruption_downtime'])
+            observation=review.interruption_observation_path();original=observation.read_text()
+            changed_observation=json.loads(original);changed_observation['input_sha256']['console']='different'
+            observation.write_text(json.dumps(changed_observation))
+            with self.assertRaises(InputError):review.check_resume_chain(path,run,record,selected)
+            observation.write_text(original)
             changed=copy.deepcopy(selected);changed['history'][0]['pairs_seen']=5
             (second/'result.json').write_text(json.dumps(changed))
             with self.assertRaises(InputError):review.check_resume_chain(path,run,record,changed)

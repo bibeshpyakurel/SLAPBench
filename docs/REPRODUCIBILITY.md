@@ -602,6 +602,14 @@ sanitized recovery summary, and the renderer distinguishes resumed-attempt time
 from the full first-start-to-final-selection wall interval including downtime.
 No further retry or configuration fallback is inferred from this recovery.
 
+The final recovery summary also uses the published interruption observation,
+whose recorded last-console-write timestamp is joined to the same original
+record/checkpoint/console hashes. It reports the first logged attempt interval
+plus the resumed interval as a lower bound on pipeline attempt time, separately
+from total elapsed wall time including downtime. This is not GPU kernel timing,
+and the untimed crash tail may add work. Copied filesystem modification times
+are not used to reconstruct this observation.
+
 ## Publication check
 
 `scripts/check_publication_scope.py` checks the Git index for dataset/model/

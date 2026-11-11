@@ -51,7 +51,9 @@ def main(argv=None):
         sources = {k: getattr(args, k) for k in ("bundle", "config", "review", "checkpoint_verification", "cohort_audit",
                                                  "small_aggregate", "qwen_aggregate")}
         if args.resume_review is not None:
+            from check_precise_native_resume import interruption_observation_path
             sources["resume_review"] = args.resume_review
+            sources["interruption_observation"] = interruption_observation_path()
         for arm in ARMS:
             short = arm.split("_")[0]
             for phase in ("test", "calibration"):
