@@ -73,6 +73,8 @@ class ResumeReviewTests(unittest.TestCase):
             write_json(second/'result.json',selected)
             result=review.check_resume_chain(path,run,record,selected)
             self.assertEqual(result['resume_attempt_elapsed_seconds'],60)
+            self.assertEqual(result['retained_trajectory_pair_presentations'],18)
+            self.assertEqual(result['minimum_observed_total_pair_presentations'],20)
             self.assertTrue(result['training_wall_interval_includes_interruption_downtime'])
             changed=copy.deepcopy(selected);changed['history'][0]['pairs_seen']=5
             (second/'result.json').write_text(json.dumps(changed))

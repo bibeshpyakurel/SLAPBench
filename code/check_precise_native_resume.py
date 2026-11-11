@@ -75,10 +75,14 @@ def check_resume_chain(path, run, record, selection):
                datetime.fromisoformat(second["started_at_utc"])).total_seconds()
     if elapsed < 0:
         raise InputError("Resume attempt timing is inconsistent.")
+    retained = sum(h["pairs_seen"] for h in selection["history"])
+    discarded = inspected["last_reported_progress"]["pairs_seen"]
     return {"single_explicit_resume_reviewed": True, "review_sha256": digest(Path(path)),
             "interruption_verification_sha256": hashes["interruption_verification"],
             "resume_checkpoint_sha256": hashes["resume_checkpoint"], "epochs_restored": 2,
             "attempts": 2, "resume_attempt_elapsed_seconds": elapsed,
+            "retained_trajectory_pair_presentations": retained,
+            "minimum_observed_total_pair_presentations": retained + discarded,
             "discarded_partial_epoch_last_reported_progress": inspected["last_reported_progress"],
             "training_wall_interval_includes_interruption_downtime": True,
             "crash_root_cause": inspected["crash_root_cause"]}

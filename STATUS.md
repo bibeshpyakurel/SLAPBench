@@ -1661,3 +1661,18 @@ unchanged results-table regeneration pass. Four synthetic recovery contracts
 cover the new behavior; real continuation follows source
 checks, commit and verified publication. The main final research report remains
 pending completed training, both calibrations and both one-time tests.
+
+Recovery changes were published/remote-verified at
+`6da72a2c8703888e0e9db0b88f2d71ef7fb7c128`; CI and CodeQL both pass.
+The single approved resume created `attempt-0002` at November 11 02:26:52 UTC
+(November 10 evening in Chicago), restoring the exact epoch2 digest. Observed
+progress advances from update 2,326 to 2,327 and onward in the replayed third
+epoch. The original interrupted console/checkpoints remain unchanged. Private
+continuation metadata identifies the actual live process/session; monitor it
+without launching another attempt.
+
+Final reporting distinguishes 111,582 pair presentations in the retained
+three-epoch trajectory from at least 130,654 presentations across both attempts,
+including the last reported 19,072 discarded partial-epoch presentations. This
+is a lower bound on executed work because crash progress was logged periodically.
+The model configuration/optimizer schedule and protected runtime remain unchanged.

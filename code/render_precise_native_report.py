@@ -212,13 +212,17 @@ def render_report(data, output, aggregate_digest):
              "After a segmentation fault during epoch 3, one explicitly reviewed continuation restored the epoch-2 "
              "model, optimizer, scheduler and RNG state and replayed the entire third epoch. The partial third-epoch "
              "work remains in the execution history and compute cost. No final checkpoint was chosen before completion.")
+        para(f"The final trajectory retains {recovered['retained_trajectory_pair_presentations']:,} pair presentations. "
+             f"Across both attempts, at least {recovered['minimum_observed_total_pair_presentations']:,} presentations "
+             "were observed, including the discarded partial epoch. The interrupted log reports periodic progress, "
+             "so this is a lower bound on total executed work, not an exact compute count.", small=True)
     else:
         para(f"The fresh adaptation took <b>{hours}h {minutes}m {seconds}s</b> from its recorded attempt start to final "
              "checkpoint selection. This elapsed time includes the training pipeline and checkpoints; it excludes the "
              "separate frozen/adapted calibration and final-test phases.")
     table(["Fixed item", "Executed setting"], [
         ["Schedule / selection", f"{cfg['epochs']} complete epochs; final epoch chosen before execution"],
-        ["Pairs / optimizer updates", f"{data['training_pairs'] * cfg['epochs']:,} pair presentations / {data['training']['optimizer_updates_completed']:,} updates"],
+        ["Retained trajectory / updates", f"{data['training_pairs'] * cfg['epochs']:,} pair presentations / {data['training']['optimizer_updates_completed']:,} updates"],
         ["Batch / accumulation", f"{cfg['batch_pairs']} pair (2 images) per microbatch / {cfg['accumulation']} microbatches"],
         ["Optimizer", f"AdamW; LR {cfg['learning_rate']:g} to {cfg['minimum_learning_rate']:g}; warmup {cfg['warmup_steps']}; matrix weight decay {cfg['weight_decay']:g}"],
         ["Loss / clipping / seed", f"Cosine contrastive margin {cfg['margin']}; norm clip 1; seed {cfg['seed']}"],
