@@ -574,6 +574,34 @@ distinguishes optional evaluation prompt input from saved training metadata.
 The actual supplied training-data JSON is already verified; do not request it
 again or infer missing runtime settings from code defaults.
 
+## November 10 native interruption and explicit resume
+
+The original Large/native process exited139/SIGSEGV in epoch3, with epoch2 fully
+saved and no final selection/calibration/tests. The CPU-only verifier
+`code/verify_precise_native_interruption.py` checks its saved scheduler, optimizer,
+RNG metadata, original source and frozen/trainable tensors. Its private receipt
+is under `local/precise/metadata/native-large-interruption-20261110/`; the reviewed
+[aggregate interruption report](../reports/precise-native-large-interruption-20261110/README.md)
+contains no raw images, identifiers or checkpoint bytes. The cause remains unconfirmed.
+
+The user explicitly approved the [one-resume proposal](notes/precise_native_resume_review_20261110.md).
+The actual response and immutable proposal snapshot, original input/run digests,
+epoch2 checkpoint digest and interruption receipt are bound under
+`local/precise/metadata/native-large-resume-20261110/`. Original November8 review
+bytes are unchanged. `code/check_precise_native_resume.py` checks that separate
+actual review/evidence binding without launching any job. The existing native
+training CLI's `--resume` restores model/optimizer/scheduler/RNG at the saved
+boundary and creates `attempt-0002`; it must not create another fresh run.
+Use a new resume-console file and preserve the original interrupted console.
+
+The offline final exporter accepts this explicitly reviewed two-attempt history
+only with `--resume-review` pointing to that actual private review. The default
+fresh-run gate remains unchanged; missing review, extra attempts, changed
+preserved history/checkpoint or failed final checks are rejected. It exports a
+sanitized recovery summary, and the renderer distinguishes resumed-attempt time
+from the full first-start-to-final-selection wall interval including downtime.
+No further retry or configuration fallback is inferred from this recovery.
+
 ## Publication check
 
 `scripts/check_publication_scope.py` checks the Git index for dataset/model/

@@ -41,6 +41,7 @@ def main(argv=None):
         parser.add_argument("--" + name, type=Path, required=True)
     parser.add_argument("--study-date", required=True)
     parser.add_argument("--review-date", default="2026-11-08")
+    parser.add_argument("--resume-review", type=Path)
     args = parser.parse_args(argv)
     try:
         if (args.output.exists() or not args.output.resolve().is_relative_to(ROOT / "reports")
@@ -49,6 +50,8 @@ def main(argv=None):
         date.fromisoformat(args.study_date);date.fromisoformat(args.review_date)
         sources = {k: getattr(args, k) for k in ("bundle", "config", "review", "checkpoint_verification", "cohort_audit",
                                                  "small_aggregate", "qwen_aggregate")}
+        if args.resume_review is not None:
+            sources["resume_review"] = args.resume_review
         for arm in ARMS:
             short = arm.split("_")[0]
             for phase in ("test", "calibration"):
@@ -100,7 +103,20 @@ def main(argv=None):
             verify_runtime_source(provenance)
         verification = json.loads(args.checkpoint_verification.read_text())
         check_final_training(training_run, verification, config, training, dino["adapted_dinov2"]["model_identity"],
-            initial["bundle"], initial["config"], expected_base_sha=WEIGHTS_SHA256, expected_profile="dinov2_large_native_v1")
+            initial["bundle"], initial["config"], expected_base_sha=WEIGHTS_SHA256, expected_profile="dinov2_large_native_v1",
+            resume_review=args.resume_review)
+        resume = None
+        if args.resume_review is not None:
+            from check_precise_native_resume import check_resume_chain, inspect_resume_review
+            record = json.loads((training_run / "run_record.json").read_text())
+            selected = json.loads((training_run / "selection.json").read_text())
+            _, _, extra_paths, _ = inspect_resume_review(args.resume_review, training_run, record)
+            for key, path in extra_paths.items():
+                sources["resume_" + key] = path;initial["resume_" + key] = digest(path)
+            for relative in ("attempt-0002/attempt.json", "attempt-0002/result.json"):
+                sources["resume_" + relative] = training_run / relative
+                initial["resume_" + relative] = digest(training_run / relative)
+            resume = check_resume_chain(args.resume_review, training_run, record, selected)
         small = json.loads(args.small_aggregate.read_text())
         if small.get("benchmark_scope") != GROUP_SCOPE or small["input_sha256"]["bundle"] != initial["bundle"]:
             raise InputError("Prior small-model report does not bind the same exact cohort.")
@@ -136,6 +152,7 @@ def main(argv=None):
             "image_preprocessing": {"original_width_height": list(ORIGINAL_SIZE), "padded_width_height": list(PADDED_SIZE),
                                     "resampling": False, "padding": "centered_white"},
             "training_elapsed_seconds": elapsed, "training": verification, "dino": dino,
+            "resume_execution": resume,
             "paired_native_dino": paired_dino(testing, native_scores["frozen_dinov2"], native_scores["adapted_dinov2"],
                 dino["frozen_dinov2"]["threshold"]["cutoff"], dino["adapted_dinov2"]["threshold"]["cutoff"]),
             "prior_small_same_cohort": small["dino"], "qwen": qwen,

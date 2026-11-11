@@ -1624,3 +1624,40 @@ Verification for this reporting change passes 209 repository tests, all 15
 legacy metric checks, correctness lint, changed-Python syntax and unchanged
 results-table regeneration. Final native results still require completed real
 phases, independent metric verification and final report review/publication.
+
+## 2026-11-10 — Large/native interruption verified; one resume approved
+
+Continuation inspected the existing process and recovered terminal exit139 /
+segmentation fault, last reported in epoch3 at 19,072 of 37,194 pairs and update
+2,922 of 3,489. The original process is absent and no final selection exists.
+The log's last write is November 9 at 19:51:42 UTC. Accessible diagnostics do not
+establish the crash cause; no OOM, model-performance or driver-repair conclusion
+is inferred. No calibration or final test had started.
+
+CPU-only inspection verified the original epoch2 checkpoint SHA-256
+`e8afe81b4963b3315e545eda22ee71e4bed14973f07662368e9565322564e762`:
+both completed epochs contain all 37,194 pairs, scheduler/optimizer state records
+2,326 saved updates with finite moments, RNG metadata is valid, all 401 frozen
+tensors remain unchanged and all 38 selected trainable tensors changed. Protected
+runtime bytes still match source 06d12c249ec7f5db53124f673b2c6947c4b144b7.
+The new `reports/precise-native-large-interruption-20261110/` exports only the
+reviewed aggregate; original assets and incomplete-run files remain untouched.
+
+The original approved protocol forbids automatic retries. After the concrete
+checkpoint-bound proposal was supplied, the user directly answered
+“Approve one unchanged-config resume.” The actual response and proposal snapshot
+are bound privately to the original input/config/review/run/checkpoint and
+interruption-verification digests. This approves one epoch2 restoration and full
+epoch3 replay, then the previously approved calibrations/tests. No further
+automatic retry, changed pixels/backend/precision, extra epoch or study is inferred.
+
+Added offline recovery review/chain checks and optional final-report support
+for this actual reviewed two-attempt history. Fresh-run gates stay strict;
+extra attempts, changed preserved history/checkpoint, missing review and failed
+final integrity checks remain rejected. Timing explicitly includes interruption
+downtime in the full wall interval and separately reports resumed-attempt elapsed
+time. All 213 repository tests, 15 legacy metric checks, correctness lint and
+unchanged results-table regeneration pass. Four synthetic recovery contracts
+cover the new behavior; real continuation follows source
+checks, commit and verified publication. The main final research report remains
+pending completed training, both calibrations and both one-time tests.

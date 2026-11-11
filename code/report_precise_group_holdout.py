@@ -28,13 +28,20 @@ def content_overlap(bundle, training, testing):
             for field in ("sha256", "decoded_sha256")}
 
 
-def check_final_training(run, verification, config, training, identity, bundle_sha, config_sha, *, expected_base_sha=WEIGHTS_SHA256, expected_profile=None):
+def check_final_training(run, verification, config, training, identity, bundle_sha, config_sha, *, expected_base_sha=WEIGHTS_SHA256, expected_profile=None, resume_review=None):
     record = json.loads((run / "run_record.json").read_text())
     selection = json.loads((run / "selection.json").read_text())
     first = json.loads((run / "attempt-0001/attempt.json").read_text())
     checkpoint = (run / selection["checkpoint"]).resolve()
     attempts = sorted(p.name for p in run.iterdir() if p.is_dir() and p.name.startswith("attempt-"))
-    if (attempts != ["attempt-0001"] or not checkpoint.is_relative_to(run.resolve())
+    valid_attempts = attempts == ["attempt-0001"]
+    if resume_review is not None:
+        from check_precise_native_resume import check_resume_chain
+        if expected_profile != "dinov2_large_native_v1":
+            raise InputError("Reviewed resume reporting is limited to the explicit native profile.")
+        check_resume_chain(resume_review, run, record, selection)
+        valid_attempts = attempts == ["attempt-0001", "attempt-0002"]
+    if (not valid_attempts or not checkpoint.is_relative_to(run.resolve())
             or record.get("config") != asdict(config)
             or record["provenance"].get("weights_sha256") != expected_base_sha
             or record["provenance"].get("benchmark_scope") != GROUP_SCOPE

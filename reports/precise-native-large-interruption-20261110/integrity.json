@@ -1,0 +1,60 @@
+{
+  "base_weights_sha256": "399fba97a95f22c36834418bc69373364a99af3a1153da1c0fb31db567c92e23",
+  "console_last_write_utc": "2026-11-09T19:51:42.766069723+00:00",
+  "counts": {
+    "changed_frozen_tensors": 0,
+    "changed_trainable_tensors": 38,
+    "frozen_parameters": 279170048,
+    "frozen_tensors": 401,
+    "trainable_parameters": 25198592,
+    "trainable_tensors": 38
+  },
+  "crash_root_cause": "not_established_by_checkpoint_integrity",
+  "epochs_completed": 2,
+  "epochs_remaining": 1,
+  "execution_source_commit": "06d12c249ec7f5db53124f673b2c6947c4b144b7",
+  "final_checkpoint_selected": false,
+  "history": [
+    {
+      "epoch": 1,
+      "learning_rate": 7.985301349691405e-06,
+      "mean_pair_loss": 0.10835980817065827,
+      "pairs_seen": 37194
+    },
+    {
+      "epoch": 2,
+      "learning_rate": 3.3690609560784563e-06,
+      "mean_pair_loss": 0.06178513426495322,
+      "pairs_seen": 37194
+    }
+  ],
+  "image_pixels_read": false,
+  "input_sha256": {
+    "checkpoint": "e8afe81b4963b3315e545eda22ee71e4bed14973f07662368e9565322564e762",
+    "console": "c2e388c5ebf9f85e89a57b2c3494b07bb7a380883324316b7065f1db68b79ecd",
+    "record": "a281ebc27576cd6829318fd69805114caa36d41ffb891a58a2c555dc027e24ff"
+  },
+  "inspection_date": "2026-11-10",
+  "last_reported_progress": {
+    "epoch": 3,
+    "pairs_seen": 19072,
+    "pairs_total": 37194,
+    "updates_completed": 2922,
+    "updates_total": 3489
+  },
+  "model_inference_performed": false,
+  "observed_terminal_exit": {
+    "code": 139,
+    "evidence": "Recovered original terminal completion; original Python process absent.",
+    "signal": "SIGSEGV"
+  },
+  "optimizer_state_entries": 38,
+  "optimizer_updates_saved": 2326,
+  "passed": true,
+  "retry_authorized": false,
+  "saved_rng_metadata_valid": true,
+  "scheduler_and_optimizer_steps_consistent": true,
+  "scope": "offline_interrupted_native_epoch_boundary_integrity_only",
+  "training_complete": false,
+  "verifier_sha256": "f144a77e3dc2ef8a9321b0800ac645d88d952cc2aee319e4d55a52575f2a1acf"
+}

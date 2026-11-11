@@ -204,9 +204,18 @@ def render_report(data, output, aggregate_digest):
          "1610 x 1512 canvas: 5 pixels on each horizontal side and 6 on each vertical side. RGB replication and "
          "normalization follow. <b>There is no resampling, cropping or stretching, and original files are unchanged.</b> "
          "The model receives 12,420 patches of 14 x 14 pixels; its positional embeddings are interpolated to this grid.")
-    para(f"The fresh adaptation took <b>{hours}h {minutes}m {seconds}s</b> from its recorded attempt start to final "
-         "checkpoint selection. This elapsed time includes the training pipeline and checkpoints; it excludes the "
-         "separate frozen/adapted calibration and final-test phases.")
+    if data.get("resume_execution"):
+        recovered = data["resume_execution"]
+        resume_hours = recovered["resume_attempt_elapsed_seconds"] / 3600
+        para(f"The recorded interval from first attempt start to final selection is <b>{hours}h {minutes}m {seconds}s</b>; "
+             f"it includes interruption downtime. The resumed attempt itself took <b>{resume_hours:.2f} hours</b>. "
+             "After a segmentation fault during epoch 3, one explicitly reviewed continuation restored the epoch-2 "
+             "model, optimizer, scheduler and RNG state and replayed the entire third epoch. The partial third-epoch "
+             "work remains in the execution history and compute cost. No final checkpoint was chosen before completion.")
+    else:
+        para(f"The fresh adaptation took <b>{hours}h {minutes}m {seconds}s</b> from its recorded attempt start to final "
+             "checkpoint selection. This elapsed time includes the training pipeline and checkpoints; it excludes the "
+             "separate frozen/adapted calibration and final-test phases.")
     table(["Fixed item", "Executed setting"], [
         ["Schedule / selection", f"{cfg['epochs']} complete epochs; final epoch chosen before execution"],
         ["Pairs / optimizer updates", f"{data['training_pairs'] * cfg['epochs']:,} pair presentations / {data['training']['optimizer_updates_completed']:,} updates"],

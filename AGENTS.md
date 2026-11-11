@@ -144,6 +144,20 @@
   results exist merely because report-layout checks pass. Konain's clarification
   about optional `--prompt_json` is distinguished from the separately saved
   training configuration in `docs/notes/precise_qwen_config_clarification_20261108.md`.
+- November 10 inspection recovered terminal exit139/SIGSEGV during epoch3;
+  the original Large/native run is unfinished, not a completed training job.
+  See `reports/precise-native-large-interruption-20261110/README.md` and the
+  verified epoch2 checkpoint/evidence. The user then explicitly answered
+  “Approve one unchanged-config resume” to the concrete proposal in
+  `docs/notes/precise_native_resume_review_20261110.md`. Record that actual
+  response against the preserved proposal/input/run/checkpoint digests; do not
+  ask again. This authorizes one resume from epoch2, replaying full epoch3 in
+  the same run with unchanged protected source/configuration, then the already
+  approved two calibrations and two one-time tests. No automatic further retry,
+  fallback or new study is authorized. Check the private continuation record
+  for whether that second attempt has already started. Final reporting must
+  disclose the interruption/replayed partial work and elapsed wall interval
+  including downtime. Original approvals, logs, checkpoints and results stay intact.
 
 ## Git workflow (required)
 - `main` is GitHub's default and publication branch. `dev` is the working branch
