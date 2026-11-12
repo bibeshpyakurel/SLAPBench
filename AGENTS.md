@@ -158,6 +158,19 @@
   for whether that second attempt has already started. Final reporting must
   disclose the interruption/replayed partial work and elapsed wall interval
   including downtime. Original approvals, logs, checkpoints and results stay intact.
+- The approved resumed native training completed on November 11: final epoch 3,
+  all 3,489 updates, final checkpoint sealed and offline integrity passed. Do
+  not train/resume again. See `reports/precise-native-training-completed-20261111/README.md`.
+  The first frozen-calibration invocation then failed at CUDA preflight before
+  model/image access, with no scores, selection or test claim. A reboot changed
+  the host to kernel 7.0.0-43, which lacks the NVIDIA compute module; the prior
+  working 7.0.0-42 kernel/modules remain installed. Non-hardware runtime bindings
+  still match. See `docs/notes/precise_native_cuda_preflight_20261111.md` and
+  private continuation metadata. System GPU repair/reboot requires separate
+  user/admin action; existing privileges require interactive authentication.
+  Do not alter provenance, silently install drivers, use a fallback, retry the
+  failed calibration or start tests without applicable actual restoration/
+  retry authorization. Preserve the failed preflight and all completed training.
 
 ## Git workflow (required)
 - `main` is GitHub's default and publication branch. `dev` is the working branch

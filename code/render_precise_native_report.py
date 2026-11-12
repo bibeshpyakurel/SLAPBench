@@ -216,8 +216,10 @@ def render_report(data, output, aggregate_digest):
              f"Across both attempts, at least {recovered['minimum_observed_total_pair_presentations']:,} presentations "
              "were observed, including the discarded partial epoch. The interrupted log reports periodic progress, "
              "so this is a lower bound on total executed work, not an exact compute count.", small=True)
-        para(f"Recorded training-attempt intervals total at least "
-             f"{recovered['minimum_observed_training_attempt_elapsed_seconds'] / 3600:.2f} hours: "
+        lower_seconds = int(recovered["minimum_observed_training_attempt_elapsed_seconds"])
+        lower_hours, lower_remainder = divmod(lower_seconds, 3600)
+        lower_minutes, lower_seconds = divmod(lower_remainder, 60)
+        para(f"Recorded training-attempt intervals total at least {lower_hours}h {lower_minutes}m {lower_seconds}s: "
              "first start to the interrupted log's last write, plus the resumed attempt. These are pipeline wall "
              "times, not GPU kernel time; the untimed crash tail may add work. Calibration and final testing are separate.", small=True)
     else:

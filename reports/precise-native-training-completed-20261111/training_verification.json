@@ -1,0 +1,108 @@
+{
+  "calibration_scores_produced": false,
+  "execution_source_commit": "06d12c249ec7f5db53124f673b2c6947c4b144b7",
+  "final_checkpoint_verification_sha256": "c2fb57bbbbe0af0fb762fe03e30c2ca402c9debaa06ba3c2e6ebd152d864001d",
+  "final_tests_performed": false,
+  "input_sha256": {
+    "bundle": "48ec4b7652940aef16f3eb8a843b5f9825752219a75f7280b461be63efe2ac86",
+    "config": "042b60a10c07e07da522660ada8eba0eaf5da8f6f7b4d0077a687d2cb9c65391",
+    "review": "8cfab94bd375c07b9833b420ba8413170f03dbe961030dbbd8fe5367d306caf5"
+  },
+  "offline_verification": {
+    "base_weights_sha256": "399fba97a95f22c36834418bc69373364a99af3a1153da1c0fb31db567c92e23",
+    "checkpoint_sha256": "c24099fa41f38a1008b91454597e054013812a885f8d2433ab1598c23ed34c15",
+    "counts": {
+      "changed_frozen_tensors": 0,
+      "changed_trainable_tensors": 38,
+      "frozen_parameters": 279170048,
+      "frozen_tensors": 401,
+      "trainable_parameters": 25198592,
+      "trainable_tensors": 38
+    },
+    "epochs_completed": 3,
+    "history": [
+      {
+        "epoch": 1,
+        "learning_rate": 7.985301349691405e-06,
+        "mean_pair_loss": 0.10835980817065827,
+        "pairs_seen": 37194
+      },
+      {
+        "epoch": 2,
+        "learning_rate": 3.3690609560784563e-06,
+        "mean_pair_loss": 0.06178513426495322,
+        "pairs_seen": 37194
+      },
+      {
+        "epoch": 3,
+        "learning_rate": 1e-06,
+        "mean_pair_loss": 0.05022471351761866,
+        "pairs_seen": 37194
+      }
+    ],
+    "image_pixels_read": false,
+    "model_inference_performed": false,
+    "optimizer_updates_completed": 3489,
+    "passed": true,
+    "scope": "offline_native_large_checkpoint_integrity",
+    "selection_sha256": "9389cf6c85a96eaa5f9559b2eb82fbade91a87f44e2cc8f0280e1faf77a1c615",
+    "verifier_sha256": "e69a5f4e96d90b797332a2e1ea0db9d20a41f8f6dd5750688e0ff0c628f70a36"
+  },
+  "recovery": {
+    "attempts": 2,
+    "crash_root_cause": "not_established_by_checkpoint_integrity",
+    "discarded_partial_epoch_last_reported_progress": {
+      "epoch": 3,
+      "pairs_seen": 19072,
+      "pairs_total": 37194,
+      "updates_completed": 2922,
+      "updates_total": 3489
+    },
+    "epochs_restored": 2,
+    "first_attempt_last_log_write_utc": "2026-11-09T19:51:42.766069+00:00",
+    "first_attempt_logged_elapsed_seconds": 76807.322149,
+    "interruption_observation_sha256": "b868532f3c5d02b6886bc83e0efb447709b6fd19cf151799ac7b4b4095628779",
+    "interruption_verification_sha256": "963dd6544ac4e386e8952ffbcf02a1897ccdcb022f51a08174671c6033cd1fd8",
+    "minimum_observed_total_pair_presentations": 130654,
+    "minimum_observed_training_attempt_elapsed_seconds": 107370.798648,
+    "resume_attempt_elapsed_seconds": 30563.476499,
+    "resume_checkpoint_sha256": "e8afe81b4963b3315e545eda22ee71e4bed14973f07662368e9565322564e762",
+    "retained_trajectory_pair_presentations": 111582,
+    "review_sha256": "bc07a90e70bd31dd95cc0e4a83599a8079ca2b306d19d992ef32a5e13f6841e4",
+    "single_explicit_resume_reviewed": true,
+    "timing_interpretation": "Pipeline wall intervals, not GPU kernel time; original crash tail is not timed exactly.",
+    "training_wall_interval_includes_interruption_downtime": true
+  },
+  "scope": "native_large_training_complete_evaluation_not_run",
+  "selection": {
+    "checkpoint": "attempt-0002/epoch-0003.pt",
+    "checkpoint_rule": "fixed_final_epoch",
+    "checkpoint_sha256": "c24099fa41f38a1008b91454597e054013812a885f8d2433ab1598c23ed34c15",
+    "epochs_completed": 3,
+    "finished_at_utc": "2026-11-11T10:56:15.837614+00:00",
+    "history": [
+      {
+        "epoch": 1,
+        "learning_rate": 7.985301349691405e-06,
+        "mean_pair_loss": 0.10835980817065827,
+        "pairs_seen": 37194
+      },
+      {
+        "epoch": 2,
+        "learning_rate": 3.3690609560784563e-06,
+        "mean_pair_loss": 0.06178513426495322,
+        "pairs_seen": 37194
+      },
+      {
+        "epoch": 3,
+        "learning_rate": 1e-06,
+        "mean_pair_loss": 0.05022471351761866,
+        "pairs_seen": 37194
+      }
+    ],
+    "test_scores_accessed": false,
+    "training_complete": true
+  },
+  "training_complete": true,
+  "training_wall_interval_seconds": 217480.393694
+}

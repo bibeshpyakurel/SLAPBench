@@ -1684,3 +1684,38 @@ reporting separates the first logged attempt interval plus resumed elapsed time
 interruption gap. It does not call either quantity GPU kernel time or reconstruct
 the observation from copied file modification times. Updated synthetic layout
 remains six pages with every page inspected; 213 repository tests and lint pass.
+
+## 2026-11-11 — Large/native training complete; CUDA preflight blocked after reboot
+
+The one approved resume finished at 10:56:15 UTC. The final selection seals three
+full epochs, 3,489 optimizer updates and checkpoint SHA-256
+`c24099fa41f38a1008b91454597e054013812a885f8d2433ab1598c23ed34c15`.
+Offline final verification passes: all 401 frozen tensors unchanged, all 38
+selected trainable tensors changed and all model tensors finite. The actual
+reviewed two-attempt recovery chain also verifies. No further training is needed.
+
+The resumed attempt took 8h 29m 23s; recorded attempt intervals total at least
+29h 49m 30s including discarded partial work. Full wall time from first start to
+final selection is 60h 24m 40s including downtime. The retained trajectory contains
+111,582 presentations, with at least 130,654 observed across both attempts.
+These are pipeline-time/work summaries, not GPU kernel timing or accuracy.
+The reviewed training-completion aggregate is in
+`reports/precise-native-training-completed-20261111/`.
+
+The subsequent frozen-calibration command exited 1 at CUDA availability preflight
+before model loading or image processing; its console/sidecar are preserved.
+No calibration directory, scores, threshold selection or final-test claim exists.
+Read-only diagnostics find a recent reboot into kernel 7.0.0-43-generic, with no
+NVIDIA compute module or usable CUDA device. PCI still sees the RTX 4080 SUPER;
+the prior 7.0.0-42-generic kernel and NVIDIA 595-open modules remain installed.
+Python, packages, interpreter bytes and compatibility binding match training.
+This accounts for the current CUDA blocker, not the earlier segmentation fault.
+
+No system repair, driver/module installation, reboot, fallback or further retry
+was performed. Administrative authentication is unavailable to this session.
+The concrete note `docs/notes/precise_native_cuda_preflight_20261111.md` describes
+returning to the existing original runtime, preserving failed-preflight files
+and a separate actual decision for one calibration-preflight retry. The user/
+lab administrator was asked to restore that runtime and confirm the retry.
+Both calibrations, both one-time tests and the final professor report remain
+pending. Independent training-completion documentation/publication continues.
