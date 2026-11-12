@@ -1,0 +1,12 @@
+{
+  "scope": "reviewed_public_aggregate_and_professor_report",
+  "sha256": {
+    "README.md": "6ed5dbe1e79f71ba4e2111179e4074799fcc6265b930808390138055e1e6cb56",
+    "aggregate.json": "614c3d386667723e7a062c4f4da76559c998cbd9af954986f7057458fa3fd6cc",
+    "operating_points.csv": "e967791afc40bfb1bf6a4b295df2fc4cb08fce02316ff99138de115a3cfe05d0",
+    "pooled_roc.svg": "2d63f950b5ce30d4bcd2ba71eca0f8ccb23094fd093b3808e6e8fab503da5188",
+    "professor-report.md": "f58c50ec7a7071bb8c9f53df70d9a81b306ce51aca8f49dbddcb2e3e1259fdbe",
+    "professor-report.pdf": "86d42786784d37becb3590d7024edcca505be7e3db8540b928f2dcf9ee3c7085",
+    "verification.json": "0b879843137afe29f7830372b82279a28ca214947c7a49daa534679057353303"
+  }
+}

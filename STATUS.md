@@ -1752,3 +1752,41 @@ contracts. Legacy15-metric reproduction, lint, syntax, unchanged results-table
 generation and source/input/content checks pass. The original19 protected files
 remain byte-identical. Runtime review binds the exact bridge source and all four
 single-use output paths; no real scoring preceded review/source publication.
+
+## 2026-11-12 — native Large benchmark and professor report completed
+
+Both training calibrations and both one-time final tests completed with the
+approved scoring bridge. Each calibration contains all 37,194 valid pair scores;
+both cutoffs were sealed/replayed before testing. Frozen cutoff is
+0.8940030932426453; adapted cutoff is 0.9026179909706116. Each has 185 training
+false accepts among 18,597 training impostors under strict greater-than. The
+successful frozen-calibration retry has its own immutable output; its canonical
+symlink resolves to that sole selection and one-time test claim. The original
+preflight failure, interrupted training and all prior studies remain intact.
+
+Both native tests cover 2,100 genuine + 2,100 impostor attempts, zero failures:
+frozen TP 1013 / TN 2064 / FP 36 / FN 1087, accuracy 73.26%, TAR 48.24%, FAR 1.71%;
+adapted TP 1417 / TN 2077 / FP 23 / FN 683, accuracy 83.19%, TAR 67.48%, FAR 1.10%.
+Accuracy increases 9.93 percentage points. Descriptive AUC rises 0.8703 to 0.9670
+and interpolated EER falls 21.52% to 8.67%. No checkpoint/cutoff/hyperparameter was selected from
+test summaries. Numeric-prefix holdout is not confirmed biological identity or
+capture independence; dependent pairs support descriptive finite-cohort claims.
+
+The final offline exporter replays both calibration/test seals and actual review,
+checkpoint, original/bridge source and exact-pair Qwen evidence. An independent
+NumPy/scikit-learn verifier reproduces all native pooled/per-type counts, cutoffs,
+ROC/AUC/EER. The actual seven-page professor PDF was visually inspected on every
+page, with no layout defects. The report, Markdown, 24-row operating table,
+continuous-score ROC, aggregate, sanitized verification and artifact hashes are
+at `reports/precise-dinov2-large-native-20261112/`.
+
+Supplied Qwen before/after accuracies 63.31%/89.67% remain source-verified on the
+same pairs, with adapted FAR 17.81%. These are different native operating policies,
+not matched test FAR. Missing actual run/base/runtime/raw-reply/selection/digest
+evidence remains explicit; no duplicate Qwen model run or invented provenance
+was used. The code-only Python 3.11 fixture issue was fixed with ExitStack; all
+four CI jobs and CodeQL pass for the source follow-up. Final publication checks
+pass: 218 repository tests, 15 legacy metric reproductions, lint/syntax, unchanged
+results-table generation, 24 CSV confusion matrices/rates, all artifact/receipt
+digests and privacy scanning against all 6,778 private image basenames. Final
+results publication follows the standing origin/dev workflow.

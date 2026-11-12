@@ -640,6 +640,35 @@ scoring sources, original training/checkpoint identity and all saved calibration
 test artifacts. The professor report discloses both kernels and source identities.
 No new GPU job, retry or system repair follows merely from these instructions.
 
+## Completed Large/native result
+
+The [final professor report and aggregate](../reports/precise-dinov2-large-native-20261112/README.md)
+record completed training, both calibrations and both one-time tests. Raw
+outputs remain under `local/precise/runs/large-native-20261108/`; the canonical
+frozen calibration resolves to `frozen-calibration-retry-20261111`. Do not
+re-execute any phase to regenerate documentation. Training execution source is
+06d12c249ec7f5db53124f673b2c6947c4b144b7; scoring execution source is
+12a6df421ac2b12699668480ae741baa50475ac4. Both identities are verified separately,
+with the original training record/checkpoint preserved.
+
+The report README supplies the exact offline export command, including both
+actual resume/runtime reviews. Independent metrics are reproduced with:
+
+```bash
+local/precise/environments/verification-compat-20261107/bin/python code/verify_precise_fixed_metrics.py \
+  --bundle local/precise/manifests/numeric-group-holdout-20261107/bundle.json \
+  --run-root local/precise/runs/large-native-20261108 \
+  --aggregate reports/precise-dinov2-large-native-20261112/aggregate.json \
+  --output local/precise/metadata/NEW-verification/independent-metrics.json
+```
+
+The original independent receipt and aggregate-reproduction hashes stay under
+`local/precise/metadata/native-large-final-report-20261112/`. The public sanitized
+verification retains metrics/digests without private paths. A standalone actual
+professor PDF, Markdown, CSV and ROC SVG were generated and all seven PDF pages
+inspected. The public artifact manifest binds every deliverable. Future reruns,
+new thresholds, new cohorts or manuscript edits need their own applicable scope.
+
 ## Publication check
 
 `scripts/check_publication_scope.py` checks the Git index for dataset/model/

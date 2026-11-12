@@ -187,6 +187,18 @@
   fallback, automatic retry or extra test claim. Both calibrations must be
   sealed before either one-time test. Check private continuation before launching
   a phase; do not duplicate a running or completed phase.
+- The Large/native benchmark is complete on November 12. Start from
+  `reports/precise-dinov2-large-native-20261112/README.md` and its professor report.
+  Training, both training calibrations and both one-time final tests completed;
+  both native arms cover all 4,200 attempts with zero failures. Frozen/adapted
+  accuracy is 73.26%/83.19%, TAR 48.24%/67.48%, FAR 1.71%/1.10%, descriptive
+  EER 21.52%/8.67%. Cutoffs remain training-selected; no test tuning occurred.
+  Independent NumPy/scikit-learn verification passes and all seven final PDF
+  pages were inspected. Training source 06d12c2 and scoring source 12a6df4 remain
+  distinct and truthful under the specifically approved runtime bridge. Do not
+  repeat or retry any completed phase. Preserve all original assets/attempts,
+  numeric-group/capture/dependence limits and source-verified Qwen run-provenance
+  qualifications. Completion authorizes no additional study or tuning.
 
 ## Git workflow (required)
 - `main` is GitHub's default and publication branch. `dev` is the working branch

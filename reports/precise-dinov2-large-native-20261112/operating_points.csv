@@ -1,0 +1,25 @@
+method,population,TP,TN,FP,FN,attempts,accuracy,tar,far,failures,threshold,policy
+DINOv2-small / 448 / frozen,pooled,730,2080,20,1370,4200,0.669047619047619,0.3476190476190476,0.009523809523809525,0,0.8948034048080444,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-small / 448 / frozen,left,277,692,8,423,1400,0.6921428571428572,0.39571428571428574,0.011428571428571429,0,0.8948034048080444,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-small / 448 / frozen,right,253,693,7,447,1400,0.6757142857142857,0.36142857142857143,0.01,0,0.8948034048080444,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-small / 448 / frozen,thumbs,200,695,5,500,1400,0.6392857142857142,0.2857142857142857,0.007142857142857143,0,0.8948034048080444,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-small / 448 / adapted,pooled,727,2095,5,1373,4200,0.6719047619047619,0.3461904761904762,0.002380952380952381,0,0.9250705242156982,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-small / 448 / adapted,left,288,698,2,412,1400,0.7042857142857143,0.4114285714285714,0.002857142857142857,0,0.9250705242156982,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-small / 448 / adapted,right,235,698,2,465,1400,0.6664285714285715,0.3357142857142857,0.002857142857142857,0,0.9250705242156982,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-small / 448 / adapted,thumbs,204,699,1,496,1400,0.645,0.2914285714285714,0.0014285714285714286,0,0.9250705242156982,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-Large / native / frozen,pooled,1013,2064,36,1087,4200,0.7326190476190476,0.48238095238095235,0.017142857142857144,0,0.8940030932426453,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-Large / native / frozen,left,326,688,12,374,1400,0.7242857142857143,0.4657142857142857,0.017142857142857144,0,0.8940030932426453,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-Large / native / frozen,right,331,690,10,369,1400,0.7292857142857143,0.47285714285714286,0.014285714285714285,0,0.8940030932426453,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-Large / native / frozen,thumbs,356,686,14,344,1400,0.7442857142857143,0.5085714285714286,0.02,0,0.8940030932426453,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-Large / native / adapted,pooled,1417,2077,23,683,4200,0.8319047619047619,0.6747619047619048,0.010952380952380953,0,0.9026179909706116,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-Large / native / adapted,left,508,689,11,192,1400,0.855,0.7257142857142858,0.015714285714285715,0,0.9026179909706116,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-Large / native / adapted,right,510,694,6,190,1400,0.86,0.7285714285714285,0.008571428571428572,0,0.9026179909706116,training_impostors_nominal_1pct_FAR_failure_as_reject
+DINOv2-Large / native / adapted,thumbs,399,694,6,301,1400,0.7807142857142857,0.57,0.008571428571428572,0,0.9026179909706116,training_impostors_nominal_1pct_FAR_failure_as_reject
+Qwen3-VL-8B / supplied base,pooled,1927,732,1368,173,4200,0.633095238095238,0.9176190476190477,0.6514285714285715,0,,native_AB_failures_incorrect_run_provenance_incomplete
+Qwen3-VL-8B / supplied base,left,689,168,532,11,1400,0.6121428571428571,0.9842857142857143,0.76,0,,native_AB_failures_incorrect_run_provenance_incomplete
+Qwen3-VL-8B / supplied base,right,678,231,469,22,1400,0.6492857142857142,0.9685714285714285,0.67,0,,native_AB_failures_incorrect_run_provenance_incomplete
+Qwen3-VL-8B / supplied base,thumbs,560,333,367,140,1400,0.6378571428571429,0.8,0.5242857142857142,0,,native_AB_failures_incorrect_run_provenance_incomplete
+Qwen3-VL-8B / supplied finetuned,pooled,2040,1726,374,60,4200,0.8966666666666666,0.9714285714285714,0.17809523809523808,0,,native_AB_failures_incorrect_run_provenance_incomplete
+Qwen3-VL-8B / supplied finetuned,left,692,608,92,8,1400,0.9285714285714286,0.9885714285714285,0.13142857142857142,0,,native_AB_failures_incorrect_run_provenance_incomplete
+Qwen3-VL-8B / supplied finetuned,right,682,588,112,18,1400,0.9071428571428571,0.9742857142857143,0.16,0,,native_AB_failures_incorrect_run_provenance_incomplete
+Qwen3-VL-8B / supplied finetuned,thumbs,666,530,170,34,1400,0.8542857142857143,0.9514285714285714,0.24285714285714285,0,,native_AB_failures_incorrect_run_provenance_incomplete
