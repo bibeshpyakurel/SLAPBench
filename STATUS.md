@@ -1719,3 +1719,36 @@ and a separate actual decision for one calibration-preflight retry. The user/
 lab administrator was asked to restore that runtime and confirm the retry.
 Both calibrations, both one-time tests and the final professor report remain
 pending. Independent training-completion documentation/publication continues.
+
+## 2026-11-11 — restored CUDA; exact scoring runtime transition approved
+
+The user confirmed GPU restoration and asked to finish. CUDA now works on
+the same RTX 4080 SUPER / NVIDIA595.99.02, with kernel7.0.0-43 retained. Full
+metadata comparison finds only the kernel patch and driver-version discovery
+method (proc record to nvidia-smi) differ from training. Protected source,
+Python/packages/interpreter/compatibility bytes and numerical settings match.
+No further system repair was performed here.
+
+The original scorer correctly rejects nonidentical provenance. Implemented a
+separate scoring-only bridge retaining every original protected model/data/
+evaluation function and all original checkpoint/record bytes. It allows only
+those two exact metadata differences after explicit review; every other change
+fails. It records actual scoring metadata, its own source identity, the original
+training identity and the preserved checkpoint digest. It cannot train, and its
+four phase outputs are bound to the review. Both calibrations replay/seal before
+one-time testing. No equivalence, new confidence claim, fallback or extra study
+is inferred.
+
+After receiving the concrete note `docs/notes/precise_native_runtime_transition_20261111.md`,
+the user directly answered “Approve exact scoring bridge.” The actual response,
+unchanged proposal snapshot, original inputs/final checkpoint/verification,
+bridge source and four output paths are bound privately under
+`local/precise/metadata/native-runtime-transition-20261111/`. No approval is
+inferred from the earlier generic restoration message. Training stays complete;
+real scoring follows source checks/commit/publication.
+
+All 218 repository tests pass, including five new synthetic transition/dispatch
+contracts. Legacy15-metric reproduction, lint, syntax, unchanged results-table
+generation and source/input/content checks pass. The original19 protected files
+remain byte-identical. Runtime review binds the exact bridge source and all four
+single-use output paths; no real scoring preceded review/source publication.

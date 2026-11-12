@@ -171,6 +171,22 @@
   Do not alter provenance, silently install drivers, use a fallback, retry the
   failed calibration or start tests without applicable actual restoration/
   retry authorization. Preserve the failed preflight and all completed training.
+- The user restored CUDA on kernel 7.0.0-43 with the same RTX 4080 SUPER and
+  driver595.99.02. Full comparison finds only the kernel patch and driver-version
+  discovery metadata differ; protected source, Python/packages/interpreter and
+  numerical settings match. The user then explicitly answered “Approve exact
+  scoring bridge” to `docs/notes/precise_native_runtime_transition_20261111.md`.
+  This approves the separate scoring-only entry `code/score_precise_native_restored.py`
+  and exact review gate `code/precise_native_runtime_review.py` for one frozen
+  calibration retry and the remaining approved calibration/tests. Record the
+  actual response/proposal/checkpoint/input/source/output bindings privately;
+  do not ask again or retrain. Preserve original records; record actual training
+  and scoring environments and their distinct source identities. The original
+  protected19 files remain unchanged; hold the additional bridge source fixed
+  across all scoring phases. Reject any other runtime/configuration change,
+  fallback, automatic retry or extra test claim. Both calibrations must be
+  sealed before either one-time test. Check private continuation before launching
+  a phase; do not duplicate a running or completed phase.
 
 ## Git workflow (required)
 - `main` is GitHub's default and publication branch. `dev` is the working branch

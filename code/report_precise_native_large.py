@@ -42,6 +42,7 @@ def main(argv=None):
     parser.add_argument("--study-date", required=True)
     parser.add_argument("--review-date", default="2026-11-08")
     parser.add_argument("--resume-review", type=Path)
+    parser.add_argument("--runtime-review", type=Path)
     args = parser.parse_args(argv)
     try:
         if (args.output.exists() or not args.output.resolve().is_relative_to(ROOT / "reports")
@@ -54,6 +55,8 @@ def main(argv=None):
             from check_precise_native_resume import interruption_observation_path
             sources["resume_review"] = args.resume_review
             sources["interruption_observation"] = interruption_observation_path()
+        if args.runtime_review is not None:
+            sources["runtime_review"] = args.runtime_review
         for arm in ARMS:
             short = arm.split("_")[0]
             for phase in ("test", "calibration"):
@@ -89,6 +92,7 @@ def main(argv=None):
             if initial["sdk_" + name] != bundle["source_sha256"][name]:
                 raise InputError("SDK/training source changed from reviewed cohort.")
         dino, native_scores = {}, {}
+        runtime_transition = None
         for arm in ARMS:
             short = arm.split("_")[0];test = args.run_root / (short + "-test")
             dino[arm], native_scores[arm] = read_dino(test, args.run_root / (short + "-calibration"), training, testing, config, arm)
@@ -103,6 +107,16 @@ def main(argv=None):
                     or any(provenance["input_sha256"][k] != initial[k] for k in ("bundle", "config", "review"))):
                 raise InputError("Native test outcomes belong to another declared execution profile.")
             verify_runtime_source(provenance)
+            if args.runtime_review is not None:
+                from precise_native_runtime_review import inspect_scoring_transition
+                summary, extra_paths, _ = inspect_scoring_transition(args.runtime_review, training_run, provenance)
+                if runtime_transition is not None and summary != runtime_transition:
+                    raise InputError("Native arms used different reviewed runtime transitions.")
+                runtime_transition = summary
+                for key, path in extra_paths.items():
+                    sources["runtime_" + key] = path;initial["runtime_" + key] = digest(path)
+            elif "scoring_runtime_transition" in provenance:
+                raise InputError("Restored-runtime outcomes require their actual separate review.")
         verification = json.loads(args.checkpoint_verification.read_text())
         check_final_training(training_run, verification, config, training, dino["adapted_dinov2"]["model_identity"],
             initial["bundle"], initial["config"], expected_base_sha=WEIGHTS_SHA256, expected_profile="dinov2_large_native_v1",
@@ -155,6 +169,7 @@ def main(argv=None):
                                     "resampling": False, "padding": "centered_white"},
             "training_elapsed_seconds": elapsed, "training": verification, "dino": dino,
             "resume_execution": resume,
+            "scoring_runtime_transition": runtime_transition,
             "paired_native_dino": paired_dino(testing, native_scores["frozen_dinov2"], native_scores["adapted_dinov2"],
                 dino["frozen_dinov2"]["threshold"]["cutoff"], dino["adapted_dinov2"]["threshold"]["cutoff"]),
             "prior_small_same_cohort": small["dino"], "qwen": qwen,

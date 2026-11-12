@@ -315,9 +315,19 @@ def render_report(data, output, aggregate_digest):
     para("Pinned Large revision: 47b73eefe95e8d44ec3623f8890bd894b6ea2d6c.<br/>"
          "Base weights SHA-256: 399fba97a95f22c36834418bc69373364a99af3a1153da1c0fb31db567c92e23.", small=True)
     first = data["dino"]["frozen_dinov2"]
-    para("Execution source commit: " + escape(first["code_commit"]) + ". Reporting-only commits may be newer; "
+    para("Scoring source commit: " + escape(first["code_commit"]) + ". Reporting-only commits may be newer; "
          "every recorded protected runtime file is checked against its execution commit.", small=True)
+    if data.get("scoring_runtime_transition"):
+        transition = data["scoring_runtime_transition"]
+        para("After GPU restoration, scoring used an explicitly reviewed runtime bridge. "
+             "Training used Linux kernel 7.0.0-42; scoring used 7.0.0-43. The same RTX 4080 SUPER, driver "
+             "595.99.02, Python/package/interpreter bytes, image preparation and numerical settings were retained. "
+             "Driver-version discovery changed from the proc record to nvidia-smi. Original training records "
+             "and checkpoint bytes were preserved; this is not a claim of identical runtime or bitwise equivalence.", small=True)
+        para("Original training execution source: " + escape(transition["training_execution_source_commit"]) + ".", small=True)
     para("Runtime versions: " + escape(", ".join(f"{k} {v}" for k, v in sorted(first["packages"].items()))) + ".", small=True)
+    if data.get("scoring_runtime_transition"):
+        story.append(PageBreak())
     heading("What the supplied Qwen results establish")
     para("All four preserved Qwen prediction files cover the exact new test membership and supplied labels once; "
          "their source summaries, prompts and confusion matrices reproduce. The supplied training JSON is byte-identical "

@@ -610,6 +610,36 @@ from total elapsed wall time including downtime. This is not GPU kernel timing,
 and the untimed crash tail may add work. Copied filesystem modification times
 are not used to reconstruct this observation.
 
+## Restored CUDA with an explicitly reviewed scoring runtime transition
+
+CUDA was restored on kernel7.0.0-43 with the original GPU/driver version. The
+user explicitly approved the [exact scoring bridge](notes/precise_native_runtime_transition_20261111.md),
+which admits only the kernel42-to43 patch and proc-to-nvidia-smi discovery
+metadata changes. The original19 protected sources, model/checkpoint bytes,
+training records and scientific configuration stay unchanged. Actual old/new
+environments are recorded separately; no record is relabeled as another run.
+
+Use `code/score_precise_native_restored.py calibrate` or `test`, with the original
+`--bundle`, `--config`, `--review`, `--source-root`, `--weights`, `--arm` and fresh
+`--output`, plus `--runtime-review local/precise/metadata/native-runtime-transition-20261111/runtime_review.json`
+and `--completed-training-run local/precise/runs/large-native-20261108/adapted-training`.
+The latter anchors provenance for both arms; only the adapted arm loads task
+checkpoint tensors. Testing additionally takes `--calibration` and requires both
+training selections already sealed. The review binds each single phase output;
+an existing output/failure is not automatically retried.
+
+The frozen calibration retry uses `frozen-calibration-retry-20261111` under the
+original run root. After success, canonical `frozen-calibration` may be a symlink
+to that sole immutable directory. Resolved paths preserve the single test claim;
+never create copied independently claimable selections. Other phase names retain
+their original canonical layout.
+
+Final offline export adds `--runtime-review` to the existing native report
+arguments. It independently checks the reviewed bridge on both arms, committed
+scoring sources, original training/checkpoint identity and all saved calibration/
+test artifacts. The professor report discloses both kernels and source identities.
+No new GPU job, retry or system repair follows merely from these instructions.
+
 ## Publication check
 
 `scripts/check_publication_scope.py` checks the Git index for dataset/model/
