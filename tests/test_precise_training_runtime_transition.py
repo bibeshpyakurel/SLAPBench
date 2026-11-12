@@ -136,16 +136,19 @@ class RuntimeTransitionTests(unittest.TestCase):
             common=[v for k,p in [('bundle',root/'local/precise/bundle.json'),('config',root/'local/precise/config.json'),
                     ('review',ordinary),('runtime-review',path),('completed-training-run',run),('source-root',root/'images'),
                     ('weights',root/'local/precise/weights')] for v in ('--'+k,str(p))]
-            with patch.object(entry,'reviewed_shared_inputs',return_value=(cfg,before['input_sha256'],lambda:None)), \
-                 patch.object(entry,'load_bundle',return_value=(bundle,training,testing,images)), \
-                 patch.object(entry.native,'validate_native_policy'),patch.object(entry.native,'source_record',return_value=original), \
-                 patch.object(entry.native,'git_output',side_effect=lambda *a,**kw:'' if a[0]=='status' else 'b'*40), \
-                 patch.object(entry,'current_core',return_value=after),patch.object(entry.native,'load_encoder',side_effect=load_model), \
-                 patch.object(entry.native,'prepare_image',return_value='synthetic pixel token'),patch.object(entry.native,'image_tensor',side_effect=lambda x:x), \
-                 patch.object(entry,'checked_checkpoint',return_value={'epochs_completed':3,'history':selected['history'],'model':{'original':'state'}}) as checked, \
-                 patch.object(entry,'calibrate_fixed',side_effect=calibrate),patch.object(torch.cuda,'is_available',return_value=True), \
-                 patch.object(torch,'use_deterministic_algorithms'),patch.object(torch,'autocast',return_value=contextlib.nullcontext()), \
-                 patch('torch.nn.attention.sdpa_kernel',return_value=contextlib.nullcontext()),contextlib.redirect_stdout(io.StringIO()):
+            patches=[patch.object(entry,'reviewed_shared_inputs',return_value=(cfg,before['input_sha256'],lambda:None)),
+                patch.object(entry,'load_bundle',return_value=(bundle,training,testing,images)),
+                patch.object(entry.native,'validate_native_policy'),patch.object(entry.native,'source_record',return_value=original),
+                patch.object(entry.native,'git_output',side_effect=lambda *a,**kw:'' if a[0]=='status' else 'b'*40),
+                patch.object(entry,'current_core',return_value=after),patch.object(entry.native,'load_encoder',side_effect=load_model),
+                patch.object(entry.native,'prepare_image',return_value='synthetic pixel token'),patch.object(entry.native,'image_tensor',side_effect=lambda x:x),
+                patch.object(entry,'calibrate_fixed',side_effect=calibrate),patch.object(torch.cuda,'is_available',return_value=True),
+                patch.object(torch,'use_deterministic_algorithms'),patch.object(torch,'autocast',return_value=contextlib.nullcontext()),
+                patch('torch.nn.attention.sdpa_kernel',return_value=contextlib.nullcontext()),contextlib.redirect_stdout(io.StringIO())]
+            with contextlib.ExitStack() as stack:
+                for context in patches:stack.enter_context(context)
+                checked=stack.enter_context(patch.object(entry,'checked_checkpoint',return_value={
+                    'epochs_completed':3,'history':selected['history'],'model':{'original':'state'}}))
                 for arm in ('frozen_dinov2','adapted_dinov2'):
                     out=Path(review['outputs']['calibrate_'+arm])
                     result=entry.main(['calibrate',*common,'--arm',arm,'--output',str(out)])
