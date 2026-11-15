@@ -1824,6 +1824,13 @@ all existing experiments stay unchanged. A separate Python 3.12 / Transformers
 4.48.3 overlay preserves earlier environments and records actual dependencies.
 See `docs/notes/internvl38b_offload_preparation_20261115.md`.
 
+Before full-weight loading, verified Accelerate's actual BF16 CPU hook storage
+behind legitimate meta placeholders. The declared final runtime uses native
+Torch Flash SDPA for language attention and two-tile chunks for the original
+vision encoder, preserving the full 20-tile pair. The tiny mixed-device probe
+passes this exact kernel path. Initial fully eager planning code was never used
+for a real InternVL checkpoint load or fingerprint inference.
+
 Architecture-only checks match the complete downloaded index. A tiny random
 two-layer Qwen2 probe passes actual NF4 GPU / unquantized BF16 CPU loading and
 repeat greedy generation; it is not a full InternVL inference claim. The fixed

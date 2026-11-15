@@ -64,6 +64,10 @@ def synthetic(args, config, report, output):
     write_json(output / "load-intent.json", {"utc": now(), "identity": report["identity_sha256"]})
     model, tokenizer = load_weights(str(args.model_dir), config, report["plan"])
     report["real_weights_loaded"] = True
+    report["placement"] = model._slapbench_placement
+    write_json(output / "loaded.json", {"utc": now(), "identity": report["identity_sha256"],
+                                        "placement": report["placement"],
+                                        "torch_gpu_allocated_bytes": torch.cuda.memory_allocated()})
     images = []
     for shift in (0, 37):
         image = Image.new("RGB", (1600, 1500), "white")
@@ -113,6 +117,7 @@ def evaluate(args, config, report, output):
     write_json(output / "load-intent.json", {"utc": now(), "identity": report["identity_sha256"]})
     model, tokenizer = load_weights(str(args.model_dir), config, report["plan"])
     report["real_weights_loaded"] = True
+    report["placement"] = model._slapbench_placement
     write_json(output / "inputs.json", {"identity": report["identity"], "binding": binding,
                                         "review_sha256": digest(args.review), "cohort": audit})
     outcomes = execute_pairs(rows, paths, config, output,
@@ -156,6 +161,7 @@ def main(argv=None):
         else:
             config, prepared = prepare(args)
             report.update(prepared)
+            write_json(output / "preflight.json", report)
             if args.mode == "plan":
                 passed = report["plan"]["ready_to_load"]
             elif args.mode == "synthetic":

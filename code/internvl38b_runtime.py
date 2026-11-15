@@ -69,6 +69,7 @@ class Config:
     compute_dtype: str
     quantization: str
     attention: str
+    vision_tile_batch_size: int
     image_size: int
     max_tiles: int
     thumbnail: bool
@@ -80,14 +81,16 @@ class Config:
     def validate(self):
         integers = (self.schema_version, self.gpu_weight_budget_gib, self.gpu_reserve_gib,
                     self.cpu_reserve_gib, self.image_size, self.max_tiles, self.max_new_tokens,
-                    self.cpu_threads, self.seed)
+                    self.cpu_threads, self.vision_tile_batch_size, self.seed)
         if (any(type(x) is not int for x in integers) or self.schema_version != 1
                 or min(integers[1:-1]) < 1 or not 0 <= self.seed < 2**32
                 or self.repo_id != REPO_ID or self.revision != REVISION
                 or self.transformers_version != "4.48.3" or self.image_size != 448
                 or not 1 <= self.max_tiles <= 12 or self.max_new_tokens > 128
                 or self.cpu_dtype != "bfloat16" or self.compute_dtype != "bfloat16"
-                or self.quantization != "nf4_double" or self.attention != "eager"
+                or self.quantization != "nf4_double"
+                or self.attention != "torch_flash_sdpa_language_eager_vision"
+                or self.vision_tile_batch_size > 13 or self.cpu_threads > 64
                 or type(self.thumbnail) is not bool):
             raise PreflightError("Unsupported explicit InternVL3-38B configuration.")
         for prompt in (self.system_prompt, self.user_prompt):
@@ -334,6 +337,7 @@ def validate_context(tokenizer, model, config, counts):
 
 def predict(model, tokenizer, config, image_a, image_b):
     import torch
+    from torch.nn.attention import SDPBackend, sdpa_kernel
     a, b = pixels(image_a, config), pixels(image_b, config)
     counts = [a.shape[0], b.shape[0]]
     question, tokens = validate_context(tokenizer, model, config, counts)
@@ -341,7 +345,7 @@ def predict(model, tokenizer, config, image_a, image_b):
     data = torch.cat((a, b)).to(device=device, dtype=torch.bfloat16)
     model.system_message = config.system_prompt
     start = time.monotonic()
-    with torch.inference_mode():
+    with torch.inference_mode(), sdpa_kernel(SDPBackend.FLASH_ATTENTION):
         raw = model.chat(tokenizer, data, question,
                          {"max_new_tokens": config.max_new_tokens, "do_sample": False},
                          history=None, num_patches_list=counts)
@@ -363,6 +367,7 @@ def tiny_offload_probe(output, config):
     """Small random Qwen2 fixture exercises actual NF4 GPU / BF16 CPU dispatch."""
     import torch
     from transformers import Qwen2Config, Qwen2ForCausalLM
+    from torch.nn.attention import SDPBackend, sdpa_kernel
     if not torch.cuda.is_available():
         raise PreflightError("The declared mixed-device probe requires CUDA.")
     torch.manual_seed(config.seed)
@@ -371,7 +376,7 @@ def tiny_offload_probe(output, config):
     cfg = Qwen2Config(vocab_size=128, hidden_size=64, intermediate_size=128,
                       num_hidden_layers=2, num_attention_heads=4, num_key_value_heads=2,
                       max_position_embeddings=128, eos_token_id=2, pad_token_id=0)
-    cfg._attn_implementation = "eager"
+    cfg._attn_implementation = "sdpa"
     original = Qwen2ForCausalLM(cfg).to(dtype=torch.bfloat16).eval()
     original.save_pretrained(fixture, safe_serialization=True)
     del original
@@ -379,7 +384,8 @@ def tiny_offload_probe(output, config):
                "model.norm": 0, "model.rotary_emb": 0, "lm_head": 0}
     model = Qwen2ForCausalLM.from_pretrained(
         fixture, local_files_only=True, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True,
-        attn_implementation="eager", quantization_config=quantization_config(), device_map=mapping).eval()
+        attn_implementation="sdpa", quantization_config=quantization_config(), device_map=mapping).eval()
+    placement = check_weight_placement(model, mapping)
     cpu_types = {str(p.dtype) for p in model.model.layers[1].parameters()}
     gpu_types = {type(m).__name__ for m in model.model.layers[0].modules()}
     if cpu_types != {"torch.bfloat16"} or "Linear4bit" not in gpu_types:
@@ -387,7 +393,7 @@ def tiny_offload_probe(output, config):
     inputs = torch.tensor([[1, 10, 11, 12]], device="cuda")
     start = time.monotonic()
     torch.cuda.reset_peak_memory_stats()
-    with torch.inference_mode():
+    with torch.inference_mode(), sdpa_kernel(SDPBackend.FLASH_ATTENTION):
         a = model.generate(inputs, attention_mask=torch.ones_like(inputs), max_new_tokens=2, do_sample=False)
         b = model.generate(inputs, attention_mask=torch.ones_like(inputs), max_new_tokens=2, do_sample=False)
     torch.cuda.synchronize()
@@ -395,7 +401,55 @@ def tiny_offload_probe(output, config):
             "real_internvl_weights_loaded": False, "fingerprint_inputs": False,
             "cpu_parameter_dtypes": sorted(cpu_types), "gpu_linear4bit_present": True,
             "output_shape": list(a.shape), "elapsed_seconds": time.monotonic() - start,
-            "peak_torch_gpu_bytes": torch.cuda.max_memory_allocated()}
+            "peak_torch_gpu_bytes": torch.cuda.max_memory_allocated(), "placement": placement}
+
+
+def check_weight_placement(model, mapping):
+    """Validate CPU hook storage, including legitimate meta placeholders at rest."""
+    import torch
+    counts = Counter()
+    for name, parameter in model.named_parameters():
+        prefixes = [key for key in mapping if name.startswith(key + ".")]
+        if not prefixes:
+            raise PreflightError("Parameter has no explicit device-map entry.")
+        group = max(prefixes, key=len)
+        if mapping[group] == "cpu":
+            actual = parameter
+            if parameter.device.type == "meta":
+                # Accelerate stores CPU tensors in each leaf hook and exposes
+                # meta placeholders until that leaf executes on the GPU.
+                parent, leaf = name.rsplit(".", 1)
+                hook = getattr(model.get_submodule(parent), "_hf_hook", None)
+                weights = getattr(hook, "weights_map", None)
+                if weights is None:
+                    raise PreflightError("CPU meta placeholder has no validated offload storage.")
+                actual = weights[leaf]
+                counts["cpu_meta_placeholders"] += 1
+            if actual.device.type != "cpu" or actual.dtype != torch.bfloat16 or actual.shape != parameter.shape:
+                raise PreflightError("Actual CPU storage differs from the BF16 offload plan.")
+            counts["cpu_weight_bytes"] += actual.numel() * actual.element_size()
+        elif parameter.device.type != "cuda" or parameter.device.index != 0:
+            raise PreflightError("Actual GPU parameter placement differs from the fixed device map.")
+        else:
+            counts["gpu_parameter_bytes"] += parameter.numel() * parameter.element_size()
+    return dict(counts)
+
+
+def extract_in_chunks(extractor, values, batch_size):
+    import torch
+    return torch.cat([extractor(values[start:start + batch_size])
+                      for start in range(0, values.shape[0], batch_size)], dim=0)
+
+
+def configure_execution(model, config):
+    """Explicit adapters; downloaded upstream source and checkpoint stay unchanged."""
+    if type(model.language_model).__name__ != "Qwen2ForCausalLM":
+        raise PreflightError("The declared Torch SDPA path requires the pinned Qwen2 language model.")
+    model.language_model.config._attn_implementation = "sdpa"
+    for layer in model.language_model.model.layers:
+        layer.self_attn.config._attn_implementation = "sdpa"
+    original = model.extract_feature
+    model.extract_feature = lambda values: extract_in_chunks(original, values, config.vision_tile_batch_size)
 
 
 def load_weights(directory, config, plan):
@@ -417,10 +471,8 @@ def load_weights(directory, config, plan):
         device_map=plan["device_map"]).eval()
     tokenizer = AutoTokenizer.from_pretrained(directory, trust_remote_code=True,
                                              local_files_only=True, use_fast=False)
-    for parameter in model.parameters():
-        if parameter.device.type == "meta" or (parameter.device.type == "cpu" and
-                parameter.is_floating_point() and parameter.dtype != torch.bfloat16):
-            raise PreflightError("Actual CPU dtype/device differs from the BF16 offload plan.")
+    model._slapbench_placement = check_weight_placement(model, plan["device_map"])
+    configure_execution(model, config)
     return model, tokenizer
 
 

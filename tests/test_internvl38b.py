@@ -33,6 +33,20 @@ class InternVL38BTests(unittest.TestCase):
             with self.assertRaises(iv.PreflightError):
                 replace(self.config, **changes).validate()
 
+    def test_vision_chunking_preserves_values_and_order(self):
+        try:
+            import torch
+        except ImportError:
+            self.skipTest("Torch is optional for the chunking fixture")
+        calls = []
+        values = torch.arange(30).reshape(10, 3)
+        def extractor(batch):
+            calls.append(len(batch))
+            return batch * 2 + 1
+        result = iv.extract_in_chunks(extractor, values, 3)
+        self.assertTrue(torch.equal(result, values * 2 + 1))
+        self.assertEqual(calls, [3, 3, 3, 1])
+
     def test_snapshot_hashes_and_index_detect_changed_bytes(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

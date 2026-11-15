@@ -61,6 +61,19 @@ order up to the declared budget; remaining layers are assigned to CPU. Live
 resource availability never changes this map or image settings automatically.
 These are planning estimates, not measured full-model peaks or a success claim.
 
+Before the first full-weight attempt, source review identified that dense eager
+language attention at 5,231 input tokens can exceed the working reserve. The
+declared final adapter therefore selects Qwen2's Torch SDPA path and forces
+PyTorch's native Flash attention backend, with no math/eager fallback. It does
+not require the separate `flash_attn` package. Vision attention remains the
+upstream eager implementation but processes two tiles per encoder call before
+concatenating features in their original order. CPU-offloaded weights are stored
+in host RAM and Accelerate transfers them to GPU for execution; their resting
+meta placeholders are validated against actual BF16 tensors in leaf hook storage.
+These adapters are explicit configuration/source changes before any real model
+load, not a retry or change to downloaded source. Original 20-tile membership,
+prompt, image detail, greedy output and checkpoint bytes stay fixed.
+
 Preprocessing converts native grayscale inputs to RGB without autocontrast or
 square padding. The fixed dynamic grid rule allows 12 base tiles plus a
 thumbnail. At 1600x1500 this produces a 3x3 grid plus thumbnail per image;
