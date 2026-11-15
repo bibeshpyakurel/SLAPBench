@@ -1843,3 +1843,29 @@ Precise inference, training, regeneration, or automatic retry occurred. Initial
 failed meta-buffer inspection and subsequent successful architecture/resource
 inspection remain privately preserved. Final evidence follows source checks
 and publication; a full-model synthetic pass and formal test remain outstanding.
+
+## 2026-11-15 — full InternVL3-38B synthetic offload check passed
+
+After the other process released its GPU/host resources, the fixed capacity
+gate passed. From published runtime source `0236f5e4a35ce644a6f22b0275f58d61f094fdd1`,
+the sole full-model synthetic attempt rehashed the snapshot, loaded all 16
+shards and verified actual CPU hook storage/device placement. Both generated
+geometric image-pair calls returned exactly `B`, with 20 tiles / 5,231 input
+tokens, no runtime error and no automatic retry. First/second generation
+latencies were 36.88/14.89 seconds; peak Torch GPU allocation was 14.41 GiB and
+peak process RSS 40.09 GiB. Total verification/load/check time was 157.44 seconds.
+These are synthetic readiness measurements, not biometric accuracy or a promised
+full-test runtime. Torch peak excludes some driver/library allocations and RSS
+includes mapped pages. The GPU was released normally when the process exited.
+
+The new runner's offline cohort path verifies all 4,200 supplied attempts and
+1,057 image byte/pixel digests and the existing thumb-aware prompt. All 231
+local tests, lint/syntax, legacy metric verification and table regeneration pass.
+Hosted CI exposed a fresh-checkout test-fixture assumption, corrected using an
+isolated temporary directory without touching protected runtime source. The
+corrected fixture commit `57980a0` passes all four hosted CI jobs and CodeQL. The
+report and aggregate are at `reports/internvl3-38b-readiness-20261115/`. Private
+attempts, logs, fixtures, raw synthetic replies and environment receipts remain
+unchanged. The viable route requires the fixed gate's approximately 14.93 GiB
+free GPU and 41.61 GiB available RAM. No Precise inference, test approval/claim,
+training, calibration, dataset changes or further experiment was performed.

@@ -6,6 +6,11 @@ architecture/capacity checks and synthetic execution. The current 4,200 Precise
 test pairs are not an implementation-development or resource-tuning set.
 No training, pair generation or real test inference follows from this preparation.
 
+The [final November 15 readiness evidence](../../reports/internvl3-38b-readiness-20261115/README.md)
+now records a successful full-model load and two synthetic calls after the other
+process finished. It supersedes the earlier busy-host capacity rejection;
+formal Precise testing remains unexecuted.
+
 ## Implementation
 
 `code/run_precise_internvl38b.py` and `code/internvl38b_runtime.py` provide:

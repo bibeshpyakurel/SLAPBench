@@ -139,6 +139,9 @@ the historical `internvl3` key still selects 8B. Actual formal scoring requires
 a successful full-model synthetic pass and the explicitly bound review, not
 merely downloaded weights or an architecture/resource plan. Private attempts,
 raw replies, environment receipts and fixtures stay under ignored `local/precise/`.
+The [completed synthetic readiness report](../reports/internvl3-38b-readiness-20261115/README.md)
+records successful loading and two geometric image-pair calls after resource
+release, with measured memory/timing. It contains no Precise predictions.
 
 The user authorized downloading the official `OpenGVLab/InternVL3-38B`
 snapshot, pinned to `b99bcba4fe0c51d9e475af25ec000dbfea6284af`, into
