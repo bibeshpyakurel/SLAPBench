@@ -131,6 +131,15 @@ runs may not have all of this provenance.
 
 ### InternVL3-38B acquisition (2026-11-15)
 
+The separate [38B offload preparation guide](notes/internvl38b_offload_preparation_20261115.md)
+documents the dedicated runner, pinned runtime overlay, full-image tiling,
+CPU-storage/GPU-execution policy, synthetic checks and exact fixed-pair contract.
+Use `requirements-internvl38b.txt` in a separate Python 3.12 environment;
+the historical `internvl3` key still selects 8B. Actual formal scoring requires
+a successful full-model synthetic pass and the explicitly bound review, not
+merely downloaded weights or an architecture/resource plan. Private attempts,
+raw replies, environment receipts and fixtures stay under ignored `local/precise/`.
+
 The user authorized downloading the official `OpenGVLab/InternVL3-38B`
 snapshot, pinned to `b99bcba4fe0c51d9e475af25ec000dbfea6284af`, into
 `/home/bibesh/.local/share/slapbench/models/internvl3-38b/`. The

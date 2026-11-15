@@ -197,8 +197,13 @@ class InternVL38BTests(unittest.TestCase):
     def test_outputs_refuse_public_tree_and_overwrite(self):
         with self.assertRaises(iv.PreflightError):
             iv.private_output(iv.ROOT / "reports/should-never-be-created")
-        with self.assertRaises(iv.PreflightError):
-            iv.private_output(iv.ROOT / "local/precise")
+        with tempfile.TemporaryDirectory() as temp, patch.object(iv, "ROOT", Path(temp)):
+            existing = Path(temp) / "local/precise/existing"
+            existing.mkdir(parents=True)
+            with self.assertRaises(iv.PreflightError):
+                iv.private_output(existing)
+            created = iv.private_output(Path(temp) / "local/precise/new-attempt")
+            self.assertTrue(created.is_dir())
 
 
 if __name__ == "__main__":
