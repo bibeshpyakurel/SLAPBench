@@ -1790,3 +1790,24 @@ pass: 218 repository tests, 15 legacy metric reproductions, lint/syntax, unchang
 results-table generation, 24 CSV confusion matrices/rates, all artifact/receipt
 digests and privacy scanning against all 6,778 private image basenames. Final
 results publication follows the standing origin/dev workflow.
+
+## 2026-11-15 — InternVL3-38B downloaded and verified locally
+
+The user requested downloading InternVL3-38B for this Ubuntu workstation.
+Downloaded the complete official `OpenGVLab/InternVL3-38B` snapshot at revision
+`b99bcba4fe0c51d9e475af25ec000dbfea6284af` to
+`/home/bibesh/.local/share/slapbench/models/internvl3-38b/`. All 36 files,
+76,790,898,977 bytes, match pinned Hub sizes and LFS SHA-256 / Git blob SHA-1
+digests. All 16 weight-index shards exist, configuration JSON parses, and no
+partial downloads remain. The reviewed acquisition report and SHA-256 inventory
+are at `reports/internvl3-38b-download-20261115/`; the private acquisition script,
+transfer log and original receipt remain under ignored local metadata.
+
+This is acquisition only: no upstream custom model code was executed, GPU
+inference or fingerprint processing performed, or project fine-tuning started.
+The original weights exceed the workstation's 16 GiB GPU memory; a viable
+quantization/offload/hardware configuration remains unvalidated. Existing model
+registries, environments, historical model symlink and completed experiment
+assets remain unchanged. Reproducibility documentation now records the pinned
+source, local location, restoration procedure and runtime limits. Publication
+contains only documentation and the textual upstream-file checksum inventory.

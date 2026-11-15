@@ -129,6 +129,17 @@ runs may not have all of this provenance.
 
 ## Practical setup
 
+### InternVL3-38B acquisition (2026-11-15)
+
+The user authorized downloading the official `OpenGVLab/InternVL3-38B`
+snapshot, pinned to `b99bcba4fe0c51d9e475af25ec000dbfea6284af`, into
+`/home/bibesh/.local/share/slapbench/models/internvl3-38b/`. The
+[acquisition report](../reports/internvl3-38b-download-20261115/README.md)
+records the file inventory, checksum procedure, exact restoration command and
+runtime limits. Weights and upstream examples remain local and outside Git.
+This acquisition does not add benchmark results or establish GPU inference
+readiness; the original weights exceed the workstation's 16 GiB GPU memory.
+
 ### October 2026 local model additions
 
 On 2026-10-04 the user separately authorized downloading and setting up these
