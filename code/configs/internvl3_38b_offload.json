@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "repo_id": "OpenGVLab/InternVL3-38B",
+  "revision": "b99bcba4fe0c51d9e475af25ec000dbfea6284af",
+  "transformers_version": "4.48.3",
+  "gpu_weight_budget_gib": 12,
+  "gpu_reserve_gib": 3,
+  "cpu_reserve_gib": 8,
+  "cpu_dtype": "bfloat16",
+  "cpu_threads": 16,
+  "compute_dtype": "bfloat16",
+  "quantization": "nf4_double",
+  "attention": "eager",
+  "image_size": 448,
+  "max_tiles": 12,
+  "thumbnail": true,
+  "max_new_tokens": 5,
+  "seed": 2026,
+  "system_prompt": "You are an expert fingerprint examiner.",
+  "user_prompt": "Below are two SLAP fingerprint images.\nEach SLAP image contains either four fingers from one hand or two thumbs (one from each hand), captured simultaneously on a scanner.\nCompare the corresponding fingers in both images.\nDo these two images belong to the same person?\n(A) Yes, same person\n(B) No, different people\nReply with only the letter A or B."
+}

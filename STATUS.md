@@ -1811,3 +1811,28 @@ registries, environments, historical model symlink and completed experiment
 assets remain unchanged. Reproducibility documentation now records the pinned
 source, local location, restoration procedure and runtime limits. Publication
 contains only documentation and the textual upstream-file checksum inventory.
+
+## 2026-11-15 — InternVL3-38B fixed-pair/offload implementation
+
+The user requested the recommended dedicated runner and GPU-plus-CPU offload
+assessment, then asked whether the route could become possible after another
+process finishes. Added a separate pinned 38B path, exact current-bundle/label
+and path validation, thumb-aware prompts, deterministic dynamic tiling,
+strict A/B parsing, immutable private attempts, failure accounting and a
+full-model-synthetic/review gate before any formal test. Historical runners and
+all existing experiments stay unchanged. A separate Python 3.12 / Transformers
+4.48.3 overlay preserves earlier environments and records actual dependencies.
+See `docs/notes/internvl38b_offload_preparation_20261115.md`.
+
+Architecture-only checks match the complete downloaded index. A tiny random
+two-layer Qwen2 probe passes actual NF4 GPU / unquantized BF16 CPU loading and
+repeat greedy generation; it is not a full InternVL inference claim. The fixed
+27-GPU/37-CPU decoder plan needs approximately 14.93 GiB free GPU and 41.61 GiB
+available RAM including reserves. The first inspection failed both gates; after
+the other process released its resources, the next check passed with about
+50 GiB available RAM. The runner refuses unsafe loading; a freed GPU helps only
+if both budgets become available. No existing process was stopped. No real InternVL weights,
+Precise inference, training, regeneration, or automatic retry occurred. Initial
+failed meta-buffer inspection and subsequent successful architecture/resource
+inspection remain privately preserved. Final evidence follows source checks
+and publication; a full-model synthetic pass and formal test remain outstanding.
