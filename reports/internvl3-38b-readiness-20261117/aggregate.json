@@ -1,0 +1,62 @@
+{
+  "cohort": {
+    "bundle_sha256": "48ec4b7652940aef16f3eb8a843b5f9825752219a75f7280b461be63efe2ac86",
+    "config_sha256": "bdd69ab06c4c249a525cfb8869d3026aaf03102219bec4a864aa4cc4dc9289ac",
+    "images": 1057,
+    "images_verified": true,
+    "numeric_groups": 55,
+    "pairs": 4200
+  },
+  "date": "2026-11-17",
+  "formal_claim_count": 0,
+  "formal_review_created": false,
+  "identity_matches_successful_synthetic": true,
+  "identity_sha256": "c9c214f0b11b2aa24714e0fae37f357b1a8337aac3232664a6bf7781739655ba",
+  "initial_plan": {
+    "blockers": [
+      "insufficient_free_gpu_memory",
+      "insufficient_available_system_ram"
+    ],
+    "ready_to_load": false,
+    "required_available_ram_bytes_with_reserve": 44672722944,
+    "required_free_gpu_bytes_with_reserve": 16035074800,
+    "resources": {
+      "cuda_available": true,
+      "gpu_free_bytes": 12233932800,
+      "gpu_total_bytes": 16720199680,
+      "ram_available_bytes": 34732105728,
+      "ram_total_bytes": 65744846848
+    }
+  },
+  "internvl_fingerprint_inference": false,
+  "internvl_unit_tests": {
+    "passed": 13,
+    "skipped": 0
+  },
+  "interruption": "Readiness plan opened CUDA context; second-compute-PID guard paused existing Qwen evaluator. No automatic restart.",
+  "prior_evidence_unchanged": true,
+  "private_evidence_sha256": {
+    "integrity.json": "feab70b31e73030dac7f09d27eb837373bef08f0735074ecec09519563d64a4f",
+    "plan-01/report.json": "cfd29e4147dee0c2f4ca36d647cd456df0a7c028b385090f43c674e903ecc97f",
+    "resources-after-pause.json": "cc65304da225acc17927f56d70eeac21efaf0ba91de21177f4a39251ef5c6291"
+  },
+  "qwen_expected_pairs": 4200,
+  "qwen_saved_pairs": 47,
+  "qwen_test_state": "paused",
+  "resources_after_qwen_pause": {
+    "compute_processes": [],
+    "gpu_free_bytes": 16719544320,
+    "gpu_requirement_satisfied": true,
+    "method": "nvidia-smi and /proc/meminfo; no new CUDA context",
+    "ram_available_bytes": 55512326144,
+    "ram_requirement_satisfied": true,
+    "utc": "2026-11-17T13:55:34Z"
+  },
+  "scope": "readiness_only",
+  "snapshot": {
+    "bytes": 76790898977,
+    "files": 36,
+    "receipt_sha256": "56d8948cb7aecbe5dc5ab7b85eb04017572bb808bbe1c10c28fa85bddd9dd184",
+    "verification": "full_sha256"
+  }
+}

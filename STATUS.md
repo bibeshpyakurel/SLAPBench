@@ -1869,3 +1869,30 @@ attempts, logs, fixtures, raw synthetic replies and environment receipts remain
 unchanged. The viable route requires the fixed gate's approximately 14.93 GiB
 free GPU and 41.61 GiB available RAM. No Precise inference, test approval/claim,
 training, calibration, dataset changes or further experiment was performed.
+
+
+## 2026-11-17 — InternVL3-38B readiness recheck and unintended Qwen pause
+
+The user requested readiness verification before starting the current Precise
+test. The primary `dev` checkout contains the prepared dedicated 38B runner;
+the older Orca worktree does not. A fresh architecture-only plan reproduces
+the exact successful November 15 identity with unchanged protected source.
+All 36 model files pass full SHA-256 revalidation, all 4,200 supplied pairs and
+1,057 image byte/pixel hashes validate, retained prior evidence digests match,
+and all 13 InternVL-specific unit tests pass without skips. All 15 legacy
+metric files reproduce; JSON and whitespace checks pass. No InternVL real
+weights were loaded and no fingerprint inference or formal review/claim began.
+See `reports/internvl3-38b-readiness-20261117/` for aggregate evidence and limits.
+
+The initial resource gate failed while Qwen3-VL-8B adapter evaluation was active:
+11.39 GiB free GPU / 32.35 GiB available RAM versus 14.93 / 41.61 GiB required.
+The plan briefly opened a CUDA context; the existing Qwen evaluator rejects any
+second compute PID and paused at the matching 07:53:55 America/Chicago time,
+retaining 47 distinct saved outcomes of 4,200. This was an unintended readiness
+check interruption, not Qwen completion. Its coordinator then failed in report
+generation. No job was explicitly killed, outputs changed or retry attempted.
+Future checks alongside that evaluator must use discovery that creates no CUDA
+context. At 07:55:34, nvidia-smi and /proc/meminfo showed no compute processes,
+15.57 GiB free GPU and 51.70 GiB available RAM, satisfying the fixed thresholds.
+Resource availability is transient; preserve actual review/execution boundaries
+and do not treat the interrupted Qwen test as complete or resume automatically.
