@@ -1,0 +1,45 @@
+{
+  "cohort": {
+    "bundle_sha256": "48ec4b7652940aef16f3eb8a843b5f9825752219a75f7280b461be63efe2ac86",
+    "config_sha256": "bdd69ab06c4c249a525cfb8869d3026aaf03102219bec4a864aa4cc4dc9289ac",
+    "images": 1057,
+    "images_verified": true,
+    "numeric_groups": 55,
+    "pairs": 4200
+  },
+  "fingerprint_inference": false,
+  "identity_checks": {
+    "configuration": true,
+    "gpu_model": true,
+    "interpreter": true,
+    "kernel": true,
+    "packages": true,
+    "python": true,
+    "snapshot_receipt": true,
+    "source": true,
+    "source_clean": true,
+    "synthetic_report": true
+  },
+  "internvl_claims": 0,
+  "private_receipt_sha256": "d52bd321a53460072f4fd18c7adc6a52e71f44b05758838794ecac1b288aaeaf",
+  "qwen_reason": "user explicitly requested no evaluation",
+  "qwen_state": "cancelled_by_user",
+  "resources": {
+    "compute_processes": [],
+    "gpu_free_bytes": 16719544320,
+    "method": "nvidia-smi and /proc/meminfo; no CUDA context",
+    "ram_available_bytes": 55134121984,
+    "required_available_ram_bytes": 44672722944,
+    "required_free_gpu_bytes": 16035074800,
+    "requirements_satisfied": true,
+    "utc": "2026-11-18T00:31:12.458918+00:00"
+  },
+  "scope": "readiness_only_no_cuda_context",
+  "snapshot": {
+    "bytes": 76790898977,
+    "files": 36,
+    "receipt_sha256": "56d8948cb7aecbe5dc5ab7b85eb04017572bb808bbe1c10c28fa85bddd9dd184",
+    "verification": "all_sizes_and_nonweight_sha256"
+  },
+  "utc": "2026-11-18T00:31:12.476333+00:00"
+}

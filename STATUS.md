@@ -1896,3 +1896,21 @@ context. At 07:55:34, nvidia-smi and /proc/meminfo showed no compute processes,
 15.57 GiB free GPU and 51.70 GiB available RAM, satisfying the fixed thresholds.
 Resource availability is transient; preserve actual review/execution boundaries
 and do not treat the interrupted Qwen test as complete or resume automatically.
+
+
+## 2026-11-17 — evening InternVL3-38B readiness confirmation
+
+At the user's request, repeated readiness checks at 18:31 America/Chicago
+without importing Torch or opening a CUDA context. The GPU has no compute
+processes: 15.57 GiB free GPU and 51.35 GiB available RAM exceed the fixed
+14.93 / 41.61 GiB requirements. Qwen's coordinator now records user cancellation;
+its earlier partial evaluation is not a completed test. No process was changed.
+Configuration/source/package/interpreter/kernel/GPU and prior synthetic-report
+bindings remain unchanged. All 36 model sizes/nonweight hashes and all 4,200
+supplied pairs / 1,057 image byte/pixel hashes validate again. The earlier
+full-weight checksum result is preserved; weight payloads were not rehashed
+again. JSON assertions and whitespace checks pass. There are zero formal
+InternVL claims; no new review, checkpoint load or inference was performed.
+The prepared route is technically ready with current resources; preserve the
+existing formal review gate and recheck resources before any authorized launch.
+Evidence: `reports/internvl3-38b-readiness-20261117-evening/`.
