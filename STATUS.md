@@ -1931,3 +1931,22 @@ All 231 tests passed, Ruff passed, 15 legacy metrics reproduced, and the
 regenerated table is byte-identical. No CUDA context, test claim or inference
 was created. The formal run awaits the user's execution authorization.
 See the [prelaunch report and proposed evaluation](reports/internvl3-38b-prelaunch-20261117/README.md).
+
+
+## 2026-11-17 — authorized InternVL3-38B Precise evaluation started
+
+The user approved the single local evaluation described in the
+[prelaunch report](reports/internvl3-38b-prelaunch-20261117/README.md).
+The private review binds the authorization to the exact 4,200-pair bundle,
+synthetic report and runtime identity. The runner started at 19:05
+America/Chicago in a local user service. It passed the live memory check,
+verified the checkpoint again, loaded the model and journaled valid A/B
+responses from the first five test pairs. The execution source and configuration
+match the prelaunch review at `b0ea825`.
+
+At 19:08, the four intervals after the first result averaged 13.84 seconds
+per pair, including preprocessing and journaling. If that early pace holds,
+the remaining evaluation will take about 16 hours, finishing around 11:15 a.m.
+America/Chicago on November 18. The evaluation was still running at this
+checkpoint. The review, launch checks, console and pair journal stay under
+`local/precise/metadata/internvl38b-evaluation-20261117/`.
