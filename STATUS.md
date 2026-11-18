@@ -1914,3 +1914,20 @@ InternVL claims; no new review, checkpoint load or inference was performed.
 The prepared route is technically ready with current resources; preserve the
 existing formal review gate and recheck resources before any authorized launch.
 Evidence: `reports/internvl3-38b-readiness-20261117-evening/`.
+
+
+## 2026-11-17 — InternVL3-38B final prelaunch check
+
+The full 36-file model snapshot passes SHA-256 verification again. With the GPU
+hidden, the runner reproduces the prior synthetic architecture, runtime identity,
+device map and context. All 4,200 supplied pairs and 1,057 image byte and decoded
+hashes pass, and every image matches the tested 1600 × 1500 dimensions. At
+19:01 America/Chicago the GPU had zero compute processes and 15.57 GiB free.
+Available RAM was 50.85 GiB. Both exceed the tested configuration's requirements.
+The Qwen coordinator still shows user cancellation. The private output path is
+unused and its parent tree is writable.
+
+All 231 tests passed, Ruff passed, 15 legacy metrics reproduced, and the
+regenerated table is byte-identical. No CUDA context, test claim or inference
+was created. The formal run awaits the user's execution authorization.
+See the [prelaunch report and proposed evaluation](reports/internvl3-38b-prelaunch-20261117/README.md).

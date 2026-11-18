@@ -1,0 +1,73 @@
+{
+  "cohort": {
+    "bundle_sha256": "48ec4b7652940aef16f3eb8a843b5f9825752219a75f7280b461be63efe2ac86",
+    "config_sha256": "bdd69ab06c4c249a525cfb8869d3026aaf03102219bec4a864aa4cc4dc9289ac",
+    "images": 1057,
+    "images_verified": true,
+    "numeric_groups": 55,
+    "pairs": 4200
+  },
+  "compute_process_count": 0,
+  "cuda_context_created": false,
+  "filesystem_available_bytes": 65846448128,
+  "fingerprint_inference": false,
+  "formal_claims": 0,
+  "gpu_memory_required_bytes": 16035074800,
+  "image_dimensions": [
+    1600,
+    1500
+  ],
+  "model_context": {
+    "grid": [
+      3,
+      3
+    ],
+    "input_tokens": 5231,
+    "output_token_budget": 5,
+    "patch_counts": [
+      10,
+      10
+    ],
+    "synthetic_size": [
+      1600,
+      1500
+    ],
+    "tokenizer_limit": 8192
+  },
+  "pair_counts": {
+    "left/genuine": 700,
+    "left/impostor": 700,
+    "right/genuine": 700,
+    "right/impostor": 700,
+    "thumbs/genuine": 700,
+    "thumbs/impostor": 700
+  },
+  "private_output_available": true,
+  "private_receipt_sha256": "41ed951b5010f05abdccc6f0f70bc1acac5a77fe76a145cd95a5e6cba63f17e3",
+  "qwen_state": "cancelled_by_user",
+  "ram_required_bytes": 44672722944,
+  "repository_checks": {
+    "legacy_metrics_reproduced": 15,
+    "results_table_byte_identical": true,
+    "ruff_passed": true,
+    "unit_tests_passed": 231
+  },
+  "resources": {
+    "gpu_free_bytes": 16719544320,
+    "gpu_total_bytes": 17171480576,
+    "measurement": "nvidia-smi and /proc/meminfo",
+    "ram_available_bytes": 54599884800,
+    "ram_total_bytes": 65744846848
+  },
+  "runtime_identity_sha256": "c9c214f0b11b2aa24714e0fae37f357b1a8337aac3232664a6bf7781739655ba",
+  "runtime_matches_synthetic": true,
+  "scope": "prelaunch_offline",
+  "snapshot": {
+    "bytes": 76790898977,
+    "files": 36,
+    "receipt_sha256": "56d8948cb7aecbe5dc5ab7b85eb04017572bb808bbe1c10c28fa85bddd9dd184",
+    "verification": "full_sha256"
+  },
+  "synthetic_report_sha256": "1578c9f86e02031a265a5b3da71b363b370382db437beddfa29d5cd8255df6e0",
+  "utc": "2026-11-18T01:01:41.568512+00:00"
+}
