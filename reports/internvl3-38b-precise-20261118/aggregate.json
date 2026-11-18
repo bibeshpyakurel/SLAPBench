@@ -1,0 +1,97 @@
+{
+  "elapsed_seconds": 58265.84232993302,
+  "execution_checkout_commit": "b0ea8255120b298cc8fbdf9fdc8c62d221fee4c5",
+  "execution_errors": 0,
+  "finished_utc": "2026-11-18T17:16:23.040748+00:00",
+  "image_count": 1057,
+  "input_binding": {
+    "bundle": "48ec4b7652940aef16f3eb8a843b5f9825752219a75f7280b461be63efe2ac86",
+    "identity": "c9c214f0b11b2aa24714e0fae37f357b1a8337aac3232664a6bf7781739655ba",
+    "synthetic_report": "1578c9f86e02031a265a5b3da71b363b370382db437beddfa29d5cd8255df6e0"
+  },
+  "invalid_responses": 0,
+  "median_generation_seconds": 13.766392771009123,
+  "model_revision": "b99bcba4fe0c51d9e475af25ec000dbfea6284af",
+  "protected_runtime_commit": "0236f5e4a35ce644a6f22b0275f58d61f094fdd1",
+  "results": {
+    "left": {
+      "accuracy": 0.5,
+      "answers": {
+        "A": 0,
+        "B": 1400
+      },
+      "confusion": {
+        "fn": 700,
+        "fp": 0,
+        "tn": 700,
+        "tp": 0
+      },
+      "false_accept_rate": 0.0,
+      "false_reject_rate": 1.0,
+      "pairs": 1400,
+      "true_accept_rate": 0.0
+    },
+    "pooled": {
+      "accuracy": 0.5,
+      "answers": {
+        "A": 0,
+        "B": 4200
+      },
+      "confusion": {
+        "fn": 2100,
+        "fp": 0,
+        "tn": 2100,
+        "tp": 0
+      },
+      "false_accept_rate": 0.0,
+      "false_reject_rate": 1.0,
+      "pairs": 4200,
+      "true_accept_rate": 0.0
+    },
+    "right": {
+      "accuracy": 0.5,
+      "answers": {
+        "A": 0,
+        "B": 1400
+      },
+      "confusion": {
+        "fn": 700,
+        "fp": 0,
+        "tn": 700,
+        "tp": 0
+      },
+      "false_accept_rate": 0.0,
+      "false_reject_rate": 1.0,
+      "pairs": 1400,
+      "true_accept_rate": 0.0
+    },
+    "thumbs": {
+      "accuracy": 0.5,
+      "answers": {
+        "A": 0,
+        "B": 1400
+      },
+      "confusion": {
+        "fn": 700,
+        "fp": 0,
+        "tn": 700,
+        "tp": 0
+      },
+      "false_accept_rate": 0.0,
+      "false_reject_rate": 1.0,
+      "pairs": 1400,
+      "true_accept_rate": 0.0
+    }
+  },
+  "scope": "aggregate_only_completed_local_evaluation",
+  "source_artifact_sha256": {
+    "bundle": "48ec4b7652940aef16f3eb8a843b5f9825752219a75f7280b461be63efe2ac86",
+    "events": "ea69cef49d2e840694bcf83879c1f02ef39d0c09eaf0fa7f2818163efbc284a3",
+    "inputs": "947d3b6aba3449d25dccb24158776e252ae18cd782b247a9cd4f7b97ac2b9687",
+    "report": "690347cba194c47a7dd85358a8f2decedcb25314d0860ee7c74d35f55664f567",
+    "review": "ebe3fa3baed5469e9dd6f02fac2c35b3226eec4f60d28597fcceec453a6eab11",
+    "synthetic_report": "1578c9f86e02031a265a5b3da71b363b370382db437beddfa29d5cd8255df6e0"
+  },
+  "started_utc": "2026-11-18T01:05:17.198433+00:00",
+  "unique_pairs_completed": 4200
+}

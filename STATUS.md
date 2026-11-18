@@ -1950,3 +1950,18 @@ the remaining evaluation will take about 16 hours, finishing around 11:15 a.m.
 America/Chicago on November 18. The evaluation was still running at this
 checkpoint. The review, launch checks, console and pair journal stay under
 `local/precise/metadata/internvl38b-evaluation-20261117/`.
+
+
+## 2026-11-18 — InternVL3-38B Precise evaluation completed
+
+The authorized evaluation finished at 11:16 a.m. Central, after 16 hours and
+11 minutes. The runner completed all 4,200 test pairs with zero invalid
+responses or execution errors. An offline check matched every start and finish
+event to the frozen pair order and independently reproduced the final metrics.
+
+All 4,200 raw responses were B after trimming whitespace. The model rejected
+all 2,100 genuine and all 2,100 impostor pairs, yielding 50.0% accuracy,
+0% true accept rate and 0% observed false accept rate. Left hands, right hands
+and thumbs each show the same pattern. This result describes the tested
+configuration. Original inputs and outputs remain in their local paths.
+See [verified aggregate results](reports/internvl3-38b-precise-20261118/README.md).
