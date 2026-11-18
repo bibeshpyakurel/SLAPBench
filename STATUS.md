@@ -1965,3 +1965,20 @@ all 2,100 genuine and all 2,100 impostor pairs, yielding 50.0% accuracy,
 and thumbs each show the same pattern. This result describes the tested
 configuration. Original inputs and outputs remain in their local paths.
 See [verified aggregate results](reports/internvl3-38b-precise-20261118/README.md).
+
+
+## 2026-11-18 — Ubuntu reboot and InternVL3-38B run health
+
+The evaluation sealed its report at 11:16:23 a.m. Central. Ubuntu rebooted at
+5:07:56 p.m. the same day. After reboot, all six recorded artifact hashes
+match, and the 4,200 paired events show no gap over 14.948 seconds between
+saved results. SSH timeouts and dropped sessions appear in the morning
+logs while the evaluator continued writing results. The accessible logs
+do not establish the cause of the remote connection problems.
+
+All 1,057 images passed repeat byte and decoded digest verification. All B
+responses were present before parsing, and the console shows a complete
+checkpoint load and successful final runner status. The audit establishes
+run continuity and output integrity. The cause of the uniform model
+decisions remains open. See the
+[run health report](reports/internvl3-38b-run-health-20261118/README.md).
