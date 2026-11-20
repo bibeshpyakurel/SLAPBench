@@ -1,0 +1,80 @@
+{
+  "completed_run_aggregate_sha256": "39af8d1ddd0b20206034a9306e269d912da38dbec293bc21fc01733a0e93261e",
+  "cpu_probe": {
+    "cpu_bfloat16_weight_bytes_matching_report": 36082788352,
+    "cuda_context_created": false,
+    "distinct_bfloat16_inputs": 1057,
+    "gpu_parameter_bytes_matching_report": 12514208512,
+    "images_verified": 1057,
+    "learned_forward_calls": 0,
+    "linear4bit_module_counts": {
+      "decoder": 189,
+      "projector": 2,
+      "vision": 180
+    },
+    "linear4bit_weight_elements": {
+      "decoder": 13164871680,
+      "projector": 91750400,
+      "vision": 5529600000
+    },
+    "local_adapter": false,
+    "local_training": false,
+    "pairs_confirmed": 4200,
+    "pairs_with_equal_bfloat16_inputs": 0,
+    "parameters_in_original_checkpoint": 38388164992,
+    "raw_b_replies": 4200,
+    "replayed_pairs": 6,
+    "replayed_prompt_length_counts": {
+      "5231": 6
+    },
+    "run_identity_sha256": "c9c214f0b11b2aa24714e0fae37f357b1a8337aac3232664a6bf7781739655ba",
+    "scope": "offline audit without learned forwards",
+    "stub_answers_round_trip": [
+      "A",
+      "B"
+    ],
+    "synthetic_readiness_responses": [
+      "B",
+      "B"
+    ],
+    "tile_shape_counts": {
+      "10x3x448x448": 1057
+    },
+    "total_tokens_per_pair": 5231,
+    "upstream_preprocessing_exact_images": 12,
+    "visual_tokens_per_image": 2560
+  },
+  "cpu_probe_sha256": "fc2755aa536fd88933d6191453e32b0b58a1f01eafa8ed35e97017db8bcb1e46",
+  "date": "2026-11-19",
+  "fpbench": {
+    "choices_per_question": 4,
+    "paper": "https://arxiv.org/html/2512.18073v2",
+    "published_overall_zero_shot_percent": 52.86,
+    "published_verification_accuracy_cot_percent": 50.37,
+    "published_verification_accuracy_zero_shot_percent": 56.84,
+    "published_verification_frequent_choice_percent": 29.23,
+    "questions_by_image_count": {
+      "3": 320,
+      "4": 484
+    },
+    "reference_repository_revision": "ed27ae669947bfd157522d537a9f9c77b4bf3189",
+    "released_verification_questions": 804,
+    "reported_internvl_fine_tuning": false,
+    "table_2_verification_questions_label": 800,
+    "verification_metadata_sha256": "557031776a03367c101c4280249d11dcd1a59386bdc4753a488a5f1e47ddc3bd"
+  },
+  "local_probe_source_sha256": "67ffb9126a82df83ec05c909ef8d84aa55bc6a93c4edb4cec555124f035a36df",
+  "model_revision": "b99bcba4fe0c51d9e475af25ec000dbfea6284af",
+  "same_bundle_dino_check": {
+    "adapted_native_accuracy": 0.8319047619047618,
+    "aggregate_sha256": "614c3d386667723e7a062c4f4da76559c998cbd9af954986f7057458fa3fd6cc",
+    "bundle_sha256": "48ec4b7652940aef16f3eb8a843b5f9825752219a75f7280b461be63efe2ac86",
+    "frozen_native_accuracy": 0.7326190476190476,
+    "pairs": 4200
+  },
+  "validation": {
+    "causal_conclusion_established": false,
+    "internvl_unit_tests_passed": 13,
+    "legacy_metrics_files_reproduced": 15
+  }
+}

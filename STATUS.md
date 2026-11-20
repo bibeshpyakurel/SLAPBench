@@ -1982,3 +1982,28 @@ checkpoint load and successful final runner status. The audit establishes
 run continuity and output integrity. The cause of the uniform model
 decisions remains open. See the
 [run health report](reports/internvl3-38b-run-health-20261118/README.md).
+
+
+## 2026-11-19 — offline audit of InternVL3-38B's all-B outcome
+
+The completed Precise run used the official pinned checkpoint for zero-shot
+inference, without local training or an adapter. All 4,200 raw replies are B.
+The audit reverified the bindings and preprocessed every referenced image.
+All 1,057 prepared tensors are distinct. Twelve images match the pinned
+model-card preprocessing at the same settings. A CPU replay with stand-ins
+verified both image regions, token budget, feature placement and A/B
+round-trip on six representative pairs. Learned GPU computations were
+outside the scope of this replay.
+
+The prior readiness check repeated one synthetic pair, obtained B both
+times and established valid output and repeatability only. A meta-model
+replay confirms that NF4 conversion covers 180 vision linears, both projector
+linears and 189 decoder linears. The resulting storage counts match those
+recorded by the completed run. FPBench reports 56.84% zero-shot verification
+for InternVL3-38B on a different multiple-choice task with individual
+fingerprints. Its fine-tuning results concern other models.
+
+Fixed answer bias, transfer to full slaps and mixed precision remain
+plausible causes. Their causal contributions remain unmeasured.
+The evidence and a separate control-test proposal are in the
+[all-B audit](reports/internvl3-38b-all-b-audit-20261119/README.md).
